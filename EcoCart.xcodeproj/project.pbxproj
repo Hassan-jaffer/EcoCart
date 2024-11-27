@@ -108,6 +108,13 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		0EF3BE012CF771B800DB6279 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		F2DCE3472CF728FF002D4AB1 = {
 			isa = PBXGroup;
 			children = (
@@ -132,12 +139,13 @@
 			isa = PBXGroup;
 			children = (
 				0E7C9AA22CF72FCD0049CD22 /* AppDelegate.swift */,
-				0E7C9AA32CF72FCD0049CD22 /* Assets.xcassets */,
-				0E7C9AA52CF72FCD0049CD22 /* Controllers */,
-				0E7C9AA62CF72FCD0049CD22 /* GoogleService-Info.plist */,
-				0E7C9AA72CF72FCD0049CD22 /* Info.plist */,
 				0E7C9AA82CF72FCD0049CD22 /* SceneDelegate.swift */,
 				0E7C9AAF2CF72FCD0049CD22 /* Views */,
+				0E7C9AA52CF72FCD0049CD22 /* Controllers */,
+				0EF3BE012CF771B800DB6279 /* Models */,
+				0E7C9AA32CF72FCD0049CD22 /* Assets.xcassets */,
+				0E7C9AA62CF72FCD0049CD22 /* GoogleService-Info.plist */,
+				0E7C9AA72CF72FCD0049CD22 /* Info.plist */,
 			);
 			path = EcoCart;
 			sourceTree = "<group>";
