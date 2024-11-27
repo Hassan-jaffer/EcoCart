@@ -1,0 +1,606 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F2DCE3542CF728FF002D4AB1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DCE3532CF728FF002D4AB1 /* AppDelegate.swift */; };
+		F2DCE3562CF728FF002D4AB1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DCE3552CF728FF002D4AB1 /* SceneDelegate.swift */; };
+		F2DCE3582CF728FF002D4AB1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DCE3572CF728FF002D4AB1 /* ViewController.swift */; };
+		F2DCE35B2CF728FF002D4AB1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2DCE3592CF728FF002D4AB1 /* Main.storyboard */; };
+		F2DCE35D2CF72901002D4AB1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2DCE35C2CF72901002D4AB1 /* Assets.xcassets */; };
+		F2DCE3602CF72901002D4AB1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2DCE35E2CF72901002D4AB1 /* LaunchScreen.storyboard */; };
+		F2DCE36B2CF72902002D4AB1 /* EcoCartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DCE36A2CF72902002D4AB1 /* EcoCartTests.swift */; };
+		F2DCE3752CF72902002D4AB1 /* EcoCartUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DCE3742CF72902002D4AB1 /* EcoCartUITests.swift */; };
+		F2DCE3772CF72902002D4AB1 /* EcoCartUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DCE3762CF72902002D4AB1 /* EcoCartUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F2DCE3672CF72901002D4AB1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2DCE3482CF728FF002D4AB1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F2DCE34F2CF728FF002D4AB1;
+			remoteInfo = EcoCart;
+		};
+		F2DCE3712CF72902002D4AB1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2DCE3482CF728FF002D4AB1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F2DCE34F2CF728FF002D4AB1;
+			remoteInfo = EcoCart;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F2DCE3502CF728FF002D4AB1 /* EcoCart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EcoCart.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2DCE3532CF728FF002D4AB1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F2DCE3552CF728FF002D4AB1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		F2DCE3572CF728FF002D4AB1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F2DCE35A2CF728FF002D4AB1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F2DCE35C2CF72901002D4AB1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F2DCE35F2CF72901002D4AB1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F2DCE3612CF72901002D4AB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2DCE3662CF72901002D4AB1 /* EcoCartTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EcoCartTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2DCE36A2CF72902002D4AB1 /* EcoCartTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoCartTests.swift; sourceTree = "<group>"; };
+		F2DCE3702CF72902002D4AB1 /* EcoCartUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EcoCartUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2DCE3742CF72902002D4AB1 /* EcoCartUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoCartUITests.swift; sourceTree = "<group>"; };
+		F2DCE3762CF72902002D4AB1 /* EcoCartUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoCartUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F2DCE34D2CF728FF002D4AB1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2DCE3632CF72901002D4AB1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2DCE36D2CF72902002D4AB1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F2DCE3472CF728FF002D4AB1 = {
+			isa = PBXGroup;
+			children = (
+				F2DCE3522CF728FF002D4AB1 /* EcoCart */,
+				F2DCE3692CF72901002D4AB1 /* EcoCartTests */,
+				F2DCE3732CF72902002D4AB1 /* EcoCartUITests */,
+				F2DCE3512CF728FF002D4AB1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F2DCE3512CF728FF002D4AB1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F2DCE3502CF728FF002D4AB1 /* EcoCart.app */,
+				F2DCE3662CF72901002D4AB1 /* EcoCartTests.xctest */,
+				F2DCE3702CF72902002D4AB1 /* EcoCartUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F2DCE3522CF728FF002D4AB1 /* EcoCart */ = {
+			isa = PBXGroup;
+			children = (
+				F2DCE3532CF728FF002D4AB1 /* AppDelegate.swift */,
+				F2DCE3552CF728FF002D4AB1 /* SceneDelegate.swift */,
+				F2DCE3572CF728FF002D4AB1 /* ViewController.swift */,
+				F2DCE3592CF728FF002D4AB1 /* Main.storyboard */,
+				F2DCE35C2CF72901002D4AB1 /* Assets.xcassets */,
+				F2DCE35E2CF72901002D4AB1 /* LaunchScreen.storyboard */,
+				F2DCE3612CF72901002D4AB1 /* Info.plist */,
+			);
+			path = EcoCart;
+			sourceTree = "<group>";
+		};
+		F2DCE3692CF72901002D4AB1 /* EcoCartTests */ = {
+			isa = PBXGroup;
+			children = (
+				F2DCE36A2CF72902002D4AB1 /* EcoCartTests.swift */,
+			);
+			path = EcoCartTests;
+			sourceTree = "<group>";
+		};
+		F2DCE3732CF72902002D4AB1 /* EcoCartUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F2DCE3742CF72902002D4AB1 /* EcoCartUITests.swift */,
+				F2DCE3762CF72902002D4AB1 /* EcoCartUITestsLaunchTests.swift */,
+			);
+			path = EcoCartUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F2DCE34F2CF728FF002D4AB1 /* EcoCart */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2DCE37A2CF72902002D4AB1 /* Build configuration list for PBXNativeTarget "EcoCart" */;
+			buildPhases = (
+				F2DCE34C2CF728FF002D4AB1 /* Sources */,
+				F2DCE34D2CF728FF002D4AB1 /* Frameworks */,
+				F2DCE34E2CF728FF002D4AB1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EcoCart;
+			productName = EcoCart;
+			productReference = F2DCE3502CF728FF002D4AB1 /* EcoCart.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F2DCE3652CF72901002D4AB1 /* EcoCartTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2DCE37D2CF72902002D4AB1 /* Build configuration list for PBXNativeTarget "EcoCartTests" */;
+			buildPhases = (
+				F2DCE3622CF72901002D4AB1 /* Sources */,
+				F2DCE3632CF72901002D4AB1 /* Frameworks */,
+				F2DCE3642CF72901002D4AB1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F2DCE3682CF72901002D4AB1 /* PBXTargetDependency */,
+			);
+			name = EcoCartTests;
+			productName = EcoCartTests;
+			productReference = F2DCE3662CF72901002D4AB1 /* EcoCartTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F2DCE36F2CF72902002D4AB1 /* EcoCartUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2DCE3802CF72902002D4AB1 /* Build configuration list for PBXNativeTarget "EcoCartUITests" */;
+			buildPhases = (
+				F2DCE36C2CF72902002D4AB1 /* Sources */,
+				F2DCE36D2CF72902002D4AB1 /* Frameworks */,
+				F2DCE36E2CF72902002D4AB1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F2DCE3722CF72902002D4AB1 /* PBXTargetDependency */,
+			);
+			name = EcoCartUITests;
+			productName = EcoCartUITests;
+			productReference = F2DCE3702CF72902002D4AB1 /* EcoCartUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F2DCE3482CF728FF002D4AB1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1520;
+				LastUpgradeCheck = 1520;
+				TargetAttributes = {
+					F2DCE34F2CF728FF002D4AB1 = {
+						CreatedOnToolsVersion = 15.2;
+					};
+					F2DCE3652CF72901002D4AB1 = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = F2DCE34F2CF728FF002D4AB1;
+					};
+					F2DCE36F2CF72902002D4AB1 = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = F2DCE34F2CF728FF002D4AB1;
+					};
+				};
+			};
+			buildConfigurationList = F2DCE34B2CF728FF002D4AB1 /* Build configuration list for PBXProject "EcoCart" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F2DCE3472CF728FF002D4AB1;
+			productRefGroup = F2DCE3512CF728FF002D4AB1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F2DCE34F2CF728FF002D4AB1 /* EcoCart */,
+				F2DCE3652CF72901002D4AB1 /* EcoCartTests */,
+				F2DCE36F2CF72902002D4AB1 /* EcoCartUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F2DCE34E2CF728FF002D4AB1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2DCE3602CF72901002D4AB1 /* LaunchScreen.storyboard in Resources */,
+				F2DCE35D2CF72901002D4AB1 /* Assets.xcassets in Resources */,
+				F2DCE35B2CF728FF002D4AB1 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2DCE3642CF72901002D4AB1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2DCE36E2CF72902002D4AB1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F2DCE34C2CF728FF002D4AB1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2DCE3582CF728FF002D4AB1 /* ViewController.swift in Sources */,
+				F2DCE3542CF728FF002D4AB1 /* AppDelegate.swift in Sources */,
+				F2DCE3562CF728FF002D4AB1 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2DCE3622CF72901002D4AB1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2DCE36B2CF72902002D4AB1 /* EcoCartTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2DCE36C2CF72902002D4AB1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2DCE3772CF72902002D4AB1 /* EcoCartUITestsLaunchTests.swift in Sources */,
+				F2DCE3752CF72902002D4AB1 /* EcoCartUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F2DCE3682CF72901002D4AB1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F2DCE34F2CF728FF002D4AB1 /* EcoCart */;
+			targetProxy = F2DCE3672CF72901002D4AB1 /* PBXContainerItemProxy */;
+		};
+		F2DCE3722CF72902002D4AB1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F2DCE34F2CF728FF002D4AB1 /* EcoCart */;
+			targetProxy = F2DCE3712CF72902002D4AB1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F2DCE3592CF728FF002D4AB1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F2DCE35A2CF728FF002D4AB1 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F2DCE35E2CF72901002D4AB1 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F2DCE35F2CF72901002D4AB1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F2DCE3782CF72902002D4AB1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F2DCE3792CF72902002D4AB1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F2DCE37B2CF72902002D4AB1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EcoCart/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "richtofen-studio.EcoCart";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F2DCE37C2CF72902002D4AB1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EcoCart/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "richtofen-studio.EcoCart";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F2DCE37E2CF72902002D4AB1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "richtofen-studio.EcoCartTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EcoCart.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/EcoCart";
+			};
+			name = Debug;
+		};
+		F2DCE37F2CF72902002D4AB1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "richtofen-studio.EcoCartTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EcoCart.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/EcoCart";
+			};
+			name = Release;
+		};
+		F2DCE3812CF72902002D4AB1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "richtofen-studio.EcoCartUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = EcoCart;
+			};
+			name = Debug;
+		};
+		F2DCE3822CF72902002D4AB1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "richtofen-studio.EcoCartUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = EcoCart;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F2DCE34B2CF728FF002D4AB1 /* Build configuration list for PBXProject "EcoCart" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2DCE3782CF72902002D4AB1 /* Debug */,
+				F2DCE3792CF72902002D4AB1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F2DCE37A2CF72902002D4AB1 /* Build configuration list for PBXNativeTarget "EcoCart" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2DCE37B2CF72902002D4AB1 /* Debug */,
+				F2DCE37C2CF72902002D4AB1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F2DCE37D2CF72902002D4AB1 /* Build configuration list for PBXNativeTarget "EcoCartTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2DCE37E2CF72902002D4AB1 /* Debug */,
+				F2DCE37F2CF72902002D4AB1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F2DCE3802CF72902002D4AB1 /* Build configuration list for PBXNativeTarget "EcoCartUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2DCE3812CF72902002D4AB1 /* Debug */,
+				F2DCE3822CF72902002D4AB1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F2DCE3482CF728FF002D4AB1 /* Project object */;
+}
