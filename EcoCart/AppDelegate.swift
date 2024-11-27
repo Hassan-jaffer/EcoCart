@@ -2,18 +2,20 @@
 //  AppDelegate.swift
 //  EcoCart
 //
-//  Created by BP-needchange on 27/11/2024.
+//  Created by Hasan Shehab on 22/11/2024.
 //
 
 import UIKit
+import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        FirebaseApp.configure()
         return true
     }
 
