@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E7C9AB02CF72FCD0049CD22 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA72CF72FCD0049CD22 /* Info.plist */; };
 		0E7C9AB12CF72FCD0049CD22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA32CF72FCD0049CD22 /* Assets.xcassets */; };
 		0E7C9AB22CF72FCD0049CD22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E7C9AAD2CF72FCD0049CD22 /* Main.storyboard */; };
 		0E7C9AB32CF72FCD0049CD22 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA62CF72FCD0049CD22 /* GoogleService-Info.plist */; };
@@ -20,6 +19,7 @@
 		0EF3BDFC2CF7704000DB6279 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0EF3BDFB2CF7704000DB6279 /* FirebaseAuth */; };
 		0EF3BDFE2CF7704000DB6279 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0EF3BDFD2CF7704000DB6279 /* FirebaseFirestore */; };
 		0EF3BE002CF7704000DB6279 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0EF3BDFF2CF7704000DB6279 /* FirebaseStorage */; };
+		103FB5822CF7BBEC00DC95CC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA72CF72FCD0049CD22 /* Info.plist */; };
 		F2DCE36B2CF72902002D4AB1 /* EcoCartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DCE36A2CF72902002D4AB1 /* EcoCartTests.swift */; };
 		F2DCE3752CF72902002D4AB1 /* EcoCartUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DCE3742CF72902002D4AB1 /* EcoCartUITests.swift */; };
 		F2DCE3772CF72902002D4AB1 /* EcoCartUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DCE3762CF72902002D4AB1 /* EcoCartUITestsLaunchTests.swift */; };
@@ -274,7 +274,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E7C9AB02CF72FCD0049CD22 /* Info.plist in Resources */,
+				103FB5822CF7BBEC00DC95CC /* Info.plist in Resources */,
 				0E7C9AB12CF72FCD0049CD22 /* Assets.xcassets in Resources */,
 				0E7C9AB22CF72FCD0049CD22 /* Main.storyboard in Resources */,
 				0E7C9AB32CF72FCD0049CD22 /* GoogleService-Info.plist in Resources */,
