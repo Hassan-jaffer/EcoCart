@@ -18,6 +18,7 @@
 		0E7C9AB72CF72FCD0049CD22 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA42CF72FCD0049CD22 /* ViewController.swift */; };
 		0E7C9AB82CF72FCD0049CD22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA22CF72FCD0049CD22 /* AppDelegate.swift */; };
 		0E7C9AB92CF72FCD0049CD22 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA82CF72FCD0049CD22 /* SceneDelegate.swift */; };
+		0EC7EEEE2CFC485800A7E000 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC7EEED2CFC485800A7E000 /* Product.swift */; };
 		0EF3BDFC2CF7704000DB6279 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0EF3BDFB2CF7704000DB6279 /* FirebaseAuth */; };
 		0EF3BDFE2CF7704000DB6279 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0EF3BDFD2CF7704000DB6279 /* FirebaseFirestore */; };
 		0EF3BE002CF7704000DB6279 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0EF3BDFF2CF7704000DB6279 /* FirebaseStorage */; };
@@ -55,6 +56,7 @@
 		0E7C9AAA2CF72FCD0049CD22 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0E7C9AAC2CF72FCD0049CD22 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0E7C9AAE2CF72FCD0049CD22 /* ProductDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProductDetails.storyboard; sourceTree = "<group>"; };
+		0EC7EEED2CFC485800A7E000 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		F2DCE3502CF728FF002D4AB1 /* EcoCart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EcoCart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2DCE3662CF72901002D4AB1 /* EcoCartTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EcoCartTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2DCE36A2CF72902002D4AB1 /* EcoCartTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoCartTests.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 		0EF3BE012CF771B800DB6279 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0EC7EEED2CFC485800A7E000 /* Product.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 			files = (
 				0E7C9AB72CF72FCD0049CD22 /* ViewController.swift in Sources */,
 				0E7C9AB82CF72FCD0049CD22 /* AppDelegate.swift in Sources */,
+				0EC7EEEE2CFC485800A7E000 /* Product.swift in Sources */,
 				0E30B4EA2CF7796700C2AFA2 /* AddProductViewController.swift in Sources */,
 				0E7C9AB92CF72FCD0049CD22 /* SceneDelegate.swift in Sources */,
 			);
