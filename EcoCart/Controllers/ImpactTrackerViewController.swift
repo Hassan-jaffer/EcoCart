@@ -23,10 +23,11 @@ class ImpactTrackerViewController: UIViewController {
         let values: [Double] = [100, 200, 300, 400]
         var entries: [BarChartDataEntry] = []
         for (i, value) in values.enumerated() {
-            let entry = BarChartDataEntry(x: value, y: Double(i))
+            let entry = BarChartDataEntry(x: Double(i), y: value)
             entries.append(entry)
         }
         let dataSet = BarChartDataSet(entries: entries,label: "Impact Metrics")
+        dataSet.valueFormatter = DefaultValueFormatter(decimals: 0)
         dataSet.colors = [NSUIColor.systemGreen]
         dataSet.valueColors = [NSUIColor.black]
         
