@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-
-
 		0E7C9AB12CF72FCD0049CD22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA32CF72FCD0049CD22 /* Assets.xcassets */; };
 		0E7C9AB22CF72FCD0049CD22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E7C9AAD2CF72FCD0049CD22 /* Main.storyboard */; };
 		0E7C9AB32CF72FCD0049CD22 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA62CF72FCD0049CD22 /* GoogleService-Info.plist */; };
@@ -19,9 +17,8 @@
 		0E7C9AB82CF72FCD0049CD22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA22CF72FCD0049CD22 /* AppDelegate.swift */; };
 		0E7C9AB92CF72FCD0049CD22 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA82CF72FCD0049CD22 /* SceneDelegate.swift */; };
 		0EC7EEEE2CFC485800A7E000 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC7EEED2CFC485800A7E000 /* Product.swift */; };
-		0EF3BDFC2CF7704000DB6279 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0EF3BDFB2CF7704000DB6279 /* FirebaseAuth */; };
-		0EF3BDFE2CF7704000DB6279 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0EF3BDFD2CF7704000DB6279 /* FirebaseFirestore */; };
-		0EF3BE002CF7704000DB6279 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0EF3BDFF2CF7704000DB6279 /* FirebaseStorage */; };
+		0EC7EEF12CFCCC2900A7E000 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 0EC7EEF02CFCCC2900A7E000 /* DGCharts */; };
+		0EC7EEF32CFCCDCB00A7E000 /* ImpactTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC7EEF22CFCCDCB00A7E000 /* ImpactTrackerViewController.swift */; };
 		103FB5822CF7BBEC00DC95CC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA72CF72FCD0049CD22 /* Info.plist */; };
 		F2DCE36B2CF72902002D4AB1 /* EcoCartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DCE36A2CF72902002D4AB1 /* EcoCartTests.swift */; };
 		F2DCE3752CF72902002D4AB1 /* EcoCartUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DCE3742CF72902002D4AB1 /* EcoCartUITests.swift */; };
@@ -58,6 +55,7 @@
 		0E7C9AAC2CF72FCD0049CD22 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0E7C9AAE2CF72FCD0049CD22 /* ProductDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProductDetails.storyboard; sourceTree = "<group>"; };
 		0EC7EEED2CFC485800A7E000 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		0EC7EEF22CFCCDCB00A7E000 /* ImpactTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactTrackerViewController.swift; sourceTree = "<group>"; };
 		F2DCE3502CF728FF002D4AB1 /* EcoCart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EcoCart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2DCE3662CF72901002D4AB1 /* EcoCartTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EcoCartTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2DCE36A2CF72902002D4AB1 /* EcoCartTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoCartTests.swift; sourceTree = "<group>"; };
@@ -71,9 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EF3BDFC2CF7704000DB6279 /* FirebaseAuth in Frameworks */,
-				0EF3BDFE2CF7704000DB6279 /* FirebaseFirestore in Frameworks */,
-				0EF3BE002CF7704000DB6279 /* FirebaseStorage in Frameworks */,
+				0EC7EEF12CFCCC2900A7E000 /* DGCharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +95,7 @@
 			children = (
 				0E7C9AA42CF72FCD0049CD22 /* ViewController.swift */,
 				0E30B4E92CF7796700C2AFA2 /* AddProductViewController.swift */,
+				0EC7EEF22CFCCDCB00A7E000 /* ImpactTrackerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -263,7 +260,7 @@
 			);
 			mainGroup = F2DCE3472CF728FF002D4AB1;
 			packageReferences = (
-				0EF3BDFA2CF7704000DB6279 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				0EC7EEEF2CFCCC2900A7E000 /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = F2DCE3512CF728FF002D4AB1 /* Products */;
 			projectDirPath = "";
@@ -312,10 +309,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EC7EEF32CFCCDCB00A7E000 /* ImpactTrackerViewController.swift in Sources */,
 				0E7C9AB72CF72FCD0049CD22 /* ViewController.swift in Sources */,
 				0E7C9AB82CF72FCD0049CD22 /* AppDelegate.swift in Sources */,
 				0EC7EEEE2CFC485800A7E000 /* Product.swift in Sources */,
-				0E30B4EA2CF7796700C2AFA2 /* AddProductViewController.swift in Sources */,
 				0E7C9AB92CF72FCD0049CD22 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -655,31 +652,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0EF3BDFA2CF7704000DB6279 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		0EC7EEEF2CFCCC2900A7E000 /* XCRemoteSwiftPackageReference "Charts" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 11.5.0;
+				minimumVersion = 5.1.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0EF3BDFB2CF7704000DB6279 /* FirebaseAuth */ = {
+		0EC7EEF02CFCCC2900A7E000 /* DGCharts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0EF3BDFA2CF7704000DB6279 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
-		};
-		0EF3BDFD2CF7704000DB6279 /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0EF3BDFA2CF7704000DB6279 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
-		};
-		0EF3BDFF2CF7704000DB6279 /* FirebaseStorage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0EF3BDFA2CF7704000DB6279 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseStorage;
+			package = 0EC7EEEF2CFCCC2900A7E000 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGCharts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
