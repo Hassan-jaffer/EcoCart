@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E2F4D422CFCD29C00235DE9 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 0E2F4D412CFCD29C00235DE9 /* DGCharts */; };
+		0E2F4D442CFCD2DF00235DE9 /* ImpactTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2F4D432CFCD2DF00235DE9 /* ImpactTrackerViewController.swift */; };
 		0E7C9AB12CF72FCD0049CD22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA32CF72FCD0049CD22 /* Assets.xcassets */; };
 		0E7C9AB22CF72FCD0049CD22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E7C9AAD2CF72FCD0049CD22 /* Main.storyboard */; };
 		0E7C9AB32CF72FCD0049CD22 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA62CF72FCD0049CD22 /* GoogleService-Info.plist */; };
@@ -17,7 +19,6 @@
 		0E7C9AB82CF72FCD0049CD22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA22CF72FCD0049CD22 /* AppDelegate.swift */; };
 		0E7C9AB92CF72FCD0049CD22 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA82CF72FCD0049CD22 /* SceneDelegate.swift */; };
 		0EC7EEEE2CFC485800A7E000 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC7EEED2CFC485800A7E000 /* Product.swift */; };
-		103FB5822CF7BBEC00DC95CC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA72CF72FCD0049CD22 /* Info.plist */; };
 		CF84B6A32CFC4B1E0006F605 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF84B6A22CFC4B1E0006F605 /* Login.storyboard */; };
 		CF84B6A52CFC58280006F605 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF84B6A42CFC58280006F605 /* Profile.storyboard */; };
 		F2DCE36B2CF72902002D4AB1 /* EcoCartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DCE36A2CF72902002D4AB1 /* EcoCartTests.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E2F4D432CFCD2DF00235DE9 /* ImpactTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactTrackerViewController.swift; sourceTree = "<group>"; };
 		0E30B4E92CF7796700C2AFA2 /* AddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
 		0E7C9AA22CF72FCD0049CD22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E7C9AA32CF72FCD0049CD22 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E2F4D422CFCD29C00235DE9 /* DGCharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +98,7 @@
 			children = (
 				0E7C9AA42CF72FCD0049CD22 /* ViewController.swift */,
 				0E30B4E92CF7796700C2AFA2 /* AddProductViewController.swift */,
+				0E2F4D432CFCD2DF00235DE9 /* ImpactTrackerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -261,6 +265,7 @@
 			);
 			mainGroup = F2DCE3472CF728FF002D4AB1;
 			packageReferences = (
+				0E2F4D402CFCD29C00235DE9 /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = F2DCE3512CF728FF002D4AB1 /* Products */;
 			projectDirPath = "";
@@ -279,7 +284,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF84B6A32CFC4B1E0006F605 /* Login.storyboard in Resources */,
-				103FB5822CF7BBEC00DC95CC /* Info.plist in Resources */,
 				0E7C9AB12CF72FCD0049CD22 /* Assets.xcassets in Resources */,
 				0E7C9AB22CF72FCD0049CD22 /* Main.storyboard in Resources */,
 				0E7C9AB32CF72FCD0049CD22 /* GoogleService-Info.plist in Resources */,
@@ -311,6 +315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E2F4D442CFCD2DF00235DE9 /* ImpactTrackerViewController.swift in Sources */,
 				0E7C9AB72CF72FCD0049CD22 /* ViewController.swift in Sources */,
 				0E7C9AB82CF72FCD0049CD22 /* AppDelegate.swift in Sources */,
 				0EC7EEEE2CFC485800A7E000 /* Product.swift in Sources */,
@@ -651,6 +656,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0E2F4D402CFCD29C00235DE9 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0E2F4D412CFCD29C00235DE9 /* DGCharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E2F4D402CFCD29C00235DE9 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGCharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F2DCE3482CF728FF002D4AB1 /* Project object */;
 }
