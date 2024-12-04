@@ -98,6 +98,13 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="317" height="76"/>
+                                        <connections>
+                                            <outlet property="ButtonOutlet" destination="cYz-Jy-n3X" id="YZS-AV-Bnu"/>
+                                            <outlet property="imageOutlet" destination="hHq-dV-e4Y" id="PWC-t4-dD2"/>
+                                            <outlet property="priceOutlet" destination="DyE-gu-Cwg" id="QPD-pa-WHo"/>
+                                            <outlet property="productNameOutlet" destination="dHO-Kr-5dv" id="95u-I1-gH5"/>
+                                            <outlet property="sellerOutlet" destination="LJk-ur-Qr6" id="cTH-mM-IKu"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -116,7 +123,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="collectionOutlet" destination="2ZB-8j-wvl" id="R2e-ga-Wv9"/>
+                        <outlet property="collectionView" destination="2ZB-8j-wvl" id="i2s-50-JTc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

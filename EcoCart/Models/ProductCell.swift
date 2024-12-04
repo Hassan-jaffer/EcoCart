@@ -10,7 +10,17 @@ import Foundation
 import UIKit
 
 class ProductCell: UICollectionViewCell {
-    @IBOutlet weak var productImageView: UIImageView!
-    @IBOutlet weak var productNameLabel: UILabel!
-    @IBOutlet weak var productPriceLabel: UILabel!
+
+    
+    @IBOutlet weak var ButtonOutlet: UIButton!
+    
+    @IBOutlet weak var sellerOutlet: UILabel!
+    
+    @IBOutlet weak var priceOutlet: UILabel!
+    
+    @IBOutlet weak var productNameOutlet: UILabel!
+    
+    @IBOutlet weak var imageOutlet: UIImageView!
+    
+    
 }
