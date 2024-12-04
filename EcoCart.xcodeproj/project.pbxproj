@@ -26,6 +26,8 @@
 		CF84B6A52CFC58280006F605 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF84B6A42CFC58280006F605 /* Profile.storyboard */; };
 		F2574B212D0058F900FF2011 /* Filter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2574B202D0058F900FF2011 /* Filter.storyboard */; };
 		F2574B232D00609F00FF2011 /* HomePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2574B222D00609F00FF2011 /* HomePage.storyboard */; };
+		F2574B252D00740000FF2011 /* homePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2574B242D00740000FF2011 /* homePageViewController.swift */; };
+		F2574B272D00785B00FF2011 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2574B262D00785B00FF2011 /* ProductCell.swift */; };
 		F2DCE36B2CF72902002D4AB1 /* EcoCartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DCE36A2CF72902002D4AB1 /* EcoCartTests.swift */; };
 		F2DCE3752CF72902002D4AB1 /* EcoCartUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DCE3742CF72902002D4AB1 /* EcoCartUITests.swift */; };
 		F2DCE3772CF72902002D4AB1 /* EcoCartUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DCE3762CF72902002D4AB1 /* EcoCartUITestsLaunchTests.swift */; };
@@ -66,6 +68,8 @@
 		CF84B6A42CFC58280006F605 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		F2574B202D0058F900FF2011 /* Filter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Filter.storyboard; sourceTree = "<group>"; };
 		F2574B222D00609F00FF2011 /* HomePage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomePage.storyboard; sourceTree = "<group>"; };
+		F2574B242D00740000FF2011 /* homePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homePageViewController.swift; sourceTree = "<group>"; };
+		F2574B262D00785B00FF2011 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		F2DCE3502CF728FF002D4AB1 /* EcoCart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EcoCart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2DCE3662CF72901002D4AB1 /* EcoCartTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EcoCartTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2DCE36A2CF72902002D4AB1 /* EcoCartTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoCartTests.swift; sourceTree = "<group>"; };
@@ -109,6 +113,7 @@
 				0E7C9AA42CF72FCD0049CD22 /* ViewController.swift */,
 				0E30B4E92CF7796700C2AFA2 /* AddProductViewController.swift */,
 				0E2F4D432CFCD2DF00235DE9 /* ImpactTrackerViewController.swift */,
+				F2574B242D00740000FF2011 /* homePageViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -132,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				0EC7EEED2CFC485800A7E000 /* Product.swift */,
+				F2574B262D00785B00FF2011 /* ProductCell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -335,10 +341,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2574B252D00740000FF2011 /* homePageViewController.swift in Sources */,
 				0E2F4D442CFCD2DF00235DE9 /* ImpactTrackerViewController.swift in Sources */,
 				0E7C9AB72CF72FCD0049CD22 /* ViewController.swift in Sources */,
 				0E7C9AB82CF72FCD0049CD22 /* AppDelegate.swift in Sources */,
 				0EC7EEEE2CFC485800A7E000 /* Product.swift in Sources */,
+				F2574B272D00785B00FF2011 /* ProductCell.swift in Sources */,
 				0E7C9AB92CF72FCD0049CD22 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
