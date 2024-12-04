@@ -19,6 +19,9 @@
 		0E7C9AB82CF72FCD0049CD22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA22CF72FCD0049CD22 /* AppDelegate.swift */; };
 		0E7C9AB92CF72FCD0049CD22 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA82CF72FCD0049CD22 /* SceneDelegate.swift */; };
 		0EC7EEEE2CFC485800A7E000 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC7EEED2CFC485800A7E000 /* Product.swift */; };
+		3F9CEECD2D005ECC004796E9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 3F9CEECC2D005ECC004796E9 /* FirebaseAuth */; };
+		3F9CEECF2D005ECC004796E9 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 3F9CEECE2D005ECC004796E9 /* FirebaseDatabase */; };
+		3F9CEED12D005F8F004796E9 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 3F9CEED02D005F8F004796E9 /* FirebaseCore */; };
 		CF84B6A32CFC4B1E0006F605 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF84B6A22CFC4B1E0006F605 /* Login.storyboard */; };
 		CF84B6A52CFC58280006F605 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF84B6A42CFC58280006F605 /* Profile.storyboard */; };
 		F2DCE36B2CF72902002D4AB1 /* EcoCartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2DCE36A2CF72902002D4AB1 /* EcoCartTests.swift */; };
@@ -72,7 +75,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F9CEECF2D005ECC004796E9 /* FirebaseDatabase in Frameworks */,
 				0E2F4D422CFCD29C00235DE9 /* DGCharts in Frameworks */,
+				3F9CEED12D005F8F004796E9 /* FirebaseCore in Frameworks */,
+				3F9CEECD2D005ECC004796E9 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +198,11 @@
 			dependencies = (
 			);
 			name = EcoCart;
+			packageProductDependencies = (
+				3F9CEECC2D005ECC004796E9 /* FirebaseAuth */,
+				3F9CEECE2D005ECC004796E9 /* FirebaseDatabase */,
+				3F9CEED02D005F8F004796E9 /* FirebaseCore */,
+			);
 			productName = EcoCart;
 			productReference = F2DCE3502CF728FF002D4AB1 /* EcoCart.app */;
 			productType = "com.apple.product-type.application";
@@ -266,6 +277,7 @@
 			mainGroup = F2DCE3472CF728FF002D4AB1;
 			packageReferences = (
 				0E2F4D402CFCD29C00235DE9 /* XCRemoteSwiftPackageReference "Charts" */,
+				3F9CEECB2D005ECC004796E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = F2DCE3512CF728FF002D4AB1 /* Products */;
 			projectDirPath = "";
@@ -666,6 +678,14 @@
 				minimumVersion = 5.1.0;
 			};
 		};
+		3F9CEECB2D005ECC004796E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.6.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -673,6 +693,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0E2F4D402CFCD29C00235DE9 /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = DGCharts;
+		};
+		3F9CEECC2D005ECC004796E9 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F9CEECB2D005ECC004796E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		3F9CEECE2D005ECC004796E9 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F9CEECB2D005ECC004796E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		3F9CEED02D005F8F004796E9 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F9CEECB2D005ECC004796E9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
