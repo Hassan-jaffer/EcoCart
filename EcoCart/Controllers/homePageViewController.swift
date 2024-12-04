@@ -23,11 +23,10 @@ class homePageViewController: UIViewController, UICollectionViewDataSource, UICo
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Set the data source and delegate for the collection view
         collectionView.dataSource = self
         collectionView.delegate = self
     }
+
 
     // MARK: - UICollectionViewDataSource
 
@@ -39,8 +38,6 @@ class homePageViewController: UIViewController, UICollectionViewDataSource, UICo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as! ProductCell
 
         let product = products[indexPath.item]
-
-        // Configure the cell using outlets in ProductCell
         cell.productNameOutlet.text = product.name
         cell.priceOutlet.text = "$\(product.price)"
         cell.sellerOutlet.text = product.seller
@@ -55,5 +52,14 @@ class homePageViewController: UIViewController, UICollectionViewDataSource, UICo
         let selectedProduct = products[indexPath.item]
         print("Selected product: \(selectedProduct.name)")
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+           return CGSize(width: 150, height: 200) // Adjust dimensions
+       }
+
+       func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+           return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10) // Adjust insets
+       }
 }
     
