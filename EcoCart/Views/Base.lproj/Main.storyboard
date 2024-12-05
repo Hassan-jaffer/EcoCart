@@ -21,6 +21,19 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="101"/>
                                 <color key="backgroundColor" red="0.67450982329999998" green="0.89411771299999998" blue="0.64313727620000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELf-ac-1BG">
+                                <rect key="frame" x="159" y="319" width="75" height="39"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="5C2-ci-nUV"/>
+                                    <constraint firstAttribute="height" constant="50" id="FLW-oL-bf1"/>
+                                    <constraint firstAttribute="width" secondItem="ELf-ac-1BG" secondAttribute="height" multiplier="25:13" id="HXT-A2-08B"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="testButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8CM-Bh-J3o"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -31,13 +44,14 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ou8-WJ-YiS" secondAttribute="trailing" id="uqj-Kq-eii"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" id="NrB-rG-VgF">
-                        <imageReference key="image" image="house.fill" catalog="system" symbolScale="large"/>
-                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="sfg-wJ-06V"/>
+                    <connections>
+                        <outlet property="testButton" destination="ELf-ac-1BG" id="PSV-dR-d4z"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="48" y="-2"/>
+            <point key="canvasLocation" x="973.28244274809151" y="-2.1126760563380285"/>
         </scene>
         <!--Impact Tracker-->
         <scene sceneID="Axn-yD-hPW">
@@ -47,7 +61,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q4d-vh-cDF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2489.3129770992364" y="-337.32394366197184"/>
+            <point key="canvasLocation" x="3416.030534351145" y="-337.32394366197184"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="nTQ-40-fjk">
@@ -61,7 +75,7 @@
                         <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="fn6-Te-mRS"/>
+                        <segue destination="IT8-16-nBh" kind="relationship" relationship="viewControllers" id="fn6-Te-mRS"/>
                         <segue destination="aLH-8H-ITy" kind="relationship" relationship="viewControllers" id="oaM-Of-Nfk"/>
                     </connections>
                 </tabBarController>
@@ -86,7 +100,28 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dfR-9b-AUd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1703" y="-350"/>
+            <point key="canvasLocation" x="2628.2442748091603" y="-350"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="bsh-6a-5gN">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IT8-16-nBh" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" id="NrB-rG-VgF">
+                        <imageReference key="image" image="house.fill" catalog="system" symbolScale="large"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wcd-Yz-osR">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="jgs-z0-dQG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nHW-gz-3Tq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="46.564885496183201" y="-2.1126760563380285"/>
         </scene>
     </scenes>
     <resources>
