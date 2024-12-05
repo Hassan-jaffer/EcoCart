@@ -10,14 +10,11 @@ import FirebaseCore
 import FirebaseFirestore
 import Firebase
 
-
-// Replace your current Metric struct with:
 struct Metric: Codable {
     let name: String
     let value: String
 }
 
-// Replace your current Product struct with:
 struct Product: Codable {
     let id: String
     let name: String
@@ -32,44 +29,32 @@ struct Product: Codable {
 }
 
 extension Product {
-static func fetchProduct(withId id: String) async throws -> Product? {
-    let db = Firestore.firestore()
-    let docRef = db.collection("product").document(id)
-    let snapshot = try await docRef.getDocument()
-    
-    guard let data = snapshot.data() else { return nil }
-    
-    print("Fetched data: \(data)")
-    
-    // Parse metrics
-    var metricsArray: [Metric] = []
-    if let metrics = data["metrics"] as? [String: Any] {
-        if let name = metrics["name"] as? String,
-           let value = metrics["value"] as? String {
-            metricsArray.append(Metric(name: name, value: value))
+    static func fetchProduct(withId id: String) async throws -> Product? {
+        let db = Firestore.firestore()
+        let docRef = db.collection("product").document(id)
+        let snapshot = try await docRef.getDocument()
+        
+        guard let data = snapshot.data() else { return nil }
+        
+        var metricsArray: [Metric] = []
+        if let metrics = data["metrics"] as? [String: Any] {
+            if let name = metrics["name"] as? String,
+               let value = metrics["value"] as? String {
+                metricsArray.append(Metric(name: name, value: value))
+            }
         }
+        
+        return Product(
+            id: snapshot.documentID,
+            name: data["name"] as? String ?? "",
+            price: data["price"] as? Double ?? 0.0,
+            description: data["description"] as? String ?? "",
+            imageURL: data["imageURL"] as? String ?? "",
+            stockQuantity: data["stockQuantity"] as? Int ?? 0,
+            storeOwnerId: data["storeOwnerID"] as? String ?? "",
+            averageRating: data["averageRating"] as? String ?? "0",
+            rating: data["rating"] as? Int ?? 0,
+            metrics: metricsArray
+        )
     }
-    
-    // Debug logging for name field
-    print("Raw name value from Firebase: \(String(describing: data["name"]))")
-    let name = data["name"] as? String ?? ""
-    print("Parsed name value: \(name)")
-    
-    let product = Product(
-        id: snapshot.documentID,
-        name: name,  // Use the extracted name variable
-        price: data["price"] as? Double ?? 0.0,
-        description: data["description"] as? String ?? "",
-        imageURL: data["imageURL"] as? String ?? "",
-        stockQuantity: data["stockQuantity"] as? Int ?? 0,
-        storeOwnerId: data["storeOwnerID"] as? String ?? "",
-        averageRating: data["averageRating"] as? String ?? "0",
-        rating: data["rating"] as? Int ?? 0,
-        metrics: metricsArray
-    )
-    
-    print("Created product object with name: \(product.name)")
-    print("Parsed product: \(product)")
-    return product
-}
 }

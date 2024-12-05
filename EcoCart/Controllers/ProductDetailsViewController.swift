@@ -44,15 +44,11 @@ class ProductDetailsViewController: UIViewController {
     private func setupUI() {
         productDescription.isEditable = false
         impactTextView.isEditable = false
-        
         nameLabel.font = .systemFont(ofSize: 24, weight: .bold)
         nameLabel.textAlignment = .center
         nameLabel.numberOfLines = 0
-        
-        // Configure quantity
         productQuantityStepper.value = Double(selectedQuantity)
         quantityLabel.text = "\(selectedQuantity)"
-        
         productQuantityStepper.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)
     }
     
@@ -68,37 +64,20 @@ class ProductDetailsViewController: UIViewController {
                     showAlert(title: "Error", message: "Failed to load product details")
                 }
             } catch {
-                print("Error fetching product: \(error)")
                 showAlert(title: "Error", message: "Failed to load product details")
             }
         }
     }
     
     private func updateUI(with product: Product) {
-        print("Updating UI with product data:")
-        print("Name from product: \(product.name)")
-        print("Rating: \(product.rating)")
-        print("Metrics: \(product.metrics)")
-        
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             
-            // Basic product info
-            print("Name label before update: \(String(describing: self.nameLabel.text))")
             self.nameLabel.text = product.name
-            self.nameLabel.sizeToFit()
-            print("Name label after update: \(String(describing: self.nameLabel.text))")
-            print("Name label is hidden: \(self.nameLabel.isHidden)")
-            print("Name label frame: \(self.nameLabel.frame)")
-            print("Name label text color: \(String(describing: self.nameLabel.textColor))")
-            print("Name label alpha: \(self.nameLabel.alpha)")
-            
             self.productPrice.text = String(format: "%.2f BHD", product.price)
             self.productDescription.text = product.description
             
             let starButtons = [self.ratingButton1, self.ratingButton2, self.ratingButton3, self.ratingButton4, self.ratingButton5]
-            print("Setting rating stars to: \(product.rating)")
-            
             starButtons.enumerated().forEach { index, button in
                 button?.setImage(UIImage(systemName: "star.fill"), for: .normal)
                 button?.tintColor = index < product.rating ? .systemYellow : .systemGray4
@@ -107,8 +86,7 @@ class ProductDetailsViewController: UIViewController {
             let metricsText = product.metrics.map { metric in
                 return "\(metric.name): \(metric.value)"
             }.joined(separator: "\n")
-            print("Setting metrics text to: \(metricsText)")
-            self.impactTextView.text = "Environmental Impact\n\n\(metricsText)"
+            self.impactTextView.text = " \n\n\(metricsText)"
             
             self.productQuantityStepper.maximumValue = Double(product.stockQuantity)
             self.productQuantityStepper.value = 1
@@ -122,11 +100,6 @@ class ProductDetailsViewController: UIViewController {
     
     private func loadImage(from url: URL) {
         URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
-            if let error = error {
-                print("Error loading image: \(error)")
-                return
-            }
-            
             if let data = data, let image = UIImage(data: data) {
                 DispatchQueue.main.async {
                     self?.productImage.image = image
@@ -149,7 +122,6 @@ class ProductDetailsViewController: UIViewController {
     @IBAction func addToCartTapped(_ sender: Any) {
         guard let product = product else { return }
         showAlert(title: "Success", message: "\(selectedQuantity) x \(product.name) added to cart!")
-        //later
     }
     
     @IBAction func viewRatingsTapped(_ sender: Any) {
