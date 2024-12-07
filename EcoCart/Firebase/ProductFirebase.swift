@@ -10,51 +10,37 @@ import FirebaseCore
 import FirebaseFirestore
 import Firebase
 
-struct Metric: Codable {
-    let name: String
-    let value: String
-}
-
-struct Product: Codable {
-    let id: String
-    let name: String
-    let price: Double
-    let description: String
-    let imageURL: String
-    let stockQuantity: Int
-    let storeOwnerId: String
-    let averageRating: String
-    let rating: Int
-    let metrics: [Metric]
-}
-
-extension Product {
-    static func fetchProduct(withId id: String) async throws -> Product? {
-        let db = Firestore.firestore()
+class ProductFirebase {
+    static let shared = ProductFirebase()
+    private let db = Firestore.firestore()
+    
+    private init() {}
+    
+    func fetchProduct(withId id: String) async throws -> Product? {
         let docRef = db.collection("product").document(id)
-        let snapshot = try await docRef.getDocument()
+        let document = try await docRef.getDocument()
         
-        guard let data = snapshot.data() else { return nil }
-        
-        var metricsArray: [Metric] = []
-        if let metrics = data["metrics"] as? [String: Any] {
-            if let name = metrics["name"] as? String,
-               let value = metrics["value"] as? String {
-                metricsArray.append(Metric(name: name, value: value))
-            }
-        }
+        guard let data = document.data() else { return nil }
         
         return Product(
-            id: snapshot.documentID,
+            id: document.documentID,
             name: data["name"] as? String ?? "",
-            price: data["price"] as? Double ?? 0.0,
             description: data["description"] as? String ?? "",
+            price: data["price"] as? Double ?? 0.0,
             imageURL: data["imageURL"] as? String ?? "",
+            averageRating: data["averageRating"] as? Int ?? 0,
             stockQuantity: data["stockQuantity"] as? Int ?? 0,
-            storeOwnerId: data["storeOwnerID"] as? String ?? "",
-            averageRating: data["averageRating"] as? String ?? "0",
-            rating: data["rating"] as? Int ?? 0,
-            metrics: metricsArray
+            metrics: parseMetrics(from: data)
         )
+    }
+    
+    private func parseMetrics(from data: [String: Any]) -> [Product.Metric] {
+        guard let metricsData = data["metrics"] as? [[String: Any]] else { return [] }
+        return metricsData.map { metricData in
+            Product.Metric(
+                name: metricData["name"] as? String ?? "",
+                value: metricData["value"] as? String ?? ""
+            )
+        }
     }
 }
