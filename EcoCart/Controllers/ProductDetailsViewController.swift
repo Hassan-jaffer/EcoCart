@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseFirestore
+import Foundation
 
 class ProductDetailsViewController: UIViewController {
     
@@ -31,8 +32,8 @@ class ProductDetailsViewController: UIViewController {
         return viewController
     }
     
-    private var productId: String?
-    private var product: Product?
+    var productId: String?
+    var product: Product?
     private var selectedQuantity: Int = 1
     
     override func viewDidLoad() {
@@ -53,17 +54,23 @@ class ProductDetailsViewController: UIViewController {
     }
     
     private func fetchProductDetails() {
-        guard let productId = self.productId else { return }
+        guard let productId = self.productId else {
+            print("❌ No product ID available")
+            return 
+        }
         
+        print("🔍 Fetching product details for ID: \(productId)")
         Task {
             do {
                 if let product = try await Product.fetchProduct(withId: productId) {
                     self.product = product
+                    self.productId = product.id
                     updateUI(with: product)
                 } else {
                     showAlert(title: "Error", message: "Failed to load product details")
                 }
             } catch {
+                print("❌ Error fetching product: \(error)")
                 showAlert(title: "Error", message: "Failed to load product details")
             }
         }
@@ -80,7 +87,7 @@ class ProductDetailsViewController: UIViewController {
             let starButtons = [self.ratingButton1, self.ratingButton2, self.ratingButton3, self.ratingButton4, self.ratingButton5]
             starButtons.enumerated().forEach { index, button in
                 button?.setImage(UIImage(systemName: "star.fill"), for: .normal)
-                button?.tintColor = index < product.rating ? .systemYellow : .systemGray4
+                button?.tintColor = index < product.averageRating ? .systemYellow : .systemGray4
             }
             
             let metricsText = product.metrics.map { metric in
@@ -125,6 +132,19 @@ class ProductDetailsViewController: UIViewController {
     }
     
     @IBAction func viewRatingsTapped(_ sender: Any) {
-        //later
+        guard let productId = self.productId else { 
+            print("⚠️ No product ID available")
+            return 
+        }
+        
+        let storyboard = UIStoryboard(name: "ProductDetails", bundle: nil)
+        guard let reviewVC = storyboard.instantiateViewController(withIdentifier: "ReviewViewController") as? ReviewViewController else {
+            print("⚠️ Could not instantiate ReviewViewController from storyboard")
+            return
+        }
+        
+        reviewVC.productId = productId
+        reviewVC.title = "Reviews"
+        navigationController?.pushViewController(reviewVC, animated: true)
     }
 }
