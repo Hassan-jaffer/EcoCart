@@ -5,6 +5,7 @@ class HomePageViewController: UIViewController, UICollectionViewDataSource, UICo
 
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var productTableView: UITableView!
     var products: [Product] = [] // Array to hold product data
     
     override func viewDidLoad() {
