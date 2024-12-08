@@ -12,8 +12,8 @@
         <!--Home Page View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="homePage" id="Y6W-OH-hqX" customClass="homePageViewController" customModule="EcoCart" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                <viewController storyboardIdentifier="HomePage" id="Y6W-OH-hqX" customClass="homePageViewController" customModule="EcoCart" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" restorationIdentifier="homePage" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -123,12 +123,12 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="collectionView" destination="2ZB-8j-wvl" id="i2s-50-JTc"/>
+                        <outlet property="collectionView" destination="2ZB-8j-wvl" id="qOz-9n-U5i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="46.564885496183201" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="237" y="-43"/>
         </scene>
     </scenes>
     <resources>
