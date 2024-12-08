@@ -1,26 +1,22 @@
-//
-//  ProductCell.swift
-//  EcoCart
-//
-//  Created by BP-needchange on 04/12/2024.
-//
-
-import Foundation
-
 import UIKit
 
 class ProductCell: UICollectionViewCell {
-
-    
-    @IBOutlet weak var ButtonOutlet: UIButton!
-    
-    @IBOutlet weak var sellerOutlet: UILabel!
-    
-    @IBOutlet weak var priceOutlet: UILabel!
-    
-    @IBOutlet weak var productNameOutlet: UILabel!
-    
-    @IBOutlet weak var imageOutlet: UIImageView!
     
     
+    @IBOutlet weak var productNameLabel: UILabel!
+    
+    @IBOutlet weak var priceLabel: UILabel!
+    
+    @IBOutlet weak var actionButton: UIButton!
+    
+    @IBOutlet weak var productImageView: UIImageView!
+    
+    @IBOutlet weak var productDescriptionLabel: UILabel!
+    
+    
+    
+    override func awakeFromNib() {
+            super.awakeFromNib()
+            // Any additional setup after loading the view
+        }
 }

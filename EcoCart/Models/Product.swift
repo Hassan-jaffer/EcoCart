@@ -1,12 +1,4 @@
-//
-//  Product.swift
-//  EcoCart
-//
-//  Created by Hasan Shehab on 01/12/2024.
-//
-
 import Foundation
-
 import FirebaseFirestore
 
 struct Product: Codable {
@@ -40,11 +32,12 @@ struct Product: Codable {
             imageURL: data["imageURL"] as? String ?? "",
             averageRating: data["averageRating"] as? Int ?? 0,
             stockQuantity: data["stockQuantity"] as? Int ?? 0,
-            metrics: parseMetrics(from: data)
+            metrics: parseMetrics(from: data)  // Make sure it's accessible
         )
     }
     
-    private static func parseMetrics(from data: [String: Any]) -> [Metric] {
+    // Change the access level to internal or public
+    static func parseMetrics(from data: [String: Any]) -> [Metric] {
         guard let metricsData = data["metrics"] as? [[String: Any]] else { return [] }
         return metricsData.map { metricData in
             Metric(
@@ -54,4 +47,3 @@ struct Product: Codable {
         }
     }
 }
-
