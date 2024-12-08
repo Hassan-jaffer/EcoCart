@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 import FirebaseFirestore
 
 struct Product: Codable {
@@ -53,3 +54,4 @@ struct Product: Codable {
         }
     }
 }
+
