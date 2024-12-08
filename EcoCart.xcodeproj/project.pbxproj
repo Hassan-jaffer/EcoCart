@@ -62,6 +62,10 @@
 		0E7C9AAE2CF72FCD0049CD22 /* ProductDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProductDetails.storyboard; sourceTree = "<group>"; };
 		0EA4058A2D058B2D00F37E56 /* ProductFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductFirebase.swift; sourceTree = "<group>"; };
 		0EC7EEED2CFC485800A7E000 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		105F69B02D049D1E005454A7 /* ReviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewCell.xib; sourceTree = "<group>"; };
+		105F69B22D049F97005454A7 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReviewCell.swift; path = EcoCart/Controllers/ReviewCell.swift; sourceTree = SOURCE_ROOT; };
+		105F69BA2D04A047005454A7 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		105F69BC2D04A067005454A7 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		1086DBA32D0114B20087646B /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
 		CF84B6A22CFC4B1E0006F605 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		CF84B6A42CFC58280006F605 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -108,6 +112,9 @@
 				0E30B4E92CF7796700C2AFA2 /* AddProductViewController.swift */,
 				0E2F4D432CFCD2DF00235DE9 /* ImpactTrackerViewController.swift */,
 				1086DBA32D0114B20087646B /* ProductDetailsViewController.swift */,
+				105F69B22D049F97005454A7 /* ReviewCell.swift */,
+				105F69BA2D04A047005454A7 /* Review.swift */,
+				105F69BC2D04A067005454A7 /* ReviewViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -121,6 +128,7 @@
 				0E7C9AAE2CF72FCD0049CD22 /* ProductDetails.storyboard */,
 				CF84B6A22CFC4B1E0006F605 /* Login.storyboard */,
 				CF84B6A42CFC58280006F605 /* Profile.storyboard */,
+				105F69B02D049D1E005454A7 /* ReviewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -308,6 +316,7 @@
 			files = (
 				CF84B6A32CFC4B1E0006F605 /* Login.storyboard in Resources */,
 				0E7C9AB12CF72FCD0049CD22 /* Assets.xcassets in Resources */,
+				105F69B12D049D1E005454A7 /* ReviewCell.xib in Resources */,
 				0E7C9AB22CF72FCD0049CD22 /* Main.storyboard in Resources */,
 				0E7C9AB32CF72FCD0049CD22 /* GoogleService-Info.plist in Resources */,
 				0E7C9AB42CF72FCD0049CD22 /* Impact Tracker.storyboard in Resources */,
@@ -342,7 +351,10 @@
 				0EA4058C2D058B2D00F37E56 /* ProductFirebase.swift in Sources */,
 				0E2F4D442CFCD2DF00235DE9 /* ImpactTrackerViewController.swift in Sources */,
 				0E7C9AB72CF72FCD0049CD22 /* ViewController.swift in Sources */,
+				105F69BB2D04A047005454A7 /* Review.swift in Sources */,
 				0E7C9AB82CF72FCD0049CD22 /* AppDelegate.swift in Sources */,
+				105F69BD2D04A067005454A7 /* ReviewViewController.swift in Sources */,
+				105F69B32D049F97005454A7 /* ReviewCell.swift in Sources */,
 				0EC7EEEE2CFC485800A7E000 /* Product.swift in Sources */,
 				0E7C9AB92CF72FCD0049CD22 /* SceneDelegate.swift in Sources */,
 			);

@@ -29,7 +29,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ahmed Ali" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fCW-xV-dFG">
-                                                    <rect key="frame" x="27.999999999999993" y="20" width="77.333333333333314" height="20"/>
+                                                    <rect key="frame" x="28" y="20" width="29.333333333333329" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -46,22 +46,22 @@
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="I6Z-42-jC5">
-                                                    <rect key="frame" x="113" y="5" width="303" height="50"/>
+                                                    <rect key="frame" x="65" y="5" width="351" height="50"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n1G-Ve-gmM">
-                                                            <rect key="frame" x="0.0" y="0.0" width="57.333333333333336" height="50"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="67" height="50"/>
                                                         </imageView>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ur7-iS-pi9">
-                                                            <rect key="frame" x="61.333333333333343" y="0.0" width="57.333333333333343" height="50"/>
+                                                            <rect key="frame" x="71" y="0.0" width="67" height="50"/>
                                                         </imageView>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lOh-iv-6Si">
-                                                            <rect key="frame" x="122.66666666666667" y="0.0" width="57.666666666666671" height="50"/>
+                                                            <rect key="frame" x="142" y="0.0" width="67" height="50"/>
                                                         </imageView>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7K0-de-tY3">
-                                                            <rect key="frame" x="184.33333333333331" y="0.0" width="57.333333333333343" height="50"/>
+                                                            <rect key="frame" x="213" y="0.0" width="67" height="50"/>
                                                         </imageView>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tU7-8j-4sk">
-                                                            <rect key="frame" x="245.66666666666671" y="0.0" width="57.333333333333343" height="50"/>
+                                                            <rect key="frame" x="284" y="0.0" width="67" height="50"/>
                                                         </imageView>
                                                     </subviews>
                                                 </stackView>
@@ -319,12 +319,12 @@
         <scene sceneID="Zjc-Sy-meq">
             <objects>
                 <viewController id="70d-rb-8Fp" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="HZB-fp-0dy">
+                    <view key="view" contentMode="scaleToFill" id="HZB-fp-0dy">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="45a-uj-Eew">
-                                <rect key="frame" x="0.0" y="103" width="430" height="829"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="45a-uj-Eew">
+                                <rect key="frame" x="0.0" y="59" width="430" height="873"/>
                             </scrollView>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dcJ-ul-sXS">
                                 <rect key="frame" x="20" y="-83" width="430" height="1312.6666666666667"/>
@@ -781,7 +781,8 @@
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" title="Reviews"/>
                                                                 <connections>
-                                                                    <action selector="viewRatingsTapped:" destination="0mZ-xP-vAc" eventType="touchUpInside" id="VQr-dG-YHB"/>
+                                                                    <action selector="viewRatingsTapped:" destination="0mZ-xP-vAc" eventType="touchUpInside" id="CTh-P9-ke2"/>
+                                                                    <segue destination="ahz-GD-7Ox" kind="push" id="cJb-hF-29e"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -917,6 +918,7 @@
                                                                 <rect key="frame" x="15" y="31" width="156" height="39"/>
                                                                 <color key="backgroundColor" red="0.67450982329999998" green="0.89411771299999998" blue="0.64313727620000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                 <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="9Jy-m5-b5R" secondAttribute="height" multiplier="149:39" id="8ad-L4-8im"/>
                                                                     <constraint firstAttribute="width" secondItem="9Jy-m5-b5R" secondAttribute="height" multiplier="149:39" id="mlr-5a-rot"/>
                                                                 </constraints>
                                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -924,7 +926,6 @@
                                                                 <buttonConfiguration key="configuration" style="plain" title="View Alternatives"/>
                                                                 <connections>
                                                                     <action selector="viewRatingsTapped:" destination="0mZ-xP-vAc" eventType="touchUpInside" id="pQa-pp-wSO"/>
-                                                                    <segue destination="ahz-GD-7Ox" kind="push" id="4hJ-Em-WL7"/>
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IGj-9G-Y3S">
@@ -945,7 +946,6 @@
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="100" id="8DZ-ga-dYh"/>
-                                                            <constraint firstItem="9Jy-m5-b5R" firstAttribute="width" secondItem="9Jy-m5-b5R" secondAttribute="height" multiplier="149:39" id="8ad-L4-8im"/>
                                                             <constraint firstItem="IGj-9G-Y3S" firstAttribute="trailing" secondItem="lsa-RX-XQi" secondAttribute="trailingMargin" constant="-8.6666666666666856" id="rwq-z5-vTy"/>
                                                         </constraints>
                                                     </view>
@@ -1054,7 +1054,7 @@
         <!--Review View Controller-->
         <scene sceneID="dJ6-lN-7Ik">
             <objects>
-                <viewController id="ahz-GD-7Ox" customClass="ReviewViewController" customModule="EcoShop" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ReviewViewController" id="ahz-GD-7Ox" customClass="ReviewViewController" customModule="EcoCart" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JSx-mG-hKP">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="922"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1227,14 +1227,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="g3W-9Z-IUj"/>
                     <connections>
-                        <outlet property="newReviewTextView" destination="P4i-Fn-OhR" id="1UU-vc-e8L"/>
-                        <outlet property="ratingStarButton1" destination="PO9-M5-TNl" id="81F-De-sZN"/>
-                        <outlet property="ratingStarButton2" destination="RLn-AQ-JdJ" id="xfJ-xG-Bzq"/>
-                        <outlet property="ratingStarButton3" destination="QCQ-dE-EgE" id="lBX-KK-mzb"/>
-                        <outlet property="ratingStarButton4" destination="bbl-Oj-PPU" id="BJj-oc-D4W"/>
-                        <outlet property="ratingStarButton5" destination="mQQ-CA-xJ5" id="6GP-nH-RkK"/>
-                        <outlet property="reviewTableView" destination="Msi-Uq-jnK" id="6Sd-Lo-QyC"/>
-                        <outlet property="submitReviewButton" destination="YsL-4P-gaL" id="Qgn-Li-nJU"/>
+                        <outlet property="newReviewTextView" destination="P4i-Fn-OhR" id="PHv-2s-hlY"/>
+                        <outlet property="ratingStarButton1" destination="PO9-M5-TNl" id="YBn-oo-CDa"/>
+                        <outlet property="ratingStarButton2" destination="RLn-AQ-JdJ" id="hL8-hJ-hKH"/>
+                        <outlet property="ratingStarButton3" destination="QCQ-dE-EgE" id="VQ5-1y-Kkn"/>
+                        <outlet property="ratingStarButton4" destination="bbl-Oj-PPU" id="5g5-ju-Nqh"/>
+                        <outlet property="ratingStarButton5" destination="mQQ-CA-xJ5" id="RNq-WE-cR9"/>
+                        <outlet property="reviewTableView" destination="Msi-Uq-jnK" id="868-uN-9ol"/>
+                        <outlet property="submitReviewButton" destination="YsL-4P-gaL" id="boV-3Q-7d4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xpG-IS-jDq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
