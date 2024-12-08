@@ -12,7 +12,7 @@
         <!--Home Page View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="HomePage" id="Y6W-OH-hqX" customClass="homePageViewController" customModule="EcoCart" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomePage" id="Y6W-OH-hqX" customClass="HomePageViewController" customModule="EcoCart" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="homePage" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -99,11 +99,11 @@
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="317" height="76"/>
                                         <connections>
-                                            <outlet property="ButtonOutlet" destination="cYz-Jy-n3X" id="YZS-AV-Bnu"/>
-                                            <outlet property="imageOutlet" destination="hHq-dV-e4Y" id="PWC-t4-dD2"/>
-                                            <outlet property="priceOutlet" destination="DyE-gu-Cwg" id="QPD-pa-WHo"/>
-                                            <outlet property="productNameOutlet" destination="dHO-Kr-5dv" id="95u-I1-gH5"/>
-                                            <outlet property="sellerOutlet" destination="LJk-ur-Qr6" id="cTH-mM-IKu"/>
+                                            <outlet property="actionButton" destination="cYz-Jy-n3X" id="IHY-19-gfL"/>
+                                            <outlet property="priceLabel" destination="DyE-gu-Cwg" id="ECO-Vu-EFQ"/>
+                                            <outlet property="productDescriptionLabel" destination="LJk-ur-Qr6" id="Utp-s3-P7W"/>
+                                            <outlet property="productImageView" destination="hHq-dV-e4Y" id="3aJ-OA-N5I"/>
+                                            <outlet property="productNameLabel" destination="dHO-Kr-5dv" id="J4y-5H-bCv"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -123,7 +123,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="collectionView" destination="2ZB-8j-wvl" id="qOz-9n-U5i"/>
+                        <outlet property="collectionView" destination="2ZB-8j-wvl" id="A1o-ah-Ubb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

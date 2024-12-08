@@ -1,130 +1,106 @@
 import UIKit
 import FirebaseFirestore
 
-class HomePageViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
-    // Connect the collection view to the storyboard
+class HomePageViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    // Array to hold fetched products
-    var products = [Product]()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        print("collectionView: \(collectionView)")  // Add this line for debugging
-        
-        if collectionView == nil {
-            print("❌ collectionView outlet is not connected.")
-        } else {
-            collectionView.dataSource = self
-            collectionView.delegate = self
-            fetchProducts()
-        }
-    }
+       
+       var products: [Product] = [] // Array to hold product data
+       
+       override func viewDidLoad() {
+           super.viewDidLoad()
+           setupCollectionView()
+           fetchProducts()
+       }
+       
+       // Setup collection view
+       private func setupCollectionView() {
+           collectionView.delegate = self
+           collectionView.dataSource = self
+           
+           // Register the ProductCell class
+           collectionView.register(ProductCell.self, forCellWithReuseIdentifier: "ProductCell")
+       }
+       
+       // Fetch product from Firestore
+       private func fetchProducts() {
+           Task {
+               do {
+                   let db = Firestore.firestore()
+                   let productId = "0"  // The product ID in Firebase
+                   let docRef = db.collection("product").document(productId)
+                   let document = try await docRef.getDocument()
+                   
+                   if let data = document.data() {
+                       self.products = [
+                           Product(
+                               id: document.documentID,
+                               name: data["name"] as? String ?? "",
+                               description: data["description"] as? String ?? "",
+                               price: data["price"] as? Double ?? 0.0,
+                               imageURL: data["imageURL"] as? String ?? "",
+                               averageRating: 0,  // Not used
+                               stockQuantity: 0,  // Not used
+                               metrics: []  // Not used
+                           )
+                       ]
+                       DispatchQueue.main.async {
+                           self.collectionView.reloadData()
+                       }
+                   } else {
+                       print("❌ No product found for ID \(productId)")
+                   }
+               } catch {
+                   print("❌ Error fetching product: \(error)")
+               }
+           }
+       }
+   }
 
-    
-    private func fetchProducts() {
-        // Fetch products from Firestore asynchronously
-        Task {
-            do {
-                let db = Firestore.firestore()
-                let snapshot = try await db.collection("product").getDocuments()
+   // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
+   extension HomePageViewController {
+       
+       // Number of items in section
+       func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+           return products.count
+       }
+       
+       // Configure the cell
+       func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+           let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as! ProductCell
+           
+           let product = products[indexPath.row]
+           
+           // Set product data to the cell
+           cell.productNameLabel.text = product.name
+           cell.priceLabel.text = String(format: "$%.2f", product.price)
+           cell.productDescriptionLabel.text = product.description
+           
+           // Load image using loadImage function
+           if let imageUrl = URL(string: product.imageURL) {
+               loadImage(from: imageUrl, in: cell)
+           }
+           
+           return cell
+       }
+       
+   }
 
-                // Parse Firestore documents into Product models
-                self.products = snapshot.documents.compactMap { document in
-                    return Product(
-                        id: document.documentID,
-                        name: document["name"] as? String ?? "",
-                        description: document["description"] as? String ?? "",
-                        price: document["price"] as? Double ?? 0.0,
-                        imageURL: document["imageURL"] as? String ?? "",
-                        averageRating: document["averageRating"] as? Int ?? 0,
-                        stockQuantity: document["stockQuantity"] as? Int ?? 0,
-                        metrics: parseMetrics(from: document.data()) // Local function to parse metrics
-                    )
-                }
-                
-                // Reload the collection view on the main thread
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
-            } catch {
-                print("❌ Error fetching products from Firestore: \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    private func parseMetrics(from data: [String: Any]) -> [Product.Metric] {
-        guard let metricsData = data["metrics"] as? [[String: Any]] else { return [] }
-        return metricsData.map { metricData in
-            Product.Metric(
-                name: metricData["name"] as? String ?? "",
-                value: metricData["value"] as? String ?? ""
-            )
-        }
-    }
-    
-    // MARK: - UICollectionViewDataSource
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return products.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        // Dequeue the custom ProductCell
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductCell", for: indexPath) as! ProductCell
-        
-        // Get the product at the given index path
-        let product = products[indexPath.item]
-        
-        // Set the product data in the cell
-        cell.productNameOutlet.text = product.name
-        cell.priceOutlet.text = "$\(product.price)"
-        cell.sellerOutlet.text = product.description // Assuming you want to show product description as "seller"
-        
-        // Load the image asynchronously from the URL (if imageURL is a URL)
-        loadImage(from: product.imageURL, into: cell.imageOutlet)
-        
-        return cell
-    }
-    
-    // MARK: - UICollectionViewDelegate
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedProduct = products[indexPath.item]
-        print("Selected product: \(selectedProduct.name)")
-    }
-    
-    // MARK: - UICollectionViewDelegateFlowLayout
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 150, height: 200) // Adjust dimensions as needed
-    }
-
-    // Adjust section insets (optional)
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10) // Adjust insets as needed
-    }
-
-    // MARK: - Image Loading
-
-    // Function to load an image from a URL asynchronously
-    private func loadImage(from urlString: String, into imageView: UIImageView) {
-        guard let url = URL(string: urlString) else { return }
-
-        // Start a data task to fetch the image
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            if let data = data, let image = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    imageView.image = image
-                }
-            } else {
-                // Handle any image loading errors (set a placeholder image, for example)
-                DispatchQueue.main.async {
-                    imageView.image = UIImage(named: "placeholder_image") // Set a placeholder image
-                }
-            }
-        }.resume()
-    }
+   // MARK: - Image Loading
+   extension HomePageViewController {
+       
+       // Load image from URL
+       private func loadImage(from url: URL, in cell: ProductCell) {
+           URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
+               if let data = data, let image = UIImage(data: data) {
+                   DispatchQueue.main.async {
+                       // Set image for the specific cell's image view
+                       cell.productImageView.image = image
+                   }
+               } else {
+                   print("Error loading image: \(error?.localizedDescription ?? "No error")")
+               }
+           }.resume()
+       }
 }
