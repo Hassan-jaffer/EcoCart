@@ -24,12 +24,10 @@ class ReviewCell: UITableViewCell {
     }
     
     private func setupUI() {
-        // Configure text view
         reviewContentTextView.isEditable = false
         reviewContentTextView.isScrollEnabled = false
         reviewContentTextView.backgroundColor = .clear
         
-        // Configure stars
         let stars = [ratingStarButton1, ratingStarButton2, ratingStarButton3, ratingStarButton4, ratingStarButton5]
         stars.forEach { button in
             button?.isUserInteractionEnabled = false
@@ -43,8 +41,7 @@ class ReviewCell: UITableViewCell {
         reviewContentTextView.text = review.content
         reviewerNameLabel.text = "By: \(review.userName)"
         
-        // Safely update stars based on rating
-        let rating = max(0, min(5, review.rating)) // Ensure rating is between 0 and 5
+        let rating = max(0, min(5, review.rating))
         print("⭐️ Setting rating to: \(rating)")
         
         let stars = [ratingStarButton1, ratingStarButton2, ratingStarButton3, ratingStarButton4, ratingStarButton5]
@@ -57,7 +54,6 @@ class ReviewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        // Reset the cell state
         reviewContentTextView.text = nil
         reviewerNameLabel.text = nil
         [ratingStarButton1, ratingStarButton2, ratingStarButton3, ratingStarButton4, ratingStarButton5].forEach { button in

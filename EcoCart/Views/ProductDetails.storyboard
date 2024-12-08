@@ -319,12 +319,12 @@
         <scene sceneID="Zjc-Sy-meq">
             <objects>
                 <viewController id="70d-rb-8Fp" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="HZB-fp-0dy">
+                    <view key="view" contentMode="scaleToFill" id="HZB-fp-0dy">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="45a-uj-Eew">
-                                <rect key="frame" x="0.0" y="62" width="430" height="812"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="45a-uj-Eew">
+                                <rect key="frame" x="0.0" y="59" width="430" height="873"/>
                             </scrollView>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dcJ-ul-sXS">
                                 <rect key="frame" x="20" y="-83" width="430" height="1312.6666666666667"/>
@@ -1227,14 +1227,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="g3W-9Z-IUj"/>
                     <connections>
-                        <outlet property="newReviewTextView" destination="P4i-Fn-OhR" id="YdK-PI-2SU"/>
-                        <outlet property="ratingStarButton1" destination="PO9-M5-TNl" id="hWK-iy-OlO"/>
-                        <outlet property="ratingStarButton2" destination="RLn-AQ-JdJ" id="AlP-Ix-64f"/>
-                        <outlet property="ratingStarButton3" destination="QCQ-dE-EgE" id="qm0-At-fL6"/>
-                        <outlet property="ratingStarButton4" destination="bbl-Oj-PPU" id="IqJ-al-rLM"/>
-                        <outlet property="ratingStarButton5" destination="mQQ-CA-xJ5" id="66w-uQ-xXT"/>
+                        <outlet property="newReviewTextView" destination="P4i-Fn-OhR" id="PHv-2s-hlY"/>
+                        <outlet property="ratingStarButton1" destination="PO9-M5-TNl" id="YBn-oo-CDa"/>
+                        <outlet property="ratingStarButton2" destination="RLn-AQ-JdJ" id="hL8-hJ-hKH"/>
+                        <outlet property="ratingStarButton3" destination="QCQ-dE-EgE" id="VQ5-1y-Kkn"/>
+                        <outlet property="ratingStarButton4" destination="bbl-Oj-PPU" id="5g5-ju-Nqh"/>
+                        <outlet property="ratingStarButton5" destination="mQQ-CA-xJ5" id="RNq-WE-cR9"/>
                         <outlet property="reviewTableView" destination="Msi-Uq-jnK" id="868-uN-9ol"/>
-                        <outlet property="submitReviewButton" destination="YsL-4P-gaL" id="eiw-Sf-o8j"/>
+                        <outlet property="submitReviewButton" destination="YsL-4P-gaL" id="boV-3Q-7d4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xpG-IS-jDq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1251,10 +1251,10 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="opaqueSeparatorColor">
-            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="secondaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

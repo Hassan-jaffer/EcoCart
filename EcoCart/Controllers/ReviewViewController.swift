@@ -20,12 +20,10 @@ class ReviewViewController: UIViewController {
     @IBOutlet weak var ratingStarButton4: UIButton!
     @IBOutlet weak var ratingStarButton5: UIButton!
     
-    // MARK: - Properties
     var productId: String?
     private var reviews: [Review] = []
     private var selectedRating: Int = 0
     
-    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         print("⚠️ ReviewViewController loaded with productId: \(String(describing: productId))")
@@ -33,29 +31,24 @@ class ReviewViewController: UIViewController {
         fetchReviews()
     }
     
-    // MARK: - UI Setup
     private func setupUI() {
         title = "Reviews"
         
-        // TableView setup
         reviewTableView.dataSource = self
         reviewTableView.delegate = self
         reviewTableView.rowHeight = UITableView.automaticDimension
         reviewTableView.estimatedRowHeight = 150
-        reviewTableView.tableFooterView = UIView() // Remove empty cell separators
+        reviewTableView.tableFooterView = UIView()
         
-        // Register cell with correct bundle
         let nib = UINib(nibName: "ReviewCell", bundle: Bundle.main)
         reviewTableView.register(nib, forCellReuseIdentifier: "ReviewCell")
         
-        // Review input setup
         newReviewTextView.layer.borderWidth = 1
         newReviewTextView.layer.borderColor = UIColor.lightGray.cgColor
         newReviewTextView.layer.cornerRadius = 5
         newReviewTextView.text = ""
         newReviewTextView.backgroundColor = .systemBackground
         
-        // Star rating setup
         let starButtons = [ratingStarButton1, ratingStarButton2, ratingStarButton3, ratingStarButton4, ratingStarButton5]
         starButtons.enumerated().forEach { index, button in
             button?.setImage(UIImage(systemName: "star.fill"), for: .normal)
@@ -64,11 +57,9 @@ class ReviewViewController: UIViewController {
             button?.tag = index + 1
         }
         
-        // Initial star state
         updateStars()
     }
     
-    // MARK: - Actions
     @objc private func starTapped(_ sender: UIButton) {
         selectedRating = sender.tag
         updateStars()
@@ -128,7 +119,6 @@ class ReviewViewController: UIViewController {
         }
     }
     
-    // MARK: - Firebase Operations
     private func fetchReviews() {
         guard let productId = productId else {
             print("❌ No productId found")
@@ -162,12 +152,10 @@ class ReviewViewController: UIViewController {
     }
 }
 
-// MARK: - TableView DataSource & Delegate
 extension ReviewViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("📊 Number of reviews: \(reviews.count)")
         if reviews.isEmpty {
-            // Show a message when there are no reviews
             let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 44))
             messageLabel.text = "No reviews yet. Be the first to review!"
             messageLabel.textAlignment = .center
