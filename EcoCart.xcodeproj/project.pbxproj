@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,6 +18,7 @@
 		0E7C9AB72CF72FCD0049CD22 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA42CF72FCD0049CD22 /* ViewController.swift */; };
 		0E7C9AB82CF72FCD0049CD22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA22CF72FCD0049CD22 /* AppDelegate.swift */; };
 		0E7C9AB92CF72FCD0049CD22 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA82CF72FCD0049CD22 /* SceneDelegate.swift */; };
+		0EA4058C2D058B2D00F37E56 /* ProductFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4058A2D058B2D00F37E56 /* ProductFirebase.swift */; };
 		0EC7EEEE2CFC485800A7E000 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC7EEED2CFC485800A7E000 /* Product.swift */; };
 		1086DBA02D0114540087646B /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1086DB9F2D0114540087646B /* FirebaseCore */; };
 		1086DBA22D0114540087646B /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 1086DBA12D0114540087646B /* FirebaseFirestore */; };
@@ -59,6 +60,7 @@
 		0E7C9AAA2CF72FCD0049CD22 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0E7C9AAC2CF72FCD0049CD22 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0E7C9AAE2CF72FCD0049CD22 /* ProductDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProductDetails.storyboard; sourceTree = "<group>"; };
+		0EA4058A2D058B2D00F37E56 /* ProductFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductFirebase.swift; sourceTree = "<group>"; };
 		0EC7EEED2CFC485800A7E000 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		1086DBA32D0114B20087646B /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
 		CF84B6A22CFC4B1E0006F605 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
@@ -70,10 +72,6 @@
 		F2DCE3742CF72902002D4AB1 /* EcoCartUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoCartUITests.swift; sourceTree = "<group>"; };
 		F2DCE3762CF72902002D4AB1 /* EcoCartUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcoCartUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		1086DB9B2D010F2A0087646B /* Firebase */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Firebase; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		F2DCE34D2CF728FF002D4AB1 /* Frameworks */ = {
@@ -127,6 +125,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		0EA4058B2D058B2D00F37E56 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				0EA4058A2D058B2D00F37E56 /* ProductFirebase.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
 		0EF3BE012CF771B800DB6279 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,7 +170,7 @@
 				0E7C9AA52CF72FCD0049CD22 /* Controllers */,
 				0EF3BE012CF771B800DB6279 /* Models */,
 				0E7C9AA32CF72FCD0049CD22 /* Assets.xcassets */,
-				1086DB9B2D010F2A0087646B /* Firebase */,
+				0EA4058B2D058B2D00F37E56 /* Firebase */,
 				0E7C9AA62CF72FCD0049CD22 /* GoogleService-Info.plist */,
 				0E7C9AA72CF72FCD0049CD22 /* Info.plist */,
 			);
@@ -202,9 +208,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				1086DB9B2D010F2A0087646B /* Firebase */,
 			);
 			name = EcoCart;
 			packageProductDependencies = (
@@ -336,6 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1086DBA42D0114B20087646B /* ProductDetailsViewController.swift in Sources */,
+				0EA4058C2D058B2D00F37E56 /* ProductFirebase.swift in Sources */,
 				0E2F4D442CFCD2DF00235DE9 /* ImpactTrackerViewController.swift in Sources */,
 				0E7C9AB72CF72FCD0049CD22 /* ViewController.swift in Sources */,
 				0E7C9AB82CF72FCD0049CD22 /* AppDelegate.swift in Sources */,
