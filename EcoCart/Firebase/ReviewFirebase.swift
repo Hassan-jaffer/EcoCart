@@ -33,7 +33,6 @@ class ReviewFirebase {
                 print("📝 Processing document: \(document.documentID)")
                 print("📝 Document data: \(document.data())")
                 
-                // Handle rating that could be either String or Int
                 let rating: Int
                 if let ratingString = document.get("rating") as? String {
                     rating = Int(ratingString) ?? 0
