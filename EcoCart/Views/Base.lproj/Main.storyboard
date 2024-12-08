@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QhC-R3-j6T">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QhC-R3-j6T">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -21,13 +21,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="101"/>
                                 <color key="backgroundColor" red="0.67450982329999998" green="0.89411771299999998" blue="0.64313727620000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELf-ac-1BG">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELf-ac-1BG">
                                 <rect key="frame" x="159" y="319" width="75" height="39"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="5C2-ci-nUV"/>
-                                    <constraint firstAttribute="height" constant="50" id="FLW-oL-bf1"/>
-                                    <constraint firstAttribute="width" secondItem="ELf-ac-1BG" secondAttribute="height" multiplier="25:13" id="HXT-A2-08B"/>
-                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                 <connections>
@@ -38,8 +33,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="ELf-ac-1BG" firstAttribute="centerX" secondItem="Ou8-WJ-YiS" secondAttribute="centerX" id="103-4R-UZr"/>
                             <constraint firstItem="Ou8-WJ-YiS" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="8KW-Vu-9pC"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ou8-WJ-YiS" secondAttribute="bottom" constant="668" id="TDS-ba-FH3"/>
+                            <constraint firstItem="ELf-ac-1BG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="216" id="hRX-fg-hka"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ELf-ac-1BG" secondAttribute="bottom" constant="411" id="maN-tZ-Oat"/>
                             <constraint firstItem="Ou8-WJ-YiS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pt1-AG-QJT"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ou8-WJ-YiS" secondAttribute="trailing" id="uqj-Kq-eii"/>
                         </constraints>
