@@ -131,20 +131,20 @@ class ProductDetailsViewController: UIViewController {
         showAlert(title: "Success", message: "\(selectedQuantity) x \(product.name) added to cart!")
     }
     
-//    @IBAction func viewRatingsTapped(_ sender: Any) {
-//        guard let productId = self.productId else { 
-//            print("⚠️ No product ID available")
-//            return 
-//        }
-//        
-//        let storyboard = UIStoryboard(name: "ProductDetails", bundle: nil)
-//        guard let reviewVC = storyboard.instantiateViewController(withIdentifier: "ReviewViewController") as? ReviewViewController else {
-//            print("⚠️ Could not instantiate ReviewViewController from storyboard")
-//            return
-//        }
-//        
-//        reviewVC.productId = productId
-//        reviewVC.title = "Reviews"
-//        navigationController?.pushViewController(reviewVC, animated: true)
-//    }
+    @IBAction func viewRatingsTapped(_ sender: Any) {
+        guard let productId = self.productId else { 
+            print("⚠️ No product ID available")
+            return 
+        }
+        
+        let storyboard = UIStoryboard(name: "ProductDetails", bundle: nil)
+        guard let reviewVC = storyboard.instantiateViewController(withIdentifier: "ReviewViewController") as? ReviewViewController else {
+            print("⚠️ Could not instantiate ReviewViewController from storyboard")
+            return
+        }
+        
+        reviewVC.productId = productId
+        reviewVC.title = "Reviews"
+        navigationController?.pushViewController(reviewVC, animated: true)
+    }
 }

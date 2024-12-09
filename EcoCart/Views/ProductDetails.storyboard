@@ -319,11 +319,11 @@
         <scene sceneID="Zjc-Sy-meq">
             <objects>
                 <viewController id="70d-rb-8Fp" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="HZB-fp-0dy">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="HZB-fp-0dy">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="45a-uj-Eew">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="45a-uj-Eew">
                                 <rect key="frame" x="0.0" y="59" width="430" height="873"/>
                             </scrollView>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dcJ-ul-sXS">
@@ -486,14 +486,14 @@
         <scene sceneID="NGC-w9-TVt">
             <objects>
                 <viewController id="mNO-uG-N6k" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="XZk-Je-03p">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="XZk-Je-03p">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kjW-0Q-h3E">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kjW-0Q-h3E">
                                 <rect key="frame" x="0.0" y="59" width="430" height="873"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mYg-e3-8Wb">
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mYg-e3-8Wb">
                                         <rect key="frame" x="0.0" y="0.0" width="430" height="1200"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hand Bag" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YKb-tQ-p3J">
@@ -781,7 +781,7 @@
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" title="Reviews"/>
                                                                 <connections>
-                                                                    <action selector="viewRatingsTapped:" destination="0mZ-xP-vAc" eventType="touchUpInside" id="CTh-P9-ke2"/>
+                                                                    <action selector="viewRatingsTapped:" destination="0mZ-xP-vAc" eventType="touchUpInside" id="BuB-sb-pjH"/>
                                                                     <segue destination="ahz-GD-7Ox" kind="push" id="cJb-hF-29e"/>
                                                                 </connections>
                                                             </button>
@@ -924,9 +924,6 @@
                                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" title="View Alternatives"/>
-                                                                <connections>
-                                                                    <action selector="viewRatingsTapped:" destination="0mZ-xP-vAc" eventType="touchUpInside" id="pQa-pp-wSO"/>
-                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IGj-9G-Y3S">
                                                                 <rect key="frame" x="267" y="31" width="146.33333333333331" height="38.333333333333336"/>
@@ -1251,10 +1248,10 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="opaqueSeparatorColor">
-            <color red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="secondaryLabelColor">
-            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
