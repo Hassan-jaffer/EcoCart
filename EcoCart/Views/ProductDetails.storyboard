@@ -1097,9 +1097,12 @@
                                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" title="Add Review"/>
+                                                                <connections>
+                                                                    <action selector="submitReviewTapped:" destination="ahz-GD-7Ox" eventType="touchUpInside" id="aHn-gP-slU"/>
+                                                                </connections>
                                                             </button>
-                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Write Review" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="P4i-Fn-OhR">
-                                                                <rect key="frame" x="136" y="46" width="286" height="77"/>
+                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="Write Review" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="P4i-Fn-OhR">
+                                                                <rect key="frame" x="188" y="46" width="234" height="77"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="P4i-Fn-OhR" secondAttribute="height" multiplier="26:7" id="D4I-Bl-BAW"/>
@@ -1231,12 +1234,12 @@
                         <outlet property="ratingStarButton4" destination="bbl-Oj-PPU" id="5g5-ju-Nqh"/>
                         <outlet property="ratingStarButton5" destination="mQQ-CA-xJ5" id="RNq-WE-cR9"/>
                         <outlet property="reviewTableView" destination="Msi-Uq-jnK" id="868-uN-9ol"/>
-                        <outlet property="submitReviewButton" destination="YsL-4P-gaL" id="boV-3Q-7d4"/>
+                        <outlet property="submitReviewButton" destination="YsL-4P-gaL" id="9EC-wf-w9g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xpG-IS-jDq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8643" y="1402"/>
+            <point key="canvasLocation" x="8642.790697674418" y="1401.5021459227469"/>
         </scene>
     </scenes>
     <resources>
