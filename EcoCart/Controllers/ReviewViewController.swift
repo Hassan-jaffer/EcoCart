@@ -40,8 +40,12 @@ class ReviewViewController: UIViewController {
         reviewTableView.estimatedRowHeight = 150
         reviewTableView.tableFooterView = UIView()
         
-        let nib = UINib(nibName: "ReviewCell", bundle: Bundle.main)
-        reviewTableView.register(nib, forCellReuseIdentifier: "ReviewCell")
+        if let nib = Bundle.main.loadNibNamed("ReviewCell", owner: nil, options: nil) {
+            reviewTableView.register(UINib(nibName: "ReviewCell", bundle: Bundle.main), forCellReuseIdentifier: "ReviewCell")
+        } else {
+            print("❌ Failed to load ReviewCell.xib")
+        }
+
         
         newReviewTextView.layer.borderWidth = 1
         newReviewTextView.layer.borderColor = UIColor.lightGray.cgColor
