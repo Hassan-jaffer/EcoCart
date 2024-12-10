@@ -10,6 +10,8 @@ import UIKit
 
 class ReviewCell: UITableViewCell {
     // MARK: - Outlets
+    
+
     @IBOutlet weak var reviewContentTextView: UITextView!
     @IBOutlet weak var reviewerNameLabel: UILabel!
     @IBOutlet weak var ratingStarButton1: UIButton!

@@ -31,79 +31,65 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.67450982329999998" green="0.89411771299999998" blue="0.64313727620000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2ZB-8j-wvl">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="ProductCell" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2ZB-8j-wvl">
                                 <rect key="frame" x="36" y="169" width="319" height="585"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" red="0.77647060160000003" green="0.77647072080000001" blue="0.77647060160000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EQS-Ft-X8z">
-                                    <size key="itemSize" width="317" height="76"/>
+                                    <size key="itemSize" width="317" height="89"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProductCell" id="6Qg-ch-ofG" customClass="ProductCell" customModule="EcoCart" customModuleProvider="target">
-                                        <rect key="frame" x="1" y="0.0" width="317" height="76"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProductCell" id="2My-Ft-hb0" customClass="ProductCell" customModule="EcoCart" customModuleProvider="target">
+                                        <rect key="frame" x="1" y="0.0" width="317" height="89"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="wii-3c-gwt">
-                                            <rect key="frame" x="0.0" y="0.0" width="317" height="76"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hcP-dh-QeK">
+                                            <rect key="frame" x="0.0" y="0.0" width="317" height="89"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYz-Jy-n3X">
-                                                    <rect key="frame" x="8" y="8" width="301" height="60"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="10"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="By Real Madrid" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJk-ur-Qr6">
-                                                    <rect key="frame" x="121" y="47" width="89" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BHD90" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DyE-gu-Cwg">
-                                                    <rect key="frame" x="242" y="27" width="56" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Koksal " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHO-Kr-5dv">
-                                                    <rect key="frame" x="121" y="18" width="54" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Unknown" translatesAutoresizingMaskIntoConstraints="NO" id="hHq-dV-e4Y">
-                                                    <rect key="frame" x="8" y="4" width="69" height="68"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Unknown" id="iOl-J8-WCX">
+                                                    <rect key="frame" x="8" y="-245" width="89" height="578"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Koksal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgA-y9-Ejj">
+                                                    <rect key="frame" x="114" y="22" width="50" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BHD 50" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N3K-od-Oh9">
+                                                    <rect key="frame" x="235" y="34" width="60" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="By Real Madrid" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EjK-vP-EHW">
+                                                    <rect key="frame" x="114" y="60" width="114" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jhi-Ty-IEl">
+                                                    <rect key="frame" x="0.0" y="0.0" width="317" height="89"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title=""/>
+                                                </button>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="cYz-Jy-n3X" secondAttribute="bottom" constant="8" id="8bR-02-VCp"/>
-                                                <constraint firstAttribute="trailing" secondItem="cYz-Jy-n3X" secondAttribute="trailing" constant="8" id="GOE-AB-dkw"/>
-                                                <constraint firstItem="cYz-Jy-n3X" firstAttribute="top" secondItem="wii-3c-gwt" secondAttribute="top" constant="8" id="GUk-yX-LPA"/>
-                                                <constraint firstItem="cYz-Jy-n3X" firstAttribute="top" secondItem="wii-3c-gwt" secondAttribute="top" constant="8" id="Vrw-Am-O9j"/>
-                                                <constraint firstAttribute="trailing" secondItem="cYz-Jy-n3X" secondAttribute="trailing" constant="8" id="Wie-GQ-KpQ"/>
-                                                <constraint firstItem="cYz-Jy-n3X" firstAttribute="leading" secondItem="wii-3c-gwt" secondAttribute="leading" constant="8" id="j26-DP-noC"/>
-                                                <constraint firstItem="cYz-Jy-n3X" firstAttribute="leading" secondItem="wii-3c-gwt" secondAttribute="leading" constant="8" id="l5m-01-bSP"/>
-                                                <constraint firstAttribute="bottom" secondItem="cYz-Jy-n3X" secondAttribute="bottom" constant="8" id="x0B-hW-y3r"/>
-                                            </constraints>
+                                            <color key="backgroundColor" red="0.54005374156565056" green="0.98296117300939079" blue="0.54966636689669668" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="317" height="76"/>
+                                        <color key="backgroundColor" red="0.54864383893871138" green="1" blue="0.14550350644738064" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <size key="customSize" width="317" height="89"/>
                                         <connections>
-                                            <outlet property="actionButton" destination="cYz-Jy-n3X" id="IHY-19-gfL"/>
-                                            <outlet property="priceLabel" destination="DyE-gu-Cwg" id="ECO-Vu-EFQ"/>
-                                            <outlet property="productDescriptionLabel" destination="LJk-ur-Qr6" id="Utp-s3-P7W"/>
-                                            <outlet property="productImageView" destination="hHq-dV-e4Y" id="3aJ-OA-N5I"/>
-                                            <outlet property="productNameLabel" destination="dHO-Kr-5dv" id="J4y-5H-bCv"/>
+                                            <outlet property="actionButton" destination="Jhi-Ty-IEl" id="n2f-ed-14j"/>
+                                            <outlet property="priceLabel" destination="N3K-od-Oh9" id="5oM-5V-m0x"/>
+                                            <outlet property="productDescriptionLabel" destination="EjK-vP-EHW" id="hFt-he-DuS"/>
+                                            <outlet property="productImageView" destination="iOl-J8-WCX" id="HXo-hP-h0O"/>
+                                            <outlet property="productNameLabel" destination="fgA-y9-Ejj" id="fPQ-uh-0SW"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -128,7 +114,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="237" y="-43"/>
+            <point key="canvasLocation" x="235.87786259541983" y="-43.661971830985919"/>
         </scene>
     </scenes>
     <resources>
