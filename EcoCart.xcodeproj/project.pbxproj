@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E074EBC2D0787D70068814A /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E074EBB2D0787D70068814A /* AddProductViewController.swift */; };
 		0E2F4D442CFCD2DF00235DE9 /* ImpactTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2F4D432CFCD2DF00235DE9 /* ImpactTrackerViewController.swift */; };
 		0E7C9AB12CF72FCD0049CD22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA32CF72FCD0049CD22 /* Assets.xcassets */; };
 		0E7C9AB22CF72FCD0049CD22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E7C9AAD2CF72FCD0049CD22 /* Main.storyboard */; };
@@ -20,6 +21,11 @@
 		0EA4058C2D058B2D00F37E56 /* ProductFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4058A2D058B2D00F37E56 /* ProductFirebase.swift */; };
 		0EC7EEEE2CFC485800A7E000 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC7EEED2CFC485800A7E000 /* Product.swift */; };
 		106224A12D063C3600ED1281 /* ProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 106224A02D063C3600ED1281 /* ProductCell.xib */; };
+		1048562D2D07654600D60B8D /* ReviewFireBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1048562C2D07654600D60B8D /* ReviewFireBase.swift */; };
+		1048562E2D07655700D60B8D /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F69BA2D04A047005454A7 /* Review.swift */; };
+		1048562F2D0765C200D60B8D /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F69BC2D04A067005454A7 /* ReviewViewController.swift */; };
+		104856302D0765D800D60B8D /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F69B22D049F97005454A7 /* ReviewCell.swift */; };
+		104856312D076A9400D60B8D /* ReviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 105F69B02D049D1E005454A7 /* ReviewCell.xib */; };
 		1086DBA42D0114B20087646B /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1086DBA32D0114B20087646B /* ProductDetailsViewController.swift */; };
 		CF84B6A32CFC4B1E0006F605 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF84B6A22CFC4B1E0006F605 /* Login.storyboard */; };
 		CF84B6A52CFC58280006F605 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF84B6A42CFC58280006F605 /* Profile.storyboard */; };
@@ -53,8 +59,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0E074EBB2D0787D70068814A /* AddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
 		0E2F4D432CFCD2DF00235DE9 /* ImpactTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactTrackerViewController.swift; sourceTree = "<group>"; };
-		0E30B4E92CF7796700C2AFA2 /* AddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
 		0E7C9AA22CF72FCD0049CD22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E7C9AA32CF72FCD0049CD22 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E7C9AA42CF72FCD0049CD22 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +73,7 @@
 		0E7C9AAE2CF72FCD0049CD22 /* ProductDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProductDetails.storyboard; sourceTree = "<group>"; };
 		0EA4058A2D058B2D00F37E56 /* ProductFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductFirebase.swift; sourceTree = "<group>"; };
 		0EC7EEED2CFC485800A7E000 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		1048562C2D07654600D60B8D /* ReviewFireBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewFireBase.swift; sourceTree = "<group>"; };
 		105F69B02D049D1E005454A7 /* ReviewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewCell.xib; sourceTree = "<group>"; };
 		105F69B22D049F97005454A7 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReviewCell.swift; path = EcoCart/Controllers/ReviewCell.swift; sourceTree = SOURCE_ROOT; };
 		105F69BA2D04A047005454A7 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
@@ -119,13 +126,12 @@
 			isa = PBXGroup;
 			children = (
 				0E7C9AA42CF72FCD0049CD22 /* ViewController.swift */,
-				0E30B4E92CF7796700C2AFA2 /* AddProductViewController.swift */,
 				0E2F4D432CFCD2DF00235DE9 /* ImpactTrackerViewController.swift */,
 				F2574B242D00740000FF2011 /* homePageViewController.swift */,
 				1086DBA32D0114B20087646B /* ProductDetailsViewController.swift */,
 				105F69B22D049F97005454A7 /* ReviewCell.swift */,
-				105F69BA2D04A047005454A7 /* Review.swift */,
 				105F69BC2D04A067005454A7 /* ReviewViewController.swift */,
+				0E074EBB2D0787D70068814A /* AddProductViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -151,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				0EA4058A2D058B2D00F37E56 /* ProductFirebase.swift */,
+				1048562C2D07654600D60B8D /* ReviewFireBase.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -160,6 +167,7 @@
 			children = (
 				0EC7EEED2CFC485800A7E000 /* Product.swift */,
 				F2574B262D00785B00FF2011 /* ProductCell.swift */,
+				105F69BA2D04A047005454A7 /* Review.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -336,6 +344,7 @@
 				0E7C9AB22CF72FCD0049CD22 /* Main.storyboard in Resources */,
 				0E7C9AB32CF72FCD0049CD22 /* GoogleService-Info.plist in Resources */,
 				106224A12D063C3600ED1281 /* ProductCell.xib in Resources */,
+				104856312D076A9400D60B8D /* ReviewCell.xib in Resources */,
 				0E7C9AB42CF72FCD0049CD22 /* Impact Tracker.storyboard in Resources */,
 				CF84B6A52CFC58280006F605 /* Profile.storyboard in Resources */,
 				0E7C9AB52CF72FCD0049CD22 /* ProductDetails.storyboard in Resources */,
@@ -364,13 +373,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1048562D2D07654600D60B8D /* ReviewFireBase.swift in Sources */,
 				F2574B252D00740000FF2011 /* homePageViewController.swift in Sources */,
+				1048562F2D0765C200D60B8D /* ReviewViewController.swift in Sources */,
 				1086DBA42D0114B20087646B /* ProductDetailsViewController.swift in Sources */,
 				0EA4058C2D058B2D00F37E56 /* ProductFirebase.swift in Sources */,
 				0E2F4D442CFCD2DF00235DE9 /* ImpactTrackerViewController.swift in Sources */,
 				0E7C9AB72CF72FCD0049CD22 /* ViewController.swift in Sources */,
+				1048562E2D07655700D60B8D /* Review.swift in Sources */,
+				0E074EBC2D0787D70068814A /* AddProductViewController.swift in Sources */,
 				0E7C9AB82CF72FCD0049CD22 /* AppDelegate.swift in Sources */,
 				0EC7EEEE2CFC485800A7E000 /* Product.swift in Sources */,
+				104856302D0765D800D60B8D /* ReviewCell.swift in Sources */,
 				F2574B272D00785B00FF2011 /* ProductCell.swift in Sources */,
 				0E7C9AB92CF72FCD0049CD22 /* SceneDelegate.swift in Sources */,
 			);
