@@ -11,7 +11,7 @@
         <!--Add Product-->
         <scene sceneID="8UC-Rf-vLg">
             <objects>
-                <tableViewController id="ZKO-WH-IyD" customClass="AddProductViewController" customModule="EcoCart" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController hidesBottomBarWhenPushed="YES" id="ZKO-WH-IyD" customClass="AddProductViewController" customModule="EcoCart" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="Yqy-fb-HDc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -292,6 +292,16 @@
             </objects>
             <point key="canvasLocation" x="4504.580152671756" y="-30.281690140845072"/>
         </scene>
+        <!--Filter-->
+        <scene sceneID="L90-e8-smp">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Filter" id="QdX-ed-kB7" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="RYD-gD-hVy"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7hX-m4-xPU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2796" y="392"/>
+        </scene>
         <!--Impact Tracker View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
@@ -326,6 +336,9 @@
                                         <color key="tintColor" systemColor="systemRedColor"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="Reset"/>
+                                        <connections>
+                                            <action selector="resetBtnTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="BUQ-9m-byB"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2zz-DT-rGH">
                                         <rect key="frame" x="8" y="72" width="345" height="221"/>
@@ -423,6 +436,15 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <segue destination="ZKO-WH-IyD" kind="show" id="D9R-0f-UTe"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nmU-f8-zPb">
+                                <rect key="frame" x="159" y="713" width="75" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                <connections>
+                                    <segue destination="QdX-ed-kB7" kind="show" id="W4K-Vl-4Fc"/>
                                 </connections>
                             </button>
                         </subviews>

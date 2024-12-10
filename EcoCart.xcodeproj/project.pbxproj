@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E074EBC2D0787D70068814A /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E074EBB2D0787D70068814A /* AddProductViewController.swift */; };
+		0E2760AA2D08A4F8004569A9 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2760A92D08A4F8004569A9 /* FilterViewController.swift */; };
 		0E2F4D442CFCD2DF00235DE9 /* ImpactTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2F4D432CFCD2DF00235DE9 /* ImpactTrackerViewController.swift */; };
 		0E7C9AB12CF72FCD0049CD22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA32CF72FCD0049CD22 /* Assets.xcassets */; };
 		0E7C9AB22CF72FCD0049CD22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E7C9AAD2CF72FCD0049CD22 /* Main.storyboard */; };
@@ -59,6 +60,7 @@
 
 /* Begin PBXFileReference section */
 		0E074EBB2D0787D70068814A /* AddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
+		0E2760A92D08A4F8004569A9 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		0E2F4D432CFCD2DF00235DE9 /* ImpactTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactTrackerViewController.swift; sourceTree = "<group>"; };
 		0E7C9AA22CF72FCD0049CD22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E7C9AA32CF72FCD0049CD22 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				105F69B22D049F97005454A7 /* ReviewCell.swift */,
 				105F69BC2D04A067005454A7 /* ReviewViewController.swift */,
 				0E074EBB2D0787D70068814A /* AddProductViewController.swift */,
+				0E2760A92D08A4F8004569A9 /* FilterViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				0E7C9AB72CF72FCD0049CD22 /* ViewController.swift in Sources */,
 				1048562E2D07655700D60B8D /* Review.swift in Sources */,
 				0E074EBC2D0787D70068814A /* AddProductViewController.swift in Sources */,
+				0E2760AA2D08A4F8004569A9 /* FilterViewController.swift in Sources */,
 				0E7C9AB82CF72FCD0049CD22 /* AppDelegate.swift in Sources */,
 				0EC7EEEE2CFC485800A7E000 /* Product.swift in Sources */,
 				104856302D0765D800D60B8D /* ReviewCell.swift in Sources */,
