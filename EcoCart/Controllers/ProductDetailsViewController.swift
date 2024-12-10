@@ -99,11 +99,16 @@ class ProductDetailsViewController: UIViewController {
             self.productQuantityStepper.value = 1
             self.quantityLabel.text = "1"
             
-            if let imageUrl = URL(string: product.imageURL) {
+            // Safely unwrap imageURL
+            if let imageUrlString = product.imageURL, let imageUrl = URL(string: imageUrlString) {
                 self.loadImage(from: imageUrl)
+            } else {
+                // Handle the case when imageURL is nil or invalid
+                self.productImage.image = UIImage(named: "placeholderImage")  // You can set a default placeholder image here
             }
         }
     }
+
     
     private func loadImage(from url: URL) {
         URLSession.shared.dataTask(with: url) { [weak self] data, _, error in

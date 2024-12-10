@@ -20,7 +20,6 @@
 		0E7C9AB92CF72FCD0049CD22 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA82CF72FCD0049CD22 /* SceneDelegate.swift */; };
 		0EA4058C2D058B2D00F37E56 /* ProductFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EA4058A2D058B2D00F37E56 /* ProductFirebase.swift */; };
 		0EC7EEEE2CFC485800A7E000 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC7EEED2CFC485800A7E000 /* Product.swift */; };
-		106224A12D063C3600ED1281 /* ProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 106224A02D063C3600ED1281 /* ProductCell.xib */; };
 		1048562D2D07654600D60B8D /* ReviewFireBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1048562C2D07654600D60B8D /* ReviewFireBase.swift */; };
 		1048562E2D07655700D60B8D /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F69BA2D04A047005454A7 /* Review.swift */; };
 		1048562F2D0765C200D60B8D /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F69BC2D04A067005454A7 /* ReviewViewController.swift */; };
@@ -78,7 +77,6 @@
 		105F69B22D049F97005454A7 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReviewCell.swift; path = EcoCart/Controllers/ReviewCell.swift; sourceTree = SOURCE_ROOT; };
 		105F69BA2D04A047005454A7 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		105F69BC2D04A067005454A7 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
-		106224A02D063C3600ED1281 /* ProductCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductCell.xib; sourceTree = "<group>"; };
 		1086DBA32D0114B20087646B /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
 		CF84B6A22CFC4B1E0006F605 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		CF84B6A42CFC58280006F605 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -147,7 +145,6 @@
 				CF84B6A42CFC58280006F605 /* Profile.storyboard */,
 				F2574B202D0058F900FF2011 /* Filter.storyboard */,
 				F2574B222D00609F00FF2011 /* HomePage.storyboard */,
-				106224A02D063C3600ED1281 /* ProductCell.xib */,
 				105F69B02D049D1E005454A7 /* ReviewCell.xib */,
 			);
 			path = Views;
@@ -343,7 +340,6 @@
 				F2574B212D0058F900FF2011 /* Filter.storyboard in Resources */,
 				0E7C9AB22CF72FCD0049CD22 /* Main.storyboard in Resources */,
 				0E7C9AB32CF72FCD0049CD22 /* GoogleService-Info.plist in Resources */,
-				106224A12D063C3600ED1281 /* ProductCell.xib in Resources */,
 				104856312D076A9400D60B8D /* ReviewCell.xib in Resources */,
 				0E7C9AB42CF72FCD0049CD22 /* Impact Tracker.storyboard in Resources */,
 				CF84B6A52CFC58280006F605 /* Profile.storyboard in Resources */,
