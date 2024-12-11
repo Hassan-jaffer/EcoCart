@@ -1,15 +1,18 @@
 import UIKit
 import FirebaseFirestore
 
-class HomePageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class HomePageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var products: [Product] = [] // Array to hold product data
+    var products: [Product] = [] // Array to hold all products
+    var filteredProducts: [Product] = [] // Array to hold search results
+    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        setupSearchController()
         fetchProducts()
     }
     
@@ -17,81 +20,105 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UINib(nibName: "ProductCell", bundle: nil), forCellReuseIdentifier: "ProductCell") // Register the XIB
+        tableView.register(UINib(nibName: "ProductCell", bundle: nil), forCellReuseIdentifier: "ProductCell")
     }
-
+    
+    // MARK: - Setup Search Controller
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Products"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+    
     // MARK: - Fetch Products from Firestore
     private func fetchProducts() {
         Task {
             do {
                 let db = Firestore.firestore()
-                let querySnapshot = try await db.collection("product").getDocuments()
+                let documents = try await db.collection("product").getDocuments()
                 
-                // Parse the documents into Product objects
-                self.products = querySnapshot.documents.compactMap { document in
+                self.products = documents.documents.map { document in
                     let data = document.data()
                     return Product(
                         id: document.documentID,
                         name: data["name"] as? String ?? "No Name",
                         description: data["description"] as? String ?? "No Description",
                         price: data["price"] as? Double ?? 0.0,
-                        imageURL: data["imageURL"] as? String,  // Ensure it's treated as optional
-                        averageRating: data["averageRating"] as? Int ?? 0,  // Safe default
-                        stockQuantity: data["stockQuantity"] as? Int ?? 0,  // Safe default
+                        imageURL: data["imageURL"] as? String,
+                        averageRating: data["averageRating"] as? Int ?? 0,
+                        stockQuantity: data["stockQuantity"] as? Int ?? 0,
                         metrics: Product.parseMetrics(from: data)
                     )
                 }
                 
+                self.filteredProducts = self.products // Initially, show all products
                 DispatchQueue.main.async {
-                    self.tableView.reloadData() // Refresh the table view
+                    self.tableView.reloadData()
                 }
             } catch {
                 print("❌ Error fetching products: \(error.localizedDescription)")
             }
         }
     }
-
+    
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return products.count
+        return filteredProducts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Dequeue the custom cell
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProductCell", for: indexPath) as? ProductCell else {
             fatalError("Unable to dequeue ProductCell")
         }
         
-        let product = products[indexPath.row]
-        
-        // Set product data in the cell
+        let product = filteredProducts[indexPath.row]
         cell.productNameLabel.text = product.name
         cell.priceLabel.text = String(format: "$%.2f", product.price)
         cell.productDescriptionLabel.text = product.description
         
-        // Load image safely
         if let imageUrlString = product.imageURL, let imageUrl = URL(string: imageUrlString) {
             loadImage(from: imageUrl, in: cell)
         } else {
-            // Set default image if URL is nil or invalid
             cell.productImageView.image = UIImage(named: "defaultImage")
         }
         
-        return cell // This works because ProductCell is a subclass of UITableViewCell
+        return cell
     }
-
-    // MARK: - UITableViewDelegate (Optional: Adjust for Row Height)
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120.0 // Adjust based on your design
+    
+    // MARK: - UITableViewDelegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedProduct = filteredProducts[indexPath.row]
+        if let productDetailsVC = ProductDetailsViewController.instantiate(with: selectedProduct.id) {
+            navigationController?.pushViewController(productDetailsVC, animated: true)
+        }
     }
-
+    
+    // MARK: - UISearchResultsUpdating
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text, !searchText.isEmpty else {
+            filteredProducts = products // Show all products when search bar is empty
+            tableView.reloadData()
+            return
+        }
+        
+        // Filter products by name or description
+        filteredProducts = products.filter { product in
+            return product.name.lowercased().contains(searchText.lowercased()) ||
+                   product.description.lowercased().contains(searchText.lowercased())
+        }
+        
+        tableView.reloadData()
+    }
+    
     // MARK: - Helper Method to Load Images
     private func loadImage(from url: URL, in cell: ProductCell) {
         URLSession.shared.dataTask(with: url) { data, _, error in
             if let error = error {
                 print("❌ Error loading image: \(error.localizedDescription)")
                 DispatchQueue.main.async {
-                    cell.productImageView.image = UIImage(named: "defaultImage") // Fallback on error
+                    cell.productImageView.image = UIImage(named: "defaultImage")
                 }
             } else if let data = data, let image = UIImage(data: data) {
                 DispatchQueue.main.async {

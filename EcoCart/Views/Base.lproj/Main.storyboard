@@ -132,11 +132,11 @@
             </objects>
             <point key="canvasLocation" x="1339.6946564885495" y="186.61971830985917"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="obi-rd-CPX">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dZj-MR-eYQ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="0UV-Zu-Gpw"/>
+                    <tabBarItem key="tabBarItem" title="" image="house" catalog="system" id="0UV-Zu-Gpw"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="FxE-a2-5W7">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -154,6 +154,7 @@
     </scenes>
     <resources>
         <image name="chart.bar.yaxis" catalog="system" width="128" height="115"/>
+        <image name="house" catalog="system" width="128" height="104"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
