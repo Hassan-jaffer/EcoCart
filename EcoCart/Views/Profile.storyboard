@@ -3,10 +3,67 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--View Controller-->
+        <scene sceneID="ueL-f9-BOj">
+            <objects>
+                <viewController id="8Ru-wd-rLh" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DFe-5U-TsB">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TG4-Bo-tnh">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="50" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="O1C-2S-106">
+                                        <rect key="frame" x="30" y="-59" width="332" height="1083"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <mutableString key="text">Your privacy is important to us. This policy explains how we collect, use, and protect your information when you use our app.
+Information Collection
+We collect information that you provide directly, such as when you create an account or interact with our services.
+We may also collect data automatically, including your device information, IP address, and usage patterns.
+Use of Information
+We use your information to provide and improve our services, personalize your experience, and communicate with you.
+We may use your data for research and analysis to enhance our app’s functionality.
+Data Sharing
+We do not sell or rent your personal information to third parties.
+We may share your information with trusted partners who assist us in operating our app, provided they agree to keep it confidential.
+Data Security
+We implement industry-standard security measures to protect your information from unauthorized access or disclosure.
+However, no method of transmission over the internet or electronic storage is 100% secure.
+Your Rights
+You have the right to access, correct, or delete your personal information.
+You can opt out of receiving promotional communications at any time.
+Changes to This Policy
+We may update this privacy policy from time to time. We will notify you of any changes by posting the new policy in the app.
+If you have any questions or concerns about this privacy policy, please contact us at  ecocart@gmail.com</mutableString>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <viewLayoutGuide key="contentLayoutGuide" id="kep-c2-N32"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="Ibv-ZJ-MDH"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="8ln-RF-OhS"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="8ln-RF-OhS" firstAttribute="trailing" secondItem="TG4-Bo-tnh" secondAttribute="trailing" id="7II-xR-T3S"/>
+                            <constraint firstItem="TG4-Bo-tnh" firstAttribute="leading" secondItem="8ln-RF-OhS" secondAttribute="leading" id="Pta-Bq-wG1"/>
+                            <constraint firstItem="8ln-RF-OhS" firstAttribute="bottom" secondItem="TG4-Bo-tnh" secondAttribute="bottom" id="d0c-X5-4Tr"/>
+                            <constraint firstItem="TG4-Bo-tnh" firstAttribute="top" secondItem="8ln-RF-OhS" secondAttribute="top" id="y4h-Un-SbW"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6tD-8k-Ein" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-240.45801526717557" y="77.464788732394368"/>
+        </scene>
         <!--Table View Controller-->
         <scene sceneID="8uc-93-P7i">
             <objects>
@@ -133,12 +190,10 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBh-zD-Scj">
-                                                    <rect key="frame" x="328" y="4" width="40" height="35"/>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="SW9-jE-X52">
+                                                    <rect key="frame" x="326" y="6" width="49" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" image="chevron.right" catalog="system"/>
-                                                </button>
+                                                </switch>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -176,7 +231,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OUJ-C0-fY6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="142.74809160305344" y="-14.084507042253522"/>
+            <point key="canvasLocation" x="-240" y="-654"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="lpB-77-jb4">
@@ -214,11 +269,11 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Personal Information" id="JbL-tZ-O6b">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="319" id="ARR-ng-Afr">
-                                        <rect key="frame" x="20" y="232" width="353" height="319"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="384" id="ARR-ng-Afr">
+                                        <rect key="frame" x="20" y="232" width="353" height="384"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ARR-ng-Afr" id="Kg7-sa-McR">
-                                            <rect key="frame" x="0.0" y="0.0" width="353" height="319"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="353" height="384"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fpm-bP-KpR">
@@ -251,6 +306,15 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nuD-OG-pyW">
+                                                    <rect key="frame" x="146" y="309" width="61" height="35"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title="Save">
+                                                        <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </buttonConfiguration>
+                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -262,25 +326,76 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="smN-om-EyU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1015" y="308"/>
+            <point key="canvasLocation" x="625" y="-654"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="3ky-Jh-L9P">
+        <!--View Controller-->
+        <scene sceneID="zUV-mr-yjN">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="l0e-IT-jhC" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3Ty-lZ-XO7">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="QLK-3A-R81" kind="relationship" relationship="rootViewController" id="KR2-CD-GwU"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vJF-dg-YCh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController id="CiC-0h-It1" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JWX-pM-Zza">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EBY-Vf-SVs">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="crt-VD-FYk"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="fCW-dm-DDB"/>
+                            </scrollView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Welcome to EcoCart!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="18" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Re9-3g-FpW">
+                                <rect key="frame" x="33" y="101" width="255" height="59"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="59" id="Knx-TG-MCS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome to EcoCart!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="18" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3uC-kK-Ubt">
+                                <rect key="frame" x="33" y="317" width="255" height="59"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lGd-u0-Iew">
+                                <rect key="frame" x="33" y="168" width="333" height="130"/>
+                                <string key="text">Thank you for choosing EcoCart. Our goal is to provide you with an exceptional experience while ensuring your data and privacy are respected.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y6j-9b-g9i">
+                                <rect key="frame" x="33" y="384" width="320" height="404"/>
+                                <mutableString key="text">EcoCart is designed to help you discover and purchase eco-friendly products that contribute to a sustainable lifestyle. Our mission is to deliver a curated selection of environmentally conscious items that make it easy for you to shop responsibly.
+Key Features:
+Curated Selection: Explore a wide range of eco-friendly products handpicked for their sustainability.
+User-Friendly Experience: Enjoy a seamless shopping experience with easy navigation and quick access to information.
+Educational Resources: Learn about the impact of your purchases and how to live more sustainably.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="GQ1-9I-Nr6"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="EBY-Vf-SVs" firstAttribute="leading" secondItem="GQ1-9I-Nr6" secondAttribute="leading" id="5mO-wh-jVQ"/>
+                            <constraint firstItem="Re9-3g-FpW" firstAttribute="leading" secondItem="lGd-u0-Iew" secondAttribute="leading" id="9sh-cO-Yte"/>
+                            <constraint firstItem="EBY-Vf-SVs" firstAttribute="top" secondItem="Re9-3g-FpW" secondAttribute="bottom" id="BF3-cf-F1f"/>
+                            <constraint firstItem="Re9-3g-FpW" firstAttribute="trailing" secondItem="3uC-kK-Ubt" secondAttribute="trailing" id="Hjb-Mi-sjX"/>
+                            <constraint firstItem="Re9-3g-FpW" firstAttribute="leading" secondItem="GQ1-9I-Nr6" secondAttribute="leading" constant="33" id="VIT-qS-1rm"/>
+                            <constraint firstItem="Re9-3g-FpW" firstAttribute="leading" secondItem="3uC-kK-Ubt" secondAttribute="leading" id="a94-SC-oaD"/>
+                            <constraint firstItem="lGd-u0-Iew" firstAttribute="top" secondItem="Re9-3g-FpW" secondAttribute="bottom" constant="8" id="dv2-2l-saq"/>
+                            <constraint firstItem="Re9-3g-FpW" firstAttribute="leading" secondItem="Y6j-9b-g9i" secondAttribute="leading" id="gHc-7O-Vhy"/>
+                            <constraint firstItem="Y6j-9b-g9i" firstAttribute="top" secondItem="EBY-Vf-SVs" secondAttribute="bottom" id="ghM-eD-1tl"/>
+                            <constraint firstItem="GQ1-9I-Nr6" firstAttribute="trailing" secondItem="EBY-Vf-SVs" secondAttribute="trailing" id="oBh-KB-VXW"/>
+                            <constraint firstItem="Re9-3g-FpW" firstAttribute="top" secondItem="GQ1-9I-Nr6" secondAttribute="top" constant="42" id="t0F-FU-Zsm"/>
+                            <constraint firstItem="GQ1-9I-Nr6" firstAttribute="trailing" secondItem="Re9-3g-FpW" secondAttribute="trailing" constant="105" id="v4Z-Un-wad"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dnn-pC-KLI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="998" y="-449"/>
+            <point key="canvasLocation" x="652.67175572519079" y="76.760563380281695"/>
         </scene>
     </scenes>
     <resources>
