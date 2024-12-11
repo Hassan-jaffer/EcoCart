@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import FirebaseFirestore
 class ImpactTrackerViewController: UIViewController {
     
     @IBOutlet weak var co2progressView: UIProgressView!
@@ -22,7 +22,7 @@ class ImpactTrackerViewController: UIViewController {
     
     @IBOutlet weak var resetBtn: UIButton!
     
-    
+    //let db = Firestore.firestore()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -59,6 +59,9 @@ class ImpactTrackerViewController: UIViewController {
         bioProgressView.setProgress(0.2, animated: true)
         bioPercentage.text = "20%"
         //TODO - get user's data and update the progress views (above is demo only)
+        
+        
+        
     }
     
     func editGraphView(){

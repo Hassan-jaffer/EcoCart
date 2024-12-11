@@ -49,45 +49,42 @@ class AddProductViewController: UITableViewController {
             alert()
             return
         }
-        let purchaseDate = purchaseDateDtPicker.date
+        let dateFormatter = ISO8601DateFormatter()
+        let purchaseDate = dateFormatter.string(from: purchaseDateDtPicker.date)
         let bio = bioSwitch.isOn
         
         //create a dictionary to store the data
-//        let productData: [String: Any] = [
-//            "name": name,
-//            "category": category,
-//            "store": store,
-//            "price": price,
-//            "co2": co2,
-//            "plastic": plastic,
-//            "tree": tree,
-//            "purchaseDate": purchaseDate,
-//            "bio": bio
-//            ]
+        let productData: [String: Any] = [
+        //--------------------------------------
+            //this is a map field
+            "impactProd": [ //map field start
+            "CO2": co2, //name : value
+            "Plastic": plastic,
+            "Tree": tree,
+            "Bio": bio
+            ], //map field end
+         //-------------------------------------
+            //these are normal field
+            "impactProdCategory": category,
+            "impactProdName": name,
+            "impactProdPrice": price,
+            "impactProdPurchaseDate": purchaseDate,
+            "impactProdStore": store,
+            "userId": UUID().uuidString //temporary, later will be changed
+            ]
         
         //reference firestore
-        //let db = Firestore.firestore()
+        let db = Firestore.firestore()
         
-        //add data
         
-//        db.collection("products").addDocument(data: productData) { error in
-//            if let error {
-//                print("Error adding document: \(error)")
-//            } else {
-//                print("Document added successfully")
-//            }
-//        }
-        
-        //print all data taken from the text fields for debugging
-        print("Name: \(name)")
-        print("Category: \(category)")
-        print("Store: \(store)")
-        print("Price: \(price)")
-        print("Co2: \(co2)")
-        print("Plastic: \(plastic)")
-        print("Tree: \(tree)")
-        print("Purchase Date: \(purchaseDate)")
-        print("Bio: \(bio)")
+        //db is the firestore reference, collection("name") is the name of the collection stored in firebase, addDocument(data) is the fields you want to store (i created above). document id will be auto generated, to create your own you will have to use document("path), for example: db.document("ImpactProducts/00001"). this will create a collection named ImpactProducts and a document id with 00001. but of course, the id must be uniquely generated in the code.
+        db.collection("impactProd").addDocument(data: productData) { error in
+            if let error {
+                print("Error adding document: \(error)")
+            } else {
+                self.successAlert()
+            }
+        }
         
         }
         
@@ -98,8 +95,19 @@ class AddProductViewController: UITableViewController {
         alert.addAction(action)
         present(alert, animated: true)
     }
+    
+    func successAlert() {
+        let alert = UIAlertController(title: "Success", message: "Product added successfully", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default) { action in
+            self.dismissPage()
+        }
+        alert.addAction(action)
+        present(alert, animated: true)
+    }
         
-        
+    func dismissPage() {
+        self.navigationController?.popViewController(animated: true)
+    }
     }
     
 
