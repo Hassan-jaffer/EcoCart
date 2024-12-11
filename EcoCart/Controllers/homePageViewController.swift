@@ -20,39 +20,33 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         tableView.register(UINib(nibName: "ProductCell", bundle: nil), forCellReuseIdentifier: "ProductCell") // Register the XIB
     }
 
-    
     // MARK: - Fetch Products from Firestore
     private func fetchProducts() {
         Task {
             do {
                 let db = Firestore.firestore()
-                let productId = "E3a7t5anTprKCgJdrnpX"
-                let document = try await db.collection("product").document(productId).getDocument()
-
-                if let data = document.data() {
-                    print("Fetched product data: \(data)")  // Debugging
-
-                    self.products = [
-                        Product(
-                            id: document.documentID,
-                            name: data["name"] as? String ?? "No Name",
-                            description: data["description"] as? String ?? "No Description",
-                            price: data["price"] as? Double ?? 0.0,
-                            imageURL: data["imageURL"] as? String,  // Ensure it's treated as optional
-                            averageRating: data["averageRating"] as? Int ?? 0,  // Safe default
-                            stockQuantity: data["stockQuantity"] as? Int ?? 0,  // Safe default
-                            metrics: Product.parseMetrics(from: data)
-                        )
-                    ]
-
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
-                } else {
-                    print("❌ No data found for product ID \(productId)")
+                let querySnapshot = try await db.collection("product").getDocuments()
+                
+                // Parse the documents into Product objects
+                self.products = querySnapshot.documents.compactMap { document in
+                    let data = document.data()
+                    return Product(
+                        id: document.documentID,
+                        name: data["name"] as? String ?? "No Name",
+                        description: data["description"] as? String ?? "No Description",
+                        price: data["price"] as? Double ?? 0.0,
+                        imageURL: data["imageURL"] as? String,  // Ensure it's treated as optional
+                        averageRating: data["averageRating"] as? Int ?? 0,  // Safe default
+                        stockQuantity: data["stockQuantity"] as? Int ?? 0,  // Safe default
+                        metrics: Product.parseMetrics(from: data)
+                    )
+                }
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData() // Refresh the table view
                 }
             } catch {
-                print("❌ Error fetching product: \(error.localizedDescription)")
+                print("❌ Error fetching products: \(error.localizedDescription)")
             }
         }
     }
@@ -85,7 +79,6 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         
         return cell // This works because ProductCell is a subclass of UITableViewCell
     }
-
 
     // MARK: - UITableViewDelegate (Optional: Adjust for Row Height)
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
