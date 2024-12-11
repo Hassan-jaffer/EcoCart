@@ -22,7 +22,7 @@ class ImpactTrackerViewController: UIViewController {
     
     @IBOutlet weak var resetBtn: UIButton!
     
-    //let db = Firestore.firestore()
+    let db = Firestore.firestore()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -79,8 +79,7 @@ class ImpactTrackerViewController: UIViewController {
     @IBAction func resetBtnTapped(_ sender: Any) {
         showAlert()
     }
-    
-    
+
     func showAlert(){
         let alert = UIAlertController(title: "Reset data?", message: "Are you sure you want to reset all data? This action cannot be undone", preferredStyle: .alert)
         
@@ -97,11 +96,37 @@ class ImpactTrackerViewController: UIViewController {
     
     
     func resetData(){
-        //TODO - clear all user's data
-        
+        //user id will be changed later
+        self.db.collection("impactProd").whereField("userId", isEqualTo: "123").getDocuments(){ querySnapshot, err in
+            if let err = err {
+                self.showError(error: err.localizedDescription)
+                return
+            } else {
+                for document in querySnapshot!.documents {
+                    print("\(document.data())")
+                    self.db.collection("impactProd").document(document.documentID).delete() { err in
+                        if let err = err {
+                            self.showError(error: err.localizedDescription)
+                        }
+                        else {
+                            self.resetSuccess()
+                        }
+                    }
+                }
+            }
+        }
     }
-    
-    
-    
-
-}
+        func resetSuccess(){
+                let alert = UIAlertController(title: "Success", message: "Data reset successfully", preferredStyle: .alert)
+                let actionOk = UIAlertAction(title: "Ok", style: .default)
+                alert.addAction(actionOk)
+                present(alert, animated: true, completion: nil)
+            }
+            
+            func showError(error: String){
+                let alert = UIAlertController(title: "Error", message: "Something went wrong\n\(error)", preferredStyle: .alert)
+                let actionOk = UIAlertAction(title: "Ok", style: .default)
+                alert.addAction(actionOk)
+                present(alert, animated: true, completion: nil)
+            }
+    }

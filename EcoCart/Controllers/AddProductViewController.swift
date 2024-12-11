@@ -70,7 +70,7 @@ class AddProductViewController: UITableViewController {
             "impactProdPrice": price,
             "impactProdPurchaseDate": purchaseDate,
             "impactProdStore": store,
-            "userId": UUID().uuidString //temporary, later will be changed
+            "userId": "123" //temporary, later will be changed
             ]
         
         //reference firestore
@@ -79,8 +79,8 @@ class AddProductViewController: UITableViewController {
         
         //db is the firestore reference, collection("name") is the name of the collection stored in firebase, addDocument(data) is the fields you want to store (i created above). document id will be auto generated, to create your own you will have to use document("path), for example: db.document("ImpactProducts/00001"). this will create a collection named ImpactProducts and a document id with 00001. but of course, the id must be uniquely generated in the code.
         db.collection("impactProd").addDocument(data: productData) { error in
-            if let error {
-                print("Error adding document: \(error)")
+            if let error{
+                self.showError(error: error.localizedDescription)
             } else {
                 self.successAlert()
             }
@@ -107,6 +107,13 @@ class AddProductViewController: UITableViewController {
         
     func dismissPage() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func showError(error: String){
+        let alert = UIAlertController(title: "Error", message: "Something went wrong\n\(error)", preferredStyle: .alert)
+        let actionOk = UIAlertAction(title: "Ok", style: .default)
+        alert.addAction(actionOk)
+        present(alert, animated: true, completion: nil)
     }
     }
     
