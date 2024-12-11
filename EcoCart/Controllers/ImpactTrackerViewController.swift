@@ -73,6 +73,7 @@ class ImpactTrackerViewController: UIViewController {
         self.plasticPercentage.text = "0kg"
         self.treePercentage.text = "0kg"
         self.bioPercentage.text = "0"
+        resetValues()
     }
     func fetchData(){
         //query with the condition, seperated it to add action listener
@@ -90,7 +91,7 @@ class ImpactTrackerViewController: UIViewController {
                 resetProgressView()
                 return
             }
-            
+            self.resetValues()
             for document in documents{ //loop through each doc
                 let metrics = document.data()["impactProd"] as? [String: Any] ?? [:] //get the map field
                 let co2Progress = metrics["CO2"] as? Double ?? 0.0
@@ -107,7 +108,7 @@ class ImpactTrackerViewController: UIViewController {
                 }
                 self.i += 1.0 //loops count (temporary)
             }
-            //print("action listner activated") debug
+            print("action listner activated") //debug
             self.updateProgressView() //update ui
             
         }
@@ -193,5 +194,13 @@ class ImpactTrackerViewController: UIViewController {
         let actionOk = UIAlertAction(title: "Ok", style: .default)
         alert.addAction(actionOk)
         present(alert, animated: true, completion: nil)
+    }
+    
+    func resetValues(){
+        self.totalCO2 = 0
+        self.totalPlastic = 0
+        self.totalImpOnTree = 0
+        self.BioCount = 0
+        self.i = 0
     }
     }
