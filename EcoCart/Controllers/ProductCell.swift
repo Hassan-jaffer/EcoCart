@@ -1,6 +1,6 @@
 import UIKit
 
-class ProductCell: UICollectionViewCell {
+class ProductCell: UITableViewCell {
     
     
     
@@ -13,7 +13,6 @@ class ProductCell: UICollectionViewCell {
     
     @IBOutlet weak var productDescriptionLabel: UILabel!
     
-    @IBOutlet weak var actionButton: UIButton!
     
     
     override func awakeFromNib() {
