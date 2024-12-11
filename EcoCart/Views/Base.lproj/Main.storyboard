@@ -86,11 +86,22 @@
                         <segue destination="IT8-16-nBh" kind="relationship" relationship="viewControllers" id="fn6-Te-mRS"/>
                         <segue destination="aLH-8H-ITy" kind="relationship" relationship="viewControllers" id="oaM-Of-Nfk"/>
                         <segue destination="dZj-MR-eYQ" kind="relationship" relationship="viewControllers" id="ECA-U6-om7"/>
+                        <segue destination="wzx-sn-rl0" kind="relationship" relationship="viewControllers" id="zi9-zr-g2P"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IlN-u3-MBN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="818" y="-758"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="Smf-vJ-xT2">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" id="BTK-VD-mlH" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="hm4-Mc-6xR"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1bK-uJ-5ui" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3643.5114503816794" y="-1238.0281690140846"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OlE-rA-egB">
@@ -151,9 +162,29 @@
             </objects>
             <point key="canvasLocation" x="-312" y="-149"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="hm2-e3-8no">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wzx-sn-rl0" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="gearshape" catalog="system" id="O1v-aH-SQP"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ACL-VV-GJY">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BTK-VD-mlH" kind="relationship" relationship="rootViewController" id="VoI-yI-hzD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U26-Gy-8dm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2716.7938931297708" y="-1238.0281690140846"/>
+        </scene>
     </scenes>
     <resources>
         <image name="chart.bar.yaxis" catalog="system" width="128" height="115"/>
+        <image name="gearshape" catalog="system" width="128" height="123"/>
         <image name="house" catalog="system" width="128" height="104"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
         <systemColor name="systemBackgroundColor">

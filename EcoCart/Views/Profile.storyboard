@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NMX-Fx-YuN">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
@@ -22,7 +22,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="50" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="O1C-2S-106">
                                         <rect key="frame" x="30" y="-59" width="332" height="1083"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <mutableString key="text">Your privacy is important to us. This policy explains how we collect, use, and protect your information when you use our app.
+                                        <string key="text">Your privacy is important to us. This policy explains how we collect, use, and protect your information when you use our app.
 Information Collection
 We collect information that you provide directly, such as when you create an account or interact with our services.
 We may also collect data automatically, including your device information, IP address, and usage patterns.
@@ -40,7 +40,7 @@ You have the right to access, correct, or delete your personal information.
 You can opt out of receiving promotional communications at any time.
 Changes to This Policy
 We may update this privacy policy from time to time. We will notify you of any changes by posting the new policy in the app.
-If you have any questions or concerns about this privacy policy, please contact us at  ecocart@gmail.com</mutableString>
+If you have any questions or concerns about this privacy policy, please contact us at  ecocart@gmail.com</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -64,10 +64,10 @@ If you have any questions or concerns about this privacy policy, please contact 
             </objects>
             <point key="canvasLocation" x="-240.45801526717557" y="77.464788732394368"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Settings Table View Controller-->
         <scene sceneID="8uc-93-P7i">
             <objects>
-                <tableViewController id="NMX-Fx-YuN" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="profile" id="NMX-Fx-YuN" customClass="SettingsTableViewController" customModule="EcoCart" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="cYI-ca-uYQ">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -341,7 +341,7 @@ If you have any questions or concerns about this privacy policy, please contact 
                                 <viewLayoutGuide key="contentLayoutGuide" id="crt-VD-FYk"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="fCW-dm-DDB"/>
                             </scrollView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Welcome to EcoCart!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="18" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Re9-3g-FpW">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to EcoCart!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="18" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Re9-3g-FpW">
                                 <rect key="frame" x="33" y="101" width="255" height="59"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="59" id="Knx-TG-MCS"/>
@@ -350,13 +350,13 @@ If you have any questions or concerns about this privacy policy, please contact 
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome to EcoCart!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="18" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3uC-kK-Ubt">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Welcome to EcoCart!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="18" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3uC-kK-Ubt">
                                 <rect key="frame" x="33" y="317" width="255" height="59"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lGd-u0-Iew">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lGd-u0-Iew">
                                 <rect key="frame" x="33" y="168" width="333" height="130"/>
                                 <string key="text">Thank you for choosing EcoCart. Our goal is to provide you with an exceptional experience while ensuring your data and privacy are respected.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -364,12 +364,12 @@ If you have any questions or concerns about this privacy policy, please contact 
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="30" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y6j-9b-g9i">
-                                <rect key="frame" x="33" y="384" width="320" height="404"/>
-                                <mutableString key="text">EcoCart is designed to help you discover and purchase eco-friendly products that contribute to a sustainable lifestyle. Our mission is to deliver a curated selection of environmentally conscious items that make it easy for you to shop responsibly.
+                                <rect key="frame" x="33" y="384" width="1848" height="404"/>
+                                <string key="text">EcoCart is designed to help you discover and purchase eco-friendly products that contribute to a sustainable lifestyle. Our mission is to deliver a curated selection of environmentally conscious items that make it easy for you to shop responsibly.
 Key Features:
 Curated Selection: Explore a wide range of eco-friendly products handpicked for their sustainability.
 User-Friendly Experience: Enjoy a seamless shopping experience with easy navigation and quick access to information.
-Educational Resources: Learn about the impact of your purchases and how to live more sustainably.</mutableString>
+Educational Resources: Learn about the impact of your purchases and how to live more sustainably.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
