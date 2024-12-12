@@ -26,6 +26,9 @@ class ImpactTrackerViewController: UIViewController {
     
     @IBOutlet weak var rankLbl: UILabel!
     
+    @IBOutlet weak var popupBtn: UIButton!
+    
+    
     var totalCO2: Float = 0.0, totalPlastic: Float = 0.0, totalImpOnTree: Float = 0.0
     var targetCO2: Float = 1000.0, targetPlastic: Float = 1000.0, targetImpOnTree: Float = 100.0
     var BioCount: Float = 0
@@ -34,10 +37,10 @@ class ImpactTrackerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        createMenu()
         editGraphView()
         editProgressView()
-        fetchData()
+        fetchData(period: "h")
     }
     
     func editProgressView(){
@@ -112,10 +115,33 @@ class ImpactTrackerViewController: UIViewController {
         self.bioPercentage.text = "0%"
         resetValues()
     }
-    func fetchData(){
-        //query with the condition, seperated it to add action listener
+    func fetchData(period: String){
+        //query with the condition, seperated it to add action listener and date comparsion
+        let query: Query
+        switch period {
+        case "day":
+            
+            let today = Calendar.current.startOfDay(for: Date())
+            query = self.db.collection("impactProd").whereField("userId", isEqualTo: "123").whereField("impactProdPurchaseDate", isGreaterThanOrEqualTo: today)
+            
+        case "week":
+            
+            let week = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: Date())
+            query = self.db.collection("impactProd").whereField("userId", isEqualTo: "123").whereField("impactProdPurchaseDate", isGreaterThanOrEqualTo: week!)
+            
+        case "month":
+            
+            let month = Calendar.current.date(byAdding: .month, value: -1, to: Date())
+            query = self.db.collection("impactProd").whereField("userId", isEqualTo: "123").whereField("impactProdPurchaseDate", isGreaterThanOrEqualTo: month!)
+            
+        case "year":
+            
+            let year = Calendar.current.date(byAdding: .year, value: -1, to: Date())
+            query = self.db.collection("impactProd").whereField("userId", isEqualTo: "123").whereField("impactProdPurchaseDate", isGreaterThanOrEqualTo: year!)
+        default:
+            query = self.db.collection("impactProd").whereField("userId", isEqualTo: "123")
+        }
         
-        let query = self.db.collection("impactProd").whereField("userId", isEqualTo: "123")// id will be changed later
         
         query.addSnapshotListener(){ [weak self] (querySnapshot, error) in //action listener watches the database, updating any change happens. syntax should be the same
             guard let self else { return }
@@ -241,4 +267,44 @@ class ImpactTrackerViewController: UIViewController {
         self.productCount = 0
         setRank(co2: 0.0, plastic: 0.0, tree: 0.0, bio: 0.0)
     }
+    
+   
+    func createMenu(){
+        let command1 = UIAction(title: "All-Time", handler: { _ in
+            self.fetchData(period: "h")
+            
+        })
+        let command2 = UIAction(title: "Today", handler: { _ in
+            self.fetchData(period: "day")
+        })
+        
+        let command3 = UIAction(title: "Last Week", handler: { _ in
+            self.fetchData(period: "week")
+        } )
+        
+        let command4 = UIAction(title: "Last Month", handler: { _ in
+            self.fetchData(period: "month")
+        })
+        let command5 = UIAction(title: "Last Year", handler: { _ in
+            self.fetchData(period: "year")
+        })
+        
+        let menu = UIMenu(title: "", children: [command1, command2, command3, command4, command5])
+        popupBtn.menu = menu
+        popupBtn.showsMenuAsPrimaryAction = true
+    }
+    
+    
+    
+    
+            
+            
+        
+           
+                
+            
+        
+    
+    
+    
     }
