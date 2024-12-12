@@ -26,6 +26,9 @@ class ImpactTrackerViewController: UIViewController {
     
     @IBOutlet weak var rankLbl: UILabel!
     
+    @IBOutlet weak var popupBtn: UIButton!
+    
+    
     var totalCO2: Float = 0.0, totalPlastic: Float = 0.0, totalImpOnTree: Float = 0.0
     var targetCO2: Float = 1000.0, targetPlastic: Float = 1000.0, targetImpOnTree: Float = 100.0
     var BioCount: Float = 0
@@ -34,7 +37,7 @@ class ImpactTrackerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        createMenu()
         editGraphView()
         editProgressView()
         fetchData()
@@ -241,4 +244,44 @@ class ImpactTrackerViewController: UIViewController {
         self.productCount = 0
         setRank(co2: 0.0, plastic: 0.0, tree: 0.0, bio: 0.0)
     }
+    
+   
+    func createMenu(){
+        let command1 = UIAction(title: "All-Time", handler: { _ in
+            print("All-Time")
+            
+        })
+        let command2 = UIAction(title: "Today", handler: { _ in
+            print("Today")
+        })
+        
+        let command3 = UIAction(title: "Last Week", handler: { _ in
+            print("Last Week")
+        } )
+        
+        let command4 = UIAction(title: "Last Month", handler: { _ in
+            print("Last Month")
+        })
+        let command5 = UIAction(title: "Last Year", handler: { _ in
+            print("Last Year")
+        })
+        
+        let menu = UIMenu(title: "", children: [command1, command2, command3, command4, command5])
+        popupBtn.menu = menu
+        popupBtn.showsMenuAsPrimaryAction = true
+    }
+    
+    
+    
+    
+            
+            
+        
+           
+                
+            
+        
+    
+    
+    
     }
