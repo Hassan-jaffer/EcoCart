@@ -21,11 +21,15 @@ class ImpactTrackerViewController: UIViewController {
     @IBOutlet weak var bioPercentage: UILabel!
     
     @IBOutlet weak var resetBtn: UIButton!
-    var totalCO2: Double = 0.0
-    var totalPlastic: Double = 0.0
-    var totalImpOnTree: Double = 0.0
-    var BioCount: Int = 0
-    var i: Float = 0.0
+    
+    @IBOutlet weak var overallLbl: UILabel!
+    
+    @IBOutlet weak var rankLbl: UILabel!
+    
+    var totalCO2: Float = 0.0, totalPlastic: Float = 0.0, totalImpOnTree: Float = 0.0
+    var targetCO2: Float = 1000.0, targetPlastic: Float = 1000.0, targetImpOnTree: Float = 100.0
+    var BioCount: Float = 0
+    var productCount: Float = 0.0
     let db = Firestore.firestore()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,25 +58,59 @@ class ImpactTrackerViewController: UIViewController {
         
     }
     func updateProgressView(){
-        self.co2progressView.setProgress(Float(self.totalCO2) / i, animated: true)
-        self.co2Percentage.text = String(self.totalCO2) + "kg"
-        self.plasticProgressView.setProgress(Float(self.totalPlastic) / i, animated: true)
-        self.plasticPercentage.text = String(self.totalPlastic) + "kg"
-        self.impOnTreeProgressView.setProgress(Float(self.totalImpOnTree) / i, animated: true)
-        self.treePercentage.text = String(self.totalImpOnTree) + "kg"
-        self.bioProgressView.setProgress(Float(self.BioCount) / i, animated: true)
-        self.bioPercentage.text = String(self.BioCount)
+        var co2Percentage: Float = Float(Int((totalCO2 / targetCO2 * 100)))
+        co2Percentage = min(co2Percentage, 100)
+        var plasticPercentage: Float = Float(Int((totalPlastic / targetPlastic * 100)))
+        plasticPercentage = min(plasticPercentage, 100)
+        var treePercentage: Float = Float(Int((totalImpOnTree / targetImpOnTree * 100)))
+        treePercentage = min(treePercentage, 100)
+        var bioPercentage: Float = Float(Int((BioCount / productCount * 100)))
+        bioPercentage = min(bioPercentage, 100)
+        setRank(co2: co2Percentage, plastic: plasticPercentage, tree: treePercentage, bio: bioPercentage)
+        self.co2progressView.setProgress(co2Percentage / 100, animated: true)
+        self.plasticProgressView.setProgress(plasticPercentage / 100, animated: true)
+        self.impOnTreeProgressView.setProgress(treePercentage / 100, animated: true)
+        self.bioProgressView.setProgress(bioPercentage / 100, animated: true)
+        self.co2Percentage.text = "\(Int(co2Percentage))%"
+        self.plasticPercentage.text = "\(Int(plasticPercentage))%"
+        self.treePercentage.text = "\(Int(treePercentage))%"
+        self.bioPercentage.text = "\(Int(bioPercentage))%"
+        }
+    
+    func setRank(co2: Float, plastic: Float, tree: Float, bio: Float){
+        let overall = Int((co2 + plastic + tree + bio) / 4)
+        self.overallLbl.text = String(overall) + "%"
+        if overall >= 80{
+            self.rankLbl.textColor = UIColor.systemGreen
+            self.rankLbl.text = "Champion"
+            self.overallLbl.textColor = UIColor.systemGreen
+        }else if overall >= 40{
+            self.rankLbl.textColor = UIColor.systemCyan
+            self.rankLbl.text = "Warrior"
+            self.overallLbl.textColor = UIColor.systemCyan
+        }else if overall >= 20{
+            self.rankLbl.textColor = UIColor.systemYellow
+            self.rankLbl.text = "Explorer"
+            self.overallLbl.textColor = UIColor.systemYellow
+        }else{
+            self.rankLbl.textColor = UIColor.systemRed
+            self.rankLbl.text = "Rookie"
+            self.overallLbl.textColor = UIColor.systemRed
         }
         
+        
+    }
+    
     func resetProgressView(){
         self.co2progressView.setProgress(0, animated: true)
         self.plasticProgressView.setProgress(0, animated: true)
         self.impOnTreeProgressView.setProgress(0, animated: true)
         self.bioProgressView.setProgress(0, animated: true)
-        self.co2Percentage.text = "0kg"
-        self.plasticPercentage.text = "0kg"
-        self.treePercentage.text = "0kg"
-        self.bioPercentage.text = "0"
+        self.co2Percentage.text = "0%"
+        self.plasticPercentage.text = "0%"
+        self.treePercentage.text = "0%"
+        self.bioPercentage.text = "0%"
+        resetValues()
     }
     func fetchData(){
         //query with the condition, seperated it to add action listener
@@ -90,12 +128,12 @@ class ImpactTrackerViewController: UIViewController {
                 resetProgressView()
                 return
             }
-            
+            self.resetValues()
             for document in documents{ //loop through each doc
                 let metrics = document.data()["impactProd"] as? [String: Any] ?? [:] //get the map field
-                let co2Progress = metrics["CO2"] as? Double ?? 0.0
-                let plasticProgress = metrics["Plastic"] as? Double ?? 0.0
-                let impOnTreeProgress = metrics["Tree"] as? Double ?? 0.0
+                let co2Progress = metrics["CO2"] as? Float ?? 0.0
+                let plasticProgress = metrics["Plastic"] as? Float ?? 0.0
+                let impOnTreeProgress = metrics["Tree"] as? Float ?? 0.0
                 let bioProgress = metrics["Bio"] as? Bool ?? false
                 //calculate using the class level variables (calculation will be changed later)
                 self.totalCO2 += co2Progress
@@ -105,9 +143,9 @@ class ImpactTrackerViewController: UIViewController {
                 if bioProgress{
                     self.BioCount += 1
                 }
-                self.i += 1.0 //loops count (temporary)
+                self.productCount += 1.0 //loops count (temporary)
             }
-            //print("action listner activated") debug
+            print("action listner activated") //debug
             self.updateProgressView() //update ui
             
         }
@@ -193,5 +231,14 @@ class ImpactTrackerViewController: UIViewController {
         let actionOk = UIAlertAction(title: "Ok", style: .default)
         alert.addAction(actionOk)
         present(alert, animated: true, completion: nil)
+    }
+    
+    func resetValues(){
+        self.totalCO2 = 0
+        self.totalPlastic = 0
+        self.totalImpOnTree = 0
+        self.BioCount = 0
+        self.productCount = 0
+        setRank(co2: 0.0, plastic: 0.0, tree: 0.0, bio: 0.0)
     }
     }
