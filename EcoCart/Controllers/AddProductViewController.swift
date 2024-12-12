@@ -49,9 +49,11 @@ class AddProductViewController: UITableViewController {
             alert()
             return
         }
-        let format = DateFormatter()
-        format.dateFormat = "yyyy-MM-dd"
-        let purchaseDate = format.string(from: purchaseDateDtPicker.date)
+        //let dateFormatter = ISO8601DateFormatter()
+        //let format = DateFormatter()
+        //format.dateFormat = "yyyy-MM-dd"
+        //let purchaseDate = format.string(from: purchaseDateDtPicker.date)
+        let purchaseDate = purchaseDateDtPicker.date
         let bio = bioSwitch.isOn
         
         //create a dictionary to store the data
