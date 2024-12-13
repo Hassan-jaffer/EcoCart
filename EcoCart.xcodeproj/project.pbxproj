@@ -10,6 +10,8 @@
 		0E074EBC2D0787D70068814A /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E074EBB2D0787D70068814A /* AddProductViewController.swift */; };
 		0E2760AA2D08A4F8004569A9 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2760A92D08A4F8004569A9 /* FilterViewController.swift */; };
 		0E2F4D442CFCD2DF00235DE9 /* ImpactTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2F4D432CFCD2DF00235DE9 /* ImpactTrackerViewController.swift */; };
+		0E60DB772D0CC89900F16562 /* ProductCell2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E60DB762D0CC89900F16562 /* ProductCell2.storyboard */; };
+		0E60DB792D0CCAEA00F16562 /* HomePageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E60DB782D0CCAEA00F16562 /* HomePageTableViewController.swift */; };
 		0E7C9AB12CF72FCD0049CD22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA32CF72FCD0049CD22 /* Assets.xcassets */; };
 		0E7C9AB22CF72FCD0049CD22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E7C9AAD2CF72FCD0049CD22 /* Main.storyboard */; };
 		0E7C9AB32CF72FCD0049CD22 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E7C9AA62CF72FCD0049CD22 /* GoogleService-Info.plist */; };
@@ -63,6 +65,8 @@
 		0E074EBB2D0787D70068814A /* AddProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewController.swift; sourceTree = "<group>"; };
 		0E2760A92D08A4F8004569A9 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		0E2F4D432CFCD2DF00235DE9 /* ImpactTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImpactTrackerViewController.swift; sourceTree = "<group>"; };
+		0E60DB762D0CC89900F16562 /* ProductCell2.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProductCell2.storyboard; sourceTree = "<group>"; };
+		0E60DB782D0CCAEA00F16562 /* HomePageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageTableViewController.swift; sourceTree = "<group>"; };
 		0E7C9AA22CF72FCD0049CD22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E7C9AA32CF72FCD0049CD22 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E7C9AA42CF72FCD0049CD22 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +134,7 @@
 				0E7C9AA42CF72FCD0049CD22 /* ViewController.swift */,
 				0E2F4D432CFCD2DF00235DE9 /* ImpactTrackerViewController.swift */,
 				F2574B242D00740000FF2011 /* homePageViewController.swift */,
+				0E60DB782D0CCAEA00F16562 /* HomePageTableViewController.swift */,
 				1086DBA32D0114B20087646B /* ProductDetailsViewController.swift */,
 				105F69B22D049F97005454A7 /* ReviewCell.swift */,
 				105F69BC2D04A067005454A7 /* ReviewViewController.swift */,
@@ -153,6 +158,7 @@
 				F2574B222D00609F00FF2011 /* HomePage.storyboard */,
 				105F69B02D049D1E005454A7 /* ReviewCell.xib */,
 				F22029F62D0998E40043A9F2 /* ProductCell.xib */,
+				0E60DB762D0CC89900F16562 /* ProductCell2.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -343,6 +349,7 @@
 			files = (
 				F2574B232D00609F00FF2011 /* HomePage.storyboard in Resources */,
 				CF84B6A32CFC4B1E0006F605 /* Login.storyboard in Resources */,
+				0E60DB772D0CC89900F16562 /* ProductCell2.storyboard in Resources */,
 				0E7C9AB12CF72FCD0049CD22 /* Assets.xcassets in Resources */,
 				F2574B212D0058F900FF2011 /* Filter.storyboard in Resources */,
 				0E7C9AB22CF72FCD0049CD22 /* Main.storyboard in Resources */,
@@ -388,6 +395,7 @@
 				0E074EBC2D0787D70068814A /* AddProductViewController.swift in Sources */,
 				0E2760AA2D08A4F8004569A9 /* FilterViewController.swift in Sources */,
 				0E7C9AB82CF72FCD0049CD22 /* AppDelegate.swift in Sources */,
+				0E60DB792D0CCAEA00F16562 /* HomePageTableViewController.swift in Sources */,
 				0EC7EEEE2CFC485800A7E000 /* Product.swift in Sources */,
 				104856302D0765D800D60B8D /* ReviewCell.swift in Sources */,
 				F2574B272D00785B00FF2011 /* ProductCell.swift in Sources */,
