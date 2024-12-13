@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QhC-R3-j6T">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QhC-R3-j6T">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -61,10 +61,10 @@
             </objects>
             <point key="canvasLocation" x="3416.030534351145" y="-337.32394366197184"/>
         </scene>
-        <!--HomePage-->
+        <!--ProductCell2-->
         <scene sceneID="2YH-Nc-ii2">
             <objects>
-                <viewControllerPlaceholder storyboardName="HomePage" id="d3v-Cd-RVs" colorLabel="IBBuiltInLabel-Blue" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="ProductCell2" id="d3v-Cd-RVs" colorLabel="IBBuiltInLabel-Blue" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="bTo-fH-lKP"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Ym-zd-fQC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
