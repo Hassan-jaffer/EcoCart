@@ -323,6 +323,7 @@
 			mainGroup = F2DCE3472CF728FF002D4AB1;
 			packageReferences = (
 				F23585FB2D058D1E00C00219 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				F2CFE3652D0C9BD90082DFB0 /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			productRefGroup = F2DCE3512CF728FF002D4AB1 /* Products */;
 			projectDirPath = "";
@@ -735,6 +736,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 11.6.0;
+			};
+		};
+		F2CFE3652D0C9BD90082DFB0 /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ChartsOrg/Charts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
