@@ -2,17 +2,18 @@ import UIKit
 import FirebaseFirestore
 
 class HomePageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
-
+    
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var filterButton: UIButton! // Add IBOutlet for the Filter Button
     
     var products: [Product] = [] // Array to hold all products
     var filteredProducts: [Product] = [] // Array to hold search results
-    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-        setupSearchController()
+        setupSearchController()  // Configure the search bar functionality
         fetchProducts()
     }
     
@@ -25,11 +26,8 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
     
     // MARK: - Setup Search Controller
     private func setupSearchController() {
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Products"
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
+        searchBar.delegate = self  // Set the search bar delegate
+        searchBar.placeholder = "Search Products"
     }
     
     // MARK: - Fetch Products from Firestore
@@ -63,7 +61,24 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    // MARK: - UITableViewDataSource
+    // MARK: - UISearchResultsUpdating
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text, !searchText.isEmpty else {
+            filteredProducts = products // Show all products when search bar is empty
+            tableView.reloadData()
+            return
+        }
+        
+        // Filter products by name or description
+        filteredProducts = products.filter { product in
+            return product.name.lowercased().contains(searchText.lowercased()) ||
+                   product.description.lowercased().contains(searchText.lowercased())
+        }
+        
+        tableView.reloadData()
+    }
+    
+    // MARK: - UITableViewDataSource & UITableViewDelegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredProducts.count
     }
@@ -87,29 +102,11 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
         return cell
     }
     
-    // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedProduct = filteredProducts[indexPath.row]
         if let productDetailsVC = ProductDetailsViewController.instantiate(with: selectedProduct.id) {
             navigationController?.pushViewController(productDetailsVC, animated: true)
         }
-    }
-    
-    // MARK: - UISearchResultsUpdating
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let searchText = searchController.searchBar.text, !searchText.isEmpty else {
-            filteredProducts = products // Show all products when search bar is empty
-            tableView.reloadData()
-            return
-        }
-        
-        // Filter products by name or description
-        filteredProducts = products.filter { product in
-            return product.name.lowercased().contains(searchText.lowercased()) ||
-                   product.description.lowercased().contains(searchText.lowercased())
-        }
-        
-        tableView.reloadData()
     }
     
     // MARK: - Helper Method to Load Images
@@ -126,5 +123,29 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
                 }
             }
         }.resume()
+    }
+    
+    // MARK: - Filter Button Action
+    @IBAction func filterButtonTapped(_ sender: UIButton) {
+        if let filterVC = storyboard?.instantiateViewController(withIdentifier: "FilterViewController") as? FilterViewController {
+            navigationController?.pushViewController(filterVC, animated: true)
+        }
+    }
+}
+
+extension HomePageViewController: UISearchBarDelegate {
+    // Search Bar delegate methods
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // Filter products as text is entered
+        if searchText.isEmpty {
+            filteredProducts = products
+        } else {
+            filteredProducts = products.filter { product in
+                return product.name.lowercased().contains(searchText.lowercased()) ||
+                       product.description.lowercased().contains(searchText.lowercased())
+            }
+        }
+        
+        tableView.reloadData()
     }
 }
