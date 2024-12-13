@@ -84,20 +84,7 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
 
     
     // MARK: - Load Images
-    private func loadImage(from url: URL, in cell: ProductCell) {
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            if let error = error {
-                print("❌ Error loading image: \(error.localizedDescription)")
-                DispatchQueue.main.async {
-                    cell.productImageView.image = UIImage(named: "defaultImage")
-                }
-            } else if let data = data, let image = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    cell.productImageView.image = image
-                }
-            }
-        }.resume()
-    }
+    
     
 
 }
