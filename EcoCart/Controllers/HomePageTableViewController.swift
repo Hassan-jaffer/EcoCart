@@ -4,23 +4,26 @@ import FirebaseFirestore
 class HomePageTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar! // Reference to the search bar in static cell
     
-
-   
-    var products: [Product] = [] // All products fetched from Firestore
-    var filteredProducts: [Product] = [] // Products matching search/filter criteria
+    var products: [Product] = []          // All products fetched from Firestore
+    var filteredProducts: [Product] = []  // Filtered products for search
+    
+    var searchTimer: Timer?               // Timer to control search delay
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
-        //setupTableView()
+        // Fetch the search bar from the static cell
+        if let searchCell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as? UITableViewCell {
+            // Manually access the UISearchBar from the cell
+            searchBar = searchCell.contentView.subviews.compactMap { $0 as? UISearchBar }.first
+            searchBar?.delegate = self
+        }
+        
         fetchProducts()
     }
-    
 
-    
-   
     
     // MARK: - Fetch Products from Firestore
     private func fetchProducts() {
@@ -41,11 +44,11 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
                         numberOfRatings: data["numberOfRatings"] as? Int ?? 0,
                         totalRatings: data["totalRatings"] as? Int ?? 0,
                         stockQuantity: data["stockQuantity"] as? Int ?? 0,
-                        metrics: Product.parseMetrics(from: data)
+                        metrics: Product.parseMetrics(from: data) // OR use `[]` if no parsing is available
                     )
                 }
                 
-                self.filteredProducts = self.products // Initially, show all products
+                self.filteredProducts = self.products // Initially show all products
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
@@ -55,41 +58,62 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
         }
     }
     
-    
-
-    
-    // MARK: - Table view data source
-
+    // MARK: - Table View Data Source
     func numberOfSections(in tableView: UITableView) -> Int {
-        return products.count
+        return 2 // Section 0 for search bar, Section 1 for products
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return products.count
+            return 1 // Static cell for the search bar
         } else {
-            return 0
+            return filteredProducts.count // Filtered products for search
         }
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //Step 1: Dequeue cell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ProductCell", for: indexPath) as! ProductCell
-
-        //Step 2: Fetch model object to display
-        let product = products[indexPath.row]
-
-        //Step 3: Configure cell
-        cell.update(with: product)
-        cell.showsReorderControl = true
-
-        //Step 4: Return cell
-        return cell
+        if indexPath.section == 0 {
+            // Static cell for search bar
+            return tableView.dequeueReusableCell(withIdentifier: "SearchBarCell", for: indexPath)
+        } else {
+            // Dynamic cells for products
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ProductCell", for: indexPath) as! ProductCell
+            let product = filteredProducts[indexPath.row]
+            cell.update(with: product)
+            return cell
+        }
     }
-
     
-    // MARK: - Load Images
+    // MARK: - UISearchBarDelegate Method
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // Check if the search text has at least 3 characters
+        guard searchText.count >= 3 else {
+            filteredProducts = products // Reset to all products if less than 3 characters
+            tableView.reloadData()
+            return
+        }
+        
+        // If there is a search timer already running, invalidate it
+        searchTimer?.invalidate()
+        
+        // Set up a new timer to wait for user input to stabilize (debouncing)
+        searchTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
+            self.performSearch(searchText)
+        }
+    }
     
-    
-
+    // Perform the actual search
+    private func performSearch(_ searchText: String) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            let filtered = self.products.filter { product in
+                product.name.lowercased().contains(searchText.lowercased()) ||
+                product.description.lowercased().contains(searchText.lowercased())
+            }
+            
+            DispatchQueue.main.async {
+                self.filteredProducts = filtered
+                self.tableView.reloadData()
+            }
+        }
+    }
 }
