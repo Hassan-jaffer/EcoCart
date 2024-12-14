@@ -46,6 +46,8 @@ class HomePageViewController: UIViewController, UITableViewDataSource, UITableVi
                         price: data["price"] as? Double ?? 0.0,
                         imageURL: data["imageURL"] as? String,
                         averageRating: data["averageRating"] as? Int ?? 0,
+                        numberOfRatings: data["numberOfRatings"] as? Int ?? 0,
+                        totalRatings: data["totalRatings"] as? Int ?? 0,
                         stockQuantity: data["stockQuantity"] as? Int ?? 0,
                         metrics: Product.parseMetrics(from: data)
                     )

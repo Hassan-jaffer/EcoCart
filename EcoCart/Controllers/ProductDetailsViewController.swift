@@ -40,6 +40,20 @@ class ProductDetailsViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         fetchProductDetails()
+        
+        // Add observer for product updates
+        NotificationCenter.default.addObserver(self, selector: #selector(handleProductUpdate(_:)), name: NSNotification.Name("ProductUpdated"), object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc private func handleProductUpdate(_ notification: Notification) {
+        if let updatedProduct = notification.userInfo?["product"] as? Product {
+            self.product = updatedProduct
+            updateUI(with: updatedProduct)
+        }
     }
     
     private func setupUI() {
@@ -77,6 +91,9 @@ class ProductDetailsViewController: UIViewController {
     }
     
     private func updateUI(with product: Product) {
+        print("🌟 Updating UI with product: \(product.id)")
+        print("🌟 Average Rating: \(product.averageRating)")
+        
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             
@@ -85,9 +102,12 @@ class ProductDetailsViewController: UIViewController {
             self.productDescription.text = product.description
             
             let starButtons = [self.ratingButton1, self.ratingButton2, self.ratingButton3, self.ratingButton4, self.ratingButton5]
+            print("🌟 Updating \(starButtons.count) star buttons")
             starButtons.enumerated().forEach { index, button in
                 button?.setImage(UIImage(systemName: "star.fill"), for: .normal)
-                button?.tintColor = index < product.averageRating ? .systemYellow : .systemGray4
+                let shouldFill = index < product.averageRating
+                button?.tintColor = shouldFill ? .systemYellow : .systemGray4
+                print("🌟 Star \(index + 1): \(shouldFill ? "Filled" : "Empty")")
             }
             
             let metricsText = product.metrics.map { metric in
