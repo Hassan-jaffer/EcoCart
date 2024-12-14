@@ -3,89 +3,100 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="giq-FX-Hpb" customClass="ReviewCell" customModule="EcoCart">
-            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bTX-Mr-JAJ">
-                    <rect key="frame" x="116" y="227" width="240" height="128"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                    <color key="textColor" systemColor="labelColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                </textView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gUE-gl-cnF">
-                    <rect key="frame" x="38" y="184" width="42" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xtZ-dS-OaL">
-                    <rect key="frame" x="110" y="183" width="52" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" image="star" catalog="system"/>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RRL-1G-Ecd">
-                    <rect key="frame" x="149" y="183" width="52" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" image="star" catalog="system"/>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="siu-Jk-5yG">
-                    <rect key="frame" x="192" y="183" width="52" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" image="star" catalog="system"/>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GbY-fA-llP">
-                    <rect key="frame" x="235" y="184" width="52" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" image="star" catalog="system"/>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1eV-r7-xY9">
-                    <rect key="frame" x="280" y="184" width="52" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" image="star" catalog="system"/>
-                </button>
-                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="241" translatesAutoresizingMaskIntoConstraints="NO" id="VVm-cO-S2e">
-                    <rect key="frame" x="0.0" y="164" width="393" height="241"/>
-                    <autoresizingMask key="autoresizingMask"/>
-                    <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VVm-cO-S2e" id="htp-KV-IGg">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="241"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </tableViewCellContentView>
-                </tableViewCell>
-            </subviews>
-            <viewLayoutGuide key="safeArea" id="5dG-ut-64i"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="237" id="sv5-hf-5WT" customClass="ReviewCell" customModule="EcoCart" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="392" height="237"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sv5-hf-5WT" id="Sc7-ea-asq">
+                <rect key="frame" x="0.0" y="0.0" width="392" height="237"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kv4-YO-DzW">
+                        <rect key="frame" x="40" y="32" width="312" height="26.333333333333329"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Ss-ft-JeG">
+                        <rect key="frame" x="128" y="28.000000000000004" width="52" height="34.333333333333343"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="star.fill" catalog="system"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbB-D7-pZw">
+                        <rect key="frame" x="212" y="28.000000000000004" width="52" height="34.333333333333343"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="star.fill" catalog="system"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cQx-ok-iE3">
+                        <rect key="frame" x="183" y="28.000000000000004" width="26" height="34.333333333333343"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="star.fill" catalog="system"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e7F-nk-0jL">
+                        <rect key="frame" x="242" y="28.000000000000004" width="52" height="34.333333333333343"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="52" id="WTp-D3-ITA"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="star.fill" catalog="system"/>
+                    </button>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JMS-sU-42z">
+                        <rect key="frame" x="40" y="82.333333333333329" width="312" height="139.66666666666669"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                        <color key="textColor" systemColor="labelColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ptk-vT-2mP">
+                        <rect key="frame" x="298" y="28.000000000000004" width="52" height="34.333333333333343"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" image="star.fill" catalog="system"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="JMS-sU-42z" firstAttribute="top" secondItem="2Ss-ft-JeG" secondAttribute="bottom" constant="20" id="04J-Ta-MRP"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="e7F-nk-0jL" secondAttribute="trailing" constant="78" id="3yC-Iw-jlS"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="JMS-sU-42z" secondAttribute="bottom" constant="3" id="4lZ-iH-WVh"/>
+                    <constraint firstItem="Kv4-YO-DzW" firstAttribute="top" secondItem="Sc7-ea-asq" secondAttribute="topMargin" constant="20" id="6oZ-xX-PYg"/>
+                    <constraint firstItem="Kv4-YO-DzW" firstAttribute="leading" secondItem="Sc7-ea-asq" secondAttribute="leadingMargin" constant="20" id="6zz-YD-Fs5"/>
+                    <constraint firstItem="2Ss-ft-JeG" firstAttribute="leading" secondItem="Sc7-ea-asq" secondAttribute="leading" constant="128" id="8Bi-ws-nxZ"/>
+                    <constraint firstItem="2Ss-ft-JeG" firstAttribute="baseline" secondItem="ptk-vT-2mP" secondAttribute="baseline" id="9T7-QZ-jv3"/>
+                    <constraint firstItem="JMS-sU-42z" firstAttribute="centerX" secondItem="cQx-ok-iE3" secondAttribute="centerX" id="9gV-wC-byN"/>
+                    <constraint firstItem="2Ss-ft-JeG" firstAttribute="baseline" secondItem="bbB-D7-pZw" secondAttribute="baseline" id="AiP-5u-q8h"/>
+                    <constraint firstItem="bbB-D7-pZw" firstAttribute="leading" secondItem="2Ss-ft-JeG" secondAttribute="trailing" constant="32" id="L6d-vM-uJs"/>
+                    <constraint firstItem="e7F-nk-0jL" firstAttribute="leading" secondItem="cQx-ok-iE3" secondAttribute="trailing" constant="33" id="MRe-pc-PJi"/>
+                    <constraint firstItem="2Ss-ft-JeG" firstAttribute="top" secondItem="Sc7-ea-asq" secondAttribute="topMargin" constant="16" id="Nvn-VQ-VyN"/>
+                    <constraint firstItem="JMS-sU-42z" firstAttribute="leading" secondItem="Sc7-ea-asq" secondAttribute="leadingMargin" constant="20" id="Re7-FA-dTF"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Kv4-YO-DzW" secondAttribute="trailing" constant="20" id="a6u-yL-x2f"/>
+                    <constraint firstItem="2Ss-ft-JeG" firstAttribute="baseline" secondItem="e7F-nk-0jL" secondAttribute="baseline" id="avu-Eb-Mdz"/>
+                    <constraint firstItem="ptk-vT-2mP" firstAttribute="leading" secondItem="bbB-D7-pZw" secondAttribute="trailing" constant="34" id="jKb-hq-Ulz"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="JMS-sU-42z" secondAttribute="trailing" constant="20" id="k1d-w2-aiw"/>
+                    <constraint firstItem="2Ss-ft-JeG" firstAttribute="centerY" secondItem="Kv4-YO-DzW" secondAttribute="centerY" id="lKJ-6C-hD6"/>
+                    <constraint firstItem="2Ss-ft-JeG" firstAttribute="baseline" secondItem="cQx-ok-iE3" secondAttribute="baseline" id="pUo-tx-UnP"/>
+                    <constraint firstItem="2Ss-ft-JeG" firstAttribute="firstBaseline" secondItem="cQx-ok-iE3" secondAttribute="baseline" id="t9V-9e-AbA"/>
+                </constraints>
+            </tableViewCellContentView>
             <accessibility key="accessibilityConfiguration" identifier="ReviewCell"/>
             <connections>
-                <outlet property="ratingStarButton1" destination="xtZ-dS-OaL" id="5Hd-Mm-LvV"/>
-                <outlet property="ratingStarButton2" destination="RRL-1G-Ecd" id="rsA-8P-xFl"/>
-                <outlet property="ratingStarButton3" destination="siu-Jk-5yG" id="F9P-yd-vwp"/>
-                <outlet property="ratingStarButton4" destination="GbY-fA-llP" id="BYp-Xt-D8p"/>
-                <outlet property="ratingStarButton5" destination="1eV-r7-xY9" id="muK-Nf-C8k"/>
-                <outlet property="reviewContentTextView" destination="bTX-Mr-JAJ" id="vJK-HU-csB"/>
-                <outlet property="reviewerNameLabel" destination="gUE-gl-cnF" id="WSM-BP-mnj"/>
+                <outlet property="ratingStarButton1" destination="2Ss-ft-JeG" id="rbX-Yd-BxC"/>
+                <outlet property="ratingStarButton2" destination="cQx-ok-iE3" id="E20-P0-jzH"/>
+                <outlet property="ratingStarButton3" destination="bbB-D7-pZw" id="yRr-JI-oeT"/>
+                <outlet property="ratingStarButton4" destination="e7F-nk-0jL" id="uRc-hh-Clr"/>
+                <outlet property="ratingStarButton5" destination="ptk-vT-2mP" id="beI-ju-e1K"/>
+                <outlet property="reviewContentTextView" destination="JMS-sU-42z" id="j40-Yj-zsQ"/>
+                <outlet property="reviewerNameLabel" destination="Kv4-YO-DzW" id="Fy1-y6-bA6"/>
             </connections>
-            <point key="canvasLocation" x="-72.51908396946564" y="19.718309859154932"/>
-        </view>
+            <point key="canvasLocation" x="1781" y="396"/>
+        </tableViewCell>
     </objects>
     <resources>
-        <image name="star" catalog="system" width="128" height="116"/>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
