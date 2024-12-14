@@ -38,7 +38,12 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
                         numberOfRatings: data["numberOfRatings"] as? Int ?? 0,
                         totalRatings: data["totalRatings"] as? Int ?? 0,
                         stockQuantity: data["stockQuantity"] as? Int ?? 0,
-                        metrics: Product.parseMetrics(from: data)
+                        metrics: Product.Metrics(
+                            bio: data["Bio"] as? Int ?? 0,
+                            co2: data["CO2"] as? Int ?? 0,
+                            plastic: data["Plastic"] as? Int ?? 0,
+                            tree: data["Tree"] as? Int ?? 0
+                        )
                     )
                 }
                 

@@ -77,6 +77,7 @@ class ProductDetailsViewController: UIViewController {
         Task {
             do {
                 if let product = try await Product.fetchProduct(withId: productId) {
+                    print("📊 Metrics received: Bio=\(product.metrics.bio), CO2=\(product.metrics.co2), Plastic=\(product.metrics.plastic), Tree=\(product.metrics.tree)")
                     self.product = product
                     self.productId = product.id
                     updateUI(with: product)
@@ -102,29 +103,31 @@ class ProductDetailsViewController: UIViewController {
             self.productDescription.text = product.description
             
             let starButtons = [self.ratingButton1, self.ratingButton2, self.ratingButton3, self.ratingButton4, self.ratingButton5]
-            print("🌟 Updating \(starButtons.count) star buttons")
             starButtons.enumerated().forEach { index, button in
                 button?.setImage(UIImage(systemName: "star.fill"), for: .normal)
-                let shouldFill = index < product.averageRating
-                button?.tintColor = shouldFill ? .systemYellow : .systemGray4
-                print("🌟 Star \(index + 1): \(shouldFill ? "Filled" : "Empty")")
+                button?.tintColor = index < product.averageRating ? .systemYellow : .systemGray4
             }
             
-            let metricsText = product.metrics.map { metric in
-                return "\(metric.name): \(metric.value)"
-            }.joined(separator: "\n")
-            self.impactTextView.text = " \n\n\(metricsText)"
+            print("📊 Metrics values: Bio=\(product.metrics.bio), CO2=\(product.metrics.co2), Plastic=\(product.metrics.plastic), Tree=\(product.metrics.tree)")
+            
+            // Format metrics text
+            let metricsText = """
+            Environmental Impact:
+            Bio-Based: \(product.metrics.bio == 1 ? "Yes" : "No")
+            CO2 Saved: \(product.metrics.co2) kg
+            Plastic Saved: \(product.metrics.plastic) kg
+            Trees Saved: \(product.metrics.tree)
+            """
+            self.impactTextView.text = metricsText
             
             self.productQuantityStepper.maximumValue = Double(product.stockQuantity)
             self.productQuantityStepper.value = 1
             self.quantityLabel.text = "1"
             
-            // Safely unwrap imageURL
             if let imageUrlString = product.imageURL, let imageUrl = URL(string: imageUrlString) {
                 self.loadImage(from: imageUrl)
             } else {
-                // Handle the case when imageURL is nil or invalid
-                self.productImage.image = UIImage(named: "placeholderImage")  // You can set a default placeholder image here
+                self.productImage.image = UIImage(named: "placeholderImage")
             }
         }
     }
