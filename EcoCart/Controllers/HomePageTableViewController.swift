@@ -4,12 +4,15 @@ import FirebaseFirestore
 class HomePageTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    
+
    
     var products: [Product] = [] // All products fetched from Firestore
     var filteredProducts: [Product] = [] // Products matching search/filter criteria
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
         //setupTableView()
         fetchProducts()
