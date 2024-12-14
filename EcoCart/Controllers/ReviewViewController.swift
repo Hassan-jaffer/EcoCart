@@ -107,6 +107,12 @@ class ReviewViewController: UIViewController {
                 try await ReviewFirebase.shared.addReview(review)
                 print("✅ Review submitted successfully")
                 
+                // Fetch updated product details
+                if let updatedProduct = try await Product.fetchProduct(withId: productId) {
+                    // Notify the product details view controller to update
+                    NotificationCenter.default.post(name: NSNotification.Name("ProductUpdated"), object: nil, userInfo: ["product": updatedProduct])
+                }
+                
                 DispatchQueue.main.async { [weak self] in
                     print("🧹 Clearing review form")
                     self?.newReviewTextView.text = ""

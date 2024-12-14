@@ -8,6 +8,8 @@ struct Product {
     let price: Double
     let imageURL: String?
     let averageRating: Int
+    let numberOfRatings: Int
+    let totalRatings: Int
     let stockQuantity: Int
     let metrics: [Metric]
     
@@ -23,14 +25,15 @@ struct Product {
         
         guard let data = document.data() else { return nil }
 
-        // Handle empty or missing fields safely
         return Product(
             id: document.documentID,
             name: data["name"] as? String ?? "No Name",
             description: data["description"] as? String ?? "No Description",
             price: data["price"] as? Double ?? 0.0,
-            imageURL: data["imageURL"] as? String, // Keep as optional
+            imageURL: data["imageURL"] as? String,
             averageRating: data["averageRating"] as? Int ?? 0,
+            numberOfRatings: data["numberOfRatings"] as? Int ?? 0,
+            totalRatings: data["totalRatings"] as? Int ?? 0,
             stockQuantity: data["stockQuantity"] as? Int ?? 0,
             metrics: parseMetrics(from: data)
         )
