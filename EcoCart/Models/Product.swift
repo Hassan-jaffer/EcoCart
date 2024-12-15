@@ -51,4 +51,35 @@ struct Product {
             )
         )
     }
+    
+    static func fetchTopRatedEcoProducts(limit: Int = 3) async throws -> [Product] {
+        let db = Firestore.firestore()
+        
+        // Query products sorted by average rating
+        let snapshot = try await db.collection("product")
+            .order(by: "averageRating", descending: true)
+            .limit(to: limit)
+            .getDocuments()
+        
+        return snapshot.documents.map { document in
+            let data = document.data()
+            return Product(
+                id: document.documentID,
+                name: data["name"] as? String ?? "",
+                description: data["description"] as? String ?? "",
+                price: data["price"] as? Double ?? 0.0,
+                imageURL: data["imageURL"] as? String,
+                averageRating: data["averageRating"] as? Int ?? 0,
+                numberOfRatings: data["numberOfRatings"] as? Int ?? 0,
+                totalRatings: data["totalRatings"] as? Int ?? 0,
+                stockQuantity: data["stockQuantity"] as? Int ?? 0,
+                metrics: Metrics(
+                    bio: data["Bio"] as? Int ?? 0,
+                    co2: data["CO2"] as? Int ?? 0,
+                    plastic: data["Plastic"] as? Int ?? 0,
+                    tree: data["Tree"] as? Int ?? 0
+                )
+            )
+        }
+    }
 }
