@@ -11,11 +11,13 @@ struct Product {
     let numberOfRatings: Int
     let totalRatings: Int
     let stockQuantity: Int
-    let metrics: [Metric]
+    let metrics: Metrics
     
-    struct Metric {
-        let name: String
-        let value: String
+    struct Metrics {
+        let bio: Int
+        let co2: Int
+        let plastic: Int
+        let tree: Int
     }
 
     static func fetchProduct(withId id: String) async throws -> Product? {
@@ -24,27 +26,59 @@ struct Product {
         let document = try await docRef.getDocument()
         
         guard let data = document.data() else { return nil }
+        
+        // Get the metrics map from Firestore
+        let metricsData = data["metrics"] as? [String: Any] ?? [:]
+        
+        print(" Raw Firestore metrics data:", metricsData)
+        print(" CO2 value from metrics:", metricsData["CO2"] ?? "nil")
 
         return Product(
             id: document.documentID,
-            name: data["name"] as? String ?? "No Name",
-            description: data["description"] as? String ?? "No Description",
+            name: data["name"] as? String ?? "",
+            description: data["description"] as? String ?? "",
             price: data["price"] as? Double ?? 0.0,
             imageURL: data["imageURL"] as? String,
             averageRating: data["averageRating"] as? Int ?? 0,
             numberOfRatings: data["numberOfRatings"] as? Int ?? 0,
             totalRatings: data["totalRatings"] as? Int ?? 0,
             stockQuantity: data["stockQuantity"] as? Int ?? 0,
-            metrics: parseMetrics(from: data)
+            metrics: Metrics(
+                bio: (metricsData["Bio"] as? Bool ?? false) ? 1 : 0,
+                co2: metricsData["CO2"] as? Int ?? 0,
+                plastic: metricsData["Plastic"] as? Int ?? 0,
+                tree: metricsData["Tree"] as? Int ?? 0
+            )
         )
     }
-
-    static func parseMetrics(from data: [String: Any]) -> [Metric] {
-        guard let metricsData = data["metrics"] as? [[String: Any]] else { return [] }
-        return metricsData.map { metricData in
-            Metric(
-                name: metricData["name"] as? String ?? "Unknown",
-                value: metricData["value"] as? String ?? "Unknown"
+    
+    static func fetchTopRatedEcoProducts(limit: Int = 3) async throws -> [Product] {
+        let db = Firestore.firestore()
+        
+        // Query products sorted by average rating
+        let snapshot = try await db.collection("product")
+            .order(by: "averageRating", descending: true)
+            .limit(to: limit)
+            .getDocuments()
+        
+        return snapshot.documents.map { document in
+            let data = document.data()
+            return Product(
+                id: document.documentID,
+                name: data["name"] as? String ?? "",
+                description: data["description"] as? String ?? "",
+                price: data["price"] as? Double ?? 0.0,
+                imageURL: data["imageURL"] as? String,
+                averageRating: data["averageRating"] as? Int ?? 0,
+                numberOfRatings: data["numberOfRatings"] as? Int ?? 0,
+                totalRatings: data["totalRatings"] as? Int ?? 0,
+                stockQuantity: data["stockQuantity"] as? Int ?? 0,
+                metrics: Metrics(
+                    bio: data["Bio"] as? Int ?? 0,
+                    co2: data["CO2"] as? Int ?? 0,
+                    plastic: data["Plastic"] as? Int ?? 0,
+                    tree: data["Tree"] as? Int ?? 0
+                )
             )
         }
     }

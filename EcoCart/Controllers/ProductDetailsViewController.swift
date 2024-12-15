@@ -23,7 +23,9 @@ class ProductDetailsViewController: UIViewController {
     @IBOutlet weak var ratingButton3: UIButton!
     @IBOutlet weak var ratingButton4: UIButton!
     @IBOutlet weak var ratingButton5: UIButton!
-    @IBOutlet weak var mainStackView: UIStackView!
+    @IBOutlet weak var topRatedImage1: UIImageView!
+    @IBOutlet weak var topRatedImage2: UIImageView!
+    @IBOutlet weak var topRatedImage3: UIImageView!
     
     static func instantiate(with productId: String) -> ProductDetailsViewController? {
         let storyboard = UIStoryboard(name: "ProductDetails", bundle: nil)
@@ -35,6 +37,7 @@ class ProductDetailsViewController: UIViewController {
     var productId: String?
     var product: Product?
     private var selectedQuantity: Int = 1
+    private var topRatedProducts: [Product] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +54,7 @@ class ProductDetailsViewController: UIViewController {
     
     @objc private func handleProductUpdate(_ notification: Notification) {
         if let updatedProduct = notification.userInfo?["product"] as? Product {
-            self.product = updatedProduct
+            product = updatedProduct
             updateUI(with: updatedProduct)
         }
     }
@@ -65,6 +68,8 @@ class ProductDetailsViewController: UIViewController {
         productQuantityStepper.value = Double(selectedQuantity)
         quantityLabel.text = "\(selectedQuantity)"
         productQuantityStepper.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)
+        setupTopRatedViews()
+        fetchTopRatedProducts()
     }
     
     private func fetchProductDetails() {
@@ -77,6 +82,7 @@ class ProductDetailsViewController: UIViewController {
         Task {
             do {
                 if let product = try await Product.fetchProduct(withId: productId) {
+                    print("📊 Metrics received: Bio=\(product.metrics.bio), CO2=\(product.metrics.co2), Plastic=\(product.metrics.plastic), Tree=\(product.metrics.tree)")
                     self.product = product
                     self.productId = product.id
                     updateUI(with: product)
@@ -97,34 +103,36 @@ class ProductDetailsViewController: UIViewController {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             
-            self.nameLabel.text = product.name
-            self.productPrice.text = String(format: "%.2f BHD", product.price)
-            self.productDescription.text = product.description
+            nameLabel.text = product.name
+            productPrice.text = String(format: "%.2f BHD", product.price)
+            productDescription.text = product.description
             
-            let starButtons = [self.ratingButton1, self.ratingButton2, self.ratingButton3, self.ratingButton4, self.ratingButton5]
-            print("🌟 Updating \(starButtons.count) star buttons")
+            let starButtons = [ratingButton1, ratingButton2, ratingButton3, ratingButton4, ratingButton5]
             starButtons.enumerated().forEach { index, button in
                 button?.setImage(UIImage(systemName: "star.fill"), for: .normal)
-                let shouldFill = index < product.averageRating
-                button?.tintColor = shouldFill ? .systemYellow : .systemGray4
-                print("🌟 Star \(index + 1): \(shouldFill ? "Filled" : "Empty")")
+                button?.tintColor = index < product.averageRating ? .systemYellow : .systemGray4
             }
             
-            let metricsText = product.metrics.map { metric in
-                return "\(metric.name): \(metric.value)"
-            }.joined(separator: "\n")
-            self.impactTextView.text = " \n\n\(metricsText)"
+            print("📊 Metrics values: Bio=\(product.metrics.bio), CO2=\(product.metrics.co2), Plastic=\(product.metrics.plastic), Tree=\(product.metrics.tree)")
             
-            self.productQuantityStepper.maximumValue = Double(product.stockQuantity)
-            self.productQuantityStepper.value = 1
-            self.quantityLabel.text = "1"
+            // Format metrics text
+            let metricsText = """
+            Environmental Impact:
+            Bio-Based: \(product.metrics.bio == 1 ? "Yes" : "No")
+            CO2 Saved: \(product.metrics.co2) kg
+            Plastic Saved: \(product.metrics.plastic) kg
+            Trees Saved: \(product.metrics.tree)
+            """
+            impactTextView.text = metricsText
             
-            // Safely unwrap imageURL
+            productQuantityStepper.maximumValue = Double(product.stockQuantity)
+            productQuantityStepper.value = 1
+            quantityLabel.text = "1"
+            
             if let imageUrlString = product.imageURL, let imageUrl = URL(string: imageUrlString) {
-                self.loadImage(from: imageUrl)
+                loadImage(from: imageUrl)
             } else {
-                // Handle the case when imageURL is nil or invalid
-                self.productImage.image = UIImage(named: "placeholderImage")  // You can set a default placeholder image here
+                productImage.image = UIImage(named: "placeholderImage")
             }
         }
     }
@@ -136,6 +144,25 @@ class ProductDetailsViewController: UIViewController {
                 DispatchQueue.main.async {
                     self?.productImage.image = image
                 }
+            }
+        }.resume()
+    }
+    
+    private func loadImage(from url: URL, into imageView: UIImageView) {
+        print("📱 Starting image download from: \(url)")
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("❌ Error downloading image: \(error)")
+                return
+            }
+            
+            if let data = data, let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    print("📱 Successfully loaded image")
+                    imageView.image = image
+                }
+            } else {
+                print("❌ Failed to create image from data")
             }
         }.resume()
     }
@@ -171,5 +198,79 @@ class ProductDetailsViewController: UIViewController {
         reviewVC.productId = productId
         reviewVC.title = "Reviews"
         navigationController?.pushViewController(reviewVC, animated: true)
+    }
+    
+    // MARK: - Top Rated Products
+    private func setupTopRatedViews() {
+        // Configure image views
+        [topRatedImage1, topRatedImage2, topRatedImage3].forEach { imageView in
+            imageView?.contentMode = .scaleAspectFill
+            imageView?.clipsToBounds = true
+            imageView?.layer.cornerRadius = 8
+            
+            // Add tap gesture
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(topRatedImageTapped(_:)))
+            imageView?.isUserInteractionEnabled = true
+            imageView?.addGestureRecognizer(tapGesture)
+        }
+    }
+    
+    private func fetchTopRatedProducts() {
+        print("📱 Starting to fetch top rated products")
+        Task {
+            do {
+                topRatedProducts = try await Product.fetchTopRatedEcoProducts(limit: 3)
+                print("📱 Fetched \(topRatedProducts.count) top rated products")
+                DispatchQueue.main.async { [weak self] in
+                    print("📱 Updating UI with top rated products")
+                    self?.updateTopRatedUI()
+                }
+            } catch {
+                print("❌ Error fetching top rated products: \(error)")
+            }
+        }
+    }
+    
+    private func updateTopRatedUI() {
+        print("📱 Starting updateTopRatedUI")
+        let imageViews = [topRatedImage1, topRatedImage2, topRatedImage3]
+        print("📱 Image views status: \(imageViews.map { $0 != nil })")
+        
+        for (index, product) in topRatedProducts.enumerated() {
+            guard index < 3,
+                  let imageView = imageViews[index] else {
+                print("❌ Failed to get image view at index \(index)")
+                continue
+            }
+            
+            print("📱 Processing product at index \(index): \(product.name)")
+            if let imageUrlString = product.imageURL,
+               let imageUrl = URL(string: imageUrlString) {
+                print("📱 Loading image from URL: \(imageUrlString)")
+                loadImage(from: imageUrl, into: imageView)
+            } else {
+                print("❌ No image URL for product at index \(index)")
+                imageView.image = UIImage(named: "placeholderImage")
+            }
+        }
+    }
+    
+    @objc private func topRatedImageTapped(_ gesture: UITapGestureRecognizer) {
+        guard let tappedImageView = gesture.view as? UIImageView else { return }
+        
+        let index: Int
+        switch tappedImageView {
+        case topRatedImage1: index = 0
+        case topRatedImage2: index = 1
+        case topRatedImage3: index = 2
+        default: return
+        }
+        
+        guard index < topRatedProducts.count else { return }
+        
+        let selectedProduct = topRatedProducts[index]
+        if let productDetailsVC = ProductDetailsViewController.instantiate(with: selectedProduct.id) {
+            navigationController?.pushViewController(productDetailsVC, animated: true)
+        }
     }
 }

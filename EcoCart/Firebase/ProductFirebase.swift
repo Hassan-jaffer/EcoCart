@@ -32,17 +32,12 @@ class ProductFirebase {
             numberOfRatings: data["numberOfRatings"] as? Int ?? 0,
             totalRatings: data["totalRatings"] as? Int ?? 0,
             stockQuantity: data["stockQuantity"] as? Int ?? 0,
-            metrics: parseMetrics(from: data)
-        )
-    }
-    
-    private func parseMetrics(from data: [String: Any]) -> [Product.Metric] {
-        guard let metricsData = data["metrics"] as? [[String: Any]] else { return [] }
-        return metricsData.map { metricData in
-            Product.Metric(
-                name: metricData["name"] as? String ?? "",
-                value: metricData["value"] as? String ?? ""
+            metrics: Product.Metrics(
+                bio: data["Bio"] as? Int ?? 0,
+                co2: data["CO2"] as? Int ?? 0,
+                plastic: data["Plastic"] as? Int ?? 0,
+                tree: data["Tree"] as? Int ?? 0
             )
-        }
+        )
     }
 }
