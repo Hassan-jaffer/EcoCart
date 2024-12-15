@@ -231,6 +231,9 @@ If you have any questions or concerns about this privacy policy, please contact 
                             <outlet property="delegate" destination="NMX-Fx-YuN" id="zsC-xC-Tig"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="darkModeSwitch" destination="SW9-jE-X52" id="ve8-ND-yqF"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OUJ-C0-fY6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
