@@ -1,7 +1,8 @@
 import UIKit
 import FirebaseFirestore
 
-class HomePageTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class HomePageTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, FilterDelegate {
+
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -119,18 +120,22 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
     
     
     @IBAction func filterButton(_ sender: UIButton) {
-        // Step 1: Load the destination storyboard
         let targetStoryboard = UIStoryboard(name: "Filter", bundle: nil)
-        
-        // Step 2: Instantiate the view controller using its Storyboard ID
         if let destinationVC = targetStoryboard.instantiateViewController(withIdentifier: "FilterViewController") as? FilterViewController {
-            
-            // Step 3: Present the view controller (or push if in a navigation controller)
-            self.navigationController?.pushViewController(destinationVC, animated: true)
-            
-            // Alternatively, present modally
-            // self.present(destinationVC, animated: true, completion: nil)
+            destinationVC.delegate = self
+            navigationController?.pushViewController(destinationVC, animated: true)
         }
+    }
+
+    
+    func didApplyAZFilter(az: Bool) {
+        filteredProducts = products
+
+        if az {
+            filteredProducts.sort { $0.name.lowercased() < $1.name.lowercased() }
+        }
+
+        tableView.reloadData()
     }
 
 }

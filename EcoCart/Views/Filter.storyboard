@@ -32,6 +32,9 @@
                                                 <integer key="value" value="10"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="applyFiltersBtnTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="HuH-Iy-HGR"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PSH-QL-wWV">
                                         <rect key="frame" x="26" y="425" width="275" height="49"/>

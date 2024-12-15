@@ -4,11 +4,18 @@
 //
 //  Created by Hasan Shehab on 10/12/2024.
 //
+protocol FilterDelegate: AnyObject {
+    func didApplyAZFilter(az: Bool)
+}
+
 
 import UIKit
 
 class FilterViewController: UIViewController {
-    
+    weak var delegate: FilterDelegate?
+
+    var isAZFiltered = false
+
     @IBOutlet weak var priceBtn: UIButton!
     @IBOutlet weak var availabilityBtn: UIButton!
     @IBOutlet weak var enviroBtn: UIButton!
@@ -57,6 +64,10 @@ class FilterViewController: UIViewController {
         //you can add more functionality later
     }
     
+    @IBAction func applyFiltersBtnTapped(_ sender: Any) {
+        delegate?.didApplyAZFilter(az: isAZFiltered)
+            navigationController?.popViewController(animated: true)
+    }
     
     
     @IBAction func availabilityBtnTapped(_ sender: Any) {
@@ -66,6 +77,7 @@ class FilterViewController: UIViewController {
         changeColor(enviroBtn)
     }
     @IBAction func azBtnTapped(_ sender: Any) {
+        isAZFiltered.toggle()
         changeColor(azBtn)
     }
     ///reset all color buttons to white (functionality on another method for optimization
@@ -76,5 +88,8 @@ class FilterViewController: UIViewController {
         resetBtn(azBtn)
         resetBtn(categoryBtn)
     }
+    
+    
+    
     
 }
