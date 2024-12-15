@@ -17,6 +17,7 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
         setupUI()
         setupActivityIndicator()
         fetchProducts()
+
     }
     
     // MARK: - Setup UI
