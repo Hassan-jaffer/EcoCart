@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IBw-OF-ImM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IBw-OF-ImM">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,34 +15,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="Duu-bH-4IK">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="55"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="IBw-OF-ImM" id="k6x-ml-hi1"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="StaticCell1" rowHeight="55" id="b8q-QL-S0q">
-                                <rect key="frame" x="20" y="55.333332061767578" width="353" height="55"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="b8q-QL-S0q" id="3Ig-9E-Imm">
-                                    <rect key="frame" x="0.0" y="0.0" width="353" height="55"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Duu-bH-4IK">
-                                            <rect key="frame" x="0.0" y="0.0" width="353" height="55"/>
-                                            <textInputTraits key="textInputTraits"/>
-                                            <connections>
-                                                <outlet property="delegate" destination="IBw-OF-ImM" id="k6x-ml-hi1"/>
-                                            </connections>
-                                        </searchBar>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="Duu-bH-4IK" firstAttribute="top" secondItem="3Ig-9E-Imm" secondAttribute="top" id="3gU-oh-6Kz"/>
-                                        <constraint firstItem="Duu-bH-4IK" firstAttribute="leading" secondItem="3Ig-9E-Imm" secondAttribute="leading" id="MXt-eR-TR4"/>
-                                        <constraint firstAttribute="bottom" secondItem="Duu-bH-4IK" secondAttribute="bottom" id="SIZ-Xm-3Un"/>
-                                        <constraint firstItem="Duu-bH-4IK" firstAttribute="top" secondItem="3Ig-9E-Imm" secondAttribute="top" id="qei-jq-uto"/>
-                                        <constraint firstAttribute="trailing" secondItem="Duu-bH-4IK" secondAttribute="trailing" id="rpp-sb-BME"/>
-                                        <constraint firstAttribute="trailing" secondItem="Duu-bH-4IK" secondAttribute="trailing" id="shS-RG-FiH"/>
-                                        <constraint firstAttribute="bottom" secondItem="Duu-bH-4IK" secondAttribute="bottom" id="xeC-7M-b1n"/>
-                                        <constraint firstItem="Duu-bH-4IK" firstAttribute="leading" secondItem="3Ig-9E-Imm" secondAttribute="leading" id="zUi-Oh-aLh"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="ProductCell" rowHeight="96" id="dEv-dK-Qh9" customClass="ProductCell" customModule="EcoCart" customModuleProvider="target">
                                 <rect key="frame" x="20" y="110.33333206176758" width="353" height="96"/>
                                 <autoresizingMask key="autoresizingMask"/>
@@ -76,7 +57,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Patient Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wym-Cr-Sj9">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wym-Cr-Sj9">
                                                             <rect key="frame" x="0.0" y="31" width="241" height="18"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="18" id="b8r-Me-4je"/>
@@ -85,7 +66,7 @@
                                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Booking date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AVz-i7-84g">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AVz-i7-84g">
                                                             <rect key="frame" x="0.0" y="58" width="241" height="18"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="18" id="2sS-5P-MmQ"/>
@@ -99,7 +80,7 @@
                                             </subviews>
                                         </stackView>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.1752340862" green="0.43704334859999999" blue="1" alpha="0.080000000000000002" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="backgroundColor" red="0.22850556840364356" green="1" blue="0.40683736606834492" alpha="0.080000000000000002" colorSpace="custom" customColorSpace="displayP3"/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="3tM-98-0Z2" secondAttribute="bottom" constant="10" id="SUT-GT-6he"/>
                                         <constraint firstItem="3tM-98-0Z2" firstAttribute="leading" secondItem="Qda-dj-dUO" secondAttribute="leading" constant="10" id="hXZ-u2-vei"/>
@@ -125,6 +106,7 @@
                         <nil key="title"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchBar" destination="Duu-bH-4IK" id="Cjq-bA-6Xp"/>
                         <outlet property="tableView" destination="Ae5-Nl-0oD" id="MdO-l7-5aa"/>
                     </connections>
                 </tableViewController>

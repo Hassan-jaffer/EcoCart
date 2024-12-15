@@ -2,25 +2,43 @@ import UIKit
 import FirebaseFirestore
 
 class HomePageTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
-    
+
     @IBOutlet weak var tableView: UITableView!
-   
-    var products: [Product] = [] // All products fetched from Firestore
-    var filteredProducts: [Product] = [] // Products matching search/filter criteria
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    var products: [Product] = []          // All products fetched from Firestore
+    var filteredProducts: [Product] = []  // Filtered products for search
+    
+    var activityIndicator: UIActivityIndicatorView! // Loading spinner
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //setupTableView()
+        setupUI()
+        setupActivityIndicator()
         fetchProducts()
+
     }
     
-
+    // MARK: - Setup UI
+    private func setupUI() {
+        searchBar.delegate = self
+        tableView.dataSource = self
+        tableView.delegate = self
+    }
     
-   
+    // MARK: - Setup Activity Indicator
+    private func setupActivityIndicator() {
+        activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.center = view.center
+        activityIndicator.hidesWhenStopped = true
+        view.addSubview(activityIndicator)
+    }
     
     // MARK: - Fetch Products from Firestore
     private func fetchProducts() {
+        activityIndicator.startAnimating() // Start the spinner
+        
         Task {
             do {
                 let db = Firestore.firestore()
@@ -47,51 +65,52 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
                     )
                 }
                 
-                self.filteredProducts = self.products // Initially, show all products
+                self.filteredProducts = self.products
                 DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating() // Stop spinner
                     self.tableView.reloadData()
                 }
             } catch {
                 print("❌ Error fetching products: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating() // Stop spinner on error
+                }
             }
         }
     }
     
-    
-
-    
-    // MARK: - Table view data source
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return products.count
-    }
-
+    // MARK: - UITableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return products.count
-        } else {
-            return 0
-        }
+        return filteredProducts.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //Step 1: Dequeue cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProductCell", for: indexPath) as! ProductCell
-
-        //Step 2: Fetch model object to display
-        let product = products[indexPath.row]
-
-        //Step 3: Configure cell
+        let product = filteredProducts[indexPath.row]
         cell.update(with: product)
-        cell.showsReorderControl = true
-
-        //Step 4: Return cell
         return cell
     }
-
     
-    // MARK: - Load Images
+    // MARK: - UITableViewDelegate
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let selectedProduct = filteredProducts[indexPath.row]
+        if let productDetailsVC = ProductDetailsViewController.instantiate(with: selectedProduct.id) {
+            navigationController?.pushViewController(productDetailsVC, animated: true)
+        }
+    }
     
-    
-
+    // MARK: - UISearchBarDelegate
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            filteredProducts = products
+        } else {
+            filteredProducts = products.filter { product in
+                product.name.lowercased().contains(searchText.lowercased()) ||
+                product.description.lowercased().contains(searchText.lowercased())
+            }
+        }
+        tableView.reloadData()
+    }
 }
