@@ -6,6 +6,8 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
+    @IBOutlet weak var filterButton: UIButton!
+    
     var products: [Product] = []          // All products fetched from Firestore
     var filteredProducts: [Product] = []  // Filtered products for search
     
@@ -113,4 +115,22 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
         }
         tableView.reloadData()
     }
+    
+    
+    
+    @IBAction func filterButton(_ sender: UIButton) {
+        // Step 1: Load the destination storyboard
+        let targetStoryboard = UIStoryboard(name: "Filter", bundle: nil)
+        
+        // Step 2: Instantiate the view controller using its Storyboard ID
+        if let destinationVC = targetStoryboard.instantiateViewController(withIdentifier: "FilterViewController") as? FilterViewController {
+            
+            // Step 3: Present the view controller (or push if in a navigation controller)
+            self.navigationController?.pushViewController(destinationVC, animated: true)
+            
+            // Alternatively, present modally
+            // self.present(destinationVC, animated: true, completion: nil)
+        }
+    }
+
 }
