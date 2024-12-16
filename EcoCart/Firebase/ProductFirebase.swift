@@ -32,6 +32,7 @@ class ProductFirebase {
             numberOfRatings: data["numberOfRatings"] as? Int ?? 0,
             totalRatings: data["totalRatings"] as? Int ?? 0,
             stockQuantity: data["stockQuantity"] as? Int ?? 0,
+            category: data["Category"] as? String ?? "",
             metrics: Product.Metrics(
                 bio: data["Bio"] as? Int ?? 0,
                 co2: data["CO2"] as? Int ?? 0,

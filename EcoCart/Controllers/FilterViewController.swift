@@ -6,9 +6,10 @@
 //
 protocol FilterDelegate: AnyObject {
     func didApplyAZFilter(az: Bool)
+    func didApplyFilters(priceOrder: String?, category: String?)
     func didResetFilters()
-
 }
+
 
 
 import UIKit
@@ -17,6 +18,10 @@ class FilterViewController: UIViewController {
     weak var delegate: FilterDelegate?
 
     var isAZFiltered = false
+    
+    var selectedPriceOrder: String? = nil
+    var selectedCategory: String? = nil
+
 
     @IBOutlet weak var PricePopupBtn: UIButton!
     @IBOutlet weak var priceBtn: UIButton!
@@ -86,10 +91,11 @@ class FilterViewController: UIViewController {
     }
     
     @IBAction func applyFiltersBtnTapped(_ sender: Any) {
-        delegate?.didApplyAZFilter(az: isAZFiltered)
-            navigationController?.popViewController(animated: true)
+        delegate?.didApplyFilters(priceOrder: selectedPriceOrder, category: selectedCategory)
+        navigationController?.popViewController(animated: true)
     }
-    
+
+
     
     @IBAction func availabilityBtnTapped(_ sender: Any) {
         changeColor(availabilityBtn)
@@ -120,37 +126,40 @@ class FilterViewController: UIViewController {
 
     
     
-    func createMenu(){
+    func createMenu() {
+        // Price Options
         let priceHL = UIAction(title: "High To Low", handler: { _ in
-            
+            self.selectedPriceOrder = "High To Low"
+            print("Price: High to Low")
         })
         let priceLH = UIAction(title: "Low To High", handler: { _ in
+            self.selectedPriceOrder = "Low To High"
+            print("Price: Low to High")
         })
-        
-        
-        
-        let priceMenu = UIMenu(title: "", children: [priceHL, priceLH])
+
+        let priceMenu = UIMenu(title: "Sort by Price", children: [priceHL, priceLH])
         PricePopupBtn.menu = priceMenu
         PricePopupBtn.showsMenuAsPrimaryAction = true
-        
-        
-        
-        
-        
-        let CatAcc = UIAction(title: "Accessories", handler: { _ in
-            
+
+        // Category Options
+        let catAcc = UIAction(title: "Accessories", handler: { _ in
+            self.selectedCategory = "Accessories"
+            print("Category: Accessories")
         })
-        let CatClot = UIAction(title: "Clothes", handler: { _ in
+        let catClothes = UIAction(title: "Clothes", handler: { _ in
+            self.selectedCategory = "Clothes"
+            print("Category: Clothes")
         })
-        let CatElec = UIAction(title: "Electronics", handler: { _ in
+        let catElec = UIAction(title: "Electronics", handler: { _ in
+            self.selectedCategory = "Electronics"
+            print("Category: Electronics")
         })
-        
-        
-        let categoryMenu = UIMenu(title: "", children: [CatClot, CatAcc, CatElec])
+
+        let categoryMenu = UIMenu(title: "Select Category", children: [catAcc, catClothes, catElec])
         CategoryPopupBtn.menu = categoryMenu
         CategoryPopupBtn.showsMenuAsPrimaryAction = true
-        
     }
+
     
     
     
