@@ -42,29 +42,32 @@ class FilterViewController: UIViewController {
     }
 
     func updateButtonStates() {
-        // Update A-Z button color
-        if isAZFiltered {
-            azBtn.backgroundColor = .systemGreen // Green when applied
-        } else {
-            azBtn.backgroundColor = .white // Default color
-        }
+        UIView.animate(withDuration: 0.5) { // Add smooth animation for color updates
+            // Update A-Z button color
+            if self.isAZFiltered {
+                self.azBtn.backgroundColor = .coolLightGreen
+            } else {
+                self.azBtn.backgroundColor = .white
+            }
 
-        // Update Price button
-        if let priceOrder = selectedPriceOrder {
-            PricePopupBtn.setTitle(priceOrder, for: .normal)
-            priceBtn.backgroundColor = .systemGreen // Change the whole button to green
-        } else {
-            priceBtn.backgroundColor = .white // Default color
-        }
+            // Update Price button
+            if let priceOrder = self.selectedPriceOrder {
+                self.PricePopupBtn.setTitle(priceOrder, for: .normal)
+                self.priceBtn.backgroundColor = .coolLightGreen
+            } else {
+                self.priceBtn.backgroundColor = .white
+            }
 
-        // Update Category button
-        if let category = selectedCategory {
-            CategoryPopupBtn.setTitle(category, for: .normal)
-            categoryBtn.backgroundColor = .systemGreen // Change the whole button to green
-        } else {
-            categoryBtn.backgroundColor = .white // Default color
+            // Update Category button
+            if let category = self.selectedCategory {
+                self.CategoryPopupBtn.setTitle(category, for: .normal)
+                self.categoryBtn.backgroundColor = .coolLightGreen
+            } else {
+                self.categoryBtn.backgroundColor = .white
+            }
         }
     }
+
 
     func roundButtons() {
         roundButton(priceBtn)
@@ -81,33 +84,27 @@ class FilterViewController: UIViewController {
     }
 
     func changeColor(_ button: UIButton) {
-        if button.backgroundColor == .white {
-            button.backgroundColor = .systemGreen
-        }
-        else {
-            button.backgroundColor = .white
+        UIView.animate(withDuration: 0.5) { // Animate over 0.3 seconds
+            if button.backgroundColor == .white {
+                button.backgroundColor = .coolLightGreen
+            } else {
+                button.backgroundColor = .white
+            }
         }
     }
+
 
     func resetBtn(_ button: UIButton) {
         button.backgroundColor = .white
     }
 
     @IBAction func applyFiltersBtnTapped(_ sender: Any) {
-        // Check if no filters are applied
-        if !isAZFiltered && selectedPriceOrder == nil && selectedCategory == nil {
-            // Show an alert message
-            let alert = UIAlertController(title: "No Filters Applied",
-                                          message: "Please select at least one filter before applying.",
-                                          preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
-        } else {
+          
             // Notify the delegate about the applied filters
             delegate?.didApplyAZFilter(az: isAZFiltered)
             delegate?.didApplyFilters(priceOrder: selectedPriceOrder, category: selectedCategory)
             navigationController?.popViewController(animated: true)
-        }
+        
     }
 
 
@@ -138,12 +135,11 @@ class FilterViewController: UIViewController {
         resetBtn(categoryBtn)
         
         // Reset Button Titles
-        PricePopupBtn.setTitle("Price", for: .normal) // Reset to default title
-        CategoryPopupBtn.setTitle("Category", for: .normal) // Reset to default title
+        PricePopupBtn.setTitle("Price Filter", for: .normal) // Reset to default title
+        CategoryPopupBtn.setTitle("Category Filter", for: .normal) // Reset to default title
         
         // Notify the delegate to reset filters and navigate back
         delegate?.didResetFilters()
-        navigationController?.popViewController(animated: true)
     }
 
 

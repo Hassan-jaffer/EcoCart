@@ -151,6 +151,10 @@
                 destinationVC.selectedPriceOrder = selectedPriceOrder
                 destinationVC.selectedCategory = selectedCategory
                 
+                // Smooth transition
+                       destinationVC.modalTransitionStyle = .crossDissolve  // Fade transition
+                       destinationVC.modalPresentationStyle = .fullScreen
+                
                 navigationController?.pushViewController(destinationVC, animated: true)
             }
         }
