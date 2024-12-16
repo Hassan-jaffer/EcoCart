@@ -67,6 +67,11 @@ class FilterViewController: UIViewController {
             }
         }
     }
+    
+    func areFiltersApplied() -> Bool {
+        return isAZFiltered || selectedPriceOrder != nil || selectedCategory != nil
+    }
+
 
 
     func roundButtons() {
@@ -119,8 +124,14 @@ class FilterViewController: UIViewController {
     }
 
     @IBAction func azBtnTapped(_ sender: Any) {
+        // Toggle A-Z filter
         isAZFiltered.toggle()
-        changeColor(azBtn)
+        if isAZFiltered {
+            // Deselect price filter if A-Z is selected
+            selectedPriceOrder = nil
+            PricePopupBtn.setTitle("Sort by Price", for: .normal)
+        }
+        updateButtonStates()
     }
 
     @IBAction func resetFilterBtnTapped(_ sender: Any) {
@@ -149,10 +160,12 @@ class FilterViewController: UIViewController {
         // Price Options
         let priceHL = UIAction(title: "High To Low", handler: { _ in
             self.selectedPriceOrder = "High To Low"
+            self.isAZFiltered = false // Deselect A-Z filter
             self.updateButtonStates() // Update button state after selection
         })
         let priceLH = UIAction(title: "Low To High", handler: { _ in
             self.selectedPriceOrder = "Low To High"
+            self.isAZFiltered = false // Deselect A-Z filter
             self.updateButtonStates() // Update button state after selection
         })
 

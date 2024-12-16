@@ -142,6 +142,15 @@
         }
 
         
+        func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+            cell.alpha = 0
+            cell.transform = CGAffineTransform(translationX: 0, y: 50) // Start position below
+            
+            UIView.animate(withDuration: 0.5, delay: 0.05 * Double(indexPath.row), options: [.curveEaseInOut], animations: {
+                cell.alpha = 1.0
+                cell.transform = .identity // Return to default position
+            }, completion: nil)
+        }
 
         
         func applyFilters() {
