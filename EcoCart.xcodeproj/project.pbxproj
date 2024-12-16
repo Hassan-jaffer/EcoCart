@@ -31,6 +31,7 @@
 		1086DBA42D0114B20087646B /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1086DBA32D0114B20087646B /* ProductDetailsViewController.swift */; };
 		5C3DD4C72D0E519800BD06C5 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3DD4C62D0E519800BD06C5 /* ThemeManager.swift */; };
 		5C3DD4C92D0E524300BD06C5 /* ProfilePageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3DD4C82D0E524300BD06C5 /* ProfilePageTableViewController.swift */; };
+		5CA077142D0FEB4A00B44555 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA077132D0FEB4A00B44555 /* Color.swift */; };
 		CF84B6A32CFC4B1E0006F605 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF84B6A22CFC4B1E0006F605 /* Login.storyboard */; };
 		CF84B6A52CFC58280006F605 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF84B6A42CFC58280006F605 /* Profile.storyboard */; };
 		F23585FD2D058D1E00C00219 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F23585FC2D058D1E00C00219 /* FirebaseAuth */; };
@@ -86,6 +87,7 @@
 		1086DBA32D0114B20087646B /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
 		5C3DD4C62D0E519800BD06C5 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		5C3DD4C82D0E524300BD06C5 /* ProfilePageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageTableViewController.swift; sourceTree = "<group>"; };
+		5CA077132D0FEB4A00B44555 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CF84B6A22CFC4B1E0006F605 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		CF84B6A42CFC58280006F605 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		F2574B202D0058F900FF2011 /* Filter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Filter.storyboard; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 		F2DCE3522CF728FF002D4AB1 /* EcoCart */ = {
 			isa = PBXGroup;
 			children = (
+				5CA077132D0FEB4A00B44555 /* Color.swift */,
 				0E7C9AA22CF72FCD0049CD22 /* AppDelegate.swift */,
 				0E7C9AA82CF72FCD0049CD22 /* SceneDelegate.swift */,
 				0E7C9AAF2CF72FCD0049CD22 /* Views */,
@@ -389,6 +392,7 @@
 				0E074EBC2D0787D70068814A /* AddProductViewController.swift in Sources */,
 				0E2760AA2D08A4F8004569A9 /* FilterViewController.swift in Sources */,
 				5C3DD4C92D0E524300BD06C5 /* ProfilePageTableViewController.swift in Sources */,
+				5CA077142D0FEB4A00B44555 /* Color.swift in Sources */,
 				5C3DD4C72D0E519800BD06C5 /* ThemeManager.swift in Sources */,
 				0E7C9AB82CF72FCD0049CD22 /* AppDelegate.swift in Sources */,
 				0E60DB792D0CCAEA00F16562 /* HomePageTableViewController.swift in Sources */,

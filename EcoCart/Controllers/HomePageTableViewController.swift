@@ -8,6 +8,8 @@
         @IBOutlet weak var searchBar: UISearchBar!
         var isAZFiltered: Bool = false // Tracks whether A-Z filter is applied
         @IBOutlet weak var filterButton: UIButton!
+        var selectedPriceOrder: String? = nil
+        var selectedCategory: String? = nil
         
         var products: [Product] = []          // All products fetched from Firestore
         var filteredProducts: [Product] = []  // Filtered products for search
@@ -143,17 +145,33 @@
             let targetStoryboard = UIStoryboard(name: "Filter", bundle: nil)
             if let destinationVC = targetStoryboard.instantiateViewController(withIdentifier: "FilterViewController") as? FilterViewController {
                 destinationVC.delegate = self
-                destinationVC.isAZFiltered = isAZFiltered // Pass the current state
+
+                // Pass the current states to the filter screen
+                destinationVC.isAZFiltered = isAZFiltered
+                destinationVC.selectedPriceOrder = selectedPriceOrder
+                destinationVC.selectedCategory = selectedCategory
+                
+                // Smooth transition
+                       destinationVC.modalTransitionStyle = .crossDissolve  // Fade transition
+                       destinationVC.modalPresentationStyle = .fullScreen
+                
                 navigationController?.pushViewController(destinationVC, animated: true)
             }
         }
 
+
         func didResetFilters() {
             isAZFiltered = false
-            searchBar.text = "" // Clear search bar text
-            filteredProducts = products // Reset to the full product list
+            selectedPriceOrder = nil
+            selectedCategory = nil
+
+            // Reset the filtered products to the full list
+            filteredProducts = products
+
+            // Reload the table view to reflect the reset
             tableView.reloadData()
         }
+
 
 
 
@@ -164,6 +182,10 @@
         }
 
         func didApplyFilters(priceOrder: String?, category: String?) {
+            // Save the filter selections
+            selectedPriceOrder = priceOrder
+            selectedCategory = category
+
             // Start with the original products list
             filteredProducts = products
 
