@@ -94,10 +94,22 @@ class FilterViewController: UIViewController {
     }
 
     @IBAction func applyFiltersBtnTapped(_ sender: Any) {
-        delegate?.didApplyAZFilter(az: isAZFiltered) // Pass A-Z filter state
-        delegate?.didApplyFilters(priceOrder: selectedPriceOrder, category: selectedCategory)
-        navigationController?.popViewController(animated: true)
+        // Check if no filters are applied
+        if !isAZFiltered && selectedPriceOrder == nil && selectedCategory == nil {
+            // Show an alert message
+            let alert = UIAlertController(title: "No Filters Applied",
+                                          message: "Please select at least one filter before applying.",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+        } else {
+            // Notify the delegate about the applied filters
+            delegate?.didApplyAZFilter(az: isAZFiltered)
+            delegate?.didApplyFilters(priceOrder: selectedPriceOrder, category: selectedCategory)
+            navigationController?.popViewController(animated: true)
+        }
     }
+
 
     @IBAction func availabilityBtnTapped(_ sender: Any) {
         changeColor(availabilityBtn)
