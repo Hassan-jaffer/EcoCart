@@ -51,11 +51,12 @@ class FilterViewController: UIViewController {
     
     func updateButtonStates() {
         if isAZFiltered {
-            azBtn.backgroundColor = .systemGreen
+            azBtn.backgroundColor = .systemGreen // Green when applied
         } else {
-            azBtn.backgroundColor = .white
+            azBtn.backgroundColor = .white // Default color
         }
     }
+
     ///round all buttons and add borders (functionality on another method for optimization)
     func roundButtons() {
         roundButton(priceBtn)
@@ -91,9 +92,12 @@ class FilterViewController: UIViewController {
     }
     
     @IBAction func applyFiltersBtnTapped(_ sender: Any) {
+        // Apply the selected filters (including A-Z)
+        delegate?.didApplyAZFilter(az: isAZFiltered) // Pass A-Z filter state
         delegate?.didApplyFilters(priceOrder: selectedPriceOrder, category: selectedCategory)
         navigationController?.popViewController(animated: true)
     }
+
 
 
     
