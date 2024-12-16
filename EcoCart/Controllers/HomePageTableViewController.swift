@@ -118,15 +118,30 @@
         // MARK: - UISearchBarDelegate
         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
             if searchText.isEmpty {
-                didApplyFilters(priceOrder: nil, category: nil)
+                // If search bar is empty, keep current filters
+                didApplyFilters(priceOrder: selectedPriceOrder, category: selectedCategory)
             } else {
-                filteredProducts = products.filter { product in
+                // Start with filtered products based on filters
+                let filteredList = products.filter { product in
+                    // Apply filters first
+                    if let category = selectedCategory, product.category?.lowercased() != category.lowercased() {
+                        return false
+                    }
+                    return true
+                }
+                
+                // Then apply search text filtering
+                filteredProducts = filteredList.filter { product in
                     product.name.lowercased().contains(searchText.lowercased()) ||
                     product.description.lowercased().contains(searchText.lowercased())
                 }
             }
-            tableView.reloadData()
+            
+            // Reload only the visible section of the table view
+            tableView.reloadSections(IndexSet(integer: 0), with: .none)
         }
+
+        
 
         
         func applyFilters() {

@@ -95,7 +95,9 @@ class FilterViewController: UIViewController {
 
 
     func resetBtn(_ button: UIButton) {
-        button.backgroundColor = .white
+        UIView.animate(withDuration: 0.5) {
+            button.backgroundColor = .white
+        }
     }
 
     @IBAction func applyFiltersBtnTapped(_ sender: Any) {
