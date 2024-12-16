@@ -18,12 +18,15 @@ class FilterViewController: UIViewController {
 
     var isAZFiltered = false
 
-    @IBOutlet weak var popupBtn: UIButton!
+    @IBOutlet weak var PricePopupBtn: UIButton!
     @IBOutlet weak var priceBtn: UIButton!
     @IBOutlet weak var availabilityBtn: UIButton!
     @IBOutlet weak var enviroBtn: UIButton!
     @IBOutlet weak var azBtn: UIButton!
     @IBOutlet weak var categoryBtn: UIButton!
+    
+    
+    @IBOutlet weak var CategoryPopupBtn: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -118,23 +121,35 @@ class FilterViewController: UIViewController {
     
     
     func createMenu(){
-        let command1 = UIAction(title: "All-Time", handler: { _ in
+        let priceHL = UIAction(title: "High To Low", handler: { _ in
             
         })
-        let command2 = UIAction(title: "Today", handler: { _ in
+        let priceLH = UIAction(title: "Low To High", handler: { _ in
         })
         
-        let command3 = UIAction(title: "Last Week", handler: { _ in
-        } )
         
-        let command4 = UIAction(title: "Last Month", handler: { _ in
+        
+        let priceMenu = UIMenu(title: "", children: [priceHL, priceLH])
+        PricePopupBtn.menu = priceMenu
+        PricePopupBtn.showsMenuAsPrimaryAction = true
+        
+        
+        
+        
+        
+        let CatAcc = UIAction(title: "Accessories", handler: { _ in
+            
         })
-        let command5 = UIAction(title: "Last Year", handler: { _ in
+        let CatClot = UIAction(title: "Clothes", handler: { _ in
+        })
+        let CatElec = UIAction(title: "Electronics", handler: { _ in
         })
         
-        let menu = UIMenu(title: "", children: [command1, command2, command3, command4, command5])
-        popupBtn.menu = menu
-        popupBtn.showsMenuAsPrimaryAction = true
+        
+        let categoryMenu = UIMenu(title: "", children: [CatClot, CatAcc, CatElec])
+        CategoryPopupBtn.menu = categoryMenu
+        CategoryPopupBtn.showsMenuAsPrimaryAction = true
+        
     }
     
     
