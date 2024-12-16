@@ -118,17 +118,22 @@ class FilterViewController: UIViewController {
         selectedPriceOrder = nil
         selectedCategory = nil
         
-        // Update UI
+        // Reset Button Colors
         resetBtn(priceBtn)
         resetBtn(availabilityBtn)
         resetBtn(enviroBtn)
         resetBtn(azBtn)
         resetBtn(categoryBtn)
         
+        // Reset Button Titles
+        PricePopupBtn.setTitle("Price", for: .normal) // Reset to default title
+        CategoryPopupBtn.setTitle("Category", for: .normal) // Reset to default title
+        
         // Notify the delegate to reset filters and navigate back
         delegate?.didResetFilters()
         navigationController?.popViewController(animated: true)
     }
+
 
     func createMenu() {
         // Price Options
