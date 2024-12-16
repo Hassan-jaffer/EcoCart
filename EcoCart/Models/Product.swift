@@ -11,6 +11,7 @@ struct Product {
     let numberOfRatings: Int
     let totalRatings: Int
     let stockQuantity: Int
+    let category: String? // Added category field
     let metrics: Metrics
     
     struct Metrics {
@@ -25,14 +26,19 @@ struct Product {
         let docRef = db.collection("product").document(id)
         let document = try await docRef.getDocument()
         
-        guard let data = document.data() else { return nil }
-        
-        // Get the metrics map from Firestore
-        let metricsData = data["metrics"] as? [String: Any] ?? [:]
-        
-        print(" Raw Firestore metrics data:", metricsData)
-        print(" CO2 value from metrics:", metricsData["CO2"] ?? "nil")
+        guard let data = document.data() else {
+            print("Document data is nil.")
+            return nil
+        }
 
+        // Print all keys in the data to check for Category
+        print("Document data: \(data)") // Debugging: print all fields in the document
+        
+        // Check if the category exists
+        let category = data["Category"] as? String
+        print("Fetched product category: \(category ?? "No category")") // Debugging category
+        
+        let metricsData = data["metrics"] as? [String: Any] ?? [:]
         return Product(
             id: document.documentID,
             name: data["name"] as? String ?? "",
@@ -43,6 +49,7 @@ struct Product {
             numberOfRatings: data["numberOfRatings"] as? Int ?? 0,
             totalRatings: data["totalRatings"] as? Int ?? 0,
             stockQuantity: data["stockQuantity"] as? Int ?? 0,
+            category: category, // Add the category here
             metrics: Metrics(
                 bio: (metricsData["Bio"] as? Bool ?? false) ? 1 : 0,
                 co2: metricsData["CO2"] as? Int ?? 0,
@@ -51,6 +58,7 @@ struct Product {
             )
         )
     }
+
     
     static func fetchTopRatedEcoProducts(limit: Int = 3) async throws -> [Product] {
         let db = Firestore.firestore()
@@ -73,6 +81,7 @@ struct Product {
                 numberOfRatings: data["numberOfRatings"] as? Int ?? 0,
                 totalRatings: data["totalRatings"] as? Int ?? 0,
                 stockQuantity: data["stockQuantity"] as? Int ?? 0,
+                category: data["Category"] as? String, 
                 metrics: Metrics(
                     bio: data["Bio"] as? Int ?? 0,
                     co2: data["CO2"] as? Int ?? 0,
