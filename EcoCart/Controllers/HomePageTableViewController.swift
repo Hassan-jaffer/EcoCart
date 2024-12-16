@@ -6,7 +6,7 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
-    
+    var isAZFiltered: Bool = false // Tracks whether A-Z filter is applied
     @IBOutlet weak var filterButton: UIButton!
     
     var products: [Product] = []          // All products fetched from Firestore
@@ -107,9 +107,10 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
     // MARK: - UISearchBarDelegate
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
-            filteredProducts = products
+            // Reset to current filtered state
+            applyFilters()
         } else {
-            filteredProducts = products.filter { product in
+            filteredProducts = filteredProducts.filter { product in
                 product.name.lowercased().contains(searchText.lowercased()) ||
                 product.description.lowercased().contains(searchText.lowercased())
             }
@@ -117,25 +118,41 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
         tableView.reloadData()
     }
     
+    func applyFilters() {
+        filteredProducts = products
+
+        if isAZFiltered {
+            filteredProducts.sort { $0.name.lowercased() < $1.name.lowercased() }
+        }
+    }
+
+
+    
     
     
     @IBAction func filterButton(_ sender: UIButton) {
         let targetStoryboard = UIStoryboard(name: "Filter", bundle: nil)
         if let destinationVC = targetStoryboard.instantiateViewController(withIdentifier: "FilterViewController") as? FilterViewController {
             destinationVC.delegate = self
+            destinationVC.isAZFiltered = isAZFiltered // Pass the current state
             navigationController?.pushViewController(destinationVC, animated: true)
         }
     }
 
+    func didResetFilters() {
+        isAZFiltered = false // Clear A-Z filter state
+        searchBar.text = ""  // Clear search bar text
+        filteredProducts = products // Reset to the original product list
+        tableView.reloadData() // Reload the table view
+    }
+
+
     
     func didApplyAZFilter(az: Bool) {
-        filteredProducts = products
-
-        if az {
-            filteredProducts.sort { $0.name.lowercased() < $1.name.lowercased() }
-        }
-
+        isAZFiltered = az
+        applyFilters()
         tableView.reloadData()
     }
+
 
 }

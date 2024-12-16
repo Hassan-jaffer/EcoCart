@@ -150,6 +150,7 @@
                         <outlet property="azBtn" destination="CBK-if-nTX" id="AAb-Cd-Uxu"/>
                         <outlet property="categoryBtn" destination="Mx5-Nl-qlI" id="ZMc-6r-FSl"/>
                         <outlet property="enviroBtn" destination="Oi9-LA-Atu" id="WRC-un-WYj"/>
+                        <outlet property="popupBtn" destination="w6a-JP-Sv1" id="ym1-LU-Dw3"/>
                         <outlet property="priceBtn" destination="BHI-Kk-Wzf" id="MA9-RX-MJk"/>
                     </connections>
                 </viewController>
