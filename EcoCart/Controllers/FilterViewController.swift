@@ -18,10 +18,8 @@ class FilterViewController: UIViewController {
     weak var delegate: FilterDelegate?
 
     var isAZFiltered = false
-    
     var selectedPriceOrder: String? = nil
     var selectedCategory: String? = nil
-
 
     @IBOutlet weak var PricePopupBtn: UIButton!
     @IBOutlet weak var priceBtn: UIButton!
@@ -29,8 +27,6 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var enviroBtn: UIButton!
     @IBOutlet weak var azBtn: UIButton!
     @IBOutlet weak var categoryBtn: UIButton!
-    
-    
     @IBOutlet weak var CategoryPopupBtn: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,23 +37,35 @@ class FilterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         createMenu()
-        
-        //this is a method i created to make buttons round and add borders, if you know how to edit them in the inspector remove it. - Hasan Shehab
         roundButtons()
         updateButtonStates() // Update button states based on current filters
-
-        
     }
-    
+
     func updateButtonStates() {
+        // Update A-Z button color
         if isAZFiltered {
             azBtn.backgroundColor = .systemGreen // Green when applied
         } else {
             azBtn.backgroundColor = .white // Default color
         }
+
+        // Update Price button
+        if let priceOrder = selectedPriceOrder {
+            PricePopupBtn.setTitle(priceOrder, for: .normal)
+            priceBtn.backgroundColor = .systemGreen // Change the whole button to green
+        } else {
+            priceBtn.backgroundColor = .white // Default color
+        }
+
+        // Update Category button
+        if let category = selectedCategory {
+            CategoryPopupBtn.setTitle(category, for: .normal)
+            categoryBtn.backgroundColor = .systemGreen // Change the whole button to green
+        } else {
+            categoryBtn.backgroundColor = .white // Default color
+        }
     }
 
-    ///round all buttons and add borders (functionality on another method for optimization)
     func roundButtons() {
         roundButton(priceBtn)
         roundButton(availabilityBtn)
@@ -65,14 +73,13 @@ class FilterViewController: UIViewController {
         roundButton(azBtn)
         roundButton(categoryBtn)
     }
-    
-    ///add border and increase round value
+
     func roundButton(_ button: UIButton) {
         button.layer.cornerRadius = 10
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.black.cgColor
     }
-    ///change color button (white to green and vice versa)
+
     func changeColor(_ button: UIButton) {
         if button.backgroundColor == .white {
             button.backgroundColor = .systemGreen
@@ -80,41 +87,36 @@ class FilterViewController: UIViewController {
         else {
             button.backgroundColor = .white
         }
-        
     }
-    
-    
-    
-    ///reset button to default
+
     func resetBtn(_ button: UIButton) {
         button.backgroundColor = .white
-        //you can add more functionality later
     }
-    
+
     @IBAction func applyFiltersBtnTapped(_ sender: Any) {
-        // Apply the selected filters (including A-Z)
         delegate?.didApplyAZFilter(az: isAZFiltered) // Pass A-Z filter state
         delegate?.didApplyFilters(priceOrder: selectedPriceOrder, category: selectedCategory)
         navigationController?.popViewController(animated: true)
     }
 
-
-
-    
     @IBAction func availabilityBtnTapped(_ sender: Any) {
         changeColor(availabilityBtn)
     }
+    
     @IBAction func enviroBtnTapped(_ sender: Any) {
         changeColor(enviroBtn)
     }
+
     @IBAction func azBtnTapped(_ sender: Any) {
         isAZFiltered.toggle()
         changeColor(azBtn)
     }
-    ///reset all color buttons to white (functionality on another method for optimization
+
     @IBAction func resetFilterBtnTapped(_ sender: Any) {
         // Reset all filter states
         isAZFiltered = false
+        selectedPriceOrder = nil
+        selectedCategory = nil
         
         // Update UI
         resetBtn(priceBtn)
@@ -128,17 +130,15 @@ class FilterViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
 
-    
-    
     func createMenu() {
         // Price Options
         let priceHL = UIAction(title: "High To Low", handler: { _ in
             self.selectedPriceOrder = "High To Low"
-            print("Price: High to Low")
+            self.updateButtonStates() // Update button state after selection
         })
         let priceLH = UIAction(title: "Low To High", handler: { _ in
             self.selectedPriceOrder = "Low To High"
-            print("Price: Low to High")
+            self.updateButtonStates() // Update button state after selection
         })
 
         let priceMenu = UIMenu(title: "Sort by Price", children: [priceHL, priceLH])
@@ -148,24 +148,19 @@ class FilterViewController: UIViewController {
         // Category Options
         let catAcc = UIAction(title: "Accessories", handler: { _ in
             self.selectedCategory = "Accessories"
-            print("Category: Accessories")
+            self.updateButtonStates() // Update button state after selection
         })
         let catClothes = UIAction(title: "Clothes", handler: { _ in
             self.selectedCategory = "Clothes"
-            print("Category: Clothes")
+            self.updateButtonStates() // Update button state after selection
         })
         let catElec = UIAction(title: "Electronics", handler: { _ in
             self.selectedCategory = "Electronics"
-            print("Category: Electronics")
+            self.updateButtonStates() // Update button state after selection
         })
 
         let categoryMenu = UIMenu(title: "Select Category", children: [catAcc, catClothes, catElec])
         CategoryPopupBtn.menu = categoryMenu
         CategoryPopupBtn.showsMenuAsPrimaryAction = true
     }
-
-    
-    
-    
-    
 }
