@@ -28,9 +28,9 @@
                                     </connections>
                                 </searchBar>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="21d-Jm-utU">
-                                    <rect key="frame" x="344" y="22" width="41" height="33"/>
+                                    <rect key="frame" x="344" y="19" width="41" height="33"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="tintColor" red="0.67629290582532042" green="1" blue="0.59888736566456635" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="tintColor" systemColor="systemGray4Color"/>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="filled"/>
                                     <connections>
@@ -137,6 +137,9 @@
         <image name="test" width="1920" height="1080"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
