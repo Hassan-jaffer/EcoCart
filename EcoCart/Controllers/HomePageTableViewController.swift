@@ -183,6 +183,7 @@ import UIKit
                destinationVC.isAZFiltered = isAZFiltered
                destinationVC.selectedPriceOrder = selectedPriceOrder
                destinationVC.selectedCategory = selectedCategory
+               destinationVC.isAvailableFiltered = isAvailableFiltered
                
                // Smooth transition
                       destinationVC.modalTransitionStyle = .crossDissolve  // Fade transition
