@@ -6,7 +6,7 @@
 //
 protocol FilterDelegate: AnyObject {
     func didApplyAZFilter(az: Bool)
-    func didApplyFilters(priceOrder: String?, category: String?)
+    func didApplyFilters(priceOrder: String?, category: String?, availability: Bool?)
     func didResetFilters()
 }
 
@@ -17,6 +17,8 @@ import UIKit
 class FilterViewController: UIViewController {
     weak var delegate: FilterDelegate?
 
+    
+    var isAvailableFiltered: Bool? = nil
     var isAZFiltered = false
     var selectedPriceOrder: String? = nil
     var selectedCategory: String? = nil
@@ -65,8 +67,24 @@ class FilterViewController: UIViewController {
             } else {
                 self.categoryBtn.backgroundColor = .white
             }
+            
+            // **Update Availability button**
+            if self.isAvailableFiltered == true {
+                self.availabilityBtn.backgroundColor = .coolLightGreen
+            } else {
+                self.availabilityBtn.backgroundColor = .white
+            }
         }
     }
+
+
+
+
+
+    
+    
+    
+
     
     func areFiltersApplied() -> Bool {
         return isAZFiltered || selectedPriceOrder != nil || selectedCategory != nil
@@ -109,15 +127,22 @@ class FilterViewController: UIViewController {
           
             // Notify the delegate about the applied filters
             delegate?.didApplyAZFilter(az: isAZFiltered)
-            delegate?.didApplyFilters(priceOrder: selectedPriceOrder, category: selectedCategory)
+            delegate?.didApplyFilters(priceOrder: selectedPriceOrder, category: selectedCategory, availability: isAvailableFiltered)
             navigationController?.popViewController(animated: true)
         
     }
 
 
     @IBAction func availabilityBtnTapped(_ sender: Any) {
-        changeColor(availabilityBtn)
+        // Toggle availability state
+        isAvailableFiltered = (isAvailableFiltered == true) ? nil : true
+        
+        // Update button color based on state
+        UIView.animate(withDuration: 0.5) {
+            self.availabilityBtn.backgroundColor = self.isAvailableFiltered == true ? .coolLightGreen : .white
+        }
     }
+
     
     @IBAction func enviroBtnTapped(_ sender: Any) {
         changeColor(enviroBtn)
@@ -129,7 +154,7 @@ class FilterViewController: UIViewController {
         if isAZFiltered {
             // Deselect price filter if A-Z is selected
             selectedPriceOrder = nil
-            PricePopupBtn.setTitle("Sort by Price", for: .normal)
+            PricePopupBtn.setTitle("Price Filter", for: .normal)
         }
         updateButtonStates()
     }
@@ -139,6 +164,8 @@ class FilterViewController: UIViewController {
         isAZFiltered = false
         selectedPriceOrder = nil
         selectedCategory = nil
+        isAvailableFiltered = nil
+
         
         // Reset Button Colors
         resetBtn(priceBtn)
@@ -154,6 +181,8 @@ class FilterViewController: UIViewController {
         // Notify the delegate to reset filters and navigate back
         delegate?.didResetFilters()
     }
+    
+    
 
 
     func createMenu() {
