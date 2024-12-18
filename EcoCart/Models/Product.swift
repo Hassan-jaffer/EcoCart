@@ -31,6 +31,29 @@ struct Product {
             return nil
         }
 
+        // Get the metrics dictionary
+        guard let metricsData = data["metrics"] as? [String: Any] else {
+            print("No metrics data found")
+            return nil
+        }
+        
+        // Debug prints
+        print("=== DEBUG INFO ===")
+        print("Metrics data: \(metricsData)")
+        
+        // Convert metrics values
+        let bioValue = metricsData["Bio"] as? Int ?? 0
+        let c02Value = metricsData["C02"] as? Int ?? 0
+        let plasticValue = metricsData["Plastic"] as? Int ?? 0
+        let treeValue = metricsData["Tree"] as? Int ?? 0
+        
+        print("Converted metrics values:")
+        print("Bio: \(bioValue)")
+        print("C02: \(c02Value)")
+        print("Plastic: \(plasticValue)")
+        print("Tree: \(treeValue)")
+        print("=================")
+        
         // Print all keys in the data to check for Category
         print("Document data: \(data)") // Debugging: print all fields in the document
         
@@ -38,7 +61,9 @@ struct Product {
         let category = data["Category"] as? String
         print("Fetched product category: \(category ?? "No category")") // Debugging category
         
-        let metricsData = data["metrics"] as? [String: Any] ?? [:]
+        // Debug print for C02 value
+        print("C02 value from Firebase: \(data["C02"] ?? "nil")")
+        
         return Product(
             id: document.documentID,
             name: data["name"] as? String ?? "",
@@ -51,10 +76,10 @@ struct Product {
             stockQuantity: data["stockQuantity"] as? Int ?? 0,
             category: category, // Add the category here
             metrics: Metrics(
-                bio: (metricsData["Bio"] as? Bool ?? false) ? 1 : 0,
-                co2: metricsData["CO2"] as? Int ?? 0,
-                plastic: metricsData["Plastic"] as? Int ?? 0,
-                tree: metricsData["Tree"] as? Int ?? 0
+                bio: bioValue,
+                co2: c02Value,
+                plastic: plasticValue,
+                tree: treeValue
             )
         )
     }
@@ -83,8 +108,8 @@ struct Product {
                 stockQuantity: data["stockQuantity"] as? Int ?? 0,
                 category: data["Category"] as? String, 
                 metrics: Metrics(
-                    bio: data["Bio"] as? Int ?? 0,
-                    co2: data["CO2"] as? Int ?? 0,
+                    bio: (data["Bio"] as? Bool ?? false) ? 1 : 0,
+                    co2: data["C02"] as? Int ?? 0,  // Changed from CO2 to C02
                     plastic: data["Plastic"] as? Int ?? 0,
                     tree: data["Tree"] as? Int ?? 0
                 )
