@@ -119,7 +119,7 @@ class ProductDetailsViewController: UIViewController {
             let metricsText = """
             Environmental Impact:
             Bio-Based: \(product.metrics.bio == 1 ? "Yes" : "No")
-            CO2 Saved: \(product.metrics.co2) kg
+            CO₂ Saved: \(product.metrics.co2) kg
             Plastic Saved: \(product.metrics.plastic) kg
             Trees Saved: \(product.metrics.tree)
             """
