@@ -81,7 +81,7 @@ class ProductDetailsViewController: UIViewController {
             guard let self = self else { return }
             
             self.nameLabel.text = product.name
-            self.productPrice.text = String(format: "%.2f BHD", product.price)
+            self.productPrice.text = String(format: "%.2f BHD", product.price ?? 0)
             self.productDescription.text = product.description
             
             let starButtons = [self.ratingButton1, self.ratingButton2, self.ratingButton3, self.ratingButton4, self.ratingButton5]

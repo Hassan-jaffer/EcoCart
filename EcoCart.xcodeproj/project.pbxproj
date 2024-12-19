@@ -27,18 +27,19 @@
 		104856302D0765D800D60B8D /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105F69B22D049F97005454A7 /* ReviewCell.swift */; };
 		104856312D076A9400D60B8D /* ReviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 105F69B02D049D1E005454A7 /* ReviewCell.xib */; };
 		1086DBA42D0114B20087646B /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1086DBA32D0114B20087646B /* ProductDetailsViewController.swift */; };
-		AC542A5C2D132F0500AE99A0 /* ProfilePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC542A5B2D132F0500AE99A0 /* ProfilePage.storyboard */; };
-		AC542A5E2D132F3F00AE99A0 /* ProfilePageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC542A5D2D132F3F00AE99A0 /* ProfilePageTableViewController.swift */; };
-		AC542A602D132F6800AE99A0 /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC542A5F2D132F6800AE99A0 /* PrivacyViewController.swift */; };
-		AC542A622D132F8500AE99A0 /* ProfileUploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC542A612D132F8500AE99A0 /* ProfileUploadViewController.swift */; };
-		AC542A642D132FB800AE99A0 /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC542A632D132FB800AE99A0 /* AboutUsViewController.swift */; };
-		AC542A662D132FE500AE99A0 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC542A652D132FE500AE99A0 /* Login.storyboard */; };
-		AC542A682D13324200AE99A0 /* LogInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC542A672D13324200AE99A0 /* LogInTableViewController.swift */; };
-		AC542A6A2D13325F00AE99A0 /* ForgotPassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC542A692D13325F00AE99A0 /* ForgotPassViewController.swift */; };
-		AC542A6C2D13327700AE99A0 /* UserSIGNUPTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC542A6B2D13327700AE99A0 /* UserSIGNUPTableViewController.swift */; };
-		AC542A6E2D1333BA00AE99A0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC542A6D2D1333BA00AE99A0 /* User.swift */; };
-		AC542A702D1333C300AE99A0 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC542A6F2D1333C300AE99A0 /* Database.swift */; };
-		AC542A722D1333CA00AE99A0 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC542A712D1333CA00AE99A0 /* Profile.swift */; };
+		83D547122D137D29004DE1CE /* ProfilePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83D547112D137D29004DE1CE /* ProfilePage.storyboard */; };
+		83D547142D137D9C004DE1CE /* LogIn Page.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83D547132D137D9C004DE1CE /* LogIn Page.storyboard */; };
+		83D5471C2D137DF0004DE1CE /* UserSIGNUPTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D547172D137DF0004DE1CE /* UserSIGNUPTableViewController.swift */; };
+		83D5471D2D137DF0004DE1CE /* LogInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D547182D137DF0004DE1CE /* LogInTableViewController.swift */; };
+		83D5471E2D137DF0004DE1CE /* ForgotPassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D547152D137DF0004DE1CE /* ForgotPassViewController.swift */; };
+		83D5471F2D137DF0004DE1CE /* ProfilePageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D547192D137DF0004DE1CE /* ProfilePageTableViewController.swift */; };
+		83D547212D137DF0004DE1CE /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D5471A2D137DF0004DE1CE /* AboutUsViewController.swift */; };
+		83D547222D137DF0004DE1CE /* PrivacyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D5471B2D137DF0004DE1CE /* PrivacyViewController.swift */; };
+		83D547262D137E09004DE1CE /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D547252D137E09004DE1CE /* Profile.swift */; };
+		83D547272D137E09004DE1CE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D547232D137E09004DE1CE /* User.swift */; };
+		83D547282D137E09004DE1CE /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D547242D137E09004DE1CE /* Database.swift */; };
+		83D5472A2D138109004DE1CE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 83D547292D138109004DE1CE /* FirebaseStorage */; };
+		83D5472C2D13A2F4004DE1CE /* SignupSuccessfulViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D5472B2D13A2F4004DE1CE /* SignupSuccessfulViewController.swift */; };
 		CF84B6A32CFC4B1E0006F605 /* LoginBackup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF84B6A22CFC4B1E0006F605 /* LoginBackup.storyboard */; };
 		CF84B6A52CFC58280006F605 /* ProfileBackup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF84B6A42CFC58280006F605 /* ProfileBackup.storyboard */; };
 		F23585FD2D058D1E00C00219 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F23585FC2D058D1E00C00219 /* FirebaseAuth */; };
@@ -92,18 +93,18 @@
 		105F69BA2D04A047005454A7 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		105F69BC2D04A067005454A7 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		1086DBA32D0114B20087646B /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
-		AC542A5B2D132F0500AE99A0 /* ProfilePage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = ProfilePage.storyboard; path = ../../../../../Desktop/Malik/ProfilePage.storyboard; sourceTree = "<group>"; };
-		AC542A5D2D132F3F00AE99A0 /* ProfilePageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfilePageTableViewController.swift; path = ../../../../../Desktop/Malik/ProfilePageTableViewController.swift; sourceTree = "<group>"; };
-		AC542A5F2D132F6800AE99A0 /* PrivacyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PrivacyViewController.swift; path = ../../../../../Desktop/Malik/PrivacyViewController.swift; sourceTree = "<group>"; };
-		AC542A612D132F8500AE99A0 /* ProfileUploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileUploadViewController.swift; path = ../../../../../Desktop/Malik/ProfileUploadViewController.swift; sourceTree = "<group>"; };
-		AC542A632D132FB800AE99A0 /* AboutUsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutUsViewController.swift; path = ../../../../../Desktop/Malik/AboutUsViewController.swift; sourceTree = "<group>"; };
-		AC542A652D132FE500AE99A0 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Login.storyboard; path = ../../../../../Desktop/Malik/Login.storyboard; sourceTree = "<group>"; };
-		AC542A672D13324200AE99A0 /* LogInTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LogInTableViewController.swift; path = ../../../../../Desktop/Malik/LogInTableViewController.swift; sourceTree = "<group>"; };
-		AC542A692D13325F00AE99A0 /* ForgotPassViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForgotPassViewController.swift; path = ../../../../../Desktop/Malik/ForgotPassViewController.swift; sourceTree = "<group>"; };
-		AC542A6B2D13327700AE99A0 /* UserSIGNUPTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSIGNUPTableViewController.swift; path = ../../../../../Desktop/Malik/UserSIGNUPTableViewController.swift; sourceTree = "<group>"; };
-		AC542A6D2D1333BA00AE99A0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = ../../../../../Desktop/Malik/Model/User.swift; sourceTree = "<group>"; };
-		AC542A6F2D1333C300AE99A0 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Database.swift; path = ../../../../../Desktop/Malik/Model/Database.swift; sourceTree = "<group>"; };
-		AC542A712D1333CA00AE99A0 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Profile.swift; path = ../../../../../Desktop/Malik/Model/Profile.swift; sourceTree = "<group>"; };
+		83D547112D137D29004DE1CE /* ProfilePage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfilePage.storyboard; sourceTree = "<group>"; };
+		83D547132D137D9C004DE1CE /* LogIn Page.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "LogIn Page.storyboard"; sourceTree = "<group>"; };
+		83D547152D137DF0004DE1CE /* ForgotPassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ForgotPassViewController.swift; path = EcoCart/Controllers/ForgotPassViewController.swift; sourceTree = SOURCE_ROOT; };
+		83D547172D137DF0004DE1CE /* UserSIGNUPTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserSIGNUPTableViewController.swift; path = EcoCart/Controllers/UserSIGNUPTableViewController.swift; sourceTree = SOURCE_ROOT; };
+		83D547182D137DF0004DE1CE /* LogInTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LogInTableViewController.swift; path = EcoCart/Controllers/LogInTableViewController.swift; sourceTree = SOURCE_ROOT; };
+		83D547192D137DF0004DE1CE /* ProfilePageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageTableViewController.swift; sourceTree = "<group>"; };
+		83D5471A2D137DF0004DE1CE /* AboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
+		83D5471B2D137DF0004DE1CE /* PrivacyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyViewController.swift; sourceTree = "<group>"; };
+		83D547232D137E09004DE1CE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		83D547242D137E09004DE1CE /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		83D547252D137E09004DE1CE /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		83D5472B2D13A2F4004DE1CE /* SignupSuccessfulViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignupSuccessfulViewController.swift; path = EcoCart/Controllers/SignupSuccessfulViewController.swift; sourceTree = SOURCE_ROOT; };
 		CF84B6A22CFC4B1E0006F605 /* LoginBackup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginBackup.storyboard; sourceTree = "<group>"; };
 		CF84B6A42CFC58280006F605 /* ProfileBackup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileBackup.storyboard; sourceTree = "<group>"; };
 		F2574B202D0058F900FF2011 /* Filter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Filter.storyboard; sourceTree = "<group>"; };
@@ -124,6 +125,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F23585FF2D058D1E00C00219 /* FirebaseCore in Frameworks */,
+				83D5472A2D138109004DE1CE /* FirebaseStorage in Frameworks */,
 				F23585FD2D058D1E00C00219 /* FirebaseAuth in Frameworks */,
 				F23586012D058D1E00C00219 /* FirebaseFirestore in Frameworks */,
 			);
@@ -149,14 +151,14 @@
 		0E7C9AA52CF72FCD0049CD22 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				83D5472B2D13A2F4004DE1CE /* SignupSuccessfulViewController.swift */,
+				83D547152D137DF0004DE1CE /* ForgotPassViewController.swift */,
+				83D547172D137DF0004DE1CE /* UserSIGNUPTableViewController.swift */,
+				83D547182D137DF0004DE1CE /* LogInTableViewController.swift */,
+				83D547192D137DF0004DE1CE /* ProfilePageTableViewController.swift */,
+				83D5471A2D137DF0004DE1CE /* AboutUsViewController.swift */,
+				83D5471B2D137DF0004DE1CE /* PrivacyViewController.swift */,
 				0E7C9AA42CF72FCD0049CD22 /* ViewController.swift */,
-				AC542A6B2D13327700AE99A0 /* UserSIGNUPTableViewController.swift */,
-				AC542A672D13324200AE99A0 /* LogInTableViewController.swift */,
-				AC542A692D13325F00AE99A0 /* ForgotPassViewController.swift */,
-				AC542A612D132F8500AE99A0 /* ProfileUploadViewController.swift */,
-				AC542A632D132FB800AE99A0 /* AboutUsViewController.swift */,
-				AC542A5D2D132F3F00AE99A0 /* ProfilePageTableViewController.swift */,
-				AC542A5F2D132F6800AE99A0 /* PrivacyViewController.swift */,
 				0E2F4D432CFCD2DF00235DE9 /* ImpactTrackerViewController.swift */,
 				F2574B242D00740000FF2011 /* homePageViewController.swift */,
 				1086DBA32D0114B20087646B /* ProductDetailsViewController.swift */,
@@ -171,17 +173,17 @@
 		0E7C9AAF2CF72FCD0049CD22 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				83D547112D137D29004DE1CE /* ProfilePage.storyboard */,
 				0E7C9AA92CF72FCD0049CD22 /* Impact Tracker.storyboard */,
 				0E7C9AAB2CF72FCD0049CD22 /* LaunchScreen.storyboard */,
 				0E7C9AAD2CF72FCD0049CD22 /* Main.storyboard */,
 				0E7C9AAE2CF72FCD0049CD22 /* ProductDetails.storyboard */,
-				AC542A5B2D132F0500AE99A0 /* ProfilePage.storyboard */,
-				AC542A652D132FE500AE99A0 /* Login.storyboard */,
 				CF84B6A22CFC4B1E0006F605 /* LoginBackup.storyboard */,
 				CF84B6A42CFC58280006F605 /* ProfileBackup.storyboard */,
 				F2574B202D0058F900FF2011 /* Filter.storyboard */,
 				F2574B222D00609F00FF2011 /* HomePage.storyboard */,
 				105F69B02D049D1E005454A7 /* ReviewCell.xib */,
+				83D547132D137D9C004DE1CE /* LogIn Page.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -198,10 +200,10 @@
 		0EF3BE012CF771B800DB6279 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				83D547232D137E09004DE1CE /* User.swift */,
+				83D547242D137E09004DE1CE /* Database.swift */,
+				83D547252D137E09004DE1CE /* Profile.swift */,
 				0EC7EEED2CFC485800A7E000 /* Product.swift */,
-				AC542A6F2D1333C300AE99A0 /* Database.swift */,
-				AC542A712D1333CA00AE99A0 /* Profile.swift */,
-				AC542A6D2D1333BA00AE99A0 /* User.swift */,
 				F2574B262D00785B00FF2011 /* ProductCell.swift */,
 				105F69BA2D04A047005454A7 /* Review.swift */,
 			);
@@ -281,6 +283,7 @@
 				F23585FC2D058D1E00C00219 /* FirebaseAuth */,
 				F23585FE2D058D1E00C00219 /* FirebaseCore */,
 				F23586002D058D1E00C00219 /* FirebaseFirestore */,
+				83D547292D138109004DE1CE /* FirebaseStorage */,
 			);
 			productName = EcoCart;
 			productReference = F2DCE3502CF728FF002D4AB1 /* EcoCart.app */;
@@ -376,14 +379,14 @@
 				F2574B232D00609F00FF2011 /* HomePage.storyboard in Resources */,
 				CF84B6A32CFC4B1E0006F605 /* LoginBackup.storyboard in Resources */,
 				0E7C9AB12CF72FCD0049CD22 /* Assets.xcassets in Resources */,
+				83D547122D137D29004DE1CE /* ProfilePage.storyboard in Resources */,
 				F2574B212D0058F900FF2011 /* Filter.storyboard in Resources */,
 				0E7C9AB22CF72FCD0049CD22 /* Main.storyboard in Resources */,
 				0E7C9AB32CF72FCD0049CD22 /* GoogleService-Info.plist in Resources */,
 				104856312D076A9400D60B8D /* ReviewCell.xib in Resources */,
-				AC542A5C2D132F0500AE99A0 /* ProfilePage.storyboard in Resources */,
 				0E7C9AB42CF72FCD0049CD22 /* Impact Tracker.storyboard in Resources */,
 				CF84B6A52CFC58280006F605 /* ProfileBackup.storyboard in Resources */,
-				AC542A662D132FE500AE99A0 /* Login.storyboard in Resources */,
+				83D547142D137D9C004DE1CE /* LogIn Page.storyboard in Resources */,
 				0E7C9AB52CF72FCD0049CD22 /* ProductDetails.storyboard in Resources */,
 				0E7C9AB62CF72FCD0049CD22 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -411,30 +414,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				1048562D2D07654600D60B8D /* ReviewFireBase.swift in Sources */,
-				AC542A682D13324200AE99A0 /* LogInTableViewController.swift in Sources */,
-				AC542A6A2D13325F00AE99A0 /* ForgotPassViewController.swift in Sources */,
 				F2574B252D00740000FF2011 /* homePageViewController.swift in Sources */,
 				1048562F2D0765C200D60B8D /* ReviewViewController.swift in Sources */,
+				83D5471C2D137DF0004DE1CE /* UserSIGNUPTableViewController.swift in Sources */,
+				83D5471D2D137DF0004DE1CE /* LogInTableViewController.swift in Sources */,
+				83D5471E2D137DF0004DE1CE /* ForgotPassViewController.swift in Sources */,
+				83D5471F2D137DF0004DE1CE /* ProfilePageTableViewController.swift in Sources */,
+				83D547212D137DF0004DE1CE /* AboutUsViewController.swift in Sources */,
+				83D547222D137DF0004DE1CE /* PrivacyViewController.swift in Sources */,
 				1086DBA42D0114B20087646B /* ProductDetailsViewController.swift in Sources */,
-				AC542A702D1333C300AE99A0 /* Database.swift in Sources */,
-				AC542A642D132FB800AE99A0 /* AboutUsViewController.swift in Sources */,
-				AC542A5E2D132F3F00AE99A0 /* ProfilePageTableViewController.swift in Sources */,
 				0EA4058C2D058B2D00F37E56 /* ProductFirebase.swift in Sources */,
+				83D547262D137E09004DE1CE /* Profile.swift in Sources */,
+				83D5472C2D13A2F4004DE1CE /* SignupSuccessfulViewController.swift in Sources */,
+				83D547272D137E09004DE1CE /* User.swift in Sources */,
+				83D547282D137E09004DE1CE /* Database.swift in Sources */,
 				0E2F4D442CFCD2DF00235DE9 /* ImpactTrackerViewController.swift in Sources */,
 				0E7C9AB72CF72FCD0049CD22 /* ViewController.swift in Sources */,
 				1048562E2D07655700D60B8D /* Review.swift in Sources */,
 				0E074EBC2D0787D70068814A /* AddProductViewController.swift in Sources */,
 				0E2760AA2D08A4F8004569A9 /* FilterViewController.swift in Sources */,
 				0E7C9AB82CF72FCD0049CD22 /* AppDelegate.swift in Sources */,
-				AC542A722D1333CA00AE99A0 /* Profile.swift in Sources */,
 				0EC7EEEE2CFC485800A7E000 /* Product.swift in Sources */,
-				AC542A6C2D13327700AE99A0 /* UserSIGNUPTableViewController.swift in Sources */,
 				104856302D0765D800D60B8D /* ReviewCell.swift in Sources */,
-				AC542A602D132F6800AE99A0 /* PrivacyViewController.swift in Sources */,
 				F2574B272D00785B00FF2011 /* ProductCell.swift in Sources */,
 				0E7C9AB92CF72FCD0049CD22 /* SceneDelegate.swift in Sources */,
-				AC542A622D132F8500AE99A0 /* ProfileUploadViewController.swift in Sources */,
-				AC542A6E2D1333BA00AE99A0 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -784,6 +787,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		83D547292D138109004DE1CE /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F23585FB2D058D1E00C00219 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
 		F23585FC2D058D1E00C00219 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F23585FB2D058D1E00C00219 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

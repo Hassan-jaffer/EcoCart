@@ -30,6 +30,7 @@ class ProductFirebase {
             imageURL: data["imageURL"] as? String ?? "",
             averageRating: data["averageRating"] as? Int ?? 0,
             stockQuantity: data["stockQuantity"] as? Int ?? 0,
+            image: UIImage(),
             metrics: parseMetrics(from: data)
         )
     }

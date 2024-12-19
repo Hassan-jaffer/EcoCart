@@ -5,10 +5,11 @@ struct Product {
     let id: String
     let name: String
     let description: String
-    let price: Double
+    let price: Double?
     let imageURL: String?
     let averageRating: Int
     let stockQuantity: Int
+    var image: UIImage
     let metrics: [Metric]
     
     struct Metric {
@@ -32,6 +33,7 @@ struct Product {
             imageURL: data["imageURL"] as? String, // Keep as optional
             averageRating: data["averageRating"] as? Int ?? 0,
             stockQuantity: data["stockQuantity"] as? Int ?? 0,
+            image: UIImage(),
             metrics: parseMetrics(from: data)
         )
     }
