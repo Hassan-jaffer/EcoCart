@@ -10,7 +10,7 @@ struct Product {
     let averageRating: Int
     let numberOfRatings: Int
     let totalRatings: Int
-    let stockQuantity: Int
+    var stockQuantity: Int
     let category: String? // Added category field
     let metrics: Metrics
     
