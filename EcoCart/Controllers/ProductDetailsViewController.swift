@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseFirestore
 import Foundation
+import FirebaseAuth
 
 class ProductDetailsViewController: UIViewController {
     
@@ -36,7 +37,7 @@ class ProductDetailsViewController: UIViewController {
     }
     
     var productId: String?
-    var product: Product?
+    var product: Product?  // Changed from 'let' to 'var'
     private var selectedQuantity: Int = 1
     private var topRatedProducts: [Product] = []
     
@@ -187,7 +188,84 @@ class ProductDetailsViewController: UIViewController {
     
     @IBAction func addToCartTapped(_ sender: Any) {
         guard let product = product else { return }
-        showAlert(title: "Success", message: "\(selectedQuantity) x \(product.name) added to cart!")
+        
+        // Check if we have enough stock
+        if product.stockQuantity < selectedQuantity {
+            showAlert(title: "Error", message: "Not enough items in stock!")
+            return
+        }
+        
+        // Update product quantity in Firebase
+        Task {
+            do {
+                let db = Firestore.firestore()
+                let productRef = db.collection("product").document(product.id)
+                
+                // Fixed transaction signature
+                try await db.runTransaction({ (transaction, errorPointer) -> Any? in
+                    let productDoc: DocumentSnapshot
+                    do {
+                        productDoc = try transaction.getDocument(productRef)
+                    } catch let fetchError as NSError {
+                        errorPointer?.pointee = fetchError
+                        return nil
+                    }
+                    
+                    guard let currentStock = productDoc.data()?["stockQuantity"] as? Int else {
+                        let error = NSError(
+                            domain: "AppErrorDomain",
+                            code: -1,
+                            userInfo: [NSLocalizedDescriptionKey: "Could not get current stock"]
+                        )
+                        errorPointer?.pointee = error
+                        return nil
+                    }
+                    
+                    // Check stock again in transaction
+                    if currentStock < self.selectedQuantity {
+                        let error = NSError(
+                            domain: "AppErrorDomain",
+                            code: -1,
+                            userInfo: [NSLocalizedDescriptionKey: "Not enough stock"]
+                        )
+                        errorPointer?.pointee = error
+                        return nil
+                    }
+                    
+                    // Update stock quantity
+                    let newStock = currentStock - self.selectedQuantity
+                    transaction.updateData(["stockQuantity": newStock], forDocument: productRef)
+                    
+                    // Add to cart collection with exact field names from Firebase
+                    let cartItemData: [String: Any] = [
+                        "imageURL": product.imageURL ?? "",
+                        "name": product.name,
+                        "price": product.price,
+                        "productID": product.id,
+                        "quantity": self.selectedQuantity,
+                        "userID": Auth.auth().currentUser?.uid ?? "guest"
+                    ]
+                    
+                    let cartRef = db.collection("cart").document()
+                    transaction.setData(cartItemData, forDocument: cartRef)
+                    
+                    return nil
+                })
+                
+                // Success
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Success", message: "\(self.selectedQuantity) x \(product.name) added to cart!")
+                    // Update the UI to reflect new stock quantity
+                    self.product?.stockQuantity -= self.selectedQuantity
+                    self.productQuantityStepper.maximumValue = Double(self.product?.stockQuantity ?? 0)
+                }
+                
+            } catch {
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Error", message: error.localizedDescription)
+                }
+            }
+        }
     }
     
     @IBAction func viewRatingsTapped(_ sender: Any) {
