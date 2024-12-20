@@ -12,6 +12,7 @@ import Foundation
 class ProductDetailsViewController: UIViewController {
     
     @IBOutlet weak var productImage: UIImageView!
+    @IBOutlet weak var ecoFriendlyCertificateImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var productPrice: UILabel!
     @IBOutlet weak var productDescription: UITextView!
@@ -107,13 +108,19 @@ class ProductDetailsViewController: UIViewController {
             productPrice.text = String(format: "%.2f BHD", product.price)
             productDescription.text = product.description
             
-            let starButtons = [ratingButton1, ratingButton2, ratingButton3, ratingButton4, ratingButton5]
+            let starButtons = [self.ratingButton1, self.ratingButton2, self.ratingButton3, self.ratingButton4, self.ratingButton5]
             starButtons.enumerated().forEach { index, button in
                 button?.setImage(UIImage(systemName: "star.fill"), for: .normal)
                 button?.tintColor = index < product.averageRating ? .systemYellow : .systemGray4
             }
             
             print("📊 Metrics values: Bio=\(product.metrics.bio), CO2=\(product.metrics.co2), Plastic=\(product.metrics.plastic), Tree=\(product.metrics.tree)")
+            
+            // Show/hide eco-friendly certificate based on Bio metric
+            self.ecoFriendlyCertificateImage.isHidden = product.metrics.bio != 1
+            if product.metrics.bio == 1 {
+                self.ecoFriendlyCertificateImage.image = UIImage(named: "eco-certificate")
+            }
             
             // Format metrics text
             let metricsText = """
@@ -123,16 +130,16 @@ class ProductDetailsViewController: UIViewController {
             Plastic Saved: \(product.metrics.plastic) kg
             Trees Saved: \(product.metrics.tree)
             """
-            impactTextView.text = metricsText
+            self.impactTextView.text = metricsText
             
-            productQuantityStepper.maximumValue = Double(product.stockQuantity)
-            productQuantityStepper.value = 1
-            quantityLabel.text = "1"
+            self.productQuantityStepper.maximumValue = Double(product.stockQuantity)
+            self.productQuantityStepper.value = 1
+            self.quantityLabel.text = "1"
             
             if let imageUrlString = product.imageURL, let imageUrl = URL(string: imageUrlString) {
-                loadImage(from: imageUrl)
+                self.loadImage(from: imageUrl)
             } else {
-                productImage.image = UIImage(named: "placeholderImage")
+                self.productImage.image = UIImage(named: "placeholderImage")
             }
         }
     }
