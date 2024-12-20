@@ -18,10 +18,13 @@ class FilterViewController: UIViewController {
     weak var delegate: FilterDelegate?
 
     
+    @IBOutlet weak var Metric: UIButton!
     var isAvailableFiltered: Bool? = nil
     var isAZFiltered = false
     var selectedPriceOrder: String? = nil
     var selectedCategory: String? = nil
+    var selectedMetric: String? = nil
+
 
     @IBOutlet weak var PricePopupBtn: UIButton!
     @IBOutlet weak var priceBtn: UIButton!
@@ -127,7 +130,7 @@ class FilterViewController: UIViewController {
           
             // Notify the delegate about the applied filters
             delegate?.didApplyAZFilter(az: isAZFiltered)
-            delegate?.didApplyFilters(priceOrder: selectedPriceOrder, category: selectedCategory, availability: isAvailableFiltered)
+        delegate?.didApplyFilters(priceOrder: selectedPriceOrder, category: selectedCategory, availability: isAvailableFiltered)
             navigationController?.popViewController(animated: true)
         
     }
@@ -219,5 +222,28 @@ class FilterViewController: UIViewController {
         let categoryMenu = UIMenu(title: "Select Category", children: [catAcc, catClothes, catElec])
         CategoryPopupBtn.menu = categoryMenu
         CategoryPopupBtn.showsMenuAsPrimaryAction = true
+        
+        
+        // Category Options
+               let MetCO2 = UIAction(title: "CO2 saved", handler: { _ in
+                   self.selectedMetric = "CO2"
+                   self.updateButtonStates() // Update button state after selection
+               })
+               let MetPlastic = UIAction(title: "Plastic saved", handler: { _ in
+                   self.selectedMetric = "Plastic"
+                   self.updateButtonStates() // Update button state after selection
+               })
+               let MetTree = UIAction(title: "Trees saved", handler: { _ in
+                   self.selectedMetric = "Tree"
+                   self.updateButtonStates() // Update button state after selection
+               })
+
+               let metricMenu = UIMenu(title: "Select metric", children: [MetCO2, MetPlastic, MetTree])
+               Metric.menu = metricMenu
+               Metric.showsMenuAsPrimaryAction = true
+               
+               
+               
+           
     }
 }
