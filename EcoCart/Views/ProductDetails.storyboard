@@ -697,7 +697,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By EcoShop" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OFb-8N-vbd">
-                                                                <rect key="frame" x="87" y="52" width="68" height="14.333333333333329"/>
+                                                                <rect key="frame" x="25" y="51" width="68" height="14.333333333333329"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                 <color key="textColor" systemColor="secondaryLabelColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -754,24 +754,28 @@
                                                                     </button>
                                                                 </subviews>
                                                             </stackView>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Aay-ES-paX">
+                                                                <rect key="frame" x="141" y="56" width="71" height="47"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            </imageView>
                                                         </subviews>
                                                         <viewLayoutGuide key="safeArea" id="r9H-Wn-bSb"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
-                                                            <constraint firstItem="pOk-rs-qLE" firstAttribute="top" secondItem="OFb-8N-vbd" secondAttribute="bottom" constant="37.999999999999986" id="4T9-hm-A8j"/>
+                                                            <constraint firstItem="pOk-rs-qLE" firstAttribute="top" secondItem="OFb-8N-vbd" secondAttribute="bottom" constant="38.999999999999986" id="4T9-hm-A8j"/>
                                                             <constraint firstItem="uoJ-tM-jmn" firstAttribute="top" secondItem="r9H-Wn-bSb" secondAttribute="top" constant="20" id="9lQ-RQ-3Bz"/>
                                                             <constraint firstAttribute="bottom" secondItem="pOk-rs-qLE" secondAttribute="bottom" constant="20" id="ABJ-pH-bsp"/>
                                                             <constraint firstItem="r9H-Wn-bSb" firstAttribute="trailing" secondItem="kPC-36-kPV" secondAttribute="trailing" constant="20" id="CIp-V7-HNL"/>
                                                             <constraint firstItem="kPC-36-kPV" firstAttribute="top" secondItem="dLj-nJ-7Ge" secondAttribute="top" constant="20" id="E0e-jh-Tje"/>
-                                                            <constraint firstItem="OFb-8N-vbd" firstAttribute="leading" secondItem="r9H-Wn-bSb" secondAttribute="leading" constant="87" id="ELZ-vv-cah"/>
+                                                            <constraint firstItem="OFb-8N-vbd" firstAttribute="leading" secondItem="r9H-Wn-bSb" secondAttribute="leading" constant="25" id="ELZ-vv-cah"/>
                                                             <constraint firstItem="r9H-Wn-bSb" firstAttribute="trailing" secondItem="9u0-Zw-36s" secondAttribute="trailing" constant="20" id="MQJ-9l-IEv"/>
                                                             <constraint firstItem="r9H-Wn-bSb" firstAttribute="trailing" secondItem="pOk-rs-qLE" secondAttribute="trailing" constant="20" id="Pu5-PP-fiA"/>
                                                             <constraint firstAttribute="height" constant="200" id="S1P-mr-hed"/>
                                                             <constraint firstItem="pOk-rs-qLE" firstAttribute="leading" secondItem="r9H-Wn-bSb" secondAttribute="leading" constant="20" id="bHJ-pi-rKg"/>
                                                             <constraint firstItem="9u0-Zw-36s" firstAttribute="top" secondItem="uoJ-tM-jmn" secondAttribute="bottom" constant="10" id="kaJ-oc-10d"/>
                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="orp-ZS-dTI"/>
-                                                            <constraint firstItem="OFb-8N-vbd" firstAttribute="top" secondItem="uoJ-tM-jmn" secondAttribute="bottom" constant="2" id="rix-k8-Ark"/>
-                                                            <constraint firstItem="9u0-Zw-36s" firstAttribute="leading" secondItem="OFb-8N-vbd" secondAttribute="trailing" constant="83" id="vzd-Ut-dPB"/>
+                                                            <constraint firstItem="OFb-8N-vbd" firstAttribute="top" secondItem="uoJ-tM-jmn" secondAttribute="bottom" constant="1" id="rix-k8-Ark"/>
+                                                            <constraint firstItem="9u0-Zw-36s" firstAttribute="leading" secondItem="OFb-8N-vbd" secondAttribute="trailing" constant="145" id="vzd-Ut-dPB"/>
                                                             <constraint firstItem="uoJ-tM-jmn" firstAttribute="leading" secondItem="r9H-Wn-bSb" secondAttribute="leading" constant="20" id="xZb-oh-07V"/>
                                                         </constraints>
                                                     </view>
@@ -959,6 +963,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Iwb-eE-mqW"/>
                     <connections>
+                        <outlet property="ecoFriendlyCertificateImage" destination="Aay-ES-paX" id="dmg-s6-San"/>
                         <outlet property="impactTextView" destination="GV3-q0-EMh" id="mq1-3T-vCm"/>
                         <outlet property="nameLabel" destination="uoJ-tM-jmn" id="bA6-Dl-Aef"/>
                         <outlet property="productDescription" destination="M4V-cu-Vxl" id="hll-qi-17t"/>
@@ -978,7 +983,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Zs-CP-W0c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7786.0465116279065" y="1401.5021459227469"/>
+            <point key="canvasLocation" x="7785.507246376812" y="1400.8928571428571"/>
         </scene>
         <!--Review View Controller-->
         <scene sceneID="dJ6-lN-7Ik">
