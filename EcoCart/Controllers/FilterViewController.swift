@@ -237,7 +237,7 @@ class FilterViewController: UIViewController {
         
         // Category Options
                let MetCO2 = UIAction(title: "CO2 saved", handler: { _ in
-                   self.selectedMetric = "CO2"
+                   self.selectedMetric = "C02"
                    self.updateButtonStates() // Update button state after selection
                })
                let MetPlastic = UIAction(title: "Plastic saved", handler: { _ in

@@ -52,6 +52,7 @@ import UIKit
 
                    self.products = documents.documents.map { document in
                        let data = document.data()
+                       print("Fetched document data: \(data)")
                        let category = data["Category"] as? String // Match exact case here
                        print("🌟 Fetched product category: \(category ?? "No Category")") // Debugging category
                        return Product(
@@ -66,17 +67,17 @@ import UIKit
                            stockQuantity: data["stockQuantity"] as? Int ?? 0,
                            category: category,
                            metrics: Product.Metrics(
-                               bio: data["Bio"] as? Int ?? 0,
-                               co2: data["CO2"] as? Int ?? 0,
-                               plastic: data["Plastic"] as? Int ?? 0,
-                               tree: data["Tree"] as? Int ?? 0
+                               bio: (data["metrics"] as? [String: Any])?["Bio"] as? Int ?? 0,
+                               co2: (data["metrics"] as? [String: Any])?["C02"] as? Int ?? 0,
+                               plastic: (data["metrics"] as? [String: Any])?["Plastic"] as? Int ?? 0,
+                               tree: (data["metrics"] as? [String: Any])?["Tree"] as? Int ?? 0
                            )
                        )
                    }
 
                    print("✅ Total Products Fetched: \(self.products.count)")
                    for product in self.products {
-                       print("🛒 Product: \(product.name), Category: \(product.category ?? "No Category")")
+                       print("🛒 Product: \(product.name), Category: \(product.category ?? "No Category"), Metric: \(product.metrics.plastic), \(product.metrics.tree), \(product.metrics.co2), \(product.metrics.bio)")
                    }
 
                    self.filteredProducts = self.products // Initially show all products
@@ -255,7 +256,7 @@ import UIKit
            // Apply Environmental Impact Filter
                if let metric = selectedMetric {
                    switch metric {
-                   case "CO2":
+                   case "C02":
                        filteredProducts.sort { $0.metrics.co2 > $1.metrics.co2 }
                    case "Plastic":
                        filteredProducts.sort { $0.metrics.plastic > $1.metrics.plastic }
