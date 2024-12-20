@@ -22,6 +22,10 @@ class ProductFirebase {
         
         guard let data = document.data() else { return nil }
         
+        // Debug prints
+        print("Raw Firebase data: \(data)")
+        print("C02 value from Firebase: \(data["C02"] ?? "nil")")
+        
         return Product(
             id: document.documentID,
             name: data["name"] as? String ?? "",
@@ -35,7 +39,7 @@ class ProductFirebase {
             category: data["Category"] as? String ?? "",
             metrics: Product.Metrics(
                 bio: data["Bio"] as? Int ?? 0,
-                co2: data["CO2"] as? Int ?? 0,
+                co2: data["C02"] as? Int ?? 0,
                 plastic: data["Plastic"] as? Int ?? 0,
                 tree: data["Tree"] as? Int ?? 0
             )
