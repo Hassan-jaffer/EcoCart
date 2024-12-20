@@ -179,17 +179,35 @@ class ImpactTrackerViewController: UIViewController {
     }
     
     
-    func editGraphView(){
-        //graph background
+    func editGraphView() {
+        // Check if dark mode is enabled
+        if traitCollection.userInterfaceStyle == .dark {
+            graphView.backgroundColor = UIColor.darkGray  // Set background to gray in dark mode
+        } else {
+            graphView.backgroundColor = UIColor.clear  // Keep it clear or transparent for light mode (similar to previous setup)
+        }
+
+        // Apply the existing configurations (works for both dark and light modes)
         graphView.layer.cornerRadius = 15
         graphView.layer.borderWidth = 2
         graphView.layer.borderColor = UIColor.systemGreen.cgColor
         graphView.layer.shadowColor = UIColor.black.cgColor
-        
-        //reset button
+
+        // Reset button appearance
         resetBtn.layer.cornerRadius = 15
-        
     }
+
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        // Check if the user interface style (theme) has changed
+        if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            // Reapply the theme to update the graph's background color
+            editGraphView()
+        }
+    }
+
     
     @IBAction func resetBtnTapped(_ sender: Any) {
         showAlert()

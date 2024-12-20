@@ -138,6 +138,12 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Category Filter"/>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7oV-yS-E5f">
+                                        <rect key="frame" x="216" y="203" width="73" height="39"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Metric"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="underPageBackgroundColor"/>
                                 <userDefinedRuntimeAttributes>
@@ -153,11 +159,12 @@
                     </view>
                     <connections>
                         <outlet property="CategoryPopupBtn" destination="nPh-cw-VOW" id="Tzn-BF-KpM"/>
+                        <outlet property="Metric" destination="7oV-yS-E5f" id="mN6-TB-ecp"/>
                         <outlet property="PricePopupBtn" destination="w6a-JP-Sv1" id="H8q-GT-7dm"/>
                         <outlet property="availabilityBtn" destination="JTO-rE-trI" id="cj6-wP-eXN"/>
                         <outlet property="azBtn" destination="CBK-if-nTX" id="AAb-Cd-Uxu"/>
                         <outlet property="categoryBtn" destination="Mx5-Nl-qlI" id="ZMc-6r-FSl"/>
-                        <outlet property="enviroBtn" destination="Oi9-LA-Atu" id="WRC-un-WYj"/>
+                        <outlet property="enviroBtn" destination="Oi9-LA-Atu" id="bL1-Km-Xzj"/>
                         <outlet property="priceBtn" destination="BHI-Kk-Wzf" id="MA9-RX-MJk"/>
                     </connections>
                 </viewController>
