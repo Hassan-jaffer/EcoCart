@@ -164,7 +164,7 @@
                         <outlet property="availabilityBtn" destination="JTO-rE-trI" id="cj6-wP-eXN"/>
                         <outlet property="azBtn" destination="CBK-if-nTX" id="AAb-Cd-Uxu"/>
                         <outlet property="categoryBtn" destination="Mx5-Nl-qlI" id="ZMc-6r-FSl"/>
-                        <outlet property="enviroBtn" destination="Oi9-LA-Atu" id="WRC-un-WYj"/>
+                        <outlet property="enviroBtn" destination="Oi9-LA-Atu" id="bL1-Km-Xzj"/>
                         <outlet property="priceBtn" destination="BHI-Kk-Wzf" id="MA9-RX-MJk"/>
                     </connections>
                 </viewController>

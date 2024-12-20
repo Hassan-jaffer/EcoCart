@@ -6,7 +6,7 @@
 //
 protocol FilterDelegate: AnyObject {
     func didApplyAZFilter(az: Bool)
-    func didApplyFilters(priceOrder: String?, category: String?, availability: Bool?)
+    func didApplyFilters(priceOrder: String?, category: String?, availability: Bool?, metric: String?)
     func didResetFilters()
 }
 
@@ -77,6 +77,13 @@ class FilterViewController: UIViewController {
             } else {
                 self.availabilityBtn.backgroundColor = .white
             }
+            
+            // Update Metric button
+                    if let metric = self.selectedMetric {
+                        self.Metric.setTitle("\(metric) Selected", for: .normal)
+                    } else {
+                        self.Metric.setTitle("Select Metric", for: .normal)
+                    }
         }
     }
 
@@ -130,7 +137,7 @@ class FilterViewController: UIViewController {
           
             // Notify the delegate about the applied filters
             delegate?.didApplyAZFilter(az: isAZFiltered)
-        delegate?.didApplyFilters(priceOrder: selectedPriceOrder, category: selectedCategory, availability: isAvailableFiltered)
+        delegate?.didApplyFilters(priceOrder: selectedPriceOrder, category: selectedCategory, availability: isAvailableFiltered, metric: selectedMetric )
             navigationController?.popViewController(animated: true)
         
     }
@@ -168,6 +175,8 @@ class FilterViewController: UIViewController {
         selectedPriceOrder = nil
         selectedCategory = nil
         isAvailableFiltered = nil
+        selectedMetric = nil  // Reset selected metric
+
 
         
         // Reset Button Colors
@@ -176,6 +185,8 @@ class FilterViewController: UIViewController {
         resetBtn(enviroBtn)
         resetBtn(azBtn)
         resetBtn(categoryBtn)
+        resetBtn(Metric)  // Reset Metric button
+
         
         // Reset Button Titles
         PricePopupBtn.setTitle("Price Filter", for: .normal) // Reset to default title
