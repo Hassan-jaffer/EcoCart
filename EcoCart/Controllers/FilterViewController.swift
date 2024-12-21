@@ -83,7 +83,7 @@ class FilterViewController: UIViewController {
                         self.Metric.setTitle("\(metric)", for: .normal)
                         self.enviroBtn.backgroundColor = .coolLightGreen
                     } else {
-                        self.Metric.setTitle("Select Metric", for: .normal)
+                        self.Metric.setTitle("Metric", for: .normal)
                         self.enviroBtn.backgroundColor = .white
 
                     }
@@ -168,6 +168,8 @@ class FilterViewController: UIViewController {
             // Deselect price filter if A-Z is selected
             selectedPriceOrder = nil
             PricePopupBtn.setTitle("Price Filter", for: .normal)
+            selectedMetric = nil
+            Metric.setTitle("Metric", for: .normal)
         }
         updateButtonStates()
     }
@@ -194,7 +196,7 @@ class FilterViewController: UIViewController {
         // Reset Button Titles
         PricePopupBtn.setTitle("Price Filter", for: .normal) // Reset to default title
         CategoryPopupBtn.setTitle("Category Filter", for: .normal) // Reset to default title
-        Metric.setTitle("Select Metric", for: .normal)
+        Metric.setTitle("Metric", for: .normal)
         
         // Notify the delegate to reset filters and navigate back
         delegate?.didResetFilters()
