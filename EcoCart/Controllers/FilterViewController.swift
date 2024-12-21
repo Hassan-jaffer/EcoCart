@@ -80,9 +80,12 @@ class FilterViewController: UIViewController {
             
             // Update Metric button
                     if let metric = self.selectedMetric {
-                        self.Metric.setTitle("\(metric) Selected", for: .normal)
+                        self.Metric.setTitle("\(metric)", for: .normal)
+                        self.enviroBtn.backgroundColor = .coolLightGreen
                     } else {
                         self.Metric.setTitle("Select Metric", for: .normal)
+                        self.enviroBtn.backgroundColor = .white
+
                     }
         }
     }
@@ -155,7 +158,7 @@ class FilterViewController: UIViewController {
 
     
     @IBAction func enviroBtnTapped(_ sender: Any) {
-        changeColor(enviroBtn)
+
     }
 
     @IBAction func azBtnTapped(_ sender: Any) {
@@ -185,12 +188,13 @@ class FilterViewController: UIViewController {
         resetBtn(enviroBtn)
         resetBtn(azBtn)
         resetBtn(categoryBtn)
-        resetBtn(Metric)  // Reset Metric button
+        resetBtn(enviroBtn)  // Reset Metric button
 
         
         // Reset Button Titles
         PricePopupBtn.setTitle("Price Filter", for: .normal) // Reset to default title
         CategoryPopupBtn.setTitle("Category Filter", for: .normal) // Reset to default title
+        Metric.setTitle("Select Metric", for: .normal)
         
         // Notify the delegate to reset filters and navigate back
         delegate?.didResetFilters()
