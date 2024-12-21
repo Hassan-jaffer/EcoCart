@@ -32,11 +32,7 @@ class ProfilePageTableViewController: UITableViewController {
         // Apply the new theme
         ThemeManager.shared.applyTheme()
         
-        // Optionally, show an alert confirming the mode change
-        let modeText = sender.isOn ? "Dark Mode Enabled" : "Light Mode Enabled"
-        let alert = UIAlertController(title: "Theme Changed", message: modeText, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+        
     }
 
 }
