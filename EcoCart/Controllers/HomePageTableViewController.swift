@@ -186,6 +186,7 @@ import UIKit
                destinationVC.selectedPriceOrder = selectedPriceOrder
                destinationVC.selectedCategory = selectedCategory
                destinationVC.isAvailableFiltered = isAvailableFiltered
+               destinationVC.selectedMetric = selectedMetric
                
                // Smooth transition
                       destinationVC.modalTransitionStyle = .crossDissolve  // Fade transition
@@ -200,6 +201,7 @@ import UIKit
            isAZFiltered = false
            selectedPriceOrder = nil
            selectedCategory = nil
+           selectedMetric = nil
 
            // Reset the filtered products to the full list
            filteredProducts = products
