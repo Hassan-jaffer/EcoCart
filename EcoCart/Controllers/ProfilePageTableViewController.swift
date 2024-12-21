@@ -34,5 +34,24 @@ class ProfilePageTableViewController: UITableViewController {
         
         
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        // Navigate based on the cell identifier
+        if let cell = tableView.cellForRow(at: indexPath) {
+            if cell.reuseIdentifier == "myOrdersCell" {
+                navigateToStoryboard(named: "MyOrders", withIdentifier: "MyOrdersViewController")
+            } else if cell.reuseIdentifier == "storeManagementCell" {
+                navigateToStoryboard(named: "Profile", withIdentifier: "StoreManagementViewController")
+            }
+        }
+    }    
+    private func navigateToStoryboard(named: String, withIdentifier storyboardID: String) {
+        let storyboard = UIStoryboard(name: named, bundle: nil) // Replace "Main" with your storyboard name if needed
+        let viewController = storyboard.instantiateViewController(withIdentifier: storyboardID)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+
 
 }
