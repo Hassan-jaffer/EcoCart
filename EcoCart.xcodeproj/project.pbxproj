@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E074EBC2D0787D70068814A /* AddProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E074EBB2D0787D70068814A /* AddProductViewController.swift */; };
+		0E14FB112D181F88005C606C /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 0E14FB102D181F88005C606C /* DGCharts */; };
 		0E2760AA2D08A4F8004569A9 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2760A92D08A4F8004569A9 /* FilterViewController.swift */; };
 		0E2F4D442CFCD2DF00235DE9 /* ImpactTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2F4D432CFCD2DF00235DE9 /* ImpactTrackerViewController.swift */; };
 		0E60DB772D0CC89900F16562 /* ProductCell2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0E60DB762D0CC89900F16562 /* ProductCell2.storyboard */; };
@@ -159,6 +160,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E14FB112D181F88005C606C /* DGCharts in Frameworks */,
 				F23585FF2D058D1E00C00219 /* FirebaseCore in Frameworks */,
 				F23585FD2D058D1E00C00219 /* FirebaseAuth in Frameworks */,
 				F23586012D058D1E00C00219 /* FirebaseFirestore in Frameworks */,
@@ -182,6 +184,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E14FB0F2D181F88005C606C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		0E7C9AA52CF72FCD0049CD22 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,6 +276,7 @@
 				F2DCE3522CF728FF002D4AB1 /* EcoCart */,
 				F2DCE3692CF72901002D4AB1 /* EcoCartTests */,
 				F2DCE3732CF72902002D4AB1 /* EcoCartUITests */,
+				0E14FB0F2D181F88005C606C /* Frameworks */,
 				F2DCE3512CF728FF002D4AB1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -335,6 +345,7 @@
 				F23585FC2D058D1E00C00219 /* FirebaseAuth */,
 				F23585FE2D058D1E00C00219 /* FirebaseCore */,
 				F23586002D058D1E00C00219 /* FirebaseFirestore */,
+				0E14FB102D181F88005C606C /* DGCharts */,
 			);
 			productName = EcoCart;
 			productReference = F2DCE3502CF728FF002D4AB1 /* EcoCart.app */;
@@ -865,6 +876,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0E14FB102D181F88005C606C /* DGCharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F2CFE3652D0C9BD90082DFB0 /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = DGCharts;
+		};
 		F23585FC2D058D1E00C00219 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F23585FB2D058D1E00C00219 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

@@ -21,15 +21,11 @@ class AddProductViewController: UITableViewController {
     @IBOutlet weak var treeTxtFld: UITextField!
     @IBOutlet weak var bioSwitch: UISwitch!
     
-
+    @IBOutlet weak var confirmBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     @IBAction func confirmBtnTapped(_ sender: Any) {
@@ -37,16 +33,22 @@ class AddProductViewController: UITableViewController {
     
         
         //get all info and store them in firebase
-        guard let name = nameTxtFld.text,
-        let category = categoryTxtFld.text,
-        let store = storeTxtFld.text,
-        
-        let price = Double(priceTxtFld.text!),
-        let co2 = Double(co2TxtFld.text!),
-        let plastic = Double(plasticTxtFld.text!),
-        let tree = Double(treeTxtFld.text!)
+        guard let name = nameTxtFld.text, !name.isEmpty,
+              let category = categoryTxtFld.text, !category.isEmpty,
+              let store = storeTxtFld.text, !store.isEmpty,
+              let price = priceTxtFld.text, !price.isEmpty,
+              let co2 = co2TxtFld.text, !co2.isEmpty,
+              let plastic = plasticTxtFld.text, !plastic.isEmpty,
+              let tree = treeTxtFld.text, !tree.isEmpty
         else {
-            alert()
+            alert(message: "Please fill all fields")
+            return
+        }
+        guard let price = Double(price),
+              let co2 = Double(co2),
+              let plastic = Double(plastic),
+              let tree = Double(tree) else {
+            alert(message: "Please enter valid numbers")
             return
         }
         //let dateFormatter = ISO8601DateFormatter()
@@ -55,7 +57,7 @@ class AddProductViewController: UITableViewController {
         //let purchaseDate = format.string(from: purchaseDateDtPicker.date)
         let purchaseDate = purchaseDateDtPicker.date
         let bio = bioSwitch.isOn
-        
+        confirmBtn.isEnabled = false
         //create a dictionary to store the data
         let productData: [String: Any] = [
         //--------------------------------------
@@ -92,8 +94,8 @@ class AddProductViewController: UITableViewController {
         }
         
         //create an alert function for when user submits empty text fields
-    func alert() {
-        let alert = UIAlertController(title: "Error", message: "Please fill out all fields", preferredStyle: .alert)
+    func alert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default)
         alert.addAction(action)
         present(alert, animated: true)
@@ -117,6 +119,7 @@ class AddProductViewController: UITableViewController {
         let actionOk = UIAlertAction(title: "Ok", style: .default)
         alert.addAction(actionOk)
         present(alert, animated: true, completion: nil)
+        confirmBtn.isEnabled = true
     }
     }
     
