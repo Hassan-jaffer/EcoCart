@@ -31,6 +31,25 @@ class ProductDetailsViewController: UIViewController {
     
     @IBOutlet weak var viewAlternativeOutlet: UIButton!
     
+    @IBAction func viewAlternativeTapped(_ sender: Any) {
+        guard let product = product else { return }
+        
+        // Instantiate the AlternativeProductsViewController
+        let storyboard = UIStoryboard(name: "AlternativeProducts", bundle: nil)
+        guard let alternativeVC = storyboard.instantiateViewController(withIdentifier: "AlternativeProductsViewController") as? AlternativeProductsViewController else {
+            return
+        }
+
+        // Pass the selected product to the AlternativeProductsViewController
+        alternativeVC.selectedProduct = product
+        
+        // Navigate to the AlternativeProductsViewController
+        navigationController?.pushViewController(alternativeVC, animated: true)
+    }
+
+    
+    
+    
     static func instantiate(with productId: String) -> ProductDetailsViewController? {
         let storyboard = UIStoryboard(name: "ProductDetails", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "ProductDetailsViewController") as? ProductDetailsViewController
