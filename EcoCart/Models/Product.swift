@@ -11,9 +11,12 @@ struct Product {
     let numberOfRatings: Int
     let totalRatings: Int
     var stockQuantity: Int
-    let category: String? // Added category field
+    let category: String?
     let metrics: Metrics
-    
+    let latitude: Double?
+    let longitude: Double?
+    let storeName: String?
+
     struct Metrics {
         let bio: Int
         let co2: Int
@@ -21,105 +24,35 @@ struct Product {
         let tree: Int
     }
 
-    static func fetchProduct(withId id: String) async throws -> Product? {
-        let db = Firestore.firestore()
-        let docRef = db.collection("product").document(id)
-        let document = try await docRef.getDocument()
-        
-        guard let data = document.data() else {
-            print("Document data is nil.")
-            return nil
-        }
-
-        // Get the metrics dictionary
-        guard let metricsData = data["metrics"] as? [String: Any] else {
-            print("No metrics data found")
-            return nil
-        }
-        
-        // Debug prints
-        print("=== DEBUG INFO ===")
-        print("Metrics data: \(metricsData)")
-        
-        // Convert metrics values
-        let bioValue = metricsData["Bio"] as? Int ?? 0
-        let c02Value = metricsData["C02"] as? Int ?? 0
-        let plasticValue = metricsData["Plastic"] as? Int ?? 0
-        let treeValue = metricsData["Tree"] as? Int ?? 0
-        
-        print("Converted metrics values:")
-        print("Bio: \(bioValue)")
-        print("C02: \(c02Value)")
-        print("Plastic: \(plasticValue)")
-        print("Tree: \(treeValue)")
-        print("=================")
-        
-        // Print all keys in the data to check for Category
-        print("Document data: \(data)") // Debugging: print all fields in the document
-        
-        // Check if the category exists
-        let category = data["Category"] as? String
-        print("Fetched product category: \(category ?? "No category")") // Debugging category
-        
-        // Debug print for C02 value
-        print("C02 value from Firebase: \(data["C02"] ?? "nil")")
-        
-        return Product(
-            id: document.documentID,
-            name: data["name"] as? String ?? "",
-            description: data["description"] as? String ?? "",
-            price: data["price"] as? Double ?? 0.0,
-            imageURL: data["imageURL"] as? String,
-            averageRating: data["averageRating"] as? Int ?? 0,
-            numberOfRatings: data["numberOfRatings"] as? Int ?? 0,
-            totalRatings: data["totalRatings"] as? Int ?? 0,
-            stockQuantity: data["stockQuantity"] as? Int ?? 0,
-            category: category, // Add the category here
-            metrics: Metrics(
-                bio: bioValue,
-                co2: c02Value,
-                plastic: plasticValue,
-                tree: treeValue
-            )
-        )
+    init(id: String, name: String, description: String, price: Double, imageURL: String?, averageRating: Int, numberOfRatings: Int, totalRatings: Int, stockQuantity: Int, category: String?, metrics: Metrics, latitude: Double?, longitude: Double?, storeName: String?) {
+        self.id = id
+        self.name = name
+        self.description = description
+        self.price = price
+        self.imageURL = imageURL
+        self.averageRating = averageRating
+        self.numberOfRatings = numberOfRatings
+        self.totalRatings = totalRatings
+        self.stockQuantity = stockQuantity
+        self.category = category
+        self.metrics = metrics
+        self.latitude = latitude
+        self.longitude = longitude
+        self.storeName = storeName
     }
 
+    static func fetchProduct(withId id: String) async throws -> Product? {
+        return try await ProductFirebase.shared.fetchProduct(withId: id)
+    }
     
     static func fetchTopRatedEcoProducts(limit: Int = 3) async throws -> [Product] {
-        let db = Firestore.firestore()
-        
-        // Query products sorted by average rating
-        let snapshot = try await db.collection("product")
-            .order(by: "averageRating", descending: true)
-            .limit(to: limit)
-            .getDocuments()
-        
-        return snapshot.documents.map { document in
-            let data = document.data()
-            return Product(
-                id: document.documentID,
-                name: data["name"] as? String ?? "",
-                description: data["description"] as? String ?? "",
-                price: data["price"] as? Double ?? 0.0,
-                imageURL: data["imageURL"] as? String,
-                averageRating: data["averageRating"] as? Int ?? 0,
-                numberOfRatings: data["numberOfRatings"] as? Int ?? 0,
-                totalRatings: data["totalRatings"] as? Int ?? 0,
-                stockQuantity: data["stockQuantity"] as? Int ?? 0,
-                category: data["Category"] as? String, 
-                metrics: Metrics(
-                    bio: (data["Bio"] as? Bool ?? false) ? 1 : 0,
-                    co2: data["C02"] as? Int ?? 0,  // Changed from CO2 to C02
-                    plastic: data["Plastic"] as? Int ?? 0,
-                    tree: data["Tree"] as? Int ?? 0
-                )
-            )
-        }
+        let products = try await ProductFirebase.shared.fetchAllProducts()
+        return Array(products.sorted { $0.averageRating > $1.averageRating }.prefix(limit))
     }
     
-    
-    
-    
+    static func fetchProductsForCategory(_ category: String) async throws -> [Product] {
+        return try await ProductFirebase.shared.fetchProductsByCategory(category)
+    }
     
     static func fetchAllProducts() async throws -> [Product] {
         let db = Firestore.firestore()
@@ -136,19 +69,24 @@ struct Product {
                 print("Fetched Metrics Dictionary: \(metricsData)")
                 
                 // Extract metrics values
-                let bioValue = metricsData["Bio"] as? Bool ?? false
+                let bioValue = metricsData["Bio"] as? Int ?? 0
                 let co2Value = metricsData["C02"] as? Int ?? 0
                 let plasticValue = metricsData["Plastic"] as? Int ?? 0
                 let treeValue = metricsData["Tree"] as? Int ?? 0
                 
-                // Print the metrics values
-                print("Bio: \(bioValue ? 1 : 0), CO2: \(co2Value), Plastic: \(plasticValue), Tree: \(treeValue)")
+                // Extract latitude, longitude, and store name with fallback default values
+                let latitudeValue = data["latitude"] as? Double ?? 0.0
+                let longitudeValue = data["longitude"] as? Double ?? 0.0
+                let storeNameValue = data["storeName"] as? String ?? "Unknown"
                 
-                // Calculate score
+                // Print the metrics values
+                print("Bio: \(bioValue), CO2: \(co2Value), Plastic: \(plasticValue), Tree: \(treeValue)")
+                
+                // Calculate score (you may need to refine this logic)
                 let score = Double(co2Value + plasticValue + treeValue) / 3.0
                 print("Calculated Score: \(score)")
                 
-                // Create and return the Product object
+                // Return the Product object with all required parameters
                 return Product(
                     id: document.documentID,
                     name: data["name"] as? String ?? "Unknown",
@@ -161,11 +99,14 @@ struct Product {
                     stockQuantity: data["stockQuantity"] as? Int ?? 0,
                     category: data["Category"] as? String,
                     metrics: Metrics(
-                        bio: bioValue ? 1 : 0,
+                        bio: bioValue,
                         co2: co2Value,
                         plastic: plasticValue,
                         tree: treeValue
-                    )
+                    ),
+                    latitude: latitudeValue,
+                    longitude: longitudeValue,
+                    storeName: storeNameValue
                 )
             } else {
                 print("No metrics data found for document ID: \(document.documentID)")
@@ -175,10 +116,4 @@ struct Product {
     }
 
 
-
-        
-    }
-
-
-
-
+}
