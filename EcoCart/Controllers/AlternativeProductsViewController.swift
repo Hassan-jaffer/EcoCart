@@ -10,6 +10,9 @@ class AlternativeProductsViewController: UIViewController {
     var selectedProduct: Product?
     var alternativeProduct: Product?  // Store the alternative product to show on the UI
     
+    @IBOutlet weak var AltMsg: UILabel!
+    
+    
     // Weights for each environmental metric (you can adjust these based on importance)
     let co2Weight: Double = 0.5
     let plasticWeight: Double = 0.3
@@ -129,6 +132,7 @@ class AlternativeProductsViewController: UIViewController {
         print("Updating UI with alternative product details.")
         
         // Unhide the view that contains the replacement product details
+        AltMsg.superview?.isHidden = false
             repName.superview?.isHidden = false // This assumes `repName` is inside the view you want to unhide
             repPrice.superview?.isHidden = false
             repImage.superview?.isHidden = false

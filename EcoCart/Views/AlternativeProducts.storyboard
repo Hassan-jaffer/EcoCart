@@ -38,14 +38,18 @@
                                             <constraint firstAttribute="height" constant="75" id="Ijs-sd-yYF"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TWY-0z-h0l">
-                                        <rect key="frame" x="91" y="96" width="38.666666666666657" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TWY-0z-h0l">
+                                        <rect key="frame" x="91" y="96" width="38.666666666666657" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="This product saves more X CO2 than the first product!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DEa-eh-Fsb">
-                                        <rect key="frame" x="46.333333333333343" y="41" width="306.66666666666663" height="82"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This product saves more X CO2 than the first product!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DEa-eh-Fsb">
+                                        <rect key="frame" x="209" y="45" width="144" height="82"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="144" id="FX3-df-cDp"/>
+                                            <constraint firstAttribute="height" constant="82" id="Ssg-Iv-hEL"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" systemColor="systemCyanColor"/>
                                         <nil key="highlightedColor"/>
@@ -63,8 +67,12 @@
                                     <constraint firstItem="1HC-bB-27T" firstAttribute="top" secondItem="F0E-4K-wGy" secondAttribute="bottom" constant="34" id="2TW-Y5-FMO"/>
                                     <constraint firstItem="Y3z-nf-rnB" firstAttribute="leading" secondItem="G08-QB-gGU" secondAttribute="leading" constant="8" id="CWi-o8-yCj"/>
                                     <constraint firstItem="TWY-0z-h0l" firstAttribute="leading" secondItem="Y3z-nf-rnB" secondAttribute="trailing" constant="8" symbolic="YES" id="FF7-Z5-jaG"/>
+                                    <constraint firstAttribute="bottom" secondItem="DEa-eh-Fsb" secondAttribute="bottom" constant="23" id="Iy8-93-daf"/>
+                                    <constraint firstItem="DEa-eh-Fsb" firstAttribute="leading" secondItem="1HC-bB-27T" secondAttribute="trailing" constant="8.3300000000000001" id="N0I-AT-e2y"/>
                                     <constraint firstAttribute="trailing" secondItem="DEa-eh-Fsb" secondAttribute="trailing" constant="8" id="T4j-8N-DVJ"/>
+                                    <constraint firstItem="TWY-0z-h0l" firstAttribute="top" secondItem="1HC-bB-27T" secondAttribute="bottom" constant="8.6699999999999999" id="U2L-04-jSR"/>
                                     <constraint firstItem="Y3z-nf-rnB" firstAttribute="top" secondItem="F0E-4K-wGy" secondAttribute="bottom" constant="15" id="XGa-fb-y9E"/>
+                                    <constraint firstAttribute="trailing" secondItem="DEa-eh-Fsb" secondAttribute="trailing" constant="8" id="ZUs-Bg-vTx"/>
                                     <constraint firstItem="1HC-bB-27T" firstAttribute="leading" secondItem="Y3z-nf-rnB" secondAttribute="trailing" constant="8" symbolic="YES" id="epz-PS-1yJ"/>
                                     <constraint firstItem="F0E-4K-wGy" firstAttribute="top" secondItem="G08-QB-gGU" secondAttribute="top" constant="8" id="f1p-SV-bzB"/>
                                     <constraint firstItem="F0E-4K-wGy" firstAttribute="leading" secondItem="G08-QB-gGU" secondAttribute="leading" constant="8" id="jp4-ub-Iyb"/>
@@ -177,6 +185,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
+                        <outlet property="AltMsg" destination="u9p-Ax-QmR" id="Wwc-8W-0Qm"/>
                         <outlet property="repImage" destination="Y3z-nf-rnB" id="ihT-aA-4eL"/>
                         <outlet property="repName" destination="1HC-bB-27T" id="TUD-N6-Fgp"/>
                         <outlet property="repPrice" destination="DEa-eh-Fsb" id="cZ4-5i-Si4"/>
