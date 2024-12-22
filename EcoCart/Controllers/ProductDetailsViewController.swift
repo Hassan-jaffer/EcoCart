@@ -29,6 +29,8 @@ class ProductDetailsViewController: UIViewController {
     @IBOutlet weak var topRatedImage2: UIImageView!
     @IBOutlet weak var topRatedImage3: UIImageView!
     
+    @IBOutlet weak var viewAlternativeOutlet: UIButton!
+    
     static func instantiate(with productId: String) -> ProductDetailsViewController? {
         let storyboard = UIStoryboard(name: "ProductDetails", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "ProductDetailsViewController") as? ProductDetailsViewController
