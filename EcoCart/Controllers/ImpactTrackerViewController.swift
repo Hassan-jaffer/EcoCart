@@ -231,6 +231,7 @@ class ImpactTrackerViewController: UIViewController {
     
     
     func resetData(){
+        resetBtn.isEnabled = false
         //user id will be changed later
         self.db.collection("impactProd").whereField("userId", isEqualTo: "123").getDocuments(){ querySnapshot, err in
             if let err = err {
@@ -263,6 +264,7 @@ class ImpactTrackerViewController: UIViewController {
         let actionOk = UIAlertAction(title: "Ok", style: .default)
         alert.addAction(actionOk)
         present(alert, animated: true, completion: nil)
+        resetBtn.isEnabled = true
     }
     
     func showError(error: String){
@@ -270,6 +272,7 @@ class ImpactTrackerViewController: UIViewController {
         let actionOk = UIAlertAction(title: "Ok", style: .default)
         alert.addAction(actionOk)
         present(alert, animated: true, completion: nil)
+        resetBtn.isEnabled = true
     }
     
     func showNoData(){
@@ -277,6 +280,7 @@ class ImpactTrackerViewController: UIViewController {
         let actionOk = UIAlertAction(title: "Ok", style: .default)
         alert.addAction(actionOk)
         present(alert, animated: true, completion: nil)
+        resetBtn.isEnabled = true
     }
     
     func resetValues(){
@@ -286,6 +290,7 @@ class ImpactTrackerViewController: UIViewController {
         self.BioCount = 0
         self.productCount = 0
         setRank(co2: 0.0, plastic: 0.0, tree: 0.0, bio: 0.0)
+        updateBarChart()
     }
     
     
