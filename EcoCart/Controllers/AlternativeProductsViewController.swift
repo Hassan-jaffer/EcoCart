@@ -3,7 +3,7 @@ import FirebaseFirestore
 
 class AlternativeProductsViewController: UIViewController {
     
-    @IBOutlet weak var repPrice: UILabel!
+    @IBOutlet weak var repExp: UILabel!
     @IBOutlet weak var repName: UILabel!
     @IBOutlet weak var repImage: UIImageView!
     
@@ -13,6 +13,7 @@ class AlternativeProductsViewController: UIViewController {
     @IBOutlet weak var AltMsg: UILabel!
     
     
+    @IBOutlet weak var repPrice: UILabel!
     // Weights for each environmental metric (you can adjust these based on importance)
     let co2Weight: Double = 0.5
     let plasticWeight: Double = 0.3
@@ -134,6 +135,7 @@ class AlternativeProductsViewController: UIViewController {
         // Unhide the view that contains the replacement product details
         AltMsg.superview?.isHidden = false
             repName.superview?.isHidden = false // This assumes `repName` is inside the view you want to unhide
+
             repPrice.superview?.isHidden = false
             repImage.superview?.isHidden = false
         

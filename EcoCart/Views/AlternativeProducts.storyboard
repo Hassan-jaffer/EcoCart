@@ -16,14 +16,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="This product has a high enviroment footprint, consider the following alternative below" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u9p-Ax-QmR">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This product has a high enviroment footprint, consider the following alternative below" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u9p-Ax-QmR">
                                 <rect key="frame" x="16" y="73" width="361" height="107"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="107" id="09w-Xf-eeU"/>
+                                    <constraint firstAttribute="width" constant="361" id="YWe-0y-0wp"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
                                 <color key="textColor" systemColor="systemRedColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G08-QB-gGU">
-                                <rect key="frame" x="16" y="188" width="361" height="146"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G08-QB-gGU">
+                                <rect key="frame" x="16" y="188" width="361" height="150"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A better product for the enviroment!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0E-4K-wGy">
                                         <rect key="frame" x="8" y="8" width="274.33333333333331" height="25"/>
@@ -84,8 +88,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="x6T-xh-LnF">
-                                <rect key="frame" x="0.0" y="401" width="393" height="309"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="x6T-xh-LnF">
+                                <rect key="frame" x="0.0" y="358" width="393" height="460"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="ProductCell" rowHeight="96" id="k44-09-hph" customClass="ProductCell" customModule="EcoCart" customModuleProvider="target">
@@ -173,6 +177,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="x6T-xh-LnF" secondAttribute="trailing" id="IXG-tl-D3b"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="G08-QB-gGU" secondAttribute="trailing" constant="16" id="KLU-Ba-bjO"/>
                             <constraint firstItem="x6T-xh-LnF" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="OWd-Mh-LyL"/>
+                            <constraint firstItem="u9p-Ax-QmR" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="14" id="eRM-QS-3Km"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="x6T-xh-LnF" secondAttribute="bottom" id="uXr-lX-uMR"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
@@ -186,9 +191,10 @@
                     </view>
                     <connections>
                         <outlet property="AltMsg" destination="u9p-Ax-QmR" id="Wwc-8W-0Qm"/>
+                        <outlet property="repExp" destination="DEa-eh-Fsb" id="lT7-SI-bsx"/>
                         <outlet property="repImage" destination="Y3z-nf-rnB" id="ihT-aA-4eL"/>
                         <outlet property="repName" destination="1HC-bB-27T" id="TUD-N6-Fgp"/>
-                        <outlet property="repPrice" destination="DEa-eh-Fsb" id="cZ4-5i-Si4"/>
+                        <outlet property="repPrice" destination="TWY-0z-h0l" id="BJs-Gj-q3R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
