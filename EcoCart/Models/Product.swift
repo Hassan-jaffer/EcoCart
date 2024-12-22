@@ -116,4 +116,38 @@ struct Product {
             )
         }
     }
+    
+    
+    
+    
+    
+    static func fetchAllProducts() async throws -> [Product] {
+        let db = Firestore.firestore()
+        
+        // Fetch all products from Firestore
+        let snapshot = try await db.collection("product").getDocuments()
+        
+        return snapshot.documents.map { document in
+            let data = document.data()
+            return Product(
+                id: document.documentID,
+                name: data["name"] as? String ?? "",
+                description: data["description"] as? String ?? "",
+                price: data["price"] as? Double ?? 0.0,
+                imageURL: data["imageURL"] as? String,
+                averageRating: data["averageRating"] as? Int ?? 0,
+                numberOfRatings: data["numberOfRatings"] as? Int ?? 0,
+                totalRatings: data["totalRatings"] as? Int ?? 0,
+                stockQuantity: data["stockQuantity"] as? Int ?? 0,
+                category: data["Category"] as? String,
+                metrics: Metrics(
+                    bio: (data["Bio"] as? Bool ?? false) ? 1 : 0,
+                    co2: data["C02"] as? Int ?? 0,
+                    plastic: data["Plastic"] as? Int ?? 0,
+                    tree: data["Tree"] as? Int ?? 0
+                )
+            )
+        }
+    }
+
 }
