@@ -11,6 +11,7 @@ import UIKit
        var selectedPriceOrder: String? = nil
        var selectedCategory: String? = nil
        var isAvailableFiltered: Bool? = nil
+       var selectedMetric: String? = nil
        var products: [Product] = []          // All products fetched from Firestore
        var filteredProducts: [Product] = []  // Filtered products for search
        
@@ -51,6 +52,7 @@ import UIKit
 
                    self.products = documents.documents.map { document in
                        let data = document.data()
+                       print("Fetched document data: \(data)")
                        let category = data["Category"] as? String // Match exact case here
                        print("🌟 Fetched product category: \(category ?? "No Category")") // Debugging category
                        return Product(
@@ -65,17 +67,17 @@ import UIKit
                            stockQuantity: data["stockQuantity"] as? Int ?? 0,
                            category: category,
                            metrics: Product.Metrics(
-                               bio: data["Bio"] as? Int ?? 0,
-                               co2: data["CO2"] as? Int ?? 0,
-                               plastic: data["Plastic"] as? Int ?? 0,
-                               tree: data["Tree"] as? Int ?? 0
+                               bio: (data["metrics"] as? [String: Any])?["Bio"] as? Int ?? 0,
+                               co2: (data["metrics"] as? [String: Any])?["C02"] as? Int ?? 0,
+                               plastic: (data["metrics"] as? [String: Any])?["Plastic"] as? Int ?? 0,
+                               tree: (data["metrics"] as? [String: Any])?["Tree"] as? Int ?? 0
                            )
                        )
                    }
 
                    print("✅ Total Products Fetched: \(self.products.count)")
                    for product in self.products {
-                       print("🛒 Product: \(product.name), Category: \(product.category ?? "No Category")")
+                       print("🛒 Product: \(product.name), Category: \(product.category ?? "No Category"), Metric: \(product.metrics.plastic), \(product.metrics.tree), \(product.metrics.co2), \(product.metrics.bio)")
                    }
 
                    self.filteredProducts = self.products // Initially show all products
@@ -119,7 +121,7 @@ import UIKit
        func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
            if searchText.isEmpty {
                // If search bar is empty, keep current filters
-               didApplyFilters(priceOrder: selectedPriceOrder, category: selectedCategory, availability: isAvailableFiltered)
+               didApplyFilters(priceOrder: selectedPriceOrder, category: selectedCategory, availability: isAvailableFiltered, metric: selectedMetric)
            } else {
                // Start with products already filtered based on category and availability
                let filteredList = products.filter { product in
@@ -184,6 +186,7 @@ import UIKit
                destinationVC.selectedPriceOrder = selectedPriceOrder
                destinationVC.selectedCategory = selectedCategory
                destinationVC.isAvailableFiltered = isAvailableFiltered
+               destinationVC.selectedMetric = selectedMetric
                
                // Smooth transition
                       destinationVC.modalTransitionStyle = .crossDissolve  // Fade transition
@@ -198,6 +201,7 @@ import UIKit
            isAZFiltered = false
            selectedPriceOrder = nil
            selectedCategory = nil
+           selectedMetric = nil
 
            // Reset the filtered products to the full list
            filteredProducts = products
@@ -212,14 +216,16 @@ import UIKit
        
        func didApplyAZFilter(az: Bool) {
            isAZFiltered = az
-           didApplyFilters(priceOrder: nil, category: nil, availability: nil) // Apply current filters
+           didApplyFilters(priceOrder: nil, category: nil, availability: nil, metric: nil) // Apply current filters
        }
 
-       func didApplyFilters(priceOrder: String?, category: String?, availability: Bool?) {
+       func didApplyFilters(priceOrder: String?, category: String?, availability: Bool?, metric: String?) {
            // Save the filter selections
            selectedPriceOrder = priceOrder
            selectedCategory = category
            isAvailableFiltered = availability
+           selectedMetric = metric
+
 
            // Start with the original products list
            filteredProducts = products
@@ -248,6 +254,22 @@ import UIKit
            // Debugging: Check filtered products after category filter
            print("Filtered products after category filter: \(filteredProducts.count) products")
 
+           
+           // Apply Environmental Impact Filter
+               if let metric = selectedMetric {
+                   switch metric {
+                   case "C02":
+                       filteredProducts.sort { $0.metrics.co2 > $1.metrics.co2 }
+                   case "Plastic":
+                       filteredProducts.sort { $0.metrics.plastic > $1.metrics.plastic }
+                   case "Tree":
+                       filteredProducts.sort { $0.metrics.tree > $1.metrics.tree }
+                   default:
+                       break
+                   }
+               }
+           
+           
            // Apply A-Z Sorting if enabled
            if isAZFiltered {
                filteredProducts.sort { $0.name.lowercased() < $1.name.lowercased() }

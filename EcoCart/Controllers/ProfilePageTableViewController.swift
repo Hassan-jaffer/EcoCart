@@ -32,11 +32,26 @@ class ProfilePageTableViewController: UITableViewController {
         // Apply the new theme
         ThemeManager.shared.applyTheme()
         
-        // Optionally, show an alert confirming the mode change
-        let modeText = sender.isOn ? "Dark Mode Enabled" : "Light Mode Enabled"
-        let alert = UIAlertController(title: "Theme Changed", message: modeText, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+        
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        // Navigate based on the cell identifier
+        if let cell = tableView.cellForRow(at: indexPath) {
+            if cell.reuseIdentifier == "myOrdersCell" {
+                navigateToStoryboard(named: "MyOrders", withIdentifier: "MyOrdersViewController")
+            } else if cell.reuseIdentifier == "storeManagementCell" {
+                navigateToStoryboard(named: "Profile", withIdentifier: "StoreManagementViewController")
+            }
+        }
+    }    
+    private func navigateToStoryboard(named: String, withIdentifier storyboardID: String) {
+        let storyboard = UIStoryboard(name: named, bundle: nil) // Replace "Main" with your storyboard name if needed
+        let viewController = storyboard.instantiateViewController(withIdentifier: storyboardID)
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+
 
 }

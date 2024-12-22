@@ -7,11 +7,12 @@
 
 import UIKit
 import FirebaseFirestore
+import DGCharts
 class ImpactTrackerViewController: UIViewController {
     
     @IBOutlet weak var co2progressView: UIProgressView!
     @IBOutlet weak var graphView: UIView!
-
+    
     @IBOutlet weak var plasticProgressView: UIProgressView!
     @IBOutlet weak var impOnTreeProgressView: UIProgressView!
     @IBOutlet weak var bioProgressView: UIProgressView!
@@ -36,11 +37,11 @@ class ImpactTrackerViewController: UIViewController {
     let db = Firestore.firestore()
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        createMenu()
-        editGraphView()
-        editProgressView()
-        fetchData(period: "h")
+        
+        createMenu() //create the popup button
+        editGraphView() //round the corners of the view
+        editProgressView() //adjust progress view size
+        fetchData(period: "") //get all data from firestore (parameter is nil for default)
     }
     
     func editProgressView(){
@@ -78,7 +79,8 @@ class ImpactTrackerViewController: UIViewController {
         self.plasticPercentage.text = "\(Int(plasticPercentage))%"
         self.treePercentage.text = "\(Int(treePercentage))%"
         self.bioPercentage.text = "\(Int(bioPercentage))%"
-        }
+        updateBarChart()
+    }
     
     func setRank(co2: Float, plastic: Float, tree: Float, bio: Float){
         let overall = Int((co2 + plastic + tree + bio) / 4)
@@ -161,7 +163,7 @@ class ImpactTrackerViewController: UIViewController {
                 let plasticProgress = metrics["Plastic"] as? Float ?? 0.0
                 let impOnTreeProgress = metrics["Tree"] as? Float ?? 0.0
                 let bioProgress = metrics["Bio"] as? Bool ?? false
-                //calculate using the class level variables (calculation will be changed later)
+                //calculate using the class level variables
                 self.totalCO2 += co2Progress
                 self.totalPlastic += plasticProgress
                 self.totalImpOnTree += impOnTreeProgress
@@ -169,7 +171,7 @@ class ImpactTrackerViewController: UIViewController {
                 if bioProgress{
                     self.BioCount += 1
                 }
-                self.productCount += 1.0 //loops count (temporary)
+                self.productCount += 1.0 //loops count
             }
             print("action listner activated") //debug
             self.updateProgressView() //update ui
@@ -179,22 +181,40 @@ class ImpactTrackerViewController: UIViewController {
     }
     
     
-    func editGraphView(){
-        //graph background
+    func editGraphView() {
+        // Check if dark mode is enabled
+        if traitCollection.userInterfaceStyle == .dark {
+            graphView.backgroundColor = UIColor.darkGray  // Set background to gray in dark mode
+        } else {
+            graphView.backgroundColor = UIColor.clear  // Keep it clear or transparent for light mode (similar to previous setup)
+        }
+        
+        // Apply the existing configurations (works for both dark and light modes)
         graphView.layer.cornerRadius = 15
         graphView.layer.borderWidth = 2
         graphView.layer.borderColor = UIColor.systemGreen.cgColor
         graphView.layer.shadowColor = UIColor.black.cgColor
         
-        //reset button
+        // Reset button appearance
         resetBtn.layer.cornerRadius = 15
-        
     }
+    
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        // Check if the user interface style (theme) has changed
+        if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            // Reapply the theme to update the graph's background color
+            editGraphView()
+        }
+    }
+    
     
     @IBAction func resetBtnTapped(_ sender: Any) {
         showAlert()
     }
-
+    
     func showAlert(){
         let alert = UIAlertController(title: "Reset data?", message: "Are you sure you want to reset all data? This action cannot be undone", preferredStyle: .alert)
         
@@ -206,11 +226,12 @@ class ImpactTrackerViewController: UIViewController {
         alert.addAction(actionReset)
         
         present(alert, animated: true, completion: nil)
-    
+        
     }
     
     
     func resetData(){
+        resetBtn.isEnabled = false
         //user id will be changed later
         self.db.collection("impactProd").whereField("userId", isEqualTo: "123").getDocuments(){ querySnapshot, err in
             if let err = err {
@@ -222,41 +243,44 @@ class ImpactTrackerViewController: UIViewController {
                 self.showNoData()
                 return
             }
-                for document in querySnapshot!.documents {
-                    print("\(document.data())")
-                    self.db.collection("impactProd").document(document.documentID).delete() { err in
-                        if let err = err {
-                            self.showError(error: err.localizedDescription)
-                        }
-                        else {
-                            
-                            self.resetProgressView()
-                            self.resetSuccess()
-                        }
+            for document in querySnapshot!.documents {
+                print("\(document.data())")
+                self.db.collection("impactProd").document(document.documentID).delete() { err in
+                    if let err = err {
+                        self.showError(error: err.localizedDescription)
+                    }
+                    else {
+                        
+                        self.resetProgressView()
+                        self.resetSuccess()
                     }
                 }
+            }
             
         }
     }
-        func resetSuccess(){
-                let alert = UIAlertController(title: "Success", message: "Data reset successfully", preferredStyle: .alert)
-                let actionOk = UIAlertAction(title: "Ok", style: .default)
-                alert.addAction(actionOk)
-                present(alert, animated: true, completion: nil)
-            }
-            
-            func showError(error: String){
-                let alert = UIAlertController(title: "Error", message: "Something went wrong\n\(error)", preferredStyle: .alert)
-                let actionOk = UIAlertAction(title: "Ok", style: .default)
-                alert.addAction(actionOk)
-                present(alert, animated: true, completion: nil)
-            }
+    func resetSuccess(){
+        let alert = UIAlertController(title: "Success", message: "Data reset successfully", preferredStyle: .alert)
+        let actionOk = UIAlertAction(title: "Ok", style: .default)
+        alert.addAction(actionOk)
+        present(alert, animated: true, completion: nil)
+        resetBtn.isEnabled = true
+    }
+    
+    func showError(error: String){
+        let alert = UIAlertController(title: "Error", message: "Something went wrong\n\(error)", preferredStyle: .alert)
+        let actionOk = UIAlertAction(title: "Ok", style: .default)
+        alert.addAction(actionOk)
+        present(alert, animated: true, completion: nil)
+        resetBtn.isEnabled = true
+    }
     
     func showNoData(){
         let alert = UIAlertController(title: "Error", message: "No data available to reset", preferredStyle: .alert)
         let actionOk = UIAlertAction(title: "Ok", style: .default)
         alert.addAction(actionOk)
         present(alert, animated: true, completion: nil)
+        resetBtn.isEnabled = true
     }
     
     func resetValues(){
@@ -266,12 +290,13 @@ class ImpactTrackerViewController: UIViewController {
         self.BioCount = 0
         self.productCount = 0
         setRank(co2: 0.0, plastic: 0.0, tree: 0.0, bio: 0.0)
+        updateBarChart()
     }
     
-   
+    
     func createMenu(){
         let command1 = UIAction(title: "All-Time", handler: { _ in
-            self.fetchData(period: "h")
+            self.fetchData(period: "")
             
         })
         let command2 = UIAction(title: "Today", handler: { _ in
@@ -295,16 +320,70 @@ class ImpactTrackerViewController: UIViewController {
     }
     
     
+    /*------------------------------------------------------------------------------------
+     
+     BAR CHART VIEW
+     
+     
+     ------------------------------------------------------------------------------------*/
     
     
-            
-            
+    @IBOutlet weak var progressChart: UIView!
+    @IBOutlet weak var barChart: BarChartView!
+    
+    @IBOutlet weak var segment: UISegmentedControl!
+    
+    
+    @IBAction func segmentedChanged(_ sender: UISegmentedControl) {
         
-           
-                
-            
         
+        if sender.selectedSegmentIndex == 0{
+            showProgressView()
+        }
+        else{
+            showBarChart()
+        }
+    }
     
+    func showProgressView(){
+        progressChart.isHidden = false
+        barChart.isHidden = true
+    }
     
+    func showBarChart(){
+        progressChart.isHidden = true
+        barChart.isHidden = false
+        
+    }
     
+    func updateBarChart(){
+        //data part
+        let dataEntries = [
+            BarChartDataEntry(x: 0, y: Double(totalCO2)),
+            BarChartDataEntry(x: 1, y: Double(totalPlastic)),
+            BarChartDataEntry(x: 2, y: Double(totalImpOnTree)),
+            BarChartDataEntry(x: 3, y: Double(BioCount))
+        ]
+        let dataSet = BarChartDataSet(entries: dataEntries, label: "")
+        
+        dataSet.colors = ChartColorTemplates.joyful()
+        
+        let data = BarChartData(dataSet: dataSet)
+        //data.barWidth = 0.8
+        barChart.data = data
+        
+        //design part
+
+        barChart.legend.enabled = false
+        barChart.xAxis.valueFormatter = IndexAxisValueFormatter(values: ["CO2 (KG)", "Plastic (G)", "Trees Saved", "Bio (Products)"])
+        barChart.xAxis.granularity = 1
+        barChart.xAxis.labelPosition = .bottom
+        barChart.rightAxis.enabled = false
+        barChart.drawGridBackgroundEnabled = false
+        barChart.leftAxis.axisMinimum = 0
+        
+    }
+    
+  
+
     }
