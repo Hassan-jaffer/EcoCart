@@ -9,6 +9,8 @@ import UIKit
 import FirebaseFirestore
 import Foundation
 import FirebaseAuth
+import MapKit
+import CoreLocation
 
 class ProductDetailsViewController: UIViewController {
     
@@ -30,6 +32,8 @@ class ProductDetailsViewController: UIViewController {
     @IBOutlet weak var topRatedImage3: UIImageView!
     
     @IBOutlet weak var viewAlternativeOutlet: UIButton!
+    @IBOutlet weak var storeLocationButton: UIButton!
+    @IBOutlet weak var storeNameLabel: UILabel!
     
     @IBAction func viewAlternativeTapped(_ sender: Any) {
         guard let product = product else { return }
@@ -47,28 +51,18 @@ class ProductDetailsViewController: UIViewController {
         navigationController?.pushViewController(alternativeVC, animated: true)
     }
 
-    
-    
-    
-    static func instantiate(with productId: String) -> ProductDetailsViewController? {
-        let storyboard = UIStoryboard(name: "ProductDetails", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "ProductDetailsViewController") as? ProductDetailsViewController
-        viewController?.productId = productId
-        return viewController
-    }
-    
-    var productId: String?
-    var product: Product?  // Changed from 'let' to 'var'
-    private var selectedQuantity: Int = 1
-    private var topRatedProducts: [Product] = []
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("📱 ViewDidLoad called")
         setupUI()
         fetchProductDetails()
         
         // Add observer for product updates
         NotificationCenter.default.addObserver(self, selector: #selector(handleProductUpdate(_:)), name: NSNotification.Name("ProductUpdated"), object: nil)
+        
+        // Setup store location button
+        configureStoreLocationButton()
+        print("🗺️ Store location button setup completed")
     }
     
     deinit {
@@ -83,6 +77,7 @@ class ProductDetailsViewController: UIViewController {
     }
     
     private func setupUI() {
+        print("🎨 Setting up UI")
         productDescription.isEditable = false
         impactTextView.isEditable = false
         nameLabel.font = .systemFont(ofSize: 24, weight: .bold)
@@ -91,9 +86,92 @@ class ProductDetailsViewController: UIViewController {
         productQuantityStepper.value = Double(selectedQuantity)
         quantityLabel.text = "\(selectedQuantity)"
         productQuantityStepper.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)
+        
         setupTopRatedViews()
         fetchTopRatedProducts()
     }
+    
+    private func configureStoreLocationButton() {
+        print("🔧 Configuring store location button")
+        storeLocationButton.isEnabled = true
+        storeLocationButton.alpha = 1.0
+        storeLocationButton.addTarget(self, action: #selector(storeLocationButtonTapped(_:)), for: .touchUpInside)
+        
+        // Add tap gesture recognizer as backup
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(storeLocationButtonTapped(_:)))
+        storeLocationButton.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func storeLocationButtonTapped(_ sender: Any) {
+        print("🗺️ Store location button tapped")
+        guard let product = product else {
+            print("❌ No product available")
+            return
+        }
+        
+        print("📍 Product location - Latitude: \(product.latitude ?? 0), Longitude: \(product.longitude ?? 0)")
+        
+        // Check if location is available
+        guard let latitude = product.latitude,
+              let longitude = product.longitude else {
+            print("❌ No location data available")
+            // Show alert if no location is available
+            let alert = UIAlertController(title: "Location Unavailable", 
+                                        message: "No location available for this store", 
+                                        preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+            return
+        }
+        
+        print("✅ Creating map view with coordinates: \(latitude), \(longitude)")
+        
+        // Create a map view controller
+        let mapVC = UIViewController()
+        let mapView = MKMapView(frame: mapVC.view.bounds)
+        mapVC.view = mapView
+        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        // Use the product's actual coordinates
+        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+        mapView.setRegion(region, animated: true)
+        
+        // Add a pin for the store location
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        annotation.title = product.storeName ?? "Store Location"
+        annotation.subtitle = product.name
+        mapView.addAnnotation(annotation)
+        
+        // Add close button
+        let closeButton = UIButton(frame: CGRect(x: 16, y: 50, width: 80, height: 40))
+        closeButton.setTitle("Close", for: .normal)
+        closeButton.backgroundColor = .systemGreen
+        closeButton.layer.cornerRadius = 8
+        closeButton.addTarget(self, action: #selector(dismissMap), for: .touchUpInside)
+        mapVC.view.addSubview(closeButton)
+        
+        // Present the map modally
+        mapVC.modalPresentationStyle = .fullScreen
+        present(mapVC, animated: true)
+    }
+    
+    @objc private func dismissMap() {
+        dismiss(animated: true)
+    }
+    
+    static func instantiate(with productId: String) -> ProductDetailsViewController? {
+        let storyboard = UIStoryboard(name: "ProductDetails", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "ProductDetailsViewController") as? ProductDetailsViewController
+        viewController?.productId = productId
+        return viewController
+    }
+    
+    var productId: String?
+    var product: Product?  // Changed from 'let' to 'var'
+    private var selectedQuantity: Int = 1
+    private var topRatedProducts: [Product] = []
     
     private func fetchProductDetails() {
         guard let productId = self.productId else {
@@ -105,11 +183,15 @@ class ProductDetailsViewController: UIViewController {
         Task {
             do {
                 if let product = try await Product.fetchProduct(withId: productId) {
+                    print("✅ Product fetched successfully")
+                    print("📍 Location data - Latitude: \(product.latitude ?? 0), Longitude: \(product.longitude ?? 0)")
                     print("📊 Metrics received: Bio=\(product.metrics.bio), CO2=\(product.metrics.co2), Plastic=\(product.metrics.plastic), Tree=\(product.metrics.tree)")
+                    
                     self.product = product
                     self.productId = product.id
                     updateUI(with: product)
                 } else {
+                    print("❌ Product fetch returned nil")
                     showAlert(title: "Error", message: "Failed to load product details")
                 }
             } catch {
@@ -121,48 +203,50 @@ class ProductDetailsViewController: UIViewController {
     
     private func updateUI(with product: Product) {
         print("🌟 Updating UI with product: \(product.id)")
-        print("🌟 Average Rating: \(product.averageRating)")
+        print("📍 Location data - Latitude: \(product.latitude ?? 0), Longitude: \(product.longitude ?? 0)")
         
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            
-            nameLabel.text = product.name
-            productPrice.text = String(format: "%.2f BHD", product.price)
-            productDescription.text = product.description
-            
-            let starButtons = [self.ratingButton1, self.ratingButton2, self.ratingButton3, self.ratingButton4, self.ratingButton5]
-            starButtons.enumerated().forEach { index, button in
-                button?.setImage(UIImage(systemName: "star.fill"), for: .normal)
-                button?.tintColor = index < product.averageRating ? .systemYellow : .systemGray4
-            }
-            
-            print("📊 Metrics values: Bio=\(product.metrics.bio), CO2=\(product.metrics.co2), Plastic=\(product.metrics.plastic), Tree=\(product.metrics.tree)")
-            
-            // Show/hide eco-friendly certificate based on Bio metric
-            self.ecoFriendlyCertificateImage.isHidden = product.metrics.bio != 1
-            if product.metrics.bio == 1 {
-                self.ecoFriendlyCertificateImage.image = UIImage(named: "eco-certificate")
-            }
-            
-            // Format metrics text
-            let metricsText = """
-            Environmental Impact:
-            Bio-Based: \(product.metrics.bio == 1 ? "Yes" : "No")
-            CO₂ Saved: \(product.metrics.co2) kg
-            Plastic Saved: \(product.metrics.plastic) kg
-            Trees Saved: \(product.metrics.tree)
-            """
-            self.impactTextView.text = metricsText
-            
-            self.productQuantityStepper.maximumValue = Double(product.stockQuantity)
-            self.productQuantityStepper.value = 1
-            self.quantityLabel.text = "1"
-            
-            if let imageUrlString = product.imageURL, let imageUrl = URL(string: imageUrlString) {
-                self.loadImage(from: imageUrl)
-            } else {
-                self.productImage.image = UIImage(named: "placeholderImage")
-            }
+        // Update UI elements with product data
+        nameLabel.text = product.name
+        productDescription.text = product.description
+        productPrice.text = String(format: "%.2f BHD", product.price)
+        storeNameLabel.text = product.storeName ?? "Store name not available"
+        
+        // Load product image
+        if let imageURLString = product.imageURL, let imageURL = URL(string: imageURLString) {
+            loadImage(from: imageURL, into: productImage)
+        }
+        
+        let starButtons = [ratingButton1, ratingButton2, ratingButton3, ratingButton4, ratingButton5]
+        starButtons.enumerated().forEach { index, button in
+            button?.setImage(UIImage(systemName: "star.fill"), for: .normal)
+            button?.tintColor = index < product.averageRating ? .systemYellow : .systemGray4
+        }
+        
+        // Show/hide eco-friendly certificate based on Bio metric
+        ecoFriendlyCertificateImage.isHidden = product.metrics.bio != 1
+        if product.metrics.bio == 1 {
+            ecoFriendlyCertificateImage.image = UIImage(named: "eco-certificate")
+        }
+        
+        // Format metrics text
+        let metricsText = """
+        Environmental Impact:
+        Bio-Based: \(product.metrics.bio == 1 ? "Yes" : "No")
+        CO₂ Saved: \(product.metrics.co2) kg
+        Plastic Saved: \(product.metrics.plastic) kg
+        Trees Saved: \(product.metrics.tree)
+        """
+        impactTextView.text = metricsText
+        
+        productQuantityStepper.maximumValue = Double(product.stockQuantity)
+        
+        // Configure store location button based on location availability
+        if let latitude = product.latitude, let longitude = product.longitude {
+            storeLocationButton.isEnabled = true
+            storeLocationButton.alpha = 1.0
+        } else {
+            storeLocationButton.isEnabled = true
+            storeLocationButton.alpha = 1.0
         }
     }
 

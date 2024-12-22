@@ -57,16 +57,19 @@ class EditProductViewController: UIViewController {
 
         let updatedProduct = Product(
             id: product.id,
-            name: name,
-            description: description,
-            price: price,
-            imageURL: product.imageURL, // Keep the same image URL
+            name: productNameTextField.text ?? product.name,
+            description: productDescriptionTextField.text ?? product.description,
+            price: Double(priceTextField.text ?? "") ?? product.price,
+            imageURL: product.imageURL, // Keep the original imageURL
             averageRating: product.averageRating,
             numberOfRatings: product.numberOfRatings,
             totalRatings: product.totalRatings,
             stockQuantity: Int(quantityStepper.value),
-            category: product.category, // Keep the same category
-            metrics: product.metrics // Keep the same metrics
+            category: product.category,
+            metrics: product.metrics,
+            latitude: product.latitude,  // Keep original latitude
+            longitude: product.longitude, // Keep original longitude
+            storeName: product.storeName  // Keep original store name
         )
         
         saveProductToFirestore(updatedProduct)
