@@ -132,8 +132,16 @@ class AlternativeProductsViewController: UIViewController {
 
         print("Updating UI with alternative product details.")
         
-        // Unhide the view that contains the replacement product details
         AltMsg.superview?.isHidden = false
+        AltMsg.superview?.alpha = 1.0 // Ensure it's not alpha=0
+        AltMsg.superview?.isHidden = false
+        print("AltMsg visibility: \(AltMsg.isHidden), alpha: \(AltMsg.alpha)")
+        print("AltMsg constraints: \(AltMsg.constraints)")
+        AltMsg.superview?.setNeedsLayout()
+        AltMsg.superview?.layoutIfNeeded()
+
+        
+        
             repName.superview?.isHidden = false // This assumes `repName` is inside the view you want to unhide
 
             repPrice.superview?.isHidden = false

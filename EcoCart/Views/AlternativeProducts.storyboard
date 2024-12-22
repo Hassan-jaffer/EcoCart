@@ -16,40 +16,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This product has a high enviroment footprint, consider the following alternative below" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u9p-Ax-QmR">
-                                <rect key="frame" x="16" y="73" width="361" height="107"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="107" id="09w-Xf-eeU"/>
-                                    <constraint firstAttribute="width" constant="361" id="YWe-0y-0wp"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
-                                <color key="textColor" systemColor="systemRedColor"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u9p-Ax-QmR">
+                                <rect key="frame" x="16" y="73" width="361" height="40.666666666666657"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="This product has a high enviroment footprint, consider the following alternative below">
+                                        <attributes>
+                                            <color key="NSColor" systemColor="systemRedColor"/>
+                                            <font key="NSFont" metaFont="system" size="17"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G08-QB-gGU">
-                                <rect key="frame" x="16" y="188" width="361" height="150"/>
+                                <rect key="frame" x="16" y="121.66666666666669" width="361" height="150"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A better product for the enviroment!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F0E-4K-wGy">
-                                        <rect key="frame" x="8" y="8" width="274.33333333333331" height="25"/>
+                                        <rect key="frame" x="8" y="7.9999999999999858" width="274.33333333333331" height="25"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y3z-nf-rnB">
-                                        <rect key="frame" x="8" y="48" width="75" height="75"/>
+                                        <rect key="frame" x="8" y="47.999999999999986" width="75" height="75"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="75" id="5jD-Uf-UEa"/>
                                             <constraint firstAttribute="height" constant="75" id="Ijs-sd-yYF"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TWY-0z-h0l">
-                                        <rect key="frame" x="91" y="96" width="38.666666666666657" height="20.333333333333329"/>
+                                        <rect key="frame" x="91" y="95.999999999999986" width="38.666666666666657" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This product saves more X CO2 than the first product!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DEa-eh-Fsb">
-                                        <rect key="frame" x="209" y="45" width="144" height="82"/>
+                                        <rect key="frame" x="209" y="44.999999999999986" width="144" height="82"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="144" id="FX3-df-cDp"/>
                                             <constraint firstAttribute="height" constant="82" id="Ssg-Iv-hEL"/>
@@ -59,7 +62,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1HC-bB-27T">
-                                        <rect key="frame" x="91" y="67" width="109.66666666666669" height="20.333333333333329"/>
+                                        <rect key="frame" x="91" y="66.999999999999986" width="109.66666666666669" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -89,7 +92,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="x6T-xh-LnF">
-                                <rect key="frame" x="0.0" y="358" width="393" height="460"/>
+                                <rect key="frame" x="0.0" y="291.66666666666669" width="393" height="526.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="ProductCell" rowHeight="96" id="k44-09-hph" customClass="ProductCell" customModule="EcoCart" customModuleProvider="target">
