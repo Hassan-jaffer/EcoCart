@@ -180,7 +180,6 @@
                         <outlet property="repImage" destination="Y3z-nf-rnB" id="ihT-aA-4eL"/>
                         <outlet property="repName" destination="1HC-bB-27T" id="TUD-N6-Fgp"/>
                         <outlet property="repPrice" destination="DEa-eh-Fsb" id="cZ4-5i-Si4"/>
-                        <outlet property="tableView" destination="x6T-xh-LnF" id="wyr-IE-SEv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

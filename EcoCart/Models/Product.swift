@@ -126,28 +126,59 @@ struct Product {
         
         // Fetch all products from Firestore
         let snapshot = try await db.collection("product").getDocuments()
-        
-        return snapshot.documents.map { document in
+        print("Fetched \(snapshot.documents.count) products.")
+
+        return snapshot.documents.compactMap { document in
             let data = document.data()
-            return Product(
-                id: document.documentID,
-                name: data["name"] as? String ?? "",
-                description: data["description"] as? String ?? "",
-                price: data["price"] as? Double ?? 0.0,
-                imageURL: data["imageURL"] as? String,
-                averageRating: data["averageRating"] as? Int ?? 0,
-                numberOfRatings: data["numberOfRatings"] as? Int ?? 0,
-                totalRatings: data["totalRatings"] as? Int ?? 0,
-                stockQuantity: data["stockQuantity"] as? Int ?? 0,
-                category: data["Category"] as? String,
-                metrics: Metrics(
-                    bio: (data["Bio"] as? Bool ?? false) ? 1 : 0,
-                    co2: data["C02"] as? Int ?? 0,
-                    plastic: data["Plastic"] as? Int ?? 0,
-                    tree: data["Tree"] as? Int ?? 0
+            
+            // Check if the metrics field exists and print it
+            if let metricsData = data["metrics"] as? [String: Any] {
+                print("Fetched Metrics Dictionary: \(metricsData)")
+                
+                // Extract metrics values
+                let bioValue = metricsData["Bio"] as? Bool ?? false
+                let co2Value = metricsData["C02"] as? Int ?? 0
+                let plasticValue = metricsData["Plastic"] as? Int ?? 0
+                let treeValue = metricsData["Tree"] as? Int ?? 0
+                
+                // Print the metrics values
+                print("Bio: \(bioValue ? 1 : 0), CO2: \(co2Value), Plastic: \(plasticValue), Tree: \(treeValue)")
+                
+                // Calculate score
+                let score = Double(co2Value + plasticValue + treeValue) / 3.0
+                print("Calculated Score: \(score)")
+                
+                // Create and return the Product object
+                return Product(
+                    id: document.documentID,
+                    name: data["name"] as? String ?? "Unknown",
+                    description: data["description"] as? String ?? "",
+                    price: data["price"] as? Double ?? 0.0,
+                    imageURL: data["imageURL"] as? String,
+                    averageRating: data["averageRating"] as? Int ?? 0,
+                    numberOfRatings: data["numberOfRatings"] as? Int ?? 0,
+                    totalRatings: data["totalRatings"] as? Int ?? 0,
+                    stockQuantity: data["stockQuantity"] as? Int ?? 0,
+                    category: data["Category"] as? String,
+                    metrics: Metrics(
+                        bio: bioValue ? 1 : 0,
+                        co2: co2Value,
+                        plastic: plasticValue,
+                        tree: treeValue
+                    )
                 )
-            )
+            } else {
+                print("No metrics data found for document ID: \(document.documentID)")
+                return nil // Return nil if metrics are missing
+            }
         }
     }
 
-}
+
+
+        
+    }
+
+
+
+
