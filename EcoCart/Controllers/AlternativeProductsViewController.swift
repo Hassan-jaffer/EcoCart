@@ -35,18 +35,21 @@ class AlternativeProductsViewController: UIViewController {
                 let allProducts = try await Product.fetchAllProducts()
                 print("Fetched \(allProducts.count) products.")
                 
-                // Filter products by category and keywords (type similarity)
+                // Filter products by keyword similarity (ignoring category)
                 let similarProducts = allProducts.filter { product in
-                    guard product.category == selectedProduct.category else { return false }
-                    return productContainsSimilarKeywords(selected: selectedProduct, candidate: product)
+                    let isSimilar = productContainsSimilarKeywords(selected: selectedProduct, candidate: product)
+                    if isSimilar {
+                        print("Similar product found: \(product.name)")
+                    }
+                    return isSimilar
                 }
                 
-                print("Filtered \(similarProducts.count) similar products in category: \(selectedProduct.category)")
+                print("Filtered \(similarProducts.count) similar products based on keywords.")
                 
                 // If no similar products are found, notify the user
                 guard !similarProducts.isEmpty else {
                     DispatchQueue.main.async {
-                        self.showNoAlternativeMessage("No alternatives found in the same category or type.")
+                        self.showNoAlternativeMessage("No alternatives found based on keywords.")
                     }
                     return
                 }
@@ -65,10 +68,12 @@ class AlternativeProductsViewController: UIViewController {
                         return scoreDiff < 0
                     }
                 
+                print("Filtered and sorted alternatives: \(alternatives.count) alternatives found.")
+                
                 // Select the best alternative if available
                 if let bestAlternative = alternatives.first {
                     alternativeProduct = bestAlternative
-                    print("Best alternative product found: \(bestAlternative.name)")
+                    print("Best alternative product found: \(bestAlternative.name), Price: \(bestAlternative.price), Footprint Score: \(calculateFootprintScore(product: bestAlternative))")
                 } else {
                     alternativeProduct = nil
                     print("No suitable alternative found.")
@@ -83,6 +88,7 @@ class AlternativeProductsViewController: UIViewController {
             }
         }
     }
+
     
     private func calculateFootprintScore(product: Product) -> Double {
         let co2 = product.metrics.co2 > 0 ? product.metrics.co2 : 100 // Default penalty for missing metrics
@@ -126,6 +132,10 @@ class AlternativeProductsViewController: UIViewController {
         AltMsg.text = "The selected product has a high environmental footprint. We recommend this eco-friendlier alternative:"
         AltMsg.isHidden = false
         
+        repName.superview?.isHidden = false // This assumes `repName` is inside the view you want to unhide
+
+                           repPrice.superview?.isHidden = false
+                           repImage.superview?.isHidden = false
         // Update UI with the alternative product details
         repName.text = alternativeProduct.name
         repPrice.text = "\(alternativeProduct.price) BHD"
