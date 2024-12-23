@@ -57,63 +57,79 @@ struct Product {
     static func fetchAllProducts() async throws -> [Product] {
         let db = Firestore.firestore()
         
-        // Fetch all products from Firestore
+        // Fetch documents from the "product" collection
         let snapshot = try await db.collection("product").getDocuments()
-        print("Fetched \(snapshot.documents.count) products.")
-
-        return snapshot.documents.compactMap { document in
+        print("✅ Fetched \(snapshot.documents.count) products.")
+        
+        var products: [Product] = []
+        
+        for document in snapshot.documents {
             let data = document.data()
             
-            // Check if the metrics field exists and print it
-            if let metricsData = data["metrics"] as? [String: Any] {
-                print("Fetched Metrics Dictionary: \(metricsData)")
-                
-                // Extract metrics values
-                let bioValue = metricsData["Bio"] as? Int ?? 0
-                let co2Value = metricsData["C02"] as? Int ?? 0
-                let plasticValue = metricsData["Plastic"] as? Int ?? 0
-                let treeValue = metricsData["Tree"] as? Int ?? 0
-                
-                // Extract latitude, longitude, and store name with fallback default values
-                let latitudeValue = data["latitude"] as? Double ?? 0.0
-                let longitudeValue = data["longitude"] as? Double ?? 0.0
-                let storeNameValue = data["storeName"] as? String ?? "Unknown"
-                
-                // Print the metrics values
-                print("Bio: \(bioValue), CO2: \(co2Value), Plastic: \(plasticValue), Tree: \(treeValue)")
-                
-                // Calculate score (you may need to refine this logic)
-                let score = Double(co2Value + plasticValue + treeValue) / 3.0
-                print("Calculated Score: \(score)")
-                
-                // Return the Product object with all required parameters
-                return Product(
-                    id: document.documentID,
-                    name: data["name"] as? String ?? "Unknown",
-                    description: data["description"] as? String ?? "",
-                    price: data["price"] as? Double ?? 0.0,
-                    imageURL: data["imageURL"] as? String,
-                    averageRating: data["averageRating"] as? Int ?? 0,
-                    numberOfRatings: data["numberOfRatings"] as? Int ?? 0,
-                    totalRatings: data["totalRatings"] as? Int ?? 0,
-                    stockQuantity: data["stockQuantity"] as? Int ?? 0,
-                    category: data["Category"] as? String,
-                    metrics: Metrics(
-                        bio: bioValue,
-                        co2: co2Value,
-                        plastic: plasticValue,
-                        tree: treeValue
-                    ),
-                    latitude: latitudeValue,
-                    longitude: longitudeValue,
-                    storeName: storeNameValue
-                )
+            // Log the entire document data to check for the category field
+            print("📄 Parsing product: \(document.documentID)")
+            print("Raw data from Firebase: \(data)")
+            
+            // Explicitly check and log the category field
+            if let categoryValue = data["Category"] as? String {
+                if categoryValue.isEmpty {
+                    print("❌ Category is empty for product \(document.documentID).")
+                } else {
+                    print("📦 Found category for product \(document.documentID): \(categoryValue)")
+                }
             } else {
-                print("No metrics data found for document ID: \(document.documentID)")
-                return nil // Return nil if metrics are missing
+                print("❌ Category is missing for product \(document.documentID).")
             }
+
+            // Extract metrics data
+            guard let metricsData = data["metrics"] as? [String: Any] else {
+                print("❌ No metrics data found for document ID: \(document.documentID)")
+                continue // Skip this product if metrics are missing
+            }
+
+            // Extract latitude and longitude
+            let latitudeValue = data["latitude"] as? Double ?? 0.0
+            let longitudeValue = data["longitude"] as? Double ?? 0.0
+            
+            // Extract and handle the category with a fallback if necessary
+            let categoryValue = (data["Category"] as? String)?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "Unknown Category"
+            
+            // Check if category was properly set or defaulted to "Unknown Category"
+            if categoryValue == "Unknown Category" {
+                print("❌ Using default category for product \(document.documentID).")
+            }
+
+            // Create and append product to the list
+            let product = Product(
+                id: document.documentID,
+                name: data["name"] as? String ?? "Unknown",
+                description: data["description"] as? String ?? "",
+                price: data["price"] as? Double ?? 0.0,
+                imageURL: data["imageURL"] as? String,
+                averageRating: data["averageRating"] as? Int ?? 0,
+                numberOfRatings: data["numberOfRatings"] as? Int ?? 0,
+                totalRatings: data["totalRatings"] as? Int ?? 0,
+                stockQuantity: data["stockQuantity"] as? Int ?? 0,
+                category: categoryValue,
+                metrics: Metrics(
+                    bio: metricsData["Bio"] as? Int ?? 0,
+                    co2: metricsData["C02"] as? Int ?? 0,
+                    plastic: metricsData["Plastic"] as? Int ?? 0,
+                    tree: metricsData["Tree"] as? Int ?? 0
+                ),
+                latitude: latitudeValue,
+                longitude: longitudeValue,
+                storeName: data["storeName"] as? String ?? "Unknown"
+            )
+
+            products.append(product)
         }
+
+        print("✅ Total Products Fetched: \(products.count)")
+        return products
     }
+
+
 
 
 }
