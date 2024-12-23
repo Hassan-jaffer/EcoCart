@@ -45,15 +45,65 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
 
         Task {
             do {
-                // Use ProductFirebase to fetch products
-                self.products = try await ProductFirebase.shared.fetchAllProducts()
-                print("✅ Total Products Fetched: \(self.products.count)")
-                
-                for product in self.products {
-                    print("🛒 Product: \(product.name), Category: \(product.category ?? "No Category"), Location: \(product.latitude ?? 0), \(product.longitude ?? 0)")
+                let db = Firestore.firestore()
+                let documents = try await db.collection("product").getDocuments()
+
+                self.products = documents.documents.map { document in
+                    let data = document.data()
+                    
+                    // Print out the entire data dictionary for debugging
+                    print("Fetched document data: \(data)")
+
+                    // Extract and print category for debugging
+                    let category = data["Category"] as? String
+                    print("🌟 Fetched product category: \(category ?? "No Category")") // Debugging category
+                    
+                    // Extract location data
+                    let latitude = (data["location"] as? [String: Any])?["latitude"] as? Double ?? 0.0
+                    let longitude = (data["location"] as? [String: Any])?["longtitude"] as? Double ?? 0.0
+                    print("📍 Fetched location - Latitude: \(latitude), Longitude: \(longitude)")
+
+                    // Extract metrics data
+                    let metricsData = data["metrics"] as? [String: Any] ?? [:]
+                    let bio = metricsData["Bio"] as? Int ?? 0
+                    let co2 = metricsData["C02"] as? Int ?? 0
+                    let plastic = metricsData["Plastic"] as? Int ?? 0
+                    let tree = metricsData["Tree"] as? Int ?? 0
+                    print("🔋 Fetched metrics - Bio: \(bio), CO2: \(co2), Plastic: \(plastic), Tree: \(tree)")
+
+                    return Product(
+                        id: document.documentID,
+                        name: data["name"] as? String ?? "",
+                        description: data["description"] as? String ?? "",
+                        price: data["price"] as? Double ?? 0.0,
+                        imageURL: data["imageURL"] as? String,
+                        averageRating: data["averageRating"] as? Int ?? 0,
+                        numberOfRatings: data["numberOfRatings"] as? Int ?? 0,
+                        totalRatings: data["totalRatings"] as? Int ?? 0,
+                        stockQuantity: data["stockQuantity"] as? Int ?? 0,
+                        category: category,
+                        metrics: Product.Metrics(
+                            bio: bio,
+                            co2: co2,
+                            plastic: plastic,
+                            tree: tree
+                        ),
+                        latitude: latitude,
+                        longitude: longitude,
+                        storeName: data["storeName"] as? String ?? "Unknown"
+                    )
                 }
 
-                self.filteredProducts = self.products // Initially show all products
+                // Debug the number of products fetched and their categories
+                print("✅ Total Products Fetched: \(self.products.count)")
+                for product in self.products {
+                    print("🛒 Product: \(product.name), Category: \(product.category ?? "No Category"), Metric: \(product.metrics.plastic), \(product.metrics.tree), \(product.metrics.co2), \(product.metrics.bio), Location: \(product.latitude), \(product.longitude)")
+                }
+
+                // Initially show all products
+                self.filteredProducts = self.products
+
+                // Update the UI on the main thread
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating() // Stop spinner
                     self.tableView.reloadData() // Reload table view
@@ -66,6 +116,7 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
             }
         }
     }
+
     
     // MARK: - UITableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

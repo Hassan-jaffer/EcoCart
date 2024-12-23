@@ -35,11 +35,27 @@ class AlternativeProductsViewController: UIViewController {
                 let allProducts = try await Product.fetchAllProducts()
                 print("Fetched \(allProducts.count) products.")
                 
+                // Filter products by category and keywords (type similarity)
+                let similarProducts = allProducts.filter { product in
+                    guard product.category == selectedProduct.category else { return false }
+                    return productContainsSimilarKeywords(selected: selectedProduct, candidate: product)
+                }
+                
+                print("Filtered \(similarProducts.count) similar products in category: \(selectedProduct.category)")
+                
+                // If no similar products are found, notify the user
+                guard !similarProducts.isEmpty else {
+                    DispatchQueue.main.async {
+                        self.showNoAlternativeMessage("No alternatives found in the same category or type.")
+                    }
+                    return
+                }
+                
                 let selectedProductScore = calculateFootprintScore(product: selectedProduct)
                 print("Selected Product Score: \(selectedProductScore)")
                 
                 // Filter and sort products based on footprint score
-                let alternatives = allProducts
+                let alternatives = similarProducts
                     .filter { calculateFootprintScore(product: $0) < selectedProductScore }
                     .sorted {
                         let scoreDiff = calculateFootprintScore(product: $0) - calculateFootprintScore(product: $1)
@@ -76,20 +92,38 @@ class AlternativeProductsViewController: UIViewController {
         return (co2Weight * Double(co2)) + (plasticWeight * Double(plastic)) + (treeWeight * Double(tree))
     }
     
+    private func productContainsSimilarKeywords(selected: Product, candidate: Product) -> Bool {
+        // Extract keywords from product names
+        let selectedKeywords = extractKeywords(from: selected.name)
+        let candidateKeywords = extractKeywords(from: candidate.name)
+        
+        // Check if the sets of keywords intersect
+        let matchingKeywords = selectedKeywords.intersection(candidateKeywords)
+        print("Matching keywords: \(matchingKeywords)")
+        return !matchingKeywords.isEmpty
+    }
+    
+    private func extractKeywords(from name: String) -> Set<String> {
+        // Convert the product name to lowercase, remove special characters, and split into words
+        let words = name
+            .lowercased()
+            .components(separatedBy: CharacterSet.alphanumerics.inverted)
+            .filter { !$0.isEmpty } // Remove empty strings
+        
+        return Set(words)
+    }
+    
     private func updateReplacementProductDetails() {
         guard let alternativeProduct = alternativeProduct else {
-            showNoAlternativeMessage("The selected product already has a low environmental impact.")
+            showNoAlternativeMessage("The selected product already has a low environmental impact, Good choice!")
+            AltMsg.textColor = UIColor.systemGreen // Change text color to green
             return
         }
         
         print("Updating UI with alternative product details.")
         
-        repName.superview?.isHidden = false // This assumes `repName` is inside the view you want to unhide
-
-                    repPrice.superview?.isHidden = false
-                    repImage.superview?.isHidden = false
         // Show the recommendation message
-        AltMsg.text = "We recommend this eco-friendlier alternative:"
+        AltMsg.text = "The selected product has a high environmental footprint. We recommend this eco-friendlier alternative:"
         AltMsg.isHidden = false
         
         // Update UI with the alternative product details
