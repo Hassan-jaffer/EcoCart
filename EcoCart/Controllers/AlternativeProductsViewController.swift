@@ -179,17 +179,17 @@ class AlternativeProductsViewController: UIViewController {
             AltMsg.textColor = UIColor.systemGreen // Change text color to green
             return
         }
-        
+
         print("Updating UI with alternative product details.")
-        
+
         // Show the recommendation message
         AltMsg.text = "The selected product has a high environmental footprint. We recommend this eco-friendlier alternative:"
         AltMsg.isHidden = false
-        
-        repName.superview?.isHidden = false // This assumes `repName` is inside the view you want to unhide
 
-                           repPrice.superview?.isHidden = false
-                           repImage.superview?.isHidden = false
+        repName.superview?.isHidden = false // This assumes `repName` is inside the view you want to unhide
+        repPrice.superview?.isHidden = false
+        repImage.superview?.isHidden = false
+
         // Update UI with the alternative product details
         repName.text = alternativeProduct.name
         repPrice.text = "\(alternativeProduct.price) BHD"
@@ -216,7 +216,26 @@ class AlternativeProductsViewController: UIViewController {
         } else {
             repImage.image = UIImage(named: "placeholder") // Default placeholder if no image URL is available
         }
+
+        // Generate the explanation for choosing this alternative product
+        let selectedProductScore = calculateFootprintScore(product: selectedProduct!)
+        let alternativeProductScore = calculateFootprintScore(product: alternativeProduct)
+        
+        // Explanation logic: compare footprint scores
+        var explanation = "This alternative has a lower environmental footprint."
+
+        if selectedProductScore > alternativeProductScore {
+            explanation += "\nThe selected product has a higher footprint."
+        } else {
+            explanation += "\nThe alternative has a better footprint."
+        }
+
+        // Set the explanation text
+        repExp.text = explanation
+
+
     }
+
     
     private func showNoAlternativeMessage(_ message: String) {
         // Display a message if no alternatives are found
