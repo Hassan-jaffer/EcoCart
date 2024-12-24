@@ -299,7 +299,22 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
     }
     
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Get the selected MetricProduct
+        let selectedMetricProduct = metricProducts[indexPath.row]
+
+        // Get the associated Product
+        let selectedProduct = selectedMetricProduct.product
+
+        // Instantiate and navigate to the ProductDetailsViewController
+        if let productDetailsVC = ProductDetailsViewController.instantiate(with: selectedProduct.id) {
+            navigationController?.pushViewController(productDetailsVC, animated: true)
+            print("Navigating to product details for: \(selectedProduct.name)")
+        } else {
+            print("Failed to instantiate ProductDetailsViewController.")
+        }
+    }
+
     // Number of sections in the table view (1 section in this case)
         func numberOfSections(in tableView: UITableView) -> Int {
             return 1 // You can adjust this based on your needs
