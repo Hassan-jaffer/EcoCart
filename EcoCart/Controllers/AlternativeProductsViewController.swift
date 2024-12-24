@@ -113,9 +113,9 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                 self.alternativeProduct = filteredProducts.first
                 
                 // Find the highest product for each metric (CO2, Plastic, Trees)
-                var co2Product: Product?
-                var plasticProduct: Product?
-                var treeProduct: Product?
+                var co2Product: Product? = nil
+                var plasticProduct: Product? = nil
+                var treeProduct: Product? = nil
                 
                 for product in filteredProducts {
                     // Find the highest CO2 product
@@ -132,11 +132,19 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                     }
                 }
                 
+                // Ensure no product is nil before proceeding
+                guard let co2Product = co2Product, let plasticProduct = plasticProduct, let treeProduct = treeProduct else {
+                    DispatchQueue.main.async {
+                        self.showNoAlternativeMessage("No valid alternative products found.")
+                    }
+                    return
+                }
+                
                 // Now, create MetricProduct for each of the highest metric products
                 self.metricProducts = [
-                    MetricProduct(product: co2Product!, metric: "CO2", metricValue: Double(co2Product!.metrics.co2)),
-                    MetricProduct(product: plasticProduct!, metric: "Plastic", metricValue: Double(plasticProduct!.metrics.plastic)),
-                    MetricProduct(product: treeProduct!, metric: "Trees", metricValue: Double(treeProduct!.metrics.tree))
+                    MetricProduct(product: co2Product, metric: "CO2", metricValue: Double(co2Product.metrics.co2)),
+                    MetricProduct(product: plasticProduct, metric: "Plastic", metricValue: Double(plasticProduct.metrics.plastic)),
+                    MetricProduct(product: treeProduct, metric: "Trees", metricValue: Double(treeProduct.metrics.tree))
                 ]
                 
                 print("Metric products count: \(self.metricProducts.count)")
@@ -153,7 +161,6 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
             }
         }
     }
-
 
 
     
