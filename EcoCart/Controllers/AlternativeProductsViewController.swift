@@ -67,7 +67,7 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
             showNoAlternativeMessage("No product selected.")
             return
         }
-        
+
         Task {
             do {
                 let allProducts = try await Product.fetchAllProducts()
@@ -109,24 +109,46 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                 
                 print("Filtered and sorted alternatives: \(filteredProducts.count) alternatives found.")
                 
-                // Populate metricProducts array with the filtered products
-                self.metricProducts = filteredProducts.map { product in
-                    // Dynamically choose which metric to use for display (CO2, Plastic, or Trees)
-                    let metricValue: Double
-                    switch currentMetric {  // currentMetric should be a property you define (e.g., "CO2", "Plastic", "Trees")
-                    case "Plastic":
-                        metricValue = Double(product.metrics.plastic)
-                    case "Trees":
-                        metricValue = Double(product.metrics.tree)
-                    default:
-                        metricValue = Double(product.metrics.co2)
-                    }
-                    return MetricProduct(product: product, metric: currentMetric, metricValue: metricValue)
-                }
-
-                // Set alternativeProduct to the best alternative from the sorted list
+                // Set the best alternative product to be shown in the header
                 self.alternativeProduct = filteredProducts.first
-
+                
+                // Find the highest product for each metric (CO2, Plastic, Trees)
+                var co2Product: Product? = nil
+                var plasticProduct: Product? = nil
+                var treeProduct: Product? = nil
+                
+                for product in filteredProducts {
+                    // Find the highest CO2 product
+                    if co2Product == nil || product.metrics.co2 > co2Product!.metrics.co2 {
+                        co2Product = product
+                    }
+                    // Find the highest Plastic product
+                    if plasticProduct == nil || product.metrics.plastic > plasticProduct!.metrics.plastic {
+                        plasticProduct = product
+                    }
+                    // Find the highest Trees product
+                    if treeProduct == nil || product.metrics.tree > treeProduct!.metrics.tree {
+                        treeProduct = product
+                    }
+                }
+                
+                // Ensure no product is nil before proceeding
+                guard let co2Product = co2Product, let plasticProduct = plasticProduct, let treeProduct = treeProduct else {
+                    DispatchQueue.main.async {
+                        self.showNoAlternativeMessage("No valid alternative products found.")
+                    }
+                    return
+                }
+                
+                // Now, create MetricProduct for each of the highest metric products
+                self.metricProducts = [
+                    MetricProduct(product: co2Product, metric: "CO2", metricValue: Double(co2Product.metrics.co2)),
+                    MetricProduct(product: plasticProduct, metric: "Plastic", metricValue: Double(plasticProduct.metrics.plastic)),
+                    MetricProduct(product: treeProduct, metric: "Trees", metricValue: Double(treeProduct.metrics.tree))
+                ]
+                
+                print("Metric products count: \(self.metricProducts.count)")
+                
                 // Update UI with the alternative product details
                 DispatchQueue.main.async {
                     self.updateReplacementProductDetails()
@@ -139,7 +161,6 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
             }
         }
     }
-
 
 
     
@@ -278,7 +299,22 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
     }
     
     
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Get the selected MetricProduct
+        let selectedMetricProduct = metricProducts[indexPath.row]
+
+        // Get the associated Product
+        let selectedProduct = selectedMetricProduct.product
+
+        // Instantiate and navigate to the ProductDetailsViewController
+        if let productDetailsVC = ProductDetailsViewController.instantiate(with: selectedProduct.id) {
+            navigationController?.pushViewController(productDetailsVC, animated: true)
+            print("Navigating to product details for: \(selectedProduct.name)")
+        } else {
+            print("Failed to instantiate ProductDetailsViewController.")
+        }
+    }
+
     // Number of sections in the table view (1 section in this case)
         func numberOfSections(in tableView: UITableView) -> Int {
             return 1 // You can adjust this based on your needs
