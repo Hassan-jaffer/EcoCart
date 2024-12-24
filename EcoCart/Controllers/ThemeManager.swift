@@ -23,10 +23,22 @@ class ThemeManager {
         // Check if dark mode is enabled
         if isDarkMode {
             // Set dark mode
-            UIApplication.shared.windows.first?.overrideUserInterfaceStyle = .dark
+            setTheme(for: .dark)
         } else {
             // Set light mode
-            UIApplication.shared.windows.first?.overrideUserInterfaceStyle = .light
+            setTheme(for: .light)
+        }
+    }
+    
+    private func setTheme(for style: UIUserInterfaceStyle) {
+        // Get the current window scene
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+            return
+        }
+        
+        // Apply the theme to all windows in the window scene
+        for window in windowScene.windows {
+            window.overrideUserInterfaceStyle = style
         }
     }
 }
