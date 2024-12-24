@@ -21,7 +21,31 @@ class AlternativeProductsViewController: UIViewController {
         super.viewDidLoad()
         print("View did load - Fetching alternative products.")
         fetchAlternativeProduct()
+        
+        // Create a tap gesture recognizer for the entire UIView that contains the product details
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapAlternativeProduct))
+        repName.superview?.isUserInteractionEnabled = true // Enable interaction for the parent view
+        repName.superview?.addGestureRecognizer(tapGesture)  // Add gesture to the parent view
+        
+        // You can repeat the same for other UI elements if necessary (e.g., price, image) or wrap them all in one parent view
     }
+
+    @objc private func didTapAlternativeProduct() {
+        // Ensure an alternative product exists
+        guard let alternativeProduct = alternativeProduct else {
+            print("No alternative product to display.")
+            return
+        }
+        
+        // Instantiate and navigate to the ProductDetailsViewController
+        if let productDetailsVC = ProductDetailsViewController.instantiate(with: alternativeProduct.id) {
+            navigationController?.pushViewController(productDetailsVC, animated: true)
+            print("Navigating to product details for: \(alternativeProduct.name)")
+        } else {
+            print("Failed to instantiate ProductDetailsViewController.")
+        }
+    }
+
     
     private func fetchAlternativeProduct() {
         guard let selectedProduct = selectedProduct else {
