@@ -21,11 +21,12 @@ class AddProductViewController: UITableViewController {
     @IBOutlet weak var treeTxtFld: UITextField!
     @IBOutlet weak var bioSwitch: UISwitch!
     
+    @IBOutlet weak var categoryPopup: UIButton!
     @IBOutlet weak var confirmBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        createMenu()
     }
     
     @IBAction func confirmBtnTapped(_ sender: Any) {
@@ -121,6 +122,28 @@ class AddProductViewController: UITableViewController {
         present(alert, animated: true, completion: nil)
         confirmBtn.isEnabled = true
     }
+    
+    
+    func createMenu(){
+        
+        let catAcc = UIAction(title: "Accessories", handler: { _ in
+            self.categoryTxtFld.text = "Accessories"
+        })
+        let catClothes = UIAction(title: "Clothes", handler: { _ in
+            self.categoryTxtFld.text = "Clothes"
+            
+        })
+        let catElec = UIAction(title: "Electronics", handler: { _ in
+            self.categoryTxtFld.text = "Electronics"
+        })
+
+        let categoryMenu = UIMenu(title: "Select a Category", children: [catAcc, catClothes, catElec])
+        categoryPopup.menu = categoryMenu
+        categoryPopup.showsMenuAsPrimaryAction = true
+        
+    }
+    
+    
     }
     
 
