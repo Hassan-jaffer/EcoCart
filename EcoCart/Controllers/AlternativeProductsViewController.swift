@@ -115,12 +115,42 @@ class AlternativeProductsViewController: UIViewController {
 
     
     private func calculateFootprintScore(product: Product) -> Double {
-        let co2 = product.metrics.co2 > 0 ? product.metrics.co2 : 100 // Default penalty for missing metrics
-        let plastic = product.metrics.plastic > 0 ? product.metrics.plastic : 100
-        let tree = product.metrics.tree > 0 ? product.metrics.tree : 100
+        // Use the metrics directly, with inversion (higher = better score)
+        let co2Saved = product.metrics.co2
+        let plasticSaved = product.metrics.plastic
+        let treesSaved = product.metrics.tree
         
-        return (co2Weight * Double(co2)) + (plasticWeight * Double(plastic)) + (treeWeight * Double(tree))
+        // Ensure values are non-negative
+        let co2Score = co2Saved > 0 ? 1 / Double(co2Saved) : 0
+        let plasticScore = plasticSaved > 0 ? 1 / Double(plasticSaved) : 0
+        let treeScore = treesSaved > 0 ? 1 / Double(treesSaved) : 0
+        
+        // Sum the weighted metrics: higher values of saved CO2, plastic, and trees = better environmental score
+        return (co2Weight * co2Score) + (plasticWeight * plasticScore) + (treeWeight * treeScore)
     }
+
+    
+    
+    private func classifyProduct(product: Product) -> String {
+        // Assign thresholds for each metric, where higher values = better product
+        let co2Saved = product.metrics.co2
+        let plasticSaved = product.metrics.plastic
+        let treesSaved = product.metrics.tree
+        
+        // Define a threshold for "good" environmental impact
+        if co2Saved > 500 && plasticSaved > 500 && treesSaved > 500 {
+            return "Good Product for the Environment"
+        } else if co2Saved > 100 && plasticSaved > 100 && treesSaved > 100 {
+            return "Average Product"
+        } else {
+            return "Not Good for the Environment"
+        }
+        
+
+    }
+
+
+
     
     private func productContainsSimilarKeywords(selected: Product, candidate: Product) -> Bool {
         // Extract keywords from product names
