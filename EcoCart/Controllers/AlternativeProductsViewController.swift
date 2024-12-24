@@ -67,7 +67,7 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
             showNoAlternativeMessage("No product selected.")
             return
         }
-        
+
         Task {
             do {
                 let allProducts = try await Product.fetchAllProducts()
@@ -109,23 +109,34 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                 
                 print("Filtered and sorted alternatives: \(filteredProducts.count) alternatives found.")
                 
-                // Populate metricProducts array with the filtered products
-                self.metricProducts = filteredProducts.map { product in
-                    // Dynamically choose which metric to use for display (CO2, Plastic, or Trees)
-                    let metricValue: Double
-                    switch currentMetric {  // currentMetric should be a property you define (e.g., "CO2", "Plastic", "Trees")
-                    case "Plastic":
-                        metricValue = Double(product.metrics.plastic)
-                    case "Trees":
-                        metricValue = Double(product.metrics.tree)
-                    default:
-                        metricValue = Double(product.metrics.co2)
-                    }
-                    return MetricProduct(product: product, metric: currentMetric, metricValue: metricValue)
-                }
-
-                // Set alternativeProduct to the best alternative from the sorted list
+                // Set the best alternative product to be shown in the header
                 self.alternativeProduct = filteredProducts.first
+                
+                self.metricProducts = filteredProducts
+                    .filter { $0.id != self.alternativeProduct?.id } // Exclude the alternative product
+                    .map { product in
+                        let metricValue: Double
+                        
+                        // Debug the product's metrics before assigning
+                        print("Product name: \(product.name), CO2: \(product.metrics.co2), Plastic: \(product.metrics.plastic), Trees: \(product.metrics.tree)")
+                        
+                        switch currentMetric {
+                        case "Plastic":
+                            metricValue = Double(product.metrics.plastic)
+                        case "Trees":
+                            metricValue = Double(product.metrics.tree)
+                        default:
+                            metricValue = Double(product.metrics.co2)
+                        }
+                        
+                        // Debug the metric value before returning
+                        print("Mapped product: \(product.name), Metric: \(currentMetric), Metric Value: \(metricValue)")
+                        
+                        return MetricProduct(product: product, metric: currentMetric, metricValue: metricValue)
+                    }
+
+                print("Number of metric products after mapping: \(self.metricProducts.count)") // Debug the final count
+
 
                 // Update UI with the alternative product details
                 DispatchQueue.main.async {
