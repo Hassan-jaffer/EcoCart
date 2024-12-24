@@ -112,32 +112,35 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                 // Set the best alternative product to be shown in the header
                 self.alternativeProduct = filteredProducts.first
                 
-                self.metricProducts = filteredProducts
-                    .filter { $0.id != self.alternativeProduct?.id } // Exclude the alternative product
-                    .map { product in
-                        let metricValue: Double
-                        
-                        // Debug the product's metrics before assigning
-                        print("Product name: \(product.name), CO2: \(product.metrics.co2), Plastic: \(product.metrics.plastic), Trees: \(product.metrics.tree)")
-                        
-                        switch currentMetric {
-                        case "Plastic":
-                            metricValue = Double(product.metrics.plastic)
-                        case "Trees":
-                            metricValue = Double(product.metrics.tree)
-                        default:
-                            metricValue = Double(product.metrics.co2)
-                        }
-                        
-                        // Debug the metric value before returning
-                        print("Mapped product: \(product.name), Metric: \(currentMetric), Metric Value: \(metricValue)")
-                        
-                        return MetricProduct(product: product, metric: currentMetric, metricValue: metricValue)
+                // Find the highest product for each metric (CO2, Plastic, Trees)
+                var co2Product: Product?
+                var plasticProduct: Product?
+                var treeProduct: Product?
+                
+                for product in filteredProducts {
+                    // Find the highest CO2 product
+                    if co2Product == nil || product.metrics.co2 > co2Product!.metrics.co2 {
+                        co2Product = product
                     }
-
-                print("Number of metric products after mapping: \(self.metricProducts.count)") // Debug the final count
-
-
+                    // Find the highest Plastic product
+                    if plasticProduct == nil || product.metrics.plastic > plasticProduct!.metrics.plastic {
+                        plasticProduct = product
+                    }
+                    // Find the highest Trees product
+                    if treeProduct == nil || product.metrics.tree > treeProduct!.metrics.tree {
+                        treeProduct = product
+                    }
+                }
+                
+                // Now, create MetricProduct for each of the highest metric products
+                self.metricProducts = [
+                    MetricProduct(product: co2Product!, metric: "CO2", metricValue: Double(co2Product!.metrics.co2)),
+                    MetricProduct(product: plasticProduct!, metric: "Plastic", metricValue: Double(plasticProduct!.metrics.plastic)),
+                    MetricProduct(product: treeProduct!, metric: "Trees", metricValue: Double(treeProduct!.metrics.tree))
+                ]
+                
+                print("Metric products count: \(self.metricProducts.count)")
+                
                 // Update UI with the alternative product details
                 DispatchQueue.main.async {
                     self.updateReplacementProductDetails()
