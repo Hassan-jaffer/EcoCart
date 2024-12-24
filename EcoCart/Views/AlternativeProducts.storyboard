@@ -105,7 +105,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Akn-fC-uIB">
                                                     <rect key="frame" x="10" y="10" width="373" height="76"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="test" translatesAutoresizingMaskIntoConstraints="NO" id="jBd-av-pue">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="test" translatesAutoresizingMaskIntoConstraints="NO" id="jBd-av-pue">
                                                             <rect key="frame" x="0.0" y="0.0" width="72" height="76"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="72" id="9dG-Gt-UMH"/>
@@ -162,6 +162,12 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Similar Products but more Eco-Friendly!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UsC-A3-sHT">
+                                <rect key="frame" x="16" y="335.66666666666669" width="303" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemGreenColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -170,6 +176,7 @@
                             <constraint firstItem="G08-QB-gGU" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="7aZ-Ar-Sad"/>
                             <constraint firstItem="u9p-Ax-QmR" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="Bpo-U8-D5P"/>
                             <constraint firstItem="G08-QB-gGU" firstAttribute="top" secondItem="u9p-Ax-QmR" secondAttribute="bottom" constant="8" id="Cqw-O8-weP"/>
+                            <constraint firstItem="x6T-xh-LnF" firstAttribute="top" secondItem="UsC-A3-sHT" secondAttribute="bottom" constant="8" symbolic="YES" id="Ddc-RB-Cx7"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="x6T-xh-LnF" secondAttribute="trailing" id="IXG-tl-D3b"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="G08-QB-gGU" secondAttribute="trailing" constant="16" id="KLU-Ba-bjO"/>
                             <constraint firstItem="x6T-xh-LnF" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="OWd-Mh-LyL"/>
@@ -207,6 +214,9 @@
         </systemColor>
         <systemColor name="systemCyanColor">
             <color red="0.19607843137254902" green="0.67843137254901964" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

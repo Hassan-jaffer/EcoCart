@@ -311,6 +311,27 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
             label3.text = "\(metricProduct.metricValue)"
         }
         
+        if let imageView = cell.viewWithTag(4) as? UIImageView {
+                    if let imageUrlString = metricProduct.product.imageURL, let imageUrl = URL(string: imageUrlString) {
+                        URLSession.shared.dataTask(with: imageUrl) { data, _, error in
+                            if let error = error {
+                                print("Error loading image: \(error)")
+                            }
+                            if let data = data, let image = UIImage(data: data) {
+                                DispatchQueue.main.async {
+                                    imageView.image = image
+                                }
+                            } else {
+                                DispatchQueue.main.async {
+                                    imageView.image = UIImage(named: "placeholder")
+                                }
+                            }
+                        }.resume()
+                    } else {
+                        imageView.image = UIImage(named: "placeholder")
+                    }
+                }
+        
         return cell
     }
 
