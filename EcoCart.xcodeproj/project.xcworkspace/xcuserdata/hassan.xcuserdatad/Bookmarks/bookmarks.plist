@@ -34,15 +34,16 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string></string>
+				<string>    static func fetchAllProducts() async throws -&gt; [Product] {
+</string>
 				<key>leading</key>
-				<string>        return products
-    }
+				<string>    }
+    
 </string>
 				<key>trailing</key>
-				<string>
-
-
+				<string>        let db = Firestore.firestore()
+        
+        // Fetch documents from the "product" collection
 </string>
 			</dict>
 			<key>type</key>
