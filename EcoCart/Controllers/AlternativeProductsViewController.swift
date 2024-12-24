@@ -1,14 +1,23 @@
 import UIKit
 import FirebaseFirestore
 
-class AlternativeProductsViewController: UIViewController {
+
+struct MetricProduct {
+    var product: Product
+    var metric: String // This can be "CO2", "Plastic", "Trees", etc.
+    var metricValue: Double // Store the value of the metric (e.g., CO2, Plastic, Trees)
+}
+
+class AlternativeProductsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var repExp: UILabel!
     @IBOutlet weak var repName: UILabel!
     @IBOutlet weak var repImage: UIImageView!
+    var currentMetric = "CO2" // Default metric to use
     @IBOutlet weak var AltMsg: UILabel!
     @IBOutlet weak var repPrice: UILabel!
-    
+    var metricProducts: [MetricProduct] = [] // Make sure this array is populated
+    @IBOutlet weak var metricsTableView: UITableView!
     var selectedProduct: Product?
     var alternativeProduct: Product? // Store the alternative product to show on the UI
     
@@ -17,10 +26,15 @@ class AlternativeProductsViewController: UIViewController {
     let plasticWeight: Double = 0.3
     let treeWeight: Double = 0.2
     
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("View did load - Fetching alternative products.")
         fetchAlternativeProduct()
+        metricsTableView.delegate = self
+        metricsTableView.dataSource = self
         
         // Create a tap gesture recognizer for the entire UIView that contains the product details
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapAlternativeProduct))
@@ -78,12 +92,13 @@ class AlternativeProductsViewController: UIViewController {
                     return
                 }
                 
+                // Calculate footprint score for the selected product
                 let selectedProductScore = calculateFootprintScore(product: selectedProduct)
                 print("Selected Product Score: \(selectedProductScore)")
                 
-                // Filter and sort products based on footprint score
-                let alternatives = similarProducts
-                    .filter { calculateFootprintScore(product: $0) < selectedProductScore }
+                // Filter and sort similar products based on footprint score
+                let filteredProducts = similarProducts
+                    .filter { calculateFootprintScore(product: $0) < selectedProductScore } // Lower footprint score
                     .sorted {
                         let scoreDiff = calculateFootprintScore(product: $0) - calculateFootprintScore(product: $1)
                         if abs(scoreDiff) < 0.01 { // If scores are nearly equal, prefer cheaper product
@@ -92,26 +107,40 @@ class AlternativeProductsViewController: UIViewController {
                         return scoreDiff < 0
                     }
                 
-                print("Filtered and sorted alternatives: \(alternatives.count) alternatives found.")
+                print("Filtered and sorted alternatives: \(filteredProducts.count) alternatives found.")
                 
-                // Select the best alternative if available
-                if let bestAlternative = alternatives.first {
-                    alternativeProduct = bestAlternative
-                    print("Best alternative product found: \(bestAlternative.name), Price: \(bestAlternative.price), Footprint Score: \(calculateFootprintScore(product: bestAlternative))")
-                } else {
-                    alternativeProduct = nil
-                    print("No suitable alternative found.")
+                // Populate metricProducts array with the filtered products
+                self.metricProducts = filteredProducts.map { product in
+                    // Dynamically choose which metric to use for display (CO2, Plastic, or Trees)
+                    let metricValue: Double
+                    switch currentMetric {  // currentMetric should be a property you define (e.g., "CO2", "Plastic", "Trees")
+                    case "Plastic":
+                        metricValue = Double(product.metrics.plastic)
+                    case "Trees":
+                        metricValue = Double(product.metrics.tree)
+                    default:
+                        metricValue = Double(product.metrics.co2)
+                    }
+                    return MetricProduct(product: product, metric: currentMetric, metricValue: metricValue)
                 }
-                
+
+                // Set alternativeProduct to the best alternative from the sorted list
+                self.alternativeProduct = filteredProducts.first
+
+                // Update UI with the alternative product details
                 DispatchQueue.main.async {
                     self.updateReplacementProductDetails()
+                    self.metricsTableView.reloadData()
                 }
+
             } catch {
                 print("Error fetching alternative products: \(error)")
                 showNoAlternativeMessage("Failed to fetch products.")
             }
         }
     }
+
+
 
     
     private func calculateFootprintScore(product: Product) -> Double {
@@ -247,4 +276,46 @@ class AlternativeProductsViewController: UIViewController {
         repPrice.text = ""
         repImage.image = UIImage(named: "placeholder") // Default placeholder image
     }
+    
+    
+    
+    // Number of sections in the table view (1 section in this case)
+        func numberOfSections(in tableView: UITableView) -> Int {
+            return 1 // You can adjust this based on your needs
+        }
+        
+        // Number of rows in each section (e.g., count of products to show)
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return metricProducts.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Dequeue the cell from the prototype
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MetricCell", for: indexPath)
+        
+        // Get the metric product to show in the cell
+        let metricProduct = metricProducts[indexPath.row]
+        
+        // Set the product name to the first label (label1)
+        if let label1 = cell.viewWithTag(1) as? UILabel {
+            label1.text = metricProduct.product.name
+        }
+        
+        // Set the metric type to the second label (label2)
+        if let label2 = cell.viewWithTag(2) as? UILabel {
+            label2.text = metricProduct.metric
+        }
+        
+        // Set the metric value to the third label (label3)
+        if let label3 = cell.viewWithTag(3) as? UILabel {
+            label3.text = "\(metricProduct.metricValue)"
+        }
+        
+        return cell
+    }
+
+
+
+
+
 }

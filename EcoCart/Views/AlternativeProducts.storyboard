@@ -92,10 +92,10 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="x6T-xh-LnF">
-                                <rect key="frame" x="0.0" y="291.66666666666669" width="393" height="526.33333333333326"/>
+                                <rect key="frame" x="0.0" y="364" width="393" height="454"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="ProductCell" rowHeight="96" id="k44-09-hph" customClass="ProductCell" customModule="EcoCart" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="MetricCell" rowHeight="96" id="k44-09-hph" customClass="ProductCell" customModule="EcoCart" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="96"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="k44-09-hph" id="9dc-WJ-F3W">
@@ -122,22 +122,22 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="5fl-eW-xXL">
                                                             <rect key="frame" x="92" y="0.0" width="281" height="76"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aya-h0-HnJ">
+                                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Metric :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aya-h0-HnJ">
                                                                     <rect key="frame" x="0.0" y="0.0" width="281" height="22"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcM-jn-CaD">
+                                                                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcM-jn-CaD">
                                                                     <rect key="frame" x="0.0" y="31" width="281" height="18"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="18" id="8Ty-yn-fI9"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F3R-Iu-Z9W">
+                                                                <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Percentage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F3R-Iu-Z9W">
                                                                     <rect key="frame" x="0.0" y="58" width="281" height="18"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="18" id="f9g-To-FqA"/>
@@ -159,12 +159,6 @@
                                                 <constraint firstAttribute="bottom" secondItem="Akn-fC-uIB" secondAttribute="bottom" constant="10" id="kfZ-br-noj"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="priceLabel" destination="fcM-jn-CaD" id="Dqp-sY-DJd"/>
-                                            <outlet property="productDescriptionLabel" destination="F3R-Iu-Z9W" id="8B4-WL-B2A"/>
-                                            <outlet property="productImageView" destination="jBd-av-pue" id="AVP-zI-AtO"/>
-                                            <outlet property="productNameLabel" destination="Aya-h0-HnJ" id="ALV-K2-h9h"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -173,13 +167,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="u9p-Ax-QmR" secondAttribute="trailing" constant="16" id="0Nd-Kh-Jab"/>
-                            <constraint firstItem="x6T-xh-LnF" firstAttribute="top" secondItem="G08-QB-gGU" secondAttribute="bottom" constant="20" id="1JH-YN-E4k"/>
                             <constraint firstItem="G08-QB-gGU" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="7aZ-Ar-Sad"/>
                             <constraint firstItem="u9p-Ax-QmR" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="Bpo-U8-D5P"/>
                             <constraint firstItem="G08-QB-gGU" firstAttribute="top" secondItem="u9p-Ax-QmR" secondAttribute="bottom" constant="8" id="Cqw-O8-weP"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="x6T-xh-LnF" secondAttribute="trailing" id="IXG-tl-D3b"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="G08-QB-gGU" secondAttribute="trailing" constant="16" id="KLU-Ba-bjO"/>
                             <constraint firstItem="x6T-xh-LnF" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="OWd-Mh-LyL"/>
+                            <constraint firstItem="x6T-xh-LnF" firstAttribute="top" secondItem="G08-QB-gGU" secondAttribute="bottom" constant="92.329999999999998" id="cTk-VP-RAV"/>
                             <constraint firstItem="u9p-Ax-QmR" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="14" id="eRM-QS-3Km"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="x6T-xh-LnF" secondAttribute="bottom" id="uXr-lX-uMR"/>
                         </constraints>
@@ -194,6 +188,7 @@
                     </view>
                     <connections>
                         <outlet property="AltMsg" destination="u9p-Ax-QmR" id="Wwc-8W-0Qm"/>
+                        <outlet property="metricsTableView" destination="x6T-xh-LnF" id="2o5-Tb-nIB"/>
                         <outlet property="repExp" destination="DEa-eh-Fsb" id="lT7-SI-bsx"/>
                         <outlet property="repImage" destination="Y3z-nf-rnB" id="ihT-aA-4eL"/>
                         <outlet property="repName" destination="1HC-bB-27T" id="TUD-N6-Fgp"/>
@@ -211,10 +206,10 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemCyanColor">
-            <color red="0.1960784314" green="0.67843137249999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.19607843137254902" green="0.67843137254901964" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
