@@ -165,19 +165,51 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
 
     
     private func calculateFootprintScore(product: Product) -> Double {
-        // Use the metrics directly, with inversion (higher = better score)
+        // Extract metric values
         let co2Saved = product.metrics.co2
         let plasticSaved = product.metrics.plastic
         let treesSaved = product.metrics.tree
+        let bio = product.metrics.bio
+        var isBiodegradable = false
         
-        // Ensure values are non-negative
+        if bio == 1 {
+            isBiodegradable = true
+        } else {
+            isBiodegradable = false
+        }
+        
+        // Log the extracted values
+        print("CO2 Saved: \(co2Saved), Plastic Saved: \(plasticSaved), Trees Saved: \(treesSaved), Biodegradable: \(isBiodegradable)")
+        
+        // Avoid division by zero by setting score to 0 if metric is 0
         let co2Score = co2Saved > 0 ? 1 / Double(co2Saved) : 0
         let plasticScore = plasticSaved > 0 ? 1 / Double(plasticSaved) : 0
         let treeScore = treesSaved > 0 ? 1 / Double(treesSaved) : 0
         
-        // Sum the weighted metrics: higher values of saved CO2, plastic, and trees = better environmental score
-        return (co2Weight * co2Score) + (plasticWeight * plasticScore) + (treeWeight * treeScore)
+        // Log individual scores
+        print("CO2 Score: \(co2Score), Plastic Score: \(plasticScore), Tree Score: \(treeScore)")
+        
+        // Weighted sum of the scores
+        let footprintScore = (co2Weight * co2Score) + (plasticWeight * plasticScore) + (treeWeight * treeScore)
+        
+        // Log weighted footprint score
+        print("Weighted Footprint Score (before adjustment): \(footprintScore)")
+        
+        // Biodegradable adjustment
+        let biodegradableAdjustment = isBiodegradable ? -0.01 : 0.01
+        
+        // Log the adjustment
+        print("Biodegradable Adjustment: \(biodegradableAdjustment)")
+        
+        // Final score
+        let finalScore = footprintScore + biodegradableAdjustment
+        
+        // Log the final score
+        print("Final Footprint Score: \(finalScore)")
+        
+        return finalScore
     }
+
 
     
     
