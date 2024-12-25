@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -979,6 +979,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="Iwb-eE-mqW"/>
                     <connections>
+                        <outlet property="DescriptionView" destination="nHc-j5-Hab" id="uAr-ef-aJS"/>
+                        <outlet property="EnviroImpactView" destination="2VL-Ze-iAt" id="jot-eq-PBR"/>
+                        <outlet property="ImageUIView" destination="AYp-f6-TZn" id="1gl-v4-6eV"/>
+                        <outlet property="ProductsStack" destination="qhY-lZ-akz" id="Xc7-ND-tam"/>
+                        <outlet property="ProductsView" destination="hJQ-mf-8Lb" id="M67-ER-pDI"/>
+                        <outlet property="ReviewView" destination="dLj-nJ-7Ge" id="aMs-75-K5O"/>
+                        <outlet property="TopRatedView" destination="lsa-RX-XQi" id="nZt-Ok-EJd"/>
                         <outlet property="ecoFriendlyCertificateImage" destination="Aay-ES-paX" id="dmg-s6-San"/>
                         <outlet property="impactTextView" destination="GV3-q0-EMh" id="mq1-3T-vCm"/>
                         <outlet property="nameLabel" destination="uoJ-tM-jmn" id="bA6-Dl-Aef"/>
@@ -1119,10 +1126,10 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="opaqueSeparatorColor">
-            <color red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="secondaryLabelColor">
-            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

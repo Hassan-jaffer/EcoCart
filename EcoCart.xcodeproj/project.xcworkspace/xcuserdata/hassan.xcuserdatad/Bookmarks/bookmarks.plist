@@ -38,7 +38,7 @@
 </string>
 				<key>leading</key>
 				<string>    }
-    
+
 </string>
 				<key>trailing</key>
 				<string>        let db = Firestore.firestore()
