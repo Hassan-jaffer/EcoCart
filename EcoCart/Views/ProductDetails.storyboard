@@ -1110,6 +1110,7 @@
                         <outlet property="ratingStarButton4" destination="bbl-Oj-PPU" id="5g5-ju-Nqh"/>
                         <outlet property="ratingStarButton5" destination="mQQ-CA-xJ5" id="RNq-WE-cR9"/>
                         <outlet property="reviewTableView" destination="Msi-Uq-jnK" id="868-uN-9ol"/>
+                        <outlet property="reviewView" destination="NL0-jv-DH5" id="2ba-fZ-RQB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xpG-IS-jDq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
