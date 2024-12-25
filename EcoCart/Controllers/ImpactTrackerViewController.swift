@@ -120,28 +120,29 @@ class ImpactTrackerViewController: UIViewController {
     func fetchData(period: String){
         //query with the condition, seperated it to add action listener and date comparsion
         let query: Query
+        let user = "123" // id must be changed to logged in user
         switch period {
         case "day":
             
             let today = Calendar.current.startOfDay(for: Date())
-            query = self.db.collection("impactProd").whereField("userId", isEqualTo: "123").whereField("impactProdPurchaseDate", isGreaterThanOrEqualTo: today)
+            query = self.db.collection("impactProd").whereField("userId", isEqualTo: user).whereField("impactProdPurchaseDate", isGreaterThanOrEqualTo: today)
             
         case "week":
             
             let week = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: Date())
-            query = self.db.collection("impactProd").whereField("userId", isEqualTo: "123").whereField("impactProdPurchaseDate", isGreaterThanOrEqualTo: week!)
+            query = self.db.collection("impactProd").whereField("userId", isEqualTo: user).whereField("impactProdPurchaseDate", isGreaterThanOrEqualTo: week!)
             
         case "month":
             
             let month = Calendar.current.date(byAdding: .month, value: -1, to: Date())
-            query = self.db.collection("impactProd").whereField("userId", isEqualTo: "123").whereField("impactProdPurchaseDate", isGreaterThanOrEqualTo: month!)
+            query = self.db.collection("impactProd").whereField("userId", isEqualTo: user).whereField("impactProdPurchaseDate", isGreaterThanOrEqualTo: month!)
             
         case "year":
             
             let year = Calendar.current.date(byAdding: .year, value: -1, to: Date())
-            query = self.db.collection("impactProd").whereField("userId", isEqualTo: "123").whereField("impactProdPurchaseDate", isGreaterThanOrEqualTo: year!)
+            query = self.db.collection("impactProd").whereField("userId", isEqualTo: user).whereField("impactProdPurchaseDate", isGreaterThanOrEqualTo: year!)
         default:
-            query = self.db.collection("impactProd").whereField("userId", isEqualTo: "123")
+            query = self.db.collection("impactProd").whereField("userId", isEqualTo: user)
         }
         
         
@@ -234,8 +235,8 @@ class ImpactTrackerViewController: UIViewController {
     
     func resetData(){
         resetBtn.isEnabled = false
-        //user id will be changed later
-        self.db.collection("impactProd").whereField("userId", isEqualTo: "123").getDocuments(){ querySnapshot, err in
+        let user = "123" //user id will be changed later
+        self.db.collection("impactProd").whereField("userId", isEqualTo: user).getDocuments(){ querySnapshot, err in
             if let err = err {
                 self.showError(error: err.localizedDescription)
                 return

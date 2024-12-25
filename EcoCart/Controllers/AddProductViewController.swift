@@ -32,7 +32,7 @@ class AddProductViewController: UITableViewController {
     @IBAction func confirmBtnTapped(_ sender: Any) {
     
     
-        
+        let user = "123" //id will be changed to logged in user
         //get all info and store them in firebase
         guard let name = nameTxtFld.text, !name.isEmpty,
               let category = categoryTxtFld.text, !category.isEmpty,
@@ -76,7 +76,7 @@ class AddProductViewController: UITableViewController {
             "impactProdPrice": price,
             "impactProdPurchaseDate": purchaseDate,
             "impactProdStore": store,
-            "userId": "123" //temporary, later will be changed
+            "userId": user
             ]
         
         //reference firestore

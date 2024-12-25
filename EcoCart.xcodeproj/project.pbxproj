@@ -39,12 +39,10 @@
 		54C191E22D16FED600DB36D0 /* OrderManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C191E12D16FED600DB36D0 /* OrderManagementViewController.swift */; };
 		54C191E42D16FEE500DB36D0 /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C191E32D16FEE500DB36D0 /* OrderCell.swift */; };
 		54C191E62D16FEF100DB36D0 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C191E52D16FEF100DB36D0 /* Order.swift */; };
-		54C191E82D17003500DB36D0 /* OrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54C191E72D17003500DB36D0 /* OrderCell.xib */; };
 		54C191EA2D17007F00DB36D0 /* OwnerManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C191E92D17007F00DB36D0 /* OwnerManagementViewController.swift */; };
 		54C191EC2D17009E00DB36D0 /* Owner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C191EB2D17009E00DB36D0 /* Owner.swift */; };
 		54C191EE2D17009F00DB36D0 /* Owner 2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C191ED2D17009F00DB36D0 /* Owner 2.swift */; };
 		54C191F02D1700B500DB36D0 /* OwnerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C191EF2D1700B500DB36D0 /* OwnerCell.swift */; };
-		54C191F22D1700C600DB36D0 /* OwnerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54C191F12D1700C600DB36D0 /* OwnerCell.xib */; };
 		54C191F42D17012600DB36D0 /* EditOwnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C191F32D17012600DB36D0 /* EditOwnerViewController.swift */; };
 		54C191F62D1702CF00DB36D0 /* Cart.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54C191F52D1702CF00DB36D0 /* Cart.storyboard */; };
 		54C191F82D1702E400DB36D0 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C191F72D1702E400DB36D0 /* CartViewController.swift */; };
@@ -134,12 +132,10 @@
 		54C191E12D16FED600DB36D0 /* OrderManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderManagementViewController.swift; sourceTree = "<group>"; };
 		54C191E32D16FEE500DB36D0 /* OrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCell.swift; sourceTree = "<group>"; };
 		54C191E52D16FEF100DB36D0 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
-		54C191E72D17003500DB36D0 /* OrderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderCell.xib; sourceTree = "<group>"; };
 		54C191E92D17007F00DB36D0 /* OwnerManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerManagementViewController.swift; sourceTree = "<group>"; };
 		54C191EB2D17009E00DB36D0 /* Owner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Owner.swift; sourceTree = "<group>"; };
 		54C191ED2D17009F00DB36D0 /* Owner 2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Owner 2.swift"; sourceTree = "<group>"; };
 		54C191EF2D1700B500DB36D0 /* OwnerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerCell.swift; sourceTree = "<group>"; };
-		54C191F12D1700C600DB36D0 /* OwnerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OwnerCell.xib; sourceTree = "<group>"; };
 		54C191F32D17012600DB36D0 /* EditOwnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditOwnerViewController.swift; sourceTree = "<group>"; };
 		54C191F52D1702CF00DB36D0 /* Cart.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Cart.storyboard; sourceTree = "<group>"; };
 		54C191F72D1702E400DB36D0 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
@@ -273,8 +269,6 @@
 				83D547132D137D9C004DE1CE /* LogInPage.storyboard */,
 				0E60DB762D0CC89900F16562 /* ProductCell2.storyboard */,
 				54C1917A2D16BF0900DB36D0 /* StoreManagement.storyboard */,
-				54C191E72D17003500DB36D0 /* OrderCell.xib */,
-				54C191F12D1700C600DB36D0 /* OwnerCell.xib */,
 				54C191F52D1702CF00DB36D0 /* Cart.storyboard */,
 				54C192012D17062300DB36D0 /* MyOrders.storyboard */,
 				5C7F5BB02D17AC7B00310022 /* AlternativeProducts.storyboard */,
@@ -479,8 +473,6 @@
 			files = (
 				CF84B6A32CFC4B1E0006F605 /* LoginBackup.storyboard in Resources */,
 				54C191F62D1702CF00DB36D0 /* Cart.storyboard in Resources */,
-				54C191E82D17003500DB36D0 /* OrderCell.xib in Resources */,
-				54C191F22D1700C600DB36D0 /* OwnerCell.xib in Resources */,
 				0E60DB772D0CC89900F16562 /* ProductCell2.storyboard in Resources */,
 				0E7C9AB12CF72FCD0049CD22 /* Assets.xcassets in Resources */,
 				83D547122D137D29004DE1CE /* ProfilePage.storyboard in Resources */,
