@@ -129,7 +129,7 @@ address associated with your account.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="973.28244274809151" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="947" y="-2"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="OeB-pR-G9T">
