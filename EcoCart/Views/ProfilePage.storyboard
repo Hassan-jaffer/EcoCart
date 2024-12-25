@@ -112,6 +112,9 @@
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="NZ3-3F-B15">
                                                     <rect key="frame" x="273.33333333333331" y="30" width="51.666666666666686" height="31"/>
+                                                    <connections>
+                                                        <action selector="toggleDarkMode:" destination="qpb-G8-JjJ" eventType="valueChanged" id="B1C-A5-i0K"/>
+                                                    </connections>
                                                 </switch>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t18-YO-SHz">
                                                     <rect key="frame" x="273.33333333333331" y="106" width="49.666666666666686" height="34.333333333333343"/>
