@@ -192,6 +192,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="ProfileImageView" destination="DWg-F8-zlc" id="noA-C2-BjA"/>
+                        <outlet property="darkModeSwitch" destination="NZ3-3F-B15" id="XRM-4y-8I5"/>
                         <outlet property="logoutButton" destination="pRE-d5-d4b" id="Wqs-6t-MML"/>
                         <outlet property="profileEmil" destination="LMf-th-Cxy" id="CBg-1e-YTH"/>
                         <outlet property="profileName" destination="CYE-sy-p7V" id="Yt0-jy-S35"/>

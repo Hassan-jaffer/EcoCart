@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Vv9-lZ-nO7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qiX-0u-vWF">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
@@ -207,23 +207,23 @@
             <objects>
                 <viewController id="qoV-el-haW" customClass="ForgotPassViewController" customModule="EcoCart" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sm8-wo-s53">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ForogotPassword" translatesAutoresizingMaskIntoConstraints="NO" id="15W-UR-IIK">
-                                <rect key="frame" x="44" y="133" width="305" height="284"/>
+                                <rect key="frame" x="44" y="30" width="305" height="284"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="284" id="GmO-yi-u8l"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot Password?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgh-fp-qFq">
-                                <rect key="frame" x="27" y="445" width="172" height="26"/>
+                                <rect key="frame" x="27" y="342" width="172" height="26"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3i6-Lh-nXu">
-                                <rect key="frame" x="49" y="498.66666666666669" width="295" height="38.333333333333314"/>
+                                <rect key="frame" x="49" y="395.66666666666669" width="295" height="38.333333333333314"/>
                                 <string key="text">Don’t worry it happens. Please enter the 
 address associated with your account.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -231,7 +231,7 @@ address associated with your account.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JO3-Mi-yqp">
-                                <rect key="frame" x="34" y="666" width="325" height="56"/>
+                                <rect key="frame" x="34" y="739" width="325" height="56"/>
                                 <color key="backgroundColor" red="0.67450982329999998" green="0.89411771299999998" blue="0.64313727620000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="4G0-al-bpr"/>
@@ -246,7 +246,7 @@ address associated with your account.</string>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ky6-8N-NHN">
-                                <rect key="frame" x="20" y="562" width="353" height="34"/>
+                                <rect key="frame" x="20" y="459" width="353" height="210"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
                             </textField>
@@ -287,7 +287,7 @@ address associated with your account.</string>
             <objects>
                 <tableViewController id="chJ-Sl-7Ps" customClass="UserSIGNUPTableViewController" customModule="EcoCart" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="none" rowHeight="45" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="WV9-wh-S4d">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <sections>
@@ -509,7 +509,7 @@ address associated with your account.</string>
             <objects>
                 <viewController id="JH0-qV-taZ" customClass="SignupSuccessfulViewController" customModule="EcoCart" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3eP-jl-rGb">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="checkmark.shield" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="UnR-cD-J76">
@@ -561,8 +561,8 @@ address associated with your account.</string>
         <scene sceneID="WH8-K5-7Sy">
             <objects>
                 <viewController id="Hkw-W1-gqT" customClass="HomeViewController" customModule="EcoCart" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="wb2-Au-Ikl">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                    <view key="view" contentMode="scaleToFill" id="wb2-Au-Ikl">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3SM-iY-Lmc">
@@ -571,18 +571,18 @@ address associated with your account.</string>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your destination location.." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cmI-WX-sXU">
-                                <rect key="frame" x="26" y="116" width="341" height="34"/>
+                                <rect key="frame" x="26" y="13" width="341" height="169"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1D2-yw-pbC">
-                                <rect key="frame" x="16" y="632" width="361" height="146"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1D2-yw-pbC">
+                                <rect key="frame" x="16" y="656" width="361" height="146"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Ocr-cW-h1m">
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Ocr-cW-h1m">
                                         <rect key="frame" x="0.0" y="0.0" width="1232" height="146"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rvN-Cx-wpw">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rvN-Cx-wpw">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="146"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pic1" translatesAutoresizingMaskIntoConstraints="NO" id="TRS-vG-mcI">
@@ -602,7 +602,7 @@ address associated with your account.</string>
                                                     <constraint firstAttribute="width" constant="240" id="NIy-Cm-RA2"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WBq-qr-cd2">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WBq-qr-cd2">
                                                 <rect key="frame" x="248" y="0.0" width="240" height="146"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pic2" translatesAutoresizingMaskIntoConstraints="NO" id="Ng0-zU-ouB">
@@ -622,7 +622,7 @@ address associated with your account.</string>
                                                     <constraint firstAttribute="width" constant="240" id="fBQ-du-bYI"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RBp-zs-WD5">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RBp-zs-WD5">
                                                 <rect key="frame" x="496" y="0.0" width="240" height="146"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pic4" translatesAutoresizingMaskIntoConstraints="NO" id="TtR-CE-cKv">
@@ -642,7 +642,7 @@ address associated with your account.</string>
                                                     <constraint firstAttribute="width" constant="240" id="un4-Nt-lga"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AMx-IH-8I4">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AMx-IH-8I4">
                                                 <rect key="frame" x="744" y="0.0" width="240" height="146"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pic3" translatesAutoresizingMaskIntoConstraints="NO" id="zwZ-PD-SHE">
@@ -662,7 +662,7 @@ address associated with your account.</string>
                                                     <constraint firstAttribute="width" constant="240" id="t6t-gq-rGx"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VZs-EF-JNy">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VZs-EF-JNy">
                                                 <rect key="frame" x="992" y="0.0" width="240" height="146"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="battery" translatesAutoresizingMaskIntoConstraints="NO" id="mMJ-ce-ElJ">
@@ -727,7 +727,7 @@ address associated with your account.</string>
             <objects>
                 <viewController id="vUR-XD-t3h" customClass="ServiceProviderHomeViewController" customModule="EcoCart" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tCH-5K-68C">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pcL-Km-Jys">
@@ -736,7 +736,7 @@ address associated with your account.</string>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6GM-0F-WYn">
-                                <rect key="frame" x="0.0" y="103" width="393" height="52"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="52"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Available to receive requests" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dTZ-9w-Aj5">
                                         <rect key="frame" x="18" y="14" width="249" height="24"/>
@@ -756,7 +756,7 @@ address associated with your account.</string>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U4G-Y3-6Vl">
-                                <rect key="frame" x="25" y="574" width="343" height="140"/>
+                                <rect key="frame" x="25" y="471" width="343" height="316"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Malik Yaseen " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="be6-V4-9f0">
                                         <rect key="frame" x="91" y="18" width="115" height="21.333333333333329"/>
@@ -923,26 +923,6 @@ address associated with your account.</string>
             </objects>
             <point key="canvasLocation" x="1112" y="271"/>
         </scene>
-        <!--Profile-->
-        <scene sceneID="8zP-0J-QBP">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Vv9-lZ-nO7" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" image="person" catalog="system" id="A3d-t5-1Im"/>
-                    <toolbarItems/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7PM-Jy-PqL">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="qiX-0u-vWF" kind="relationship" relationship="rootViewController" id="7cN-cy-Mve"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zXi-oG-6Rs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1589" y="-84"/>
-        </scene>
     </scenes>
     <resources>
         <image name="ForogotPassword" width="702" height="623"/>
@@ -952,7 +932,6 @@ address associated with your account.</string>
         <image name="eye.fill" catalog="system" width="128" height="80"/>
         <image name="eye.slash.fill" catalog="system" width="128" height="96"/>
         <image name="location" width="512" height="512"/>
-        <image name="person" catalog="system" width="128" height="121"/>
         <image name="pic1" width="1000" height="679"/>
         <image name="pic2" width="866" height="650"/>
         <image name="pic3" width="1010" height="981"/>
@@ -965,10 +944,10 @@ address associated with your account.</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

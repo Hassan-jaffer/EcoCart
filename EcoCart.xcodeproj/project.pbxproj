@@ -52,7 +52,6 @@
 		54C191FC2D17030A00DB36D0 /* CartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C191FB2D17030A00DB36D0 /* CartItem.swift */; };
 		54C191FE2D17033800DB36D0 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C191FD2D17033800DB36D0 /* CheckoutViewController.swift */; };
 		54C192002D1703BE00DB36D0 /* PaymentDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C191FF2D1703BE00DB36D0 /* PaymentDetailsViewController.swift */; };
-		54C192022D17062300DB36D0 /* MyOrders.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54C192012D17062300DB36D0 /* MyOrders.storyboard */; };
 		54C192042D17076500DB36D0 /* ExpandedOrderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C192032D17076500DB36D0 /* ExpandedOrderListViewController.swift */; };
 		54C192062D17077700DB36D0 /* CancelOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C192052D17077700DB36D0 /* CancelOrderViewController.swift */; };
 		5C3DD4C72D0E519800BD06C5 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3DD4C62D0E519800BD06C5 /* ThemeManager.swift */; };
@@ -60,9 +59,8 @@
 		5C7F5BB12D17AC7B00310022 /* AlternativeProducts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C7F5BB02D17AC7B00310022 /* AlternativeProducts.storyboard */; };
 		5C7F5BB32D17ACBC00310022 /* AlternativeProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7F5BB22D17ACBC00310022 /* AlternativeProductsViewController.swift */; };
 		5CA077142D0FEB4A00B44555 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA077132D0FEB4A00B44555 /* Color.swift */; };
-		CF84B6A52CFC58280006F605 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF84B6A42CFC58280006F605 /* Profile.storyboard */; };
 		83D547122D137D29004DE1CE /* ProfilePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83D547112D137D29004DE1CE /* ProfilePage.storyboard */; };
-		83D547142D137D9C004DE1CE /* LogIn Page.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83D547132D137D9C004DE1CE /* LogIn Page.storyboard */; };
+		83D547142D137D9C004DE1CE /* LogInPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83D547132D137D9C004DE1CE /* LogInPage.storyboard */; };
 		83D5471C2D137DF0004DE1CE /* UserSIGNUPTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D547172D137DF0004DE1CE /* UserSIGNUPTableViewController.swift */; };
 		83D5471D2D137DF0004DE1CE /* LogInTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D547182D137DF0004DE1CE /* LogInTableViewController.swift */; };
 		83D5471E2D137DF0004DE1CE /* ForgotPassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D547152D137DF0004DE1CE /* ForgotPassViewController.swift */; };
@@ -75,6 +73,7 @@
 		83D5472A2D138109004DE1CE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 83D547292D138109004DE1CE /* FirebaseStorage */; };
 		83D5472C2D13A2F4004DE1CE /* SignupSuccessfulViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D5472B2D13A2F4004DE1CE /* SignupSuccessfulViewController.swift */; };
 		CF84B6A32CFC4B1E0006F605 /* LoginBackup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF84B6A22CFC4B1E0006F605 /* LoginBackup.storyboard */; };
+		CF84B6A52CFC58280006F605 /* ProfileBackup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF84B6A42CFC58280006F605 /* ProfileBackup.storyboard */; };
 		F23585FD2D058D1E00C00219 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F23585FC2D058D1E00C00219 /* FirebaseAuth */; };
 		F23585FF2D058D1E00C00219 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = F23585FE2D058D1E00C00219 /* FirebaseCore */; };
 		F23586012D058D1E00C00219 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = F23586002D058D1E00C00219 /* FirebaseFirestore */; };
@@ -156,9 +155,8 @@
 		5C7F5BB02D17AC7B00310022 /* AlternativeProducts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AlternativeProducts.storyboard; sourceTree = "<group>"; };
 		5C7F5BB22D17ACBC00310022 /* AlternativeProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeProductsViewController.swift; sourceTree = "<group>"; };
 		5CA077132D0FEB4A00B44555 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		CF84B6A42CFC58280006F605 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		83D547112D137D29004DE1CE /* ProfilePage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfilePage.storyboard; sourceTree = "<group>"; };
-		83D547132D137D9C004DE1CE /* LogIn Page.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "LogIn Page.storyboard"; sourceTree = "<group>"; };
+		83D547132D137D9C004DE1CE /* LogInPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LogInPage.storyboard; sourceTree = "<group>"; };
 		83D547152D137DF0004DE1CE /* ForgotPassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ForgotPassViewController.swift; path = EcoCart/Controllers/ForgotPassViewController.swift; sourceTree = SOURCE_ROOT; };
 		83D547172D137DF0004DE1CE /* UserSIGNUPTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserSIGNUPTableViewController.swift; path = EcoCart/Controllers/UserSIGNUPTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		83D547182D137DF0004DE1CE /* LogInTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LogInTableViewController.swift; path = EcoCart/Controllers/LogInTableViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -256,8 +254,6 @@
 				54C192032D17076500DB36D0 /* ExpandedOrderListViewController.swift */,
 				54C192052D17077700DB36D0 /* CancelOrderViewController.swift */,
 				5C7F5BB22D17ACBC00310022 /* AlternativeProductsViewController.swift */,
-				F2574B222D00609F00FF2011 /* HomePage.storyboard */,
-				F2574B242D00740000FF2011 /* homePageViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -274,7 +270,7 @@
 				CF84B6A42CFC58280006F605 /* ProfileBackup.storyboard */,
 				F2574B202D0058F900FF2011 /* Filter.storyboard */,
 				105F69B02D049D1E005454A7 /* ReviewCell.xib */,
-				83D547132D137D9C004DE1CE /* LogIn Page.storyboard */,
+				83D547132D137D9C004DE1CE /* LogInPage.storyboard */,
 				0E60DB762D0CC89900F16562 /* ProductCell2.storyboard */,
 				54C1917A2D16BF0900DB36D0 /* StoreManagement.storyboard */,
 				54C191E72D17003500DB36D0 /* OrderCell.xib */,
@@ -481,7 +477,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2574B232D00609F00FF2011 /* HomePage.storyboard in Resources */,
 				CF84B6A32CFC4B1E0006F605 /* LoginBackup.storyboard in Resources */,
 				54C191F62D1702CF00DB36D0 /* Cart.storyboard in Resources */,
 				54C191E82D17003500DB36D0 /* OrderCell.xib in Resources */,
@@ -497,7 +492,7 @@
 				104856312D076A9400D60B8D /* ReviewCell.xib in Resources */,
 				0E7C9AB42CF72FCD0049CD22 /* Impact Tracker.storyboard in Resources */,
 				CF84B6A52CFC58280006F605 /* ProfileBackup.storyboard in Resources */,
-				83D547142D137D9C004DE1CE /* LogIn Page.storyboard in Resources */,
+				83D547142D137D9C004DE1CE /* LogInPage.storyboard in Resources */,
 				0E7C9AB52CF72FCD0049CD22 /* ProductDetails.storyboard in Resources */,
 				0E7C9AB62CF72FCD0049CD22 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -930,15 +925,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		83D547292D138109004DE1CE /* FirebaseStorage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F23585FB2D058D1E00C00219 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseStorage;
-		};
 		0E14FB102D181F88005C606C /* DGCharts */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F2CFE3652D0C9BD90082DFB0 /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = DGCharts;
+		};
+		83D547292D138109004DE1CE /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F23585FB2D058D1E00C00219 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 		F23585FC2D058D1E00C00219 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
