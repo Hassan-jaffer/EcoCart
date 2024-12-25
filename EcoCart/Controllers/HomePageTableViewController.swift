@@ -218,6 +218,8 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
     
     func updateFilterButtonColor() {
             // Change button color based on filter state
+        let filterIcon = UIImage(systemName: "line.horizontal.3.decrease.circle.fill")
+        filterButton.setImage(filterIcon, for: .normal)
             UIView.animate(withDuration: 0.3) {
                 self.filterButton.backgroundColor = self.areFiltersActive ? .coolLightGreen : .lightGray
             }
@@ -227,8 +229,17 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
     
     func didApplyAZFilter(az: Bool) {
         isAZFiltered = az
-        didApplyFilters(priceOrder: nil, category: nil, availability: nil, metric: nil) // Apply current filters
+        
+        // Update the areFiltersActive flag based on the AZ filter state
+        areFiltersActive = isAZFiltered || selectedPriceOrder != nil || selectedCategory != nil || isAvailableFiltered != nil || selectedMetric != nil
+        
+        // Apply current filters, including A-Z filter
+        didApplyFilters(priceOrder: nil, category: nil, availability: nil, metric: nil)
+        
+        // Update the filter button color
+        updateFilterButtonColor()
     }
+
 
     func didApplyFilters(priceOrder: String?, category: String?, availability: Bool?, metric: String?) {
         // Save the selected filters
