@@ -44,32 +44,32 @@ struct Product {
     static func fetchProduct(withId id: String) async throws -> Product? {
         return try await ProductFirebase.shared.fetchProduct(withId: id)
     }
-    
+
     static func fetchTopRatedEcoProducts(limit: Int = 3) async throws -> [Product] {
         let products = try await ProductFirebase.shared.fetchAllProducts()
         return Array(products.sorted { $0.averageRating > $1.averageRating }.prefix(limit))
     }
-    
+
     static func fetchProductsForCategory(_ category: String) async throws -> [Product] {
         return try await ProductFirebase.shared.fetchProductsByCategory(category)
     }
-    
+
     static func fetchAllProducts() async throws -> [Product] {
         let db = Firestore.firestore()
         
         // Fetch documents from the "product" collection
         let snapshot = try await db.collection("product").getDocuments()
         print("✅ Fetched \(snapshot.documents.count) products.")
-        
+
         var products: [Product] = []
-        
+
         for document in snapshot.documents {
             let data = document.data()
-            
+
             // Log the entire document data to check for the category field
             print("📄 Parsing product: \(document.documentID)")
             print("Raw data from Firebase: \(data)")
-            
+
             // Explicitly check and log the category field
             if let categoryValue = data["Category"] as? String {
                 if categoryValue.isEmpty {
@@ -90,10 +90,10 @@ struct Product {
             // Extract latitude and longitude
             let latitudeValue = data["latitude"] as? Double ?? 0.0
             let longitudeValue = data["longitude"] as? Double ?? 0.0
-            
+
             // Extract and handle the category with a fallback if necessary
             let categoryValue = (data["Category"] as? String)?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "Unknown Category"
-            
+
             // Check if category was properly set or defaulted to "Unknown Category"
             if categoryValue == "Unknown Category" {
                 print("❌ Using default category for product \(document.documentID).")
