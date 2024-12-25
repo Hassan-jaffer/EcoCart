@@ -56,12 +56,18 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Product Category" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kRo-j0-QzP">
+                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Product Category" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kRo-j0-QzP">
                                                     <rect key="frame" x="111" y="7" width="262" height="34"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z7r-s7-Quq">
+                                                    <rect key="frame" x="248" y="5" width="95" height="39"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title="Category"/>
+                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -278,6 +284,7 @@
                     <navigationItem key="navigationItem" title="Add Product" id="lnF-XT-gfn"/>
                     <connections>
                         <outlet property="bioSwitch" destination="M0h-rW-ETN" id="CtG-HJ-veE"/>
+                        <outlet property="categoryPopup" destination="z7r-s7-Quq" id="nzy-eY-PGs"/>
                         <outlet property="categoryTxtFld" destination="kRo-j0-QzP" id="LQD-GN-O2S"/>
                         <outlet property="co2TxtFld" destination="F0e-2N-BrF" id="sca-M8-oVR"/>
                         <outlet property="confirmBtn" destination="lhM-rC-tya" id="ptF-lZ-LAD"/>
@@ -317,17 +324,6 @@
                                     <constraint firstItem="lru-L3-Y03" firstAttribute="centerX" secondItem="QAp-6R-Tgy" secondAttribute="centerX" id="MU2-m8-TNk"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CFt-bU-f3t">
-                                <rect key="frame" x="118" y="718" width="157" height="39"/>
-                                <color key="tintColor" red="0.67450982329999998" green="0.89411771299999998" blue="0.63921570780000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Add Product">
-                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <segue destination="ZKO-WH-IyD" kind="show" id="D9R-0f-UTe"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zqY-L4-P03">
                                 <rect key="frame" x="260" y="171" width="117" height="39"/>
                                 <state key="normal" title="Button"/>
@@ -482,13 +478,24 @@
                                     <action selector="segmentedChanged:" destination="Y6W-OH-hqX" eventType="valueChanged" id="xYl-PZ-0UT"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CFt-bU-f3t">
+                                <rect key="frame" x="118" y="693" width="157" height="39"/>
+                                <color key="tintColor" red="0.67450982329999998" green="0.89411771299999998" blue="0.63921570780000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Add Product">
+                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <segue destination="ZKO-WH-IyD" kind="show" id="D9R-0f-UTe"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="QAp-6R-Tgy" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="5Mu-r8-5Jl"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="QAp-6R-Tgy" secondAttribute="bottom" constant="668" id="5fg-G6-iaL"/>
-                            <constraint firstItem="CFt-bU-f3t" firstAttribute="top" secondItem="FbE-7i-FDX" secondAttribute="bottom" constant="33" id="67L-23-hxa"/>
+                            <constraint firstItem="CFt-bU-f3t" firstAttribute="top" secondItem="FbE-7i-FDX" secondAttribute="bottom" constant="8" id="67L-23-hxa"/>
                             <constraint firstItem="CFt-bU-f3t" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="118" id="849-PO-yUd"/>
                             <constraint firstAttribute="bottom" secondItem="FbE-7i-FDX" secondAttribute="bottom" constant="167" id="Bit-Hs-231"/>
                             <constraint firstItem="zqY-L4-P03" firstAttribute="top" secondItem="QAp-6R-Tgy" secondAttribute="bottom" constant="21" id="Ciq-Cb-1Rb"/>
@@ -535,7 +542,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
