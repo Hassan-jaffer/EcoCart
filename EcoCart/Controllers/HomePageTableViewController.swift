@@ -13,7 +13,7 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
     var selectedMetric: String? = nil
     var products: [Product] = []          // All products fetched from Firestore
     var filteredProducts: [Product] = []  // Filtered products for search
-    
+    var areFiltersActive = false // To track if filters are applied
     var activityIndicator: UIActivityIndicatorView! // Loading spinner
     
     override func viewDidLoad() {
@@ -22,6 +22,7 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
         setupUI()
         setupActivityIndicator()
         fetchProducts()
+        updateFilterButtonColor()
 
     }
     
@@ -207,9 +208,20 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
 
         // Reload the table view to reflect the reset
         tableView.reloadData()
+        
+        areFiltersActive = false
+        updateFilterButtonColor()
+
     }
 
-
+    
+    
+    func updateFilterButtonColor() {
+            // Change button color based on filter state
+            UIView.animate(withDuration: 0.3) {
+                self.filterButton.backgroundColor = self.areFiltersActive ? .coolLightGreen : .lightGray
+            }
+        }
 
 
     
@@ -253,6 +265,10 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
                 break
             }
         }
+
+        // Check if any filter is applied
+        areFiltersActive = (priceOrder != nil || category != nil || availability != nil || (metric != nil && metric!.isEmpty == false))
+        updateFilterButtonColor()
 
         // Apply Sorting
         if let priceOrder = priceOrder {

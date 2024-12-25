@@ -30,9 +30,11 @@
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="21d-Jm-utU">
                                     <rect key="frame" x="344" y="19" width="41" height="33"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="tintColor" systemColor="systemGray4Color"/>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="filled"/>
+                                    <buttonConfiguration key="configuration" style="filled">
+                                        <color key="baseBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </buttonConfiguration>
                                     <connections>
                                         <action selector="filterButton:" destination="IBw-OF-ImM" eventType="touchUpInside" id="C6K-oF-vfq"/>
                                     </connections>
@@ -137,9 +139,6 @@
         <image name="test" width="1920" height="1080"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray4Color">
-            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
