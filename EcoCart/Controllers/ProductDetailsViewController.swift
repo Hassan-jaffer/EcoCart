@@ -112,14 +112,14 @@ class ProductDetailsViewController: UIViewController {
             TopRatedView.backgroundColor = UIColor.black
             ReviewView.backgroundColor = UIColor.black
             TopRatedView.backgroundColor = UIColor.black
-            ProductsStack.backgroundColor = UIColor.black
+            EnviroImpactView.backgroundColor = UIColor.black
         }else{
             ImageUIView.backgroundColor = UIColor.white
             DescriptionView.backgroundColor = UIColor.white
             TopRatedView.backgroundColor = UIColor.white
             ReviewView.backgroundColor = UIColor.white
             TopRatedView.backgroundColor = UIColor.white
-            ProductsStack.backgroundColor = UIColor.white
+            EnviroImpactView.backgroundColor = UIColor.white
 
         }
         view.backgroundColor = backgroundColor
