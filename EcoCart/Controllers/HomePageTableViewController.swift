@@ -41,7 +41,7 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     private func fetchProducts() {
-        activityIndicator.startAnimating() // Start the spinner
+        activityIndicator.startAnimating()
 
         Task {
             do {
@@ -50,27 +50,6 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
 
                 self.products = documents.documents.map { document in
                     let data = document.data()
-                    
-                    // Print out the entire data dictionary for debugging
-                    print("Fetched document data: \(data)")
-
-                    // Extract and print category for debugging
-                    let category = data["Category"] as? String
-                    print("🌟 Fetched product category: \(category ?? "No Category")") // Debugging category
-                    
-                    // Extract location data
-                    let latitude = (data["location"] as? [String: Any])?["latitude"] as? Double ?? 0.0
-                    let longitude = (data["location"] as? [String: Any])?["longtitude"] as? Double ?? 0.0
-                    print("📍 Fetched location - Latitude: \(latitude), Longitude: \(longitude)")
-
-                    // Extract metrics data
-                    let metricsData = data["metrics"] as? [String: Any] ?? [:]
-                    let bio = metricsData["Bio"] as? Int ?? 0
-                    let co2 = metricsData["C02"] as? Int ?? 0
-                    let plastic = metricsData["Plastic"] as? Int ?? 0
-                    let tree = metricsData["Tree"] as? Int ?? 0
-                    print("🔋 Fetched metrics - Bio: \(bio), CO2: \(co2), Plastic: \(plastic), Tree: \(tree)")
-
                     return Product(
                         id: document.documentID,
                         name: data["name"] as? String ?? "",
@@ -81,41 +60,39 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
                         numberOfRatings: data["numberOfRatings"] as? Int ?? 0,
                         totalRatings: data["totalRatings"] as? Int ?? 0,
                         stockQuantity: data["stockQuantity"] as? Int ?? 0,
-                        category: category,
+                        category: data["Category"] as? String,
                         metrics: Product.Metrics(
-                            bio: bio,
-                            co2: co2,
-                            plastic: plastic,
-                            tree: tree
+                            bio: (data["metrics"] as? [String: Any])?["Bio"] as? Int ?? 0,
+                            co2: (data["metrics"] as? [String: Any])?["C02"] as? Int ?? 0,
+                            plastic: (data["metrics"] as? [String: Any])?["Plastic"] as? Int ?? 0,
+                            tree: (data["metrics"] as? [String: Any])?["Tree"] as? Int ?? 0
                         ),
-                        latitude: latitude,
-                        longitude: longitude,
+                        latitude: (data["location"] as? [String: Any])?["latitude"] as? Double ?? 0.0,
+                        longitude: (data["location"] as? [String: Any])?["longtitude"] as? Double ?? 0.0,
                         storeName: data["storeName"] as? String ?? "Unknown"
                     )
                 }
 
-                // Debug the number of products fetched and their categories
-                print("✅ Total Products Fetched: \(self.products.count)")
-                for product in self.products {
-                    print("🛒 Product: \(product.name), Category: \(product.category ?? "No Category"), Metric: \(product.metrics.plastic), \(product.metrics.tree), \(product.metrics.co2), \(product.metrics.bio), Location: \(product.latitude), \(product.longitude)")
-                }
+                // Sort products by average rating in descending order
+                self.products.sort { $0.averageRating > $1.averageRating }
 
                 // Initially show all products
                 self.filteredProducts = self.products
 
-                // Update the UI on the main thread
                 DispatchQueue.main.async {
-                    self.activityIndicator.stopAnimating() // Stop spinner
-                    self.tableView.reloadData() // Reload table view
+                    self.activityIndicator.stopAnimating()
+                    self.tableView.reloadData()
                 }
             } catch {
                 print("❌ Error fetching products: \(error.localizedDescription)")
                 DispatchQueue.main.async {
-                    self.activityIndicator.stopAnimating() // Stop spinner on error
+                    self.activityIndicator.stopAnimating()
                 }
             }
         }
     }
+
+
 
     
     // MARK: - UITableView DataSource
@@ -242,29 +219,19 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
     }
 
     func didApplyFilters(priceOrder: String?, category: String?, availability: Bool?, metric: String?) {
-        // Save the filter selections
+        // Save the selected filters
         selectedPriceOrder = priceOrder
         selectedCategory = category
         isAvailableFiltered = availability
         selectedMetric = metric
 
-
-        // Start with the original products list
+        // Start with the original product list
         filteredProducts = products
 
-        // Apply Price Sorting
-        if let priceOrder = priceOrder {
-            if priceOrder == "High To Low" {
-                filteredProducts.sort { $0.price > $1.price }
-            } else if priceOrder == "Low To High" {
-                filteredProducts.sort { $0.price < $1.price }
-            }
-        }
-        
         // Apply Availability Filter
-            if let availability = isAvailableFiltered, availability == true {
-                filteredProducts = filteredProducts.filter { $0.stockQuantity > 0 }
-            }
+        if let availability = isAvailableFiltered, availability == true {
+            filteredProducts = filteredProducts.filter { $0.stockQuantity > 0 }
+        }
 
         // Apply Category Filter
         if let category = category {
@@ -273,32 +240,45 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
             }
         }
 
-        // Debugging: Check filtered products after category filter
-        print("Filtered products after category filter: \(filteredProducts.count) products")
-
-        
         // Apply Environmental Impact Filter
-            if let metric = selectedMetric {
-                switch metric {
-                case "C02":
-                    filteredProducts.sort { $0.metrics.co2 > $1.metrics.co2 }
-                case "Plastic":
-                    filteredProducts.sort { $0.metrics.plastic > $1.metrics.plastic }
-                case "Tree":
-                    filteredProducts.sort { $0.metrics.tree > $1.metrics.tree }
-                default:
-                    break
-                }
+        if let metric = selectedMetric {
+            switch metric {
+            case "C02":
+                filteredProducts.sort { $0.metrics.co2 > $1.metrics.co2 }
+            case "Plastic":
+                filteredProducts.sort { $0.metrics.plastic > $1.metrics.plastic }
+            case "Tree":
+                filteredProducts.sort { $0.metrics.tree > $1.metrics.tree }
+            default:
+                break
             }
-        
-        // Apply A-Z Sorting if enabled
-        if isAZFiltered {
+        }
+
+        // Apply Sorting
+        if let priceOrder = priceOrder {
+            // Price sorting takes priority over all other sorting
+            if priceOrder == "High To Low" {
+                filteredProducts.sort { $0.price > $1.price }
+            } else if priceOrder == "Low To High" {
+                filteredProducts.sort { $0.price < $1.price }
+            }
+        } else if let metric = selectedMetric {
+            // If a metric filter is applied, don't sort by A-Z or ratings
+            // (Metric sorting is already applied above)
+        } else if isAZFiltered {
+            // A-Z sorting overrides ratings (but not price)
             filteredProducts.sort { $0.name.lowercased() < $1.name.lowercased() }
-            print("Products after A-Z sorting: \(filteredProducts.count) products")
+        } else {
+            // Default to sorting by highest average rating when no other sorting is applied
+            filteredProducts.sort { $0.averageRating > $1.averageRating }
         }
 
         // Reload the table view with the filtered and sorted products
         tableView.reloadData()
     }
+
+
+
+
 
 }
