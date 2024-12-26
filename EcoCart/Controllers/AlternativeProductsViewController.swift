@@ -176,61 +176,55 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
         let co2Saved = product.metrics.co2
         let plasticSaved = product.metrics.plastic
         let treesSaved = product.metrics.tree
-        let bio = product.metrics.bio
-        
-        let isBiodegradable = bio == 1
-        
+        let bio = product.metrics.bio // Assuming this is an Int (1 for biodegradable, 0 for not)
+
         // Log the extracted values
-        print("CO2 Saved: \(co2Saved), Plastic Saved: \(plasticSaved), Trees Saved: \(treesSaved), Biodegradable: \(isBiodegradable)")
-        
+        print("CO2 Saved: \(co2Saved), Plastic Saved: \(plasticSaved), Trees Saved: \(treesSaved), Biodegradable: \(bio != 0)")
+
         // Calculate scores based on contributions
         let co2Score = co2Saved > 0 ? Double(co2Saved) : 0.0
         let plasticScore = plasticSaved > 0 ? Double(plasticSaved) : 0.0
         let treeScore = treesSaved > 0 ? Double(treesSaved) : 0.0
-        
+
         // Compute weighted scores
         let weightedCo2Score = co2Weight * co2Score
         let weightedPlasticScore = plasticWeight * plasticScore
         let weightedTreeScore = treeWeight * treeScore
-        
+
         // Combine the weighted scores
         let footprintScore = weightedCo2Score + weightedPlasticScore + weightedTreeScore
-        
+
         // Log weighted footprint score
         print("Weighted Footprint Score (before adjustment): \(footprintScore)")
-        
-        // Biodegradable adjustment
-        let biodegradableAdjustment = isBiodegradable ? -0.005 : 0.005
-        
+
+        // Biodegradable adjustment (positive for biodegradable)
+        let biodegradableAdjustment = bio != 0 ? 0.005 : 0.0
+
         // Log the adjustment
         print("Biodegradable Adjustment: \(biodegradableAdjustment)")
-        
+
         // Final score
         let finalScore = footprintScore + biodegradableAdjustment
-        
+
         // Log the final score
         print("Final Footprint Score: \(finalScore)")
-        
+
         return finalScore
     }
-    
-    
+
     private func classifyProduct(product: Product) -> Bool {
         let footprintScore = calculateFootprintScore(product: product)
-        let threshold = 50.0 // Adjusted threshold
+        let threshold = 30.0 // Adjusted threshold
 
         // Check if the product meets the footprint score threshold
-        if footprintScore <= threshold {
+        if footprintScore >= threshold {
             return true // Product is environmentally friendly
         }
-        
+
         // Additional checks can be added here
         let metrics = product.metrics
         return metrics.co2 > 100 || metrics.plastic > 100 || metrics.tree > 10 // Example criteria
     }
-
-
-
 
 
     
