@@ -63,12 +63,15 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
 
     
     private func fetchAlternativeProduct() {
+        
         guard let selectedProduct = selectedProduct else {
             print("Selected product is nil.")
             showNoAlternativeMessage("No product selected.")
             return
         }
-
+        
+        
+        
         Task {
             do {
                 let allProducts = try await Product.fetchAllProducts()
@@ -96,6 +99,7 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                 // Calculate footprint score for the selected product
                 let selectedProductScore = calculateFootprintScore(product: selectedProduct)
                 print("Selected Product Score: \(selectedProductScore)")
+               
                 
                 // Filter and sort similar products based on footprint score
                 let filteredProducts = similarProducts
@@ -154,8 +158,18 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                 
                 // Update UI with the alternative product details
                 DispatchQueue.main.async {
-                    self.updateReplacementProductDetails()
+                    
                     self.metricsTableView.reloadData()
+                }
+                
+                if(classifyProduct(product: selectedProduct) == true){
+                    showNoAlternativeMessage("The selected product already has a low environmental impact, Good choice!")
+                    AltMsg.textColor = UIColor.systemGreen // Change text color to green
+                    statusImage.image = UIImage.thumbs
+                    statusImage.isHidden = false
+                }else{
+                    self.updateReplacementProductDetails()
+
                 }
 
             } catch {
@@ -216,23 +230,18 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
 
     
     
-    private func classifyProduct(product: Product) -> String {
-        // Assign thresholds for each metric, where higher values = better product
-        let co2Saved = product.metrics.co2
-        let plasticSaved = product.metrics.plastic
-        let treesSaved = product.metrics.tree
-        
-        // Define a threshold for "good" environmental impact
-        if co2Saved > 500 && plasticSaved > 500 && treesSaved > 500 {
-            return "Good Product for the Environment"
-        } else if co2Saved > 100 && plasticSaved > 100 && treesSaved > 100 {
-            return "Average Product"
-        } else {
-            return "Not Good for the Environment"
-        }
-        
+    private func classifyProduct(product: Product) -> Bool {
+        // Calculate the product's footprint score
+        let footprintScore = calculateFootprintScore(product: product)
 
+        // Define a threshold for "Good"
+        if footprintScore < 0.1 {
+            return true
+        } else {
+            return false
+        }
     }
+
 
 
 
@@ -259,9 +268,8 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
     }
     
     private func updateReplacementProductDetails() {
-        guard let alternativeProduct = alternativeProduct else {
-            showNoAlternativeMessage("The selected product already has a low environmental impact, Good choice!")
-            AltMsg.textColor = UIColor.systemGreen // Change text color to green
+         guard let alternativeProduct = alternativeProduct else {
+            
             return
         }
 
@@ -271,7 +279,7 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
         AltMsg.text = "The selected product has a high environmental footprint. We recommend this eco-friendlier alternative:"
         AltMsg.isHidden = false
 
-        repName.superview?.isHidden = false // This assumes `repName` is inside the view you want to unhide
+        repName.superview?.isHidden = false
         repPrice.superview?.isHidden = false
         repImage.superview?.isHidden = false
 
