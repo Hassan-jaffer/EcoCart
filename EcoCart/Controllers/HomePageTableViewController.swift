@@ -264,7 +264,7 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
         }
 
         // Apply Environmental Impact Filter
-        if let metric = selectedMetric {
+        if let metric = selectedMetric, !metric.isEmpty {
             switch metric {
             case "C02":
                 filteredProducts.sort { $0.metrics.co2 > $1.metrics.co2 }
@@ -278,7 +278,7 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
         }
 
         // Check if any filter is applied
-        areFiltersActive = (priceOrder != nil || category != nil || availability != nil || (metric != nil && metric!.isEmpty == false))
+        areFiltersActive = (priceOrder != nil || category != nil || availability != nil || (metric != nil && !metric!.isEmpty))
         updateFilterButtonColor()
 
         // Apply Sorting
@@ -303,7 +303,6 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
         // Reload the table view with the filtered and sorted products
         tableView.reloadData()
     }
-
 
 
 

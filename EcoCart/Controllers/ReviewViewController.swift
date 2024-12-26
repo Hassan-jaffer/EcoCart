@@ -30,6 +30,7 @@ class ReviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("⚠️ ReviewViewController loaded with productId: \(String(describing: productId))")
+        NotificationCenter.default.addObserver(self, selector: #selector(handleThemeChange), name: .themeDidChange, object: nil)
         setupUI()
         fetchReviews()
     }
@@ -75,6 +76,10 @@ class ReviewViewController: UIViewController {
     @objc private func starTapped(_ sender: UIButton) {
         selectedRating = sender.tag
         updateStars()
+    }
+    
+    @objc private func handleThemeChange() {
+        setupUI() // Reapply theme settings dynamically
     }
     
     private func updateStars() {

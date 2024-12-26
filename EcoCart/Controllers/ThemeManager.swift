@@ -1,3 +1,7 @@
+extension Notification.Name {
+    static let themeDidChange = Notification.Name("ThemeDidChange")
+}
+
 import UIKit
 
 class ThemeManager {
@@ -13,6 +17,8 @@ class ThemeManager {
         set {
             // Save the dark mode preference to UserDefaults
             UserDefaults.standard.set(newValue, forKey: "isDarkMode")
+            NotificationCenter.default.post(name: .themeDidChange, object: nil, userInfo: ["isDarkMode": newValue])
+
         }
     }
     
