@@ -74,14 +74,12 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                 let allProducts = try await Product.fetchAllProducts()
                 print("Fetched \(allProducts.count) products.")
 
-                // Filter products by keyword similarity (ignoring category)
-                let similarProducts = allProducts.filter { product in
-                    let isSimilar = productContainsSimilarKeywords(selected: selectedProduct, candidate: product)
-                    if isSimilar {
-                        print("Similar product found: \(product.name)")
-                    }
-                    return isSimilar
-                }
+                // Filter products by keyword similarity (ignoring category) and exclude the selected product
+                          let similarProducts = allProducts.filter { product in
+                              let isSimilar = productContainsSimilarKeywords(selected: selectedProduct, candidate: product)
+                              let isNotSelected = product.id != selectedProduct.id // Exclude selected product
+                              return isSimilar && isNotSelected
+                          }
 
                 print("Filtered \(similarProducts.count) similar products based on keywords.")
 
@@ -89,6 +87,9 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                 guard !similarProducts.isEmpty else {
                     DispatchQueue.main.async {
                         self.showNoAlternativeMessage("No alternatives found based on keywords.")
+                        self.statusImage.image = UIImage(named: "Magni")
+                        self.statusImage.isHidden = false
+                        
                     }
                     return
                 }
@@ -170,34 +171,30 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
         }
     }
 
-    
     private func calculateFootprintScore(product: Product) -> Double {
         // Extract metric values
         let co2Saved = product.metrics.co2
         let plasticSaved = product.metrics.plastic
         let treesSaved = product.metrics.tree
         let bio = product.metrics.bio
-        var isBiodegradable = false
         
-        if bio == 1 {
-            isBiodegradable = true
-        } else {
-            isBiodegradable = false
-        }
+        let isBiodegradable = bio == 1
         
         // Log the extracted values
         print("CO2 Saved: \(co2Saved), Plastic Saved: \(plasticSaved), Trees Saved: \(treesSaved), Biodegradable: \(isBiodegradable)")
         
-        // Avoid division by zero by setting score to 0 if metric is 0
-        let co2Score = co2Saved > 0 ? 1 / Double(co2Saved) : 0
-        let plasticScore = plasticSaved > 0 ? 1 / Double(plasticSaved) : 0
-        let treeScore = treesSaved > 0 ? 1 / Double(treesSaved) : 0
+        // Calculate scores based on contributions
+        let co2Score = co2Saved > 0 ? Double(co2Saved) : 0.0
+        let plasticScore = plasticSaved > 0 ? Double(plasticSaved) : 0.0
+        let treeScore = treesSaved > 0 ? Double(treesSaved) : 0.0
         
-        // Log individual scores
-        print("CO2 Score: \(co2Score), Plastic Score: \(plasticScore), Tree Score: \(treeScore)")
+        // Compute weighted scores
+        let weightedCo2Score = co2Weight * co2Score
+        let weightedPlasticScore = plasticWeight * plasticScore
+        let weightedTreeScore = treeWeight * treeScore
         
-        // Weighted sum of the scores
-        let footprintScore = (co2Weight * co2Score) + (plasticWeight * plasticScore) + (treeWeight * treeScore)
+        // Combine the weighted scores
+        let footprintScore = weightedCo2Score + weightedPlasticScore + weightedTreeScore
         
         // Log weighted footprint score
         print("Weighted Footprint Score (before adjustment): \(footprintScore)")
@@ -216,26 +213,34 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
         
         return finalScore
     }
-
-
     
     
     private func classifyProduct(product: Product) -> Bool {
-        // Calculate the product's footprint score
         let footprintScore = calculateFootprintScore(product: product)
+        let threshold = 50.0 // Adjusted threshold
 
-        // Define a threshold for "Good"
-        if footprintScore <= 0.005 {
-            return true
-        } else {
-            return false
+        // Check if the product meets the footprint score threshold
+        if footprintScore <= threshold {
+            return true // Product is environmentally friendly
         }
+        
+        // Additional checks can be added here
+        let metrics = product.metrics
+        return metrics.co2 > 100 || metrics.plastic > 100 || metrics.tree > 10 // Example criteria
     }
 
 
 
 
+
     
+    private let stopWords: Set<String> = [
+        "recyclable", "eco", "green", "sustainable", "environmentally", "friendly",
+        "product", "the", "and", "a", "of", "in", "to", "for", "is", "that", "on",
+        "with", "as", "by", "from", "this", "which", "be", "are", "at", "it", "recycled"
+        // Add more as needed
+    ]
+
     private func productContainsSimilarKeywords(selected: Product, candidate: Product) -> Bool {
         // Extract keywords from product names
         let selectedKeywords = extractKeywords(from: selected.name)
@@ -246,17 +251,16 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
         print("Matching keywords: \(matchingKeywords)")
         return !matchingKeywords.isEmpty
     }
-    
+
     private func extractKeywords(from name: String) -> Set<String> {
         // Convert the product name to lowercase, remove special characters, and split into words
         let words = name
             .lowercased()
             .components(separatedBy: CharacterSet.alphanumerics.inverted)
-            .filter { !$0.isEmpty } // Remove empty strings
-        
+            .filter { !$0.isEmpty && !stopWords.contains($0) } // Remove empty strings and stop words
+
         return Set(words)
     }
-    
     private func updateReplacementProductDetails() {
          guard let alternativeProduct = alternativeProduct else {
             
