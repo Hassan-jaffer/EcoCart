@@ -21,6 +21,7 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
     var selectedProduct: Product?
     var alternativeProduct: Product? // Store the alternative product to show on the UI
     
+    @IBOutlet weak var statusImage: UIImageView!
     // Weights for each environmental metric (can be adjusted dynamically or fetched from a config)
     let co2Weight: Double = 0.5
     let plasticWeight: Double = 0.3
@@ -136,6 +137,8 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                 guard let co2Product = co2Product, let plasticProduct = plasticProduct, let treeProduct = treeProduct else {
                     DispatchQueue.main.async {
                         self.showNoAlternativeMessage("No valid alternative products found.")
+                        self.statusImage.image = UIImage(named: "Magni")
+                        self.statusImage.isHidden = false
                     }
                     return
                 }

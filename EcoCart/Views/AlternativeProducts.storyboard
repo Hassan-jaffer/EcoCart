@@ -168,19 +168,26 @@
                                 <color key="textColor" systemColor="systemGreenColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="03K-8y-OZa">
+                                <rect key="frame" x="76" y="131" width="243" height="155"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="u9p-Ax-QmR" secondAttribute="trailing" constant="16" id="0Nd-Kh-Jab"/>
+                            <constraint firstItem="03K-8y-OZa" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="76" id="5HB-97-0hX"/>
                             <constraint firstItem="G08-QB-gGU" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="7aZ-Ar-Sad"/>
                             <constraint firstItem="u9p-Ax-QmR" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="Bpo-U8-D5P"/>
                             <constraint firstItem="G08-QB-gGU" firstAttribute="top" secondItem="u9p-Ax-QmR" secondAttribute="bottom" constant="8" id="Cqw-O8-weP"/>
                             <constraint firstItem="x6T-xh-LnF" firstAttribute="top" secondItem="UsC-A3-sHT" secondAttribute="bottom" constant="8" symbolic="YES" id="Ddc-RB-Cx7"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="x6T-xh-LnF" secondAttribute="trailing" id="IXG-tl-D3b"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="G08-QB-gGU" secondAttribute="trailing" constant="16" id="KLU-Ba-bjO"/>
+                            <constraint firstItem="03K-8y-OZa" firstAttribute="top" secondItem="u9p-Ax-QmR" secondAttribute="bottom" constant="17.329999999999998" id="Mfg-Nk-U52"/>
                             <constraint firstItem="x6T-xh-LnF" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="OWd-Mh-LyL"/>
+                            <constraint firstItem="UsC-A3-sHT" firstAttribute="top" secondItem="03K-8y-OZa" secondAttribute="bottom" constant="49.670000000000002" id="ap5-vc-5gV"/>
                             <constraint firstItem="x6T-xh-LnF" firstAttribute="top" secondItem="G08-QB-gGU" secondAttribute="bottom" constant="92.329999999999998" id="cTk-VP-RAV"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="03K-8y-OZa" secondAttribute="trailing" constant="74" id="eHa-I2-o3k"/>
                             <constraint firstItem="u9p-Ax-QmR" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="14" id="eRM-QS-3Km"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="x6T-xh-LnF" secondAttribute="bottom" id="uXr-lX-uMR"/>
                         </constraints>
@@ -200,6 +207,7 @@
                         <outlet property="repImage" destination="Y3z-nf-rnB" id="ihT-aA-4eL"/>
                         <outlet property="repName" destination="1HC-bB-27T" id="TUD-N6-Fgp"/>
                         <outlet property="repPrice" destination="TWY-0z-h0l" id="BJs-Gj-q3R"/>
+                        <outlet property="statusImage" destination="03K-8y-OZa" id="kUz-xj-tuU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
