@@ -77,6 +77,7 @@ class ProductDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("📱 ViewDidLoad called")
+        NotificationCenter.default.addObserver(self, selector: #selector(handleThemeChange), name: .themeDidChange, object: nil)
         setupUI()
         fetchProductDetails()
         
@@ -98,6 +99,11 @@ class ProductDetailsViewController: UIViewController {
             updateUI(with: updatedProduct)
         }
     }
+    
+    @objc private func handleThemeChange() {
+        setupUI() // Reapply theme settings dynamically
+    }
+
     
     private func setupUI() {
         print("🎨 Setting up UI")
