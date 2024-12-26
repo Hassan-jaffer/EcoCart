@@ -97,7 +97,7 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                 let selectedProductScore = calculateFootprintScore(product: selectedProduct)
                 print("Selected Product Score: \(selectedProductScore)")
 
-                // Filter and sort similar products based on footprint score
+                // Filter and sort similar products based on footprint score (for suggested alternatives)
                 let filteredProducts = similarProducts
                     .filter { calculateFootprintScore(product: $0) < selectedProductScore } // Lower footprint score
                     .sorted {
@@ -113,18 +113,23 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                 // Set the best alternative product to be shown in the header
                 self.alternativeProduct = filteredProducts.first
 
-                // Find the highest product for each metric (CO2, Plastic, Trees)
+                // --------------------- For Metric Table ---------------------
+
+                // Now find the highest values for each metric (CO2, Plastic, Trees) for the table
                 var validMetricProducts: [MetricProduct] = []
 
-                if let co2Product = filteredProducts.max(by: { $0.metrics.co2 < $1.metrics.co2 }) {
+                // CO2: Find product with highest CO2 saved
+                if let co2Product = similarProducts.max(by: { $0.metrics.co2 < $1.metrics.co2 }) {
                     validMetricProducts.append(MetricProduct(product: co2Product, metric: "CO2", metricValue: Double(co2Product.metrics.co2)))
                 }
 
-                if let plasticProduct = filteredProducts.max(by: { $0.metrics.plastic < $1.metrics.plastic }) {
+                // Plastic: Find product with highest Plastic saved
+                if let plasticProduct = similarProducts.max(by: { $0.metrics.plastic < $1.metrics.plastic }) {
                     validMetricProducts.append(MetricProduct(product: plasticProduct, metric: "Plastic", metricValue: Double(plasticProduct.metrics.plastic)))
                 }
 
-                if let treeProduct = filteredProducts.max(by: { $0.metrics.tree < $1.metrics.tree }) {
+                // Trees: Find product with highest Trees saved
+                if let treeProduct = similarProducts.max(by: { $0.metrics.tree < $1.metrics.tree }) {
                     validMetricProducts.append(MetricProduct(product: treeProduct, metric: "Trees", metricValue: Double(treeProduct.metrics.tree)))
                 }
 
@@ -148,6 +153,7 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                     self.metricsTableView.reloadData()
                 }
 
+                // If the selected product already has a low footprint, show confirmation
                 if(classifyProduct(product: selectedProduct) == true) {
                     showNoAlternativeMessage("The selected product already has a low environmental impact, Good choice!")
                     AltMsg.textColor = UIColor.systemGreen // Change text color to green
@@ -197,7 +203,7 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
         print("Weighted Footprint Score (before adjustment): \(footprintScore)")
         
         // Biodegradable adjustment
-        let biodegradableAdjustment = isBiodegradable ? -0.01 : 0.01
+        let biodegradableAdjustment = isBiodegradable ? -0.005 : 0.005
         
         // Log the adjustment
         print("Biodegradable Adjustment: \(biodegradableAdjustment)")
@@ -219,7 +225,7 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
         let footprintScore = calculateFootprintScore(product: product)
 
         // Define a threshold for "Good"
-        if footprintScore < 0.1 {
+        if footprintScore <= 0.005 {
             return true
         } else {
             return false

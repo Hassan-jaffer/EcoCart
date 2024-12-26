@@ -18,6 +18,7 @@ class FilterViewController: UIViewController {
     weak var delegate: FilterDelegate?
 
     
+    @IBOutlet weak var FilterView: UIView!
     @IBOutlet weak var Metric: UIButton!
     var isAvailableFiltered: Bool? = nil
     var isAZFiltered = false
@@ -41,10 +42,20 @@ class FilterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(handleThemeChange), name: .themeDidChange, object: nil)
         createMenu()
         roundButtons()
         updateButtonStates() // Update button states based on current filters
     }
+    
+    @objc private func handleThemeChange(_ notification: Notification) {
+        if ThemeManager.shared.isDarkMode {
+            FilterView.backgroundColor = UIColor.black
+        } else {
+            FilterView.backgroundColor = UIColor.gray
+        }
+    }
+
 
     func updateButtonStates() {
         UIView.animate(withDuration: 0.5) { // Add smooth animation for color updates

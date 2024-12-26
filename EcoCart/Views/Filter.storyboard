@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cwk-bl-JMz">
-                                <rect key="frame" x="32" y="104" width="328" height="644"/>
+                                <rect key="frame" x="32" y="150" width="328" height="644"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Gq-0k-5gD">
@@ -166,6 +166,7 @@
                     </view>
                     <connections>
                         <outlet property="CategoryPopupBtn" destination="nPh-cw-VOW" id="Tzn-BF-KpM"/>
+                        <outlet property="FilterView" destination="cwk-bl-JMz" id="fGY-Hf-sLX"/>
                         <outlet property="Metric" destination="7oV-yS-E5f" id="mN6-TB-ecp"/>
                         <outlet property="PricePopupBtn" destination="w6a-JP-Sv1" id="H8q-GT-7dm"/>
                         <outlet property="availabilityBtn" destination="JTO-rE-trI" id="cj6-wP-eXN"/>
