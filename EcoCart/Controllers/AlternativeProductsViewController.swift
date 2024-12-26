@@ -32,7 +32,7 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("View did load - Fetching alternative products.")
+       //print("View did load - Fetching alternative products.")
         fetchAlternativeProduct()
         metricsTableView.delegate = self
         metricsTableView.dataSource = self
@@ -63,20 +63,17 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
 
     
     private func fetchAlternativeProduct() {
-        
         guard let selectedProduct = selectedProduct else {
             print("Selected product is nil.")
             showNoAlternativeMessage("No product selected.")
             return
         }
-        
-        
-        
+
         Task {
             do {
                 let allProducts = try await Product.fetchAllProducts()
                 print("Fetched \(allProducts.count) products.")
-                
+
                 // Filter products by keyword similarity (ignoring category)
                 let similarProducts = allProducts.filter { product in
                     let isSimilar = productContainsSimilarKeywords(selected: selectedProduct, candidate: product)
@@ -85,9 +82,9 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                     }
                     return isSimilar
                 }
-                
+
                 print("Filtered \(similarProducts.count) similar products based on keywords.")
-                
+
                 // If no similar products are found, notify the user
                 guard !similarProducts.isEmpty else {
                     DispatchQueue.main.async {
@@ -95,12 +92,11 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                     }
                     return
                 }
-                
+
                 // Calculate footprint score for the selected product
                 let selectedProductScore = calculateFootprintScore(product: selectedProduct)
                 print("Selected Product Score: \(selectedProductScore)")
-               
-                
+
                 // Filter and sort similar products based on footprint score
                 let filteredProducts = similarProducts
                     .filter { calculateFootprintScore(product: $0) < selectedProductScore } // Lower footprint score
@@ -111,34 +107,29 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                         }
                         return scoreDiff < 0
                     }
-                
+
                 print("Filtered and sorted alternatives: \(filteredProducts.count) alternatives found.")
-                
+
                 // Set the best alternative product to be shown in the header
                 self.alternativeProduct = filteredProducts.first
-                
+
                 // Find the highest product for each metric (CO2, Plastic, Trees)
-                var co2Product: Product? = nil
-                var plasticProduct: Product? = nil
-                var treeProduct: Product? = nil
-                
-                for product in filteredProducts {
-                    // Find the highest CO2 product
-                    if co2Product == nil || product.metrics.co2 > co2Product!.metrics.co2 {
-                        co2Product = product
-                    }
-                    // Find the highest Plastic product
-                    if plasticProduct == nil || product.metrics.plastic > plasticProduct!.metrics.plastic {
-                        plasticProduct = product
-                    }
-                    // Find the highest Trees product
-                    if treeProduct == nil || product.metrics.tree > treeProduct!.metrics.tree {
-                        treeProduct = product
-                    }
+                var validMetricProducts: [MetricProduct] = []
+
+                if let co2Product = filteredProducts.max(by: { $0.metrics.co2 < $1.metrics.co2 }) {
+                    validMetricProducts.append(MetricProduct(product: co2Product, metric: "CO2", metricValue: Double(co2Product.metrics.co2)))
                 }
-                
-                // Ensure no product is nil before proceeding
-                guard let co2Product = co2Product, let plasticProduct = plasticProduct, let treeProduct = treeProduct else {
+
+                if let plasticProduct = filteredProducts.max(by: { $0.metrics.plastic < $1.metrics.plastic }) {
+                    validMetricProducts.append(MetricProduct(product: plasticProduct, metric: "Plastic", metricValue: Double(plasticProduct.metrics.plastic)))
+                }
+
+                if let treeProduct = filteredProducts.max(by: { $0.metrics.tree < $1.metrics.tree }) {
+                    validMetricProducts.append(MetricProduct(product: treeProduct, metric: "Trees", metricValue: Double(treeProduct.metrics.tree)))
+                }
+
+                // Check if no valid alternatives exist
+                guard !validMetricProducts.isEmpty else {
                     DispatchQueue.main.async {
                         self.showNoAlternativeMessage("No valid alternative products found.")
                         self.statusImage.image = UIImage(named: "Magni")
@@ -146,30 +137,24 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                     }
                     return
                 }
-                
-                // Now, create MetricProduct for each of the highest metric products
-                self.metricProducts = [
-                    MetricProduct(product: co2Product, metric: "CO2", metricValue: Double(co2Product.metrics.co2)),
-                    MetricProduct(product: plasticProduct, metric: "Plastic", metricValue: Double(plasticProduct.metrics.plastic)),
-                    MetricProduct(product: treeProduct, metric: "Trees", metricValue: Double(treeProduct.metrics.tree))
-                ]
-                
+
+                // Now update the table with valid alternatives
+                self.metricProducts = validMetricProducts
+
                 print("Metric products count: \(self.metricProducts.count)")
-                
+
                 // Update UI with the alternative product details
                 DispatchQueue.main.async {
-                    
                     self.metricsTableView.reloadData()
                 }
-                
-                if(classifyProduct(product: selectedProduct) == true){
+
+                if(classifyProduct(product: selectedProduct) == true) {
                     showNoAlternativeMessage("The selected product already has a low environmental impact, Good choice!")
                     AltMsg.textColor = UIColor.systemGreen // Change text color to green
                     statusImage.image = UIImage.thumbs
                     statusImage.isHidden = false
-                }else{
+                } else {
                     self.updateReplacementProductDetails()
-
                 }
 
             } catch {
@@ -178,7 +163,6 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
             }
         }
     }
-
 
     
     private func calculateFootprintScore(product: Product) -> Double {
@@ -342,6 +326,7 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
     }
     
     
+    // When a row is selected, navigate to ProductDetailsViewController
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Get the selected MetricProduct
         let selectedMetricProduct = metricProducts[indexPath.row]
@@ -359,15 +344,16 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
     }
 
     // Number of sections in the table view (1 section in this case)
-        func numberOfSections(in tableView: UITableView) -> Int {
-            return 1 // You can adjust this based on your needs
-        }
-        
-        // Number of rows in each section (e.g., count of products to show)
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    // Number of rows in each section (count of products to show)
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return metricProducts.count
     }
 
+    // Configure each cell in the table view dynamically
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Dequeue the cell from the prototype
         let cell = tableView.dequeueReusableCell(withIdentifier: "MetricCell", for: indexPath)
@@ -390,29 +376,31 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
             label3.text = "\(metricProduct.metricValue)"
         }
         
+        // Load the product image (with error handling)
         if let imageView = cell.viewWithTag(4) as? UIImageView {
-                    if let imageUrlString = metricProduct.product.imageURL, let imageUrl = URL(string: imageUrlString) {
-                        URLSession.shared.dataTask(with: imageUrl) { data, _, error in
-                            if let error = error {
-                                print("Error loading image: \(error)")
-                            }
-                            if let data = data, let image = UIImage(data: data) {
-                                DispatchQueue.main.async {
-                                    imageView.image = image
-                                }
-                            } else {
-                                DispatchQueue.main.async {
-                                    imageView.image = UIImage(named: "placeholder")
-                                }
-                            }
-                        }.resume()
-                    } else {
-                        imageView.image = UIImage(named: "placeholder")
+            if let imageUrlString = metricProduct.product.imageURL, let imageUrl = URL(string: imageUrlString) {
+                URLSession.shared.dataTask(with: imageUrl) { data, _, error in
+                    if let error = error {
+                        print("Error loading image: \(error)")
                     }
-                }
+                    if let data = data, let image = UIImage(data: data) {
+                        DispatchQueue.main.async {
+                            imageView.image = image
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            imageView.image = UIImage(named: "placeholder")
+                        }
+                    }
+                }.resume()
+            } else {
+                imageView.image = UIImage(named: "placeholder")
+            }
+        }
         
         return cell
     }
+
 
 
 
