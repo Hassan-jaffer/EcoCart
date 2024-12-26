@@ -199,11 +199,9 @@
                         <outlet property="logoutButton" destination="pRE-d5-d4b" id="Wqs-6t-MML"/>
                         <outlet property="profileEmil" destination="LMf-th-Cxy" id="CBg-1e-YTH"/>
                         <outlet property="profileName" destination="CYE-sy-p7V" id="Yt0-jy-S35"/>
-                        <segue destination="6ms-PM-bPu" kind="unwind" identifier="backToHome" unwindAction="unwindToLogin:" id="WwZ-Ps-Xot"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mJq-Rn-EHV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="6ms-PM-bPu" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="951.90839694656484" y="-116.19718309859155"/>
         </scene>

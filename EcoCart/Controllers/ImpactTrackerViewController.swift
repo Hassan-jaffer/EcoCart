@@ -120,7 +120,7 @@ class ImpactTrackerViewController: UIViewController {
     func fetchData(period: String){
         //query with the condition, seperated it to add action listener and date comparsion
         let query: Query
-        let user = "123" // id must be changed to logged in user
+        let user = UserDefaults.standard.string(forKey: "user_uid_key") // id must be changed to logged in user
         switch period {
         case "day":
             

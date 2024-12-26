@@ -32,7 +32,7 @@ class AddProductViewController: UITableViewController {
     @IBAction func confirmBtnTapped(_ sender: Any) {
     
     
-        let user = "123" //id will be changed to logged in user
+        let user = UserDefaults.standard.string(forKey: "user_uid_key") //id will be changed to logged in user
         //get all info and store them in firebase
         guard let name = nameTxtFld.text, !name.isEmpty,
               let category = categoryTxtFld.text, !category.isEmpty,

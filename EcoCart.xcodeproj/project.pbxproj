@@ -57,6 +57,11 @@
 		5C7F5BB12D17AC7B00310022 /* AlternativeProducts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C7F5BB02D17AC7B00310022 /* AlternativeProducts.storyboard */; };
 		5C7F5BB32D17ACBC00310022 /* AlternativeProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7F5BB22D17ACBC00310022 /* AlternativeProductsViewController.swift */; };
 		5CA077142D0FEB4A00B44555 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA077132D0FEB4A00B44555 /* Color.swift */; };
+		832E295F2D1CEEAE000C5458 /* History.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 832E295E2D1CEEAE000C5458 /* History.storyboard */; };
+		832E29612D1CEECA000C5458 /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832E29602D1CEECA000C5458 /* HistoryTableViewCell.swift */; };
+		832E29632D1CF8AA000C5458 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 832E29622D1CF8AA000C5458 /* MainTabBarController.swift */; };
+		832E29652D1D02EE000C5458 /* mainAdmin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 832E29642D1D02EE000C5458 /* mainAdmin.storyboard */; };
+		832E29672D1D030C000C5458 /* mainManager.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 832E29662D1D030C000C5458 /* mainManager.storyboard */; };
 		83D547122D137D29004DE1CE /* ProfilePage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83D547112D137D29004DE1CE /* ProfilePage.storyboard */; };
 		83D547142D137D9C004DE1CE /* LogInPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83D547132D137D9C004DE1CE /* LogInPage.storyboard */; };
 		83D5471C2D137DF0004DE1CE /* UserSIGNUPTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D547172D137DF0004DE1CE /* UserSIGNUPTableViewController.swift */; };
@@ -70,7 +75,6 @@
 		83D547282D137E09004DE1CE /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D547242D137E09004DE1CE /* Database.swift */; };
 		83D5472A2D138109004DE1CE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 83D547292D138109004DE1CE /* FirebaseStorage */; };
 		83D5472C2D13A2F4004DE1CE /* SignupSuccessfulViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D5472B2D13A2F4004DE1CE /* SignupSuccessfulViewController.swift */; };
-		CF84B6A32CFC4B1E0006F605 /* LoginBackup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF84B6A22CFC4B1E0006F605 /* LoginBackup.storyboard */; };
 		CF84B6A52CFC58280006F605 /* ProfileBackup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF84B6A42CFC58280006F605 /* ProfileBackup.storyboard */; };
 		F23585FD2D058D1E00C00219 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F23585FC2D058D1E00C00219 /* FirebaseAuth */; };
 		F23585FF2D058D1E00C00219 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = F23585FE2D058D1E00C00219 /* FirebaseCore */; };
@@ -151,6 +155,11 @@
 		5C7F5BB02D17AC7B00310022 /* AlternativeProducts.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AlternativeProducts.storyboard; sourceTree = "<group>"; };
 		5C7F5BB22D17ACBC00310022 /* AlternativeProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeProductsViewController.swift; sourceTree = "<group>"; };
 		5CA077132D0FEB4A00B44555 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		832E295E2D1CEEAE000C5458 /* History.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = History.storyboard; sourceTree = "<group>"; };
+		832E29602D1CEECA000C5458 /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
+		832E29622D1CF8AA000C5458 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		832E29642D1D02EE000C5458 /* mainAdmin.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = mainAdmin.storyboard; sourceTree = "<group>"; };
+		832E29662D1D030C000C5458 /* mainManager.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = mainManager.storyboard; sourceTree = "<group>"; };
 		83D547112D137D29004DE1CE /* ProfilePage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfilePage.storyboard; sourceTree = "<group>"; };
 		83D547132D137D9C004DE1CE /* LogInPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LogInPage.storyboard; sourceTree = "<group>"; };
 		83D547152D137DF0004DE1CE /* ForgotPassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ForgotPassViewController.swift; path = EcoCart/Controllers/ForgotPassViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -163,7 +172,6 @@
 		83D547242D137E09004DE1CE /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		83D547252D137E09004DE1CE /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		83D5472B2D13A2F4004DE1CE /* SignupSuccessfulViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignupSuccessfulViewController.swift; path = EcoCart/Controllers/SignupSuccessfulViewController.swift; sourceTree = SOURCE_ROOT; };
-		CF84B6A22CFC4B1E0006F605 /* LoginBackup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginBackup.storyboard; sourceTree = "<group>"; };
 		CF84B6A42CFC58280006F605 /* ProfileBackup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileBackup.storyboard; sourceTree = "<group>"; };
 		F2574B202D0058F900FF2011 /* Filter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Filter.storyboard; sourceTree = "<group>"; };
 		F2574B262D00785B00FF2011 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
@@ -216,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				83D5472B2D13A2F4004DE1CE /* SignupSuccessfulViewController.swift */,
+				832E29602D1CEECA000C5458 /* HistoryTableViewCell.swift */,
 				83D547152D137DF0004DE1CE /* ForgotPassViewController.swift */,
 				83D547172D137DF0004DE1CE /* UserSIGNUPTableViewController.swift */,
 				83D547182D137DF0004DE1CE /* LogInTableViewController.swift */,
@@ -250,6 +259,7 @@
 				54C192032D17076500DB36D0 /* ExpandedOrderListViewController.swift */,
 				54C192052D17077700DB36D0 /* CancelOrderViewController.swift */,
 				5C7F5BB22D17ACBC00310022 /* AlternativeProductsViewController.swift */,
+				832E29622D1CF8AA000C5458 /* MainTabBarController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -262,7 +272,6 @@
 				0E7C9AAB2CF72FCD0049CD22 /* LaunchScreen.storyboard */,
 				0E7C9AAD2CF72FCD0049CD22 /* Main.storyboard */,
 				0E7C9AAE2CF72FCD0049CD22 /* ProductDetails.storyboard */,
-				CF84B6A22CFC4B1E0006F605 /* LoginBackup.storyboard */,
 				CF84B6A42CFC58280006F605 /* ProfileBackup.storyboard */,
 				F2574B202D0058F900FF2011 /* Filter.storyboard */,
 				105F69B02D049D1E005454A7 /* ReviewCell.xib */,
@@ -271,7 +280,10 @@
 				54C1917A2D16BF0900DB36D0 /* StoreManagement.storyboard */,
 				54C191F52D1702CF00DB36D0 /* Cart.storyboard */,
 				54C192012D17062300DB36D0 /* MyOrders.storyboard */,
+				832E295E2D1CEEAE000C5458 /* History.storyboard */,
 				5C7F5BB02D17AC7B00310022 /* AlternativeProducts.storyboard */,
+				832E29642D1D02EE000C5458 /* mainAdmin.storyboard */,
+				832E29662D1D030C000C5458 /* mainManager.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -471,10 +483,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF84B6A32CFC4B1E0006F605 /* LoginBackup.storyboard in Resources */,
 				54C191F62D1702CF00DB36D0 /* Cart.storyboard in Resources */,
 				0E60DB772D0CC89900F16562 /* ProductCell2.storyboard in Resources */,
 				0E7C9AB12CF72FCD0049CD22 /* Assets.xcassets in Resources */,
+				832E29672D1D030C000C5458 /* mainManager.storyboard in Resources */,
 				83D547122D137D29004DE1CE /* ProfilePage.storyboard in Resources */,
 				F2574B212D0058F900FF2011 /* Filter.storyboard in Resources */,
 				5C7F5BB12D17AC7B00310022 /* AlternativeProducts.storyboard in Resources */,
@@ -485,8 +497,10 @@
 				0E7C9AB42CF72FCD0049CD22 /* Impact Tracker.storyboard in Resources */,
 				CF84B6A52CFC58280006F605 /* ProfileBackup.storyboard in Resources */,
 				83D547142D137D9C004DE1CE /* LogInPage.storyboard in Resources */,
+				832E29652D1D02EE000C5458 /* mainAdmin.storyboard in Resources */,
 				0E7C9AB52CF72FCD0049CD22 /* ProductDetails.storyboard in Resources */,
 				0E7C9AB62CF72FCD0049CD22 /* LaunchScreen.storyboard in Resources */,
+				832E295F2D1CEEAE000C5458 /* History.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,6 +529,7 @@
 				54C191E02D16FCA300DB36D0 /* AddProductManagementViewController.swift in Sources */,
 				1048562F2D0765C200D60B8D /* ReviewViewController.swift in Sources */,
 				83D5471C2D137DF0004DE1CE /* UserSIGNUPTableViewController.swift in Sources */,
+				832E29612D1CEECA000C5458 /* HistoryTableViewCell.swift in Sources */,
 				83D5471D2D137DF0004DE1CE /* LogInTableViewController.swift in Sources */,
 				83D5471E2D137DF0004DE1CE /* ForgotPassViewController.swift in Sources */,
 				83D5471F2D137DF0004DE1CE /* ProfilePageTableViewController.swift in Sources */,
@@ -560,6 +575,7 @@
 				54C191792D16BE5300DB36D0 /* StoreManagementViewController.swift in Sources */,
 				54C191EE2D17009F00DB36D0 /* Owner 2.swift in Sources */,
 				54C191F42D17012600DB36D0 /* EditOwnerViewController.swift in Sources */,
+				832E29632D1CF8AA000C5458 /* MainTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

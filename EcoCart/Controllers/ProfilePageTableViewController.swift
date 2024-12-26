@@ -38,6 +38,7 @@ class ProfilePageTableViewController: UITableViewController, UIImagePickerContro
         ProfileImageView.layer.cornerRadius = ProfileImageView.frame.height / 2
         self.navigationItem.hidesBackButton = true
         
+        
         let appearance = UITabBarAppearance()
         appearance.backgroundColor = UIColor(red: 156/255, green: 230/255, blue: 157/255, alpha: 1.0)
         self.tabBarController?.tabBar.standardAppearance = appearance
@@ -79,7 +80,16 @@ class ProfilePageTableViewController: UITableViewController, UIImagePickerContro
         do {
             try Auth.auth().signOut()
             UserDefaults.standard.removeObject(forKey: "user_uid_key")
-            performSegue(withIdentifier: "backToHome", sender: nil)
+            
+            let storyboard = UIStoryboard(name: "LogInPage", bundle: nil)
+            if let loginVC = storyboard.instantiateViewController(withIdentifier: "login") as? LogInTableViewController {
+                let navigationController = UINavigationController(rootViewController: loginVC)
+                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                   let window = windowScene.windows.first {
+                    window.rootViewController = navigationController
+                    window.makeKeyAndVisible()
+                }
+            }
         } catch {
             print("Error signing out: \(error.localizedDescription)")
         }

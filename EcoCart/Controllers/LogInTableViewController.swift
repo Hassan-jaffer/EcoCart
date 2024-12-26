@@ -27,9 +27,41 @@ class LogInTableViewController: UITableViewController {
         // Check if user is already logged in
         if let _ = UserDefaults.standard.string(forKey: "user_uid_key") {
             // User is logged in, navigate to ProfilePageTableViewController
-            let storyboard = UIStoryboard(name: "ProfilePage", bundle: nil)
-            if let profileVC = storyboard.instantiateViewController(withIdentifier: "ProfilePageTableViewController") as? ProfilePageTableViewController {
-                self.navigationController?.pushViewController(profileVC, animated: true)
+
+            let userType = UserDefaults.standard.string(forKey: "user_type")
+            
+            if userType == nil {
+                return
+            }
+            switch userType!.lowercased() {
+            case "regular":
+                UserDefaults.standard.set("regular", forKey: "user_type")
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                if let regularVC = storyboard.instantiateViewController(withIdentifier: "main") as? MainTabBarController {
+                    // Replace the entire navigation stack
+                    self.navigationController?.setViewControllers([regularVC], animated: true)
+                }
+            case "admin":
+                UserDefaults.standard.set("admin", forKey: "user_type")
+                let storyboard = UIStoryboard(name: "mainAdmin", bundle: nil)
+                if let adminVC = storyboard.instantiateViewController(withIdentifier: "mainAdmin") as? UIViewController {
+                    self.navigationController?.setViewControllers([adminVC], animated: true)
+                }
+            case "storemanager":
+                UserDefaults.standard.set("storemanager", forKey: "user_type")
+                let storyboard = UIStoryboard(name: "mainManager", bundle: nil)
+                if let managerVC = storyboard.instantiateViewController(withIdentifier: "mainManager") as? UIViewController {
+                    self.navigationController?.setViewControllers([managerVC], animated: true)
+                }
+            default:
+                print("Invalid user type")
+                self.showAlert(title: "Error", message: "Invalid user type")
+            }
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let mainVC = storyboard.instantiateViewController(withIdentifier: "main") as? MainTabBarController {
+                self.navigationController?.setViewControllers([mainVC], animated: false)
+
             }
         }
              setupUI()
@@ -94,7 +126,6 @@ class LogInTableViewController: UITableViewController {
             return
         }
 
-
         FirebaseAuth.Auth.auth().signIn(withEmail: username, password: password) { [weak self] result, error in
             guard let self = self else { return }
             
@@ -110,10 +141,44 @@ class LogInTableViewController: UITableViewController {
             }
             
             UserDefaults.standard.set(uid, forKey: "user_uid_key")
-            // User is logged in, navigate to ProfilePageTableViewController
-            let storyboard = UIStoryboard(name: "ProfilePage", bundle: nil)
-            if let profileVC = storyboard.instantiateViewController(withIdentifier: "ProfilePageTableViewController") as? ProfilePageTableViewController {
-                self.navigationController?.pushViewController(profileVC, animated: true)
+            
+            // Check user type in Firestore
+            let db = Firestore.firestore()
+            db.collection("users").document(uid).getDocument { [weak self] document, error in
+                guard let self = self else { return }
+                
+                if let document = document, document.exists,
+                   let userType = document.data()?["userType"] as? String {
+                    
+                    
+                    switch userType.lowercased() {
+                    case "regular":
+                        UserDefaults.standard.set("regular", forKey: "user_type")
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        if let regularVC = storyboard.instantiateViewController(withIdentifier: "main") as? MainTabBarController {
+                            // Replace the entire navigation stack
+                            self.navigationController?.setViewControllers([regularVC], animated: true)
+                        }
+                    case "admin":
+                        UserDefaults.standard.set("admin", forKey: "user_type")
+                        let storyboard = UIStoryboard(name: "mainAdmin", bundle: nil)
+                        if let adminVC = storyboard.instantiateViewController(withIdentifier: "mainAdmin") as? UIViewController {
+                            self.navigationController?.setViewControllers([adminVC], animated: true)
+                        }
+                    case "storemanager":
+                        UserDefaults.standard.set("storemanager", forKey: "user_type")
+                        let storyboard = UIStoryboard(name: "mainManager", bundle: nil)
+                        if let managerVC = storyboard.instantiateViewController(withIdentifier: "mainManager") as? UIViewController {
+                            self.navigationController?.setViewControllers([managerVC], animated: true)
+                        }
+                    default:
+                        print("Invalid user type")
+                        self.showAlert(title: "Error", message: "Invalid user type")
+                    }
+                } else {
+                    print("Could not find user or user type")
+                    self.showAlert(title: "Error", message: "Could not find user type")
+                }
             }
         }
     }
@@ -121,25 +186,51 @@ class LogInTableViewController: UITableViewController {
     func loginSegue() {
         guard let uid = User.uid else { return }
         
-        // First check regular users
+        // Check user type in a single collection with a 'type' field
         db.collection("users").document(uid).getDocument { [weak self] document, error in
             guard let self = self else { return }
             
-            if let document = document, document.exists {
-                self.performSegue(withIdentifier: "home", sender: self)
-                return
-            }
-            
-            // If not found in regular users, check service providers
-            self.db.collection("serviceProviders").document(uid).getDocument { document, error in
-                if let document = document, document.exists {
-                    self.performSegue(withIdentifier: "serviceproviderhome", sender: self)
-                } else {
-                    print("could not find the user type")
+            if let document = document, document.exists,
+               let userType = document.data()?["type"] as? String {
+                
+                switch userType.lowercased() {
+                case "regular":
+                    self.performSegue(withIdentifier: "Home", sender: self)
+                case "admin":
+                    self.performSegue(withIdentifier: "adminHome", sender: self)
+                case "storemanager":
+                    self.performSegue(withIdentifier: "storeManagerHome", sender: self)
+                default:
+                    print("Invalid user type")
                 }
+            } else {
+                print("Could not find user or user type")
             }
         }
     }
+    
+//    func loginSegue() {
+//        guard let uid = User.uid else { return }
+//        
+//        // First check regular users
+//        db.collection("users").document(uid).getDocument { [weak self] document, error in
+//            guard let self = self else { return }
+//            
+//            if let document = document, document.exists {
+//                self.performSegue(withIdentifier: "home", sender: self)
+//                return
+//            }
+//            
+//            // If not found in regular users, check service providers
+//            self.db.collection("serviceProviders").document(uid).getDocument { document, error in
+//                if let document = document, document.exists {
+//                    self.performSegue(withIdentifier: "serviceproviderhome", sender: self)
+//                } else {
+//                    print("could not find the user type")
+//                }
+//            }
+//        }
+//    }
     
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ciX-bs-2DL">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--History-->
+        <scene sceneID="2ne-WJ-xL5">
+            <objects>
+                <tableViewController id="CEP-g8-0ed" customClass="HistoryTableViewController" customModule="EcoCart" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="75y-er-Rrh">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="history" rowHeight="150" id="eS8-rz-nIG" customClass="HistoryTableViewCell" customModule="EcoCart" customModuleProvider="target">
+                                <rect key="frame" x="20" y="55.333332061767578" width="353" height="150"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eS8-rz-nIG" id="Fro-YO-GDS">
+                                    <rect key="frame" x="0.0" y="0.0" width="353" height="150"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eco-certificate" translatesAutoresizingMaskIntoConstraints="NO" id="dTK-2B-KsG">
+                                            <rect key="frame" x="30" y="26" width="65" height="65"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="65" id="0EP-zK-izE"/>
+                                                <constraint firstAttribute="width" constant="65" id="V9f-eS-IYK"/>
+                                            </constraints>
+                                        </imageView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="b4h-ko-qie">
+                                            <rect key="frame" x="105" y="21.999999999999996" width="107" height="44.666666666666657"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VID-lo-zMB">
+                                                    <rect key="frame" x="0.0" y="0.0" width="94" height="20.333333333333332"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MKO-Zc-96k">
+                                                    <rect key="frame" x="0.0" y="24.333333333333336" width="107" height="20.333333333333336"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8hd-W3-Ymb" userLabel="Request :">
+                                                            <rect key="frame" x="0.0" y="0.0" width="49.666666666666664" height="20.333333333333332"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99 BHD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sMl-t1-o5E">
+                                                            <rect key="frame" x="49.666666666666657" y="0.0" width="57.333333333333343" height="20.333333333333332"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="b4h-ko-qie" firstAttribute="leading" secondItem="dTK-2B-KsG" secondAttribute="trailing" constant="10" id="6hS-cj-ymE"/>
+                                        <constraint firstItem="dTK-2B-KsG" firstAttribute="leading" secondItem="Fro-YO-GDS" secondAttribute="leadingMargin" constant="10" id="7mV-xW-Evi"/>
+                                        <constraint firstItem="b4h-ko-qie" firstAttribute="top" secondItem="Fro-YO-GDS" secondAttribute="topMargin" constant="10" id="Q4y-UO-I2u"/>
+                                        <constraint firstItem="dTK-2B-KsG" firstAttribute="top" secondItem="Fro-YO-GDS" secondAttribute="topMargin" constant="14" id="YFG-5O-GK6"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="imageOutlet" destination="dTK-2B-KsG" id="N7u-jq-pjP"/>
+                                    <outlet property="nameOutlet" destination="VID-lo-zMB" id="Uwr-pd-c2W"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="History" id="kqa-cV-HU7"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Tg-mJ-mKR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1933.5877862595419" y="-2.1126760563380285"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="FHv-Pa-aLz">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ciX-bs-2DL" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="timer" catalog="system" id="JOd-zL-ef2"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NAJ-0N-Dop">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="CEP-g8-0ed" kind="relationship" relationship="rootViewController" id="EQD-6v-bWl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8fU-Pw-jXk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1047" y="-2"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="eco-certificate" width="1000" height="905"/>
+        <image name="timer" catalog="system" width="128" height="123"/>
+    </resources>
+</document>
