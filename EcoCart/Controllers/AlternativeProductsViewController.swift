@@ -243,7 +243,7 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
     private let stopWords: Set<String> = [
         "recyclable", "eco", "green", "sustainable", "environmentally", "friendly",
         "product", "the", "and", "a", "of", "in", "to", "for", "is", "that", "on",
-        "with", "as", "by", "from", "this", "which", "be", "are", "at", "it", "recycled"
+        "with", "as", "by", "from", "this", "which", "be", "are", "at", "it", "recycled", "Cotton", "Organic", "Hemp", "hemp", "cotton", "organic",
         // Add more as needed
     ]
 

@@ -76,7 +76,7 @@ class AddProductViewController: UITableViewController {
             "impactProdPrice": price,
             "impactProdPurchaseDate": purchaseDate,
             "impactProdStore": store,
-            "userId": user
+            "userId": user!
             ]
         
         //reference firestore
