@@ -190,27 +190,40 @@ extension StoreHomeVC {
     private func deleteProductFromFirebase(productID: String, indexPath: IndexPath) {
         let db = Firestore.firestore()
         
-        // Delete store document from Firestore
+        // First, check if the indexPath.row is still valid
+        guard indexPath.row < self.products.count else {
+            print("Error: indexPath.row is out of range in products array")
+            return
+        }
+        
+        // Delete product document from Firestore
         db.collection("product").document(productID).delete { error in
             if let error = error {
                 // Handle error (e.g., show an alert)
-                print("Error deleting store: \(error.localizedDescription)")
+                print("Error deleting product: \(error.localizedDescription)")
                 let errorAlert = UIAlertController(
                     title: "Error",
-                    message: "Failed to delete the store. Please try again.",
+                    message: "Failed to delete the product. Please try again.",
                     preferredStyle: .alert
                 )
                 errorAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self.present(errorAlert, animated: true, completion: nil)
             } else {
-                // Remove the store from the local array and update the table view
-                self.products.remove(at: indexPath.row)
-                DispatchQueue.main.async {
-                    self.productsListTable.deleteRows(at: [indexPath], with: .automatic)
+                // Only proceed to remove the product from the local array if the index is valid
+                if indexPath.row < self.products.count {
+                    self.products.remove(at: indexPath.row)
+                    
+                    // Update the table view on the main thread
+                    DispatchQueue.main.async {
+                        self.productsListTable.deleteRows(at: [indexPath], with: .automatic)
+                    }
+                } else {
+                    print("Error: indexPath.row is out of range after deletion.")
                 }
             }
         }
     }
+
 }
 
 // MARK: - UITableView Delegate

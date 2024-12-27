@@ -154,6 +154,12 @@ class AdminHomeVC: UITabBarController, StoresListXibDelegate, UITableViewDelegat
     private func deleteStoreFromFirebase(storeID: String, indexPath: IndexPath) {
         let db = Firestore.firestore()
         
+        // First, check if the indexPath is still valid
+        guard indexPath.row < self.stores.count else {
+            print("Error: indexPath.row is out of range in stores array")
+            return
+        }
+        
         // Delete store document from Firestore
         db.collection("users").document(storeID).delete { error in
             if let error = error {
@@ -167,14 +173,21 @@ class AdminHomeVC: UITabBarController, StoresListXibDelegate, UITableViewDelegat
                 errorAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self.present(errorAlert, animated: true, completion: nil)
             } else {
-                // Remove the store from the local array and update the table view
-                self.stores.remove(at: indexPath.row)
-                DispatchQueue.main.async {
-                    self.storesListTable.deleteRows(at: [indexPath], with: .automatic)
+                // Remove the store from the local array only if the indexPath is still valid
+                if indexPath.row < self.stores.count {
+                    self.stores.remove(at: indexPath.row)
+                    
+                    // Update the table view on the main thread
+                    DispatchQueue.main.async {
+                        self.storesListTable.deleteRows(at: [indexPath], with: .automatic)
+                    }
+                } else {
+                    print("Error: indexPath.row is out of range after deletion.")
                 }
             }
         }
     }
+
 }
 
 // MARK: - UITableView Delegate
