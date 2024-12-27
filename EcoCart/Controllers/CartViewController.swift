@@ -60,14 +60,14 @@ class CartViewController: UIViewController {
     
     // MARK: - Cart Management
     private func fetchCartItems() {
-        guard let userID = Auth.auth().currentUser?.uid else {
+        guard let _ = Auth.auth().currentUser?.uid else {
             print("No user logged in")
             tableView.refreshControl?.endRefreshing()
             return
         }
         
         db.collection("cart")
-            .whereField("userID", isEqualTo: userID)
+            .whereField("userID", isEqualTo: Auth.auth().currentUser?.uid ?? "guest")
             .getDocuments { [weak self] (querySnapshot, error) in
                 if let error = error {
                     print("Error getting cart items: \(error)")
@@ -151,7 +151,7 @@ class CartViewController: UIViewController {
     }
     
     private func updateQuantityInFirebase(productID: String, newQuantity: Int) {
-        guard let userID = Auth.auth().currentUser?.uid,
+        guard let _ = Auth.auth().currentUser?.uid,
               let documentIDs = cartDocuments[productID] else { return }
         
         // If quantity is 0 or negative, delete the item
@@ -190,7 +190,7 @@ class CartViewController: UIViewController {
     }
     
     private func deleteItemFromFirebase(productID: String, completion: @escaping (Bool) -> Void) {
-        guard let userID = Auth.auth().currentUser?.uid,
+        guard let _ = Auth.auth().currentUser?.uid,
               let documentIDs = cartDocuments[productID] else {
             completion(false)
             return
