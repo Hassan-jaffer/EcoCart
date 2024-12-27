@@ -43,15 +43,15 @@ class LogInTableViewController: UITableViewController {
                 }
             case "admin":
                 UserDefaults.standard.set("admin", forKey: "user_type")
-                let storyboard = UIStoryboard(name: "mainAdmin", bundle: nil)
-                if let adminVC = storyboard.instantiateViewController(withIdentifier: "mainAdmin") as? UIViewController {
-                    self.navigationController?.setViewControllers([adminVC], animated: true)
+                let storyboard = UIStoryboard(name: "AdminScreens", bundle: nil)
+                if let adminHomeViewController = storyboard.instantiateViewController(withIdentifier: "AdminTabBarVC") as? UITabBarController {
+                    self.navigationController?.setViewControllers([adminHomeViewController], animated: true)
                 }
             case "storemanager":
                 UserDefaults.standard.set("storemanager", forKey: "user_type")
-                let storyboard = UIStoryboard(name: "mainManager", bundle: nil)
-                if let managerVC = storyboard.instantiateViewController(withIdentifier: "mainManager") as? UIViewController {
-                    self.navigationController?.setViewControllers([managerVC], animated: true)
+                let storyboard = UIStoryboard(name: "StoreScreens", bundle: nil)
+                if let adminHomeViewController = storyboard.instantiateViewController(withIdentifier: "StoreTabBarController") as? UITabBarController {
+                    self.navigationController?.setViewControllers([adminHomeViewController], animated: true)
                 }
             default:
                 print("Invalid user type")
@@ -161,15 +161,18 @@ class LogInTableViewController: UITableViewController {
                         }
                     case "admin":
                         UserDefaults.standard.set("admin", forKey: "user_type")
-                        let storyboard = UIStoryboard(name: "mainAdmin", bundle: nil)
-                        if let adminVC = storyboard.instantiateViewController(withIdentifier: "mainAdmin") as? UIViewController {
-                            self.navigationController?.setViewControllers([adminVC], animated: true)
+                        
+                        let storyboard = UIStoryboard(name: "AdminScreens", bundle: nil)
+                        if let adminHomeViewController = storyboard.instantiateViewController(withIdentifier: "AdminTabBarVC") as? UITabBarController {
+                            self.navigationController?.setViewControllers([adminHomeViewController], animated: true)
                         }
+                        
                     case "storemanager":
                         UserDefaults.standard.set("storemanager", forKey: "user_type")
-                        let storyboard = UIStoryboard(name: "mainManager", bundle: nil)
-                        if let managerVC = storyboard.instantiateViewController(withIdentifier: "mainManager") as? UIViewController {
-                            self.navigationController?.setViewControllers([managerVC], animated: true)
+                        
+                        let storyboard = UIStoryboard(name: "StoreScreens", bundle: nil)
+                        if let adminHomeViewController = storyboard.instantiateViewController(withIdentifier: "StoreTabBarController") as? UITabBarController {
+                            self.navigationController?.setViewControllers([adminHomeViewController], animated: true)
                         }
                     default:
                         print("Invalid user type")
@@ -197,7 +200,7 @@ class LogInTableViewController: UITableViewController {
                 case "regular":
                     self.performSegue(withIdentifier: "Home", sender: self)
                 case "admin":
-                    self.performSegue(withIdentifier: "adminHome", sender: self)
+                    self.performSegue(withIdentifier: "Home", sender: self)
                 case "storemanager":
                     self.performSegue(withIdentifier: "storeManagerHome", sender: self)
                 default:

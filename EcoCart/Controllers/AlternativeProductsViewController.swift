@@ -10,6 +10,7 @@ struct MetricProduct {
 
 class AlternativeProductsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var MetricTitle: UILabel!
     @IBOutlet weak var repExp: UILabel!
     @IBOutlet weak var repName: UILabel!
     @IBOutlet weak var repImage: UIImageView!
@@ -74,32 +75,22 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                 let allProducts = try await Product.fetchAllProducts()
                 print("Fetched \(allProducts.count) products.")
 
-                // Filter products by keyword similarity (ignoring category)
+                // Filter products by keyword similarity (ignoring category) and exclude the selected product
                 let similarProducts = allProducts.filter { product in
                     let isSimilar = productContainsSimilarKeywords(selected: selectedProduct, candidate: product)
-                    if isSimilar {
-                        print("Similar product found: \(product.name)")
-                    }
-                    return isSimilar
+                    let isNotSelected = product.id != selectedProduct.id // Exclude selected product
+                    return isSimilar && isNotSelected
                 }
 
                 print("Filtered \(similarProducts.count) similar products based on keywords.")
-
-                // If no similar products are found, notify the user
-                guard !similarProducts.isEmpty else {
-                    DispatchQueue.main.async {
-                        self.showNoAlternativeMessage("No alternatives found based on keywords.")
-                    }
-                    return
-                }
 
                 // Calculate footprint score for the selected product
                 let selectedProductScore = calculateFootprintScore(product: selectedProduct)
                 print("Selected Product Score: \(selectedProductScore)")
 
-                // Filter and sort similar products based on footprint score
+                // Filter and sort similar products based on footprint score (for suggested alternatives)
                 let filteredProducts = similarProducts
-                    .filter { calculateFootprintScore(product: $0) < selectedProductScore } // Lower footprint score
+                    .filter { calculateFootprintScore(product: $0) >= selectedProductScore }
                     .sorted {
                         let scoreDiff = calculateFootprintScore(product: $0) - calculateFootprintScore(product: $1)
                         if abs(scoreDiff) < 0.01 { // If scores are nearly equal, prefer cheaper product
@@ -113,41 +104,68 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                 // Set the best alternative product to be shown in the header
                 self.alternativeProduct = filteredProducts.first
 
-                // Find the highest product for each metric (CO2, Plastic, Trees)
+                // --------------------- For Metric Table ---------------------
                 var validMetricProducts: [MetricProduct] = []
+                var usedProductIDs: Set<String> = [] // Track product IDs to prevent duplicates
 
-                if let co2Product = filteredProducts.max(by: { $0.metrics.co2 < $1.metrics.co2 }) {
+                // CO2 Saved Metric
+                if let co2Product = similarProducts
+                    .filter({
+                        !usedProductIDs.contains($0.id) &&
+                        $0.metrics.co2 > selectedProduct.metrics.co2 // CO2 saved is higher than selected product
+                    })
+                    .max(by: { $0.metrics.co2 < $1.metrics.co2 }) {
                     validMetricProducts.append(MetricProduct(product: co2Product, metric: "CO2", metricValue: Double(co2Product.metrics.co2)))
+                    usedProductIDs.insert(co2Product.id)
                 }
 
-                if let plasticProduct = filteredProducts.max(by: { $0.metrics.plastic < $1.metrics.plastic }) {
+                // Plastic Saved Metric
+                if let plasticProduct = similarProducts
+                    .filter({
+                        !usedProductIDs.contains($0.id) &&
+                        $0.metrics.plastic > selectedProduct.metrics.plastic // Plastic saved is higher than selected product
+                    })
+                    .max(by: { $0.metrics.plastic < $1.metrics.plastic }) {
                     validMetricProducts.append(MetricProduct(product: plasticProduct, metric: "Plastic", metricValue: Double(plasticProduct.metrics.plastic)))
+                    usedProductIDs.insert(plasticProduct.id)
                 }
 
-                if let treeProduct = filteredProducts.max(by: { $0.metrics.tree < $1.metrics.tree }) {
-                    validMetricProducts.append(MetricProduct(product: treeProduct, metric: "Trees", metricValue: Double(treeProduct.metrics.tree)))
+                // Trees Saved Metric
+                if let treesProduct = similarProducts
+                    .filter({
+                        !usedProductIDs.contains($0.id) &&
+                        $0.metrics.tree > selectedProduct.metrics.tree // Trees saved is higher than selected product
+                    })
+                        .max(by: { $0.metrics.tree < $1.metrics.tree }) {
+                    validMetricProducts.append(MetricProduct(product: treesProduct, metric: "Trees", metricValue: Double(treesProduct.metrics.tree)))
+                    usedProductIDs.insert(treesProduct.id)
                 }
+
+
 
                 // Check if no valid alternatives exist
+                print("validMetricProducts count before check: \(validMetricProducts.count)")
                 guard !validMetricProducts.isEmpty else {
                     DispatchQueue.main.async {
-                        self.showNoAlternativeMessage("No valid alternative products found.")
+                        print("No valid products found. Updating UI.")
+                        self.showNoAlternativeMessage("This product has high enviromental footprint. However, no alternative products was found.")
                         self.statusImage.image = UIImage(named: "Magni")
                         self.statusImage.isHidden = false
                     }
                     return
                 }
 
-                // Now update the table with valid alternatives
+                // Update the table with valid alternatives
                 self.metricProducts = validMetricProducts
 
                 print("Metric products count: \(self.metricProducts.count)")
 
-                // Update UI with the alternative product details
+                // Reload the table data on the main thread
                 DispatchQueue.main.async {
                     self.metricsTableView.reloadData()
                 }
 
+                // If the selected product already has a low footprint, show confirmation
                 if(classifyProduct(product: selectedProduct) == true) {
                     showNoAlternativeMessage("The selected product already has a low environmental impact, Good choice!")
                     AltMsg.textColor = UIColor.systemGreen // Change text color to green
@@ -164,72 +182,71 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
         }
     }
 
-    
+
     private func calculateFootprintScore(product: Product) -> Double {
         // Extract metric values
         let co2Saved = product.metrics.co2
         let plasticSaved = product.metrics.plastic
         let treesSaved = product.metrics.tree
-        let bio = product.metrics.bio
-        var isBiodegradable = false
-        
-        if bio == 1 {
-            isBiodegradable = true
-        } else {
-            isBiodegradable = false
-        }
-        
+        let bio = product.metrics.bio // Assuming this is an Int (1 for biodegradable, 0 for not)
+
         // Log the extracted values
-        print("CO2 Saved: \(co2Saved), Plastic Saved: \(plasticSaved), Trees Saved: \(treesSaved), Biodegradable: \(isBiodegradable)")
-        
-        // Avoid division by zero by setting score to 0 if metric is 0
-        let co2Score = co2Saved > 0 ? 1 / Double(co2Saved) : 0
-        let plasticScore = plasticSaved > 0 ? 1 / Double(plasticSaved) : 0
-        let treeScore = treesSaved > 0 ? 1 / Double(treesSaved) : 0
-        
-        // Log individual scores
-        print("CO2 Score: \(co2Score), Plastic Score: \(plasticScore), Tree Score: \(treeScore)")
-        
-        // Weighted sum of the scores
-        let footprintScore = (co2Weight * co2Score) + (plasticWeight * plasticScore) + (treeWeight * treeScore)
-        
+        print("CO2 Saved: \(co2Saved), Plastic Saved: \(plasticSaved), Trees Saved: \(treesSaved), Biodegradable: \(bio != 0)")
+
+        // Calculate scores based on contributions
+        let co2Score = co2Saved > 0 ? Double(co2Saved) : 0.0
+        let plasticScore = plasticSaved > 0 ? Double(plasticSaved) : 0.0
+        let treeScore = treesSaved > 0 ? Double(treesSaved) : 0.0
+
+        // Compute weighted scores
+        let weightedCo2Score = co2Weight * co2Score
+        let weightedPlasticScore = plasticWeight * plasticScore
+        let weightedTreeScore = treeWeight * treeScore
+
+        // Combine the weighted scores
+        let footprintScore = weightedCo2Score + weightedPlasticScore + weightedTreeScore
+
         // Log weighted footprint score
         print("Weighted Footprint Score (before adjustment): \(footprintScore)")
-        
-        // Biodegradable adjustment
-        let biodegradableAdjustment = isBiodegradable ? -0.01 : 0.01
-        
+
+        // Biodegradable adjustment (positive for biodegradable)
+        let biodegradableAdjustment = bio != 0 ? 0.005 : 0.0
+
         // Log the adjustment
         print("Biodegradable Adjustment: \(biodegradableAdjustment)")
-        
+
         // Final score
         let finalScore = footprintScore + biodegradableAdjustment
-        
+
         // Log the final score
         print("Final Footprint Score: \(finalScore)")
-        
+
         return finalScore
     }
 
-
-    
-    
     private func classifyProduct(product: Product) -> Bool {
-        // Calculate the product's footprint score
         let footprintScore = calculateFootprintScore(product: product)
+        let threshold = 50.00 // Adjusted threshold
 
-        // Define a threshold for "Good"
-        if footprintScore < 0.1 {
-            return true
-        } else {
-            return false
+        // Check if the product meets the footprint score threshold
+        if footprintScore >= threshold {
+            return true // Product is environmentally friendly
         }
+
+        // Additional checks can be added here
+        let metrics = product.metrics
+        return metrics.co2 > 100 || metrics.plastic > 100 || metrics.tree > 10 // Example criteria
     }
 
 
-
-
     
+    private let stopWords: Set<String> = [
+        "recyclable", "eco", "green", "sustainable", "environmentally", "friendly",
+        "product", "the", "and", "a", "of", "in", "to", "for", "is", "that", "on",
+        "with", "as", "by", "from", "this", "which", "be", "are", "at", "it", "recycled"
+        // Add more as needed
+    ]
+
     private func productContainsSimilarKeywords(selected: Product, candidate: Product) -> Bool {
         // Extract keywords from product names
         let selectedKeywords = extractKeywords(from: selected.name)
@@ -240,17 +257,16 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
         print("Matching keywords: \(matchingKeywords)")
         return !matchingKeywords.isEmpty
     }
-    
+
     private func extractKeywords(from name: String) -> Set<String> {
         // Convert the product name to lowercase, remove special characters, and split into words
         let words = name
             .lowercased()
             .components(separatedBy: CharacterSet.alphanumerics.inverted)
-            .filter { !$0.isEmpty } // Remove empty strings
-        
+            .filter { !$0.isEmpty && !stopWords.contains($0) } // Remove empty strings and stop words
+
         return Set(words)
     }
-    
     private func updateReplacementProductDetails() {
          guard let alternativeProduct = alternativeProduct else {
             
@@ -295,17 +311,11 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
         }
 
         // Generate the explanation for choosing this alternative product
-        let selectedProductScore = calculateFootprintScore(product: selectedProduct!)
-        let alternativeProductScore = calculateFootprintScore(product: alternativeProduct)
+       
         
         // Explanation logic: compare footprint scores
-        var explanation = "This alternative has a lower environmental footprint."
+        let explanation = "This alternative has a lower environmental footprint. We recommend giving it a look!"
 
-        if selectedProductScore > alternativeProductScore {
-            explanation += "\nThe selected product has a higher footprint."
-        } else {
-            explanation += "\nThe alternative has a better footprint."
-        }
 
         // Set the explanation text
         repExp.text = explanation
@@ -350,7 +360,13 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
 
     // Number of rows in each section (count of products to show)
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if(metricProducts.count == 0){
+            MetricTitle.isHidden = true
+        }else{
+            MetricTitle.isHidden = false
+        }
         return metricProducts.count
+        
     }
 
     // Configure each cell in the table view dynamically
@@ -368,12 +384,12 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
         
         // Set the metric type to the second label (label2)
         if let label2 = cell.viewWithTag(2) as? UILabel {
-            label2.text = metricProduct.metric
+            label2.text = "This product has higher \(metricProduct.metric) saved!"
         }
         
         // Set the metric value to the third label (label3)
         if let label3 = cell.viewWithTag(3) as? UILabel {
-            label3.text = "\(metricProduct.metricValue)"
+            label3.text = "\(metricProduct.metricValue) \(metricProduct.metric) saved"
         }
         
         // Load the product image (with error handling)
