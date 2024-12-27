@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 63;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -574,7 +574,7 @@
 				};
 			};
 			buildConfigurationList = F2DCE34B2CF728FF002D4AB1 /* Build configuration list for PBXProject "EcoCart" */;
-			compatibilityVersion = "Xcode 15.3";
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
