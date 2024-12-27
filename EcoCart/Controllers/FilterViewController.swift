@@ -18,6 +18,7 @@ class FilterViewController: UIViewController {
     weak var delegate: FilterDelegate?
 
     
+    @IBOutlet weak var FilterView: UIView!
     @IBOutlet weak var Metric: UIButton!
     var isAvailableFiltered: Bool? = nil
     var isAZFiltered = false
@@ -41,10 +42,20 @@ class FilterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(handleThemeChange), name: .themeDidChange, object: nil)
         createMenu()
         roundButtons()
         updateButtonStates() // Update button states based on current filters
     }
+    
+    @objc private func handleThemeChange(_ notification: Notification) {
+        if ThemeManager.shared.isDarkMode {
+            FilterView.backgroundColor = UIColor.black
+        } else {
+            FilterView.backgroundColor = UIColor.gray
+        }
+    }
+
 
     func updateButtonStates() {
         UIView.animate(withDuration: 0.5) { // Add smooth animation for color updates
@@ -231,8 +242,8 @@ class FilterViewController: UIViewController {
             self.selectedCategory = "Clothes"
             self.updateButtonStates() // Update button state after selection
         })
-        let catElec = UIAction(title: "Electronics", handler: { _ in
-            self.selectedCategory = "Electronics"
+        let catElec = UIAction(title: "Home & Lifestyle", handler: { _ in
+            self.selectedCategory = "Home & Lifestyle"
             self.updateButtonStates() // Update button state after selection
         })
 
@@ -244,14 +255,17 @@ class FilterViewController: UIViewController {
         // Category Options
                let MetCO2 = UIAction(title: "CO2 saved", handler: { _ in
                    self.selectedMetric = "C02"
+                   self.isAZFiltered = false // Deselect A-Z filter
                    self.updateButtonStates() // Update button state after selection
                })
                let MetPlastic = UIAction(title: "Plastic saved", handler: { _ in
                    self.selectedMetric = "Plastic"
+                   self.isAZFiltered = false // Deselect A-Z filter
                    self.updateButtonStates() // Update button state after selection
                })
                let MetTree = UIAction(title: "Trees saved", handler: { _ in
                    self.selectedMetric = "Tree"
+                   self.isAZFiltered = false // Deselect A-Z filter
                    self.updateButtonStates() // Update button state after selection
                })
 
