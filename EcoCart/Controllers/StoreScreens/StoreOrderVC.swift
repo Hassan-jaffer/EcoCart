@@ -7,7 +7,7 @@
 import UIKit
 import FirebaseFirestore
 import FirebaseAuth
-class StoreHomeVC: UITabBarController, UITableViewDelegate, UITableViewDataSource, ProductXibTableViewDelegate {
+class StoreOrderVC: UITabBarController, UITableViewDelegate, UITableViewDataSource, ProductXibTableViewDelegate {
 
     
     var productsListTable: UITableView! // TableView declared programmatically
@@ -27,7 +27,7 @@ class StoreHomeVC: UITabBarController, UITableViewDelegate, UITableViewDataSourc
 
 
 // MARK: - Setup Table View Programmatically
-extension StoreHomeVC {
+extension StoreOrderVC {
     private func setupTableView() {
         // Create the table view
         productsListTable = UITableView(frame: self.view.bounds, style: .plain)
@@ -95,7 +95,7 @@ extension StoreHomeVC {
                 print("Failed to fetch store name.")
                 return
             }
-            db.collection("product")
+            db.collection("orders")
                 .whereField("storeName", isEqualTo: storeName)
                 .addSnapshotListener { [weak self] querySnapshot, error in
                     guard let self = self else { return }
@@ -114,7 +114,7 @@ extension StoreHomeVC {
                     self.products = querySnapshot?.documents.compactMap { document in
                         let data = document.data()
                         print("Data is: \(data)")
-                        guard let name = data["name"] as? String else {
+                        guard let name = data["username"] as? String else {
                             print("Invalid or missing field: name in document \(document.documentID)")
                             return nil
                         }
@@ -124,17 +124,17 @@ extension StoreHomeVC {
                             return nil
                         }
                         
-                        guard let description = data["description"] as? String else {
+                        guard let description = data["productName"] as? String else {
                             print("Invalid or missing field: description in document \(document.documentID)")
                             return nil
                         }
                         
-                        guard let stockQuantity = data["stockQuantity"] as? Double else {
+                        guard let stockQuantity = data["pending"] as? Bool else {
                             print("Invalid or missing field: stockQuantity in document \(document.documentID)")
                             return nil
                         }
                         
-                        guard let category = data["Category"] as? String else {
+                        guard let category = data["userID"] as? String else {
                             print("Invalid or missing field: Category in document \(document.documentID)")
                             return nil
                         }
@@ -256,7 +256,7 @@ extension StoreHomeVC {
 }
 
 // MARK: - UITableView Delegate
-extension StoreHomeVC {
+extension StoreOrderVC {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let productDetailsVC: ProductDetailsVC = ProductDetailsVC.instantiate(appStoryboard: .stores)
         productDetailsVC.productDetails = products[indexPath.row]
@@ -265,7 +265,7 @@ extension StoreHomeVC {
 }
 
 // MARK: - UITableView DataSource
-extension StoreHomeVC {
+extension StoreOrderVC {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         products.count
     }

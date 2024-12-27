@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -39,8 +39,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bcG-mc-jLt">
-                                <rect key="frame" x="15" y="300" width="115" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Store Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bcG-mc-jLt">
+                                <rect key="frame" x="15" y="300" width="90" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -131,11 +131,11 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="plus.app.fill" catalog="system" id="dQE-Do-hHz"/>
                     <connections>
+                        <outlet property="StoreNameTextField" destination="pyn-Yi-wb6" id="Br7-UN-fpy"/>
                         <outlet property="emailTextField" destination="ylz-y5-E11" id="ZF5-pY-8Wl"/>
                         <outlet property="firstNameTextField" destination="Cgz-AC-kCz" id="ups-qi-2vg"/>
                         <outlet property="lastNameTextField" destination="BLG-eL-2tz" id="Dsg-Pr-xTx"/>
                         <outlet property="passwordTextField" destination="Ckw-ST-kyY" id="SHV-WY-kSj"/>
-                        <outlet property="phoneNumberTextField" destination="pyn-Yi-wb6" id="Br7-UN-fpy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ujP-bQ-oem" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
