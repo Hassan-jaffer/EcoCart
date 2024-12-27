@@ -303,7 +303,7 @@ class ProductDetailsViewController: UIViewController {
         productQuantityStepper.maximumValue = Double(product.stockQuantity)
         
         // Configure store location button based on location availability
-        if let latitude = product.latitude, let longitude = product.longitude {
+        if let _ = product.latitude, let _ = product.longitude {
             storeLocationButton.isEnabled = true
             storeLocationButton.alpha = 1.0
         } else {
@@ -369,7 +369,7 @@ class ProductDetailsViewController: UIViewController {
                 let productRef = db.collection("product").document(product.id)
                 
                 // Fixed transaction signature
-                try await db.runTransaction({ (transaction, errorPointer) -> Any? in
+                _ = try await db.runTransaction({ (transaction, errorPointer) -> Any? in
                     let productDoc: DocumentSnapshot
                     do {
                         productDoc = try transaction.getDocument(productRef)

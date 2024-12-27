@@ -114,7 +114,12 @@ class ReviewFirebase {
             print("✅ Successfully added review with ID: \(docRef.documentID)")
             
             // Update product ratings using all reviews
-            try await updateProductRatings(for: review.productId)
+            do {
+                try await updateProductRatings(for: review.productId)
+            } catch {
+                print("❌ Error updating product ratings: \(error)")
+                throw ReviewError.firestoreError(error)
+            }
         } catch {
             print("❌ Error in addReview: \(error)")
             throw ReviewError.firestoreError(error)

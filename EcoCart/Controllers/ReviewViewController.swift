@@ -50,13 +50,8 @@ class ReviewViewController: UIViewController {
             reviewView.backgroundColor = UIColor.white
         }
         
-        if let nib = Bundle.main.loadNibNamed("ReviewCell", owner: nil, options: nil) {
-            reviewTableView.register(UINib(nibName: "ReviewCell", bundle: Bundle.main), forCellReuseIdentifier: "ReviewCell")
-        } else {
-            print("❌ Failed to load ReviewCell.xib")
-        }
+        reviewTableView.register(UINib(nibName: "ReviewCell", bundle: Bundle.main), forCellReuseIdentifier: "ReviewCell")
 
-        
         newReviewTextView.layer.borderWidth = 1
         newReviewTextView.layer.borderColor = UIColor.lightGray.cgColor
         newReviewTextView.layer.cornerRadius = 5
