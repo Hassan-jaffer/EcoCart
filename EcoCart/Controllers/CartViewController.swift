@@ -236,16 +236,37 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: - CartItemCellDelegate
 extension CartViewController: CartItemCellDelegate {
-    func quantityDidChange(at index: Int, newQuantity: Int) {
+    func quantityDidChange(at index: Int, newQuantity: Int, isIncrementing: Bool) {
+        guard index < cartItems.count else { return }
         let item = cartItems[index]
         
-        // If quantity would become 0, delete the item
-        if newQuantity <= 1 {
+        // Handle deletion
+        if newQuantity == 0 {
             deleteItemFromFirebase(productID: item.productID) { [weak self] success in
+                guard let self = self else { return }
+                
                 if success {
-                    self?.cartItems.remove(at: index)
                     DispatchQueue.main.async {
-                        self?.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+                        // Make sure the index is still valid
+                        guard index < self.cartItems.count else { return }
+                        
+                        // Remove the item from the data source first
+                        self.cartItems.remove(at: index)
+                        
+                        // Then update the UI
+                        if !self.cartItems.isEmpty {
+                            self.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+                        } else {
+                            self.tableView.reloadData()
+                        }
+                    }
+                } else {
+                    // If deletion failed, reset the stepper
+                    DispatchQueue.main.async {
+                        if let cell = self.tableView.cellForRow(at: IndexPath(row: index, section: 0)) as? CartItemCell {
+                            cell.stepper.value = 1
+                            cell.quantityLabel.text = "1"
+                        }
                     }
                 }
             }

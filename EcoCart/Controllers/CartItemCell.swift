@@ -1,7 +1,14 @@
 import UIKit
 
+class CustomStepper: UIStepper {
+    override var minimumValue: Double {
+        get { return 0 }
+        set { super.minimumValue = 0 }
+    }
+}
+
 protocol CartItemCellDelegate: AnyObject {
-    func quantityDidChange(at index: Int, newQuantity: Int)
+    func quantityDidChange(at index: Int, newQuantity: Int, isIncrementing: Bool)
 }
 
 class CartItemCell: UITableViewCell {
@@ -11,7 +18,13 @@ class CartItemCell: UITableViewCell {
     @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var quantityLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var stepper: UIStepper!
+    @IBOutlet weak var stepper: UIStepper! {
+        didSet {
+            if let customStepper = stepper as? CustomStepper {
+                customStepper.minimumValue = 0
+            }
+        }
+    }
     
     // MARK: - Properties
     weak var delegate: CartItemCellDelegate?
@@ -21,6 +34,7 @@ class CartItemCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupImageView()
+        setupStepper()
     }
     
     private func setupImageView() {
@@ -28,6 +42,14 @@ class CartItemCell: UITableViewCell {
         productImageView.clipsToBounds = true
         productImageView.layer.cornerRadius = 8
         productImageView.backgroundColor = .systemGray6
+    }
+    
+    private func setupStepper() {
+        stepper.maximumValue = 99
+        stepper.stepValue = 1
+        stepper.wraps = false
+        stepper.autorepeat = true
+        stepper.minimumValue = 0  // This will work with CustomStepper
     }
     
     // MARK: - Configuration
@@ -39,27 +61,19 @@ class CartItemCell: UITableViewCell {
         priceLabel.text = String(format: "%.3f BHD", item.totalPrice)
         
         stepper.value = Double(item.quantity)
-        stepper.minimumValue = 1
-        stepper.maximumValue = 99
         
-        // Load image using URLSession
         loadImage(from: item.imageURL)
     }
     
     private func loadImage(from urlString: String) {
-        // Cancel any existing image loading task
         imageTask?.cancel()
-        
-        // Set placeholder image
         productImageView.image = UIImage(systemName: "photo")
         
-        // Check if URL is valid
         guard let url = URL(string: urlString) else {
             print("Invalid image URL")
             return
         }
         
-        // Create and start image loading task
         imageTask = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             guard let self = self else { return }
             
@@ -87,9 +101,18 @@ class CartItemCell: UITableViewCell {
     
     // MARK: - Actions
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
-        let newQuantity = Int(sender.value)
-        quantityLabel.text = "\(newQuantity)"
-        delegate?.quantityDidChange(at: tag, newQuantity: newQuantity)
+        let newValue = Int(sender.value)
+        let currentQuantity = item?.quantity ?? 1
+        
+        if newValue == 0 {
+            // Trigger deletion
+            delegate?.quantityDidChange(at: tag, newQuantity: 0, isIncrementing: false)
+            return
+        }
+        
+        let isIncrementing = newValue > currentQuantity
+        quantityLabel.text = "\(newValue)"
+        delegate?.quantityDidChange(at: tag, newQuantity: newValue, isIncrementing: isIncrementing)
     }
     
     override func prepareForReuse() {
@@ -100,7 +123,7 @@ class CartItemCell: UITableViewCell {
         productNameLabel.text = nil
         quantityLabel.text = nil
         priceLabel.text = nil
-        stepper.value = 0
+        stepper.value = 1
     }
     
     override func layoutSubviews() {

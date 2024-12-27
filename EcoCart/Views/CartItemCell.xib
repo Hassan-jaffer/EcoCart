@@ -35,7 +35,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="99" translatesAutoresizingMaskIntoConstraints="NO" id="stp-qt-chg">
+                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="99" translatesAutoresizingMaskIntoConstraints="NO" id="stp-qt-chg" customClass="CustomStepper" customModule="EcoCart" customModuleProvider="target">
                         <rect key="frame" x="265" y="77" width="94" height="32"/>
                         <connections>
                             <action selector="stepperValueChanged:" destination="KGk-i7-Jjw" eventType="valueChanged" id="stp-act-id"/>
