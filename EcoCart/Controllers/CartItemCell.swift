@@ -1,5 +1,4 @@
 import UIKit
-import SDWebImage
 
 protocol CartItemCellDelegate: AnyObject {
     func quantityDidChange(at index: Int, newQuantity: Int)
@@ -17,6 +16,7 @@ class CartItemCell: UITableViewCell {
     // MARK: - Properties
     weak var delegate: CartItemCellDelegate?
     private var item: CartItem?
+    private var imageTask: URLSessionDataTask?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,27 +42,47 @@ class CartItemCell: UITableViewCell {
         stepper.minimumValue = 1
         stepper.maximumValue = 99
         
-        // Load image using SDWebImage
-        if let url = URL(string: item.imageURL) {
-            productImageView.sd_setImage(
-                with: url,
-                placeholderImage: UIImage(systemName: "photo"),
-                options: [.retryFailed, .refreshCached],
-                progress: { (receivedSize, expectedSize, _) in
-                    // Handle progress if needed
-                    let progress = Float(receivedSize) / Float(expectedSize)
-                    print("Loading progress: \(progress)")
-                },
-                completed: { [weak self] (image: UIImage?, error: Error?, cacheType: SDImageCacheType, imageURL: URL?) in
-                    if let error = error {
-                        print("Error loading image: \(error)")
-                        self?.productImageView.image = UIImage(systemName: "photo")
-                    }
-                }
-            )
-        } else {
-            productImageView.image = UIImage(systemName: "photo")
+        // Load image using URLSession
+        loadImage(from: item.imageURL)
+    }
+    
+    private func loadImage(from urlString: String) {
+        // Cancel any existing image loading task
+        imageTask?.cancel()
+        
+        // Set placeholder image
+        productImageView.image = UIImage(systemName: "photo")
+        
+        // Check if URL is valid
+        guard let url = URL(string: urlString) else {
+            print("Invalid image URL")
+            return
         }
+        
+        // Create and start image loading task
+        imageTask = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            guard let self = self else { return }
+            
+            if let error = error {
+                print("Error loading image: \(error)")
+                return
+            }
+            
+            guard let data = data, let image = UIImage(data: data) else {
+                print("Invalid image data")
+                return
+            }
+            
+            DispatchQueue.main.async {
+                UIView.transition(with: self.productImageView,
+                                duration: 0.3,
+                                options: .transitionCrossDissolve,
+                                animations: {
+                    self.productImageView.image = image
+                })
+            }
+        }
+        imageTask?.resume()
     }
     
     // MARK: - Actions
@@ -74,8 +94,9 @@ class CartItemCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        productImageView.image = nil
-        productImageView.sd_cancelCurrentImageLoad()
+        imageTask?.cancel()
+        imageTask = nil
+        productImageView.image = UIImage(systemName: "photo")
         productNameLabel.text = nil
         quantityLabel.text = nil
         priceLabel.text = nil
@@ -87,31 +108,3 @@ class CartItemCell: UITableViewCell {
         productImageView.layer.cornerRadius = 8
     }
 }
-
-
-//import UIKit
-//
-//class CartItemCell: UITableViewCell {
-//    @IBOutlet weak var productImageView: UIImageView!
-//    @IBOutlet weak var productNameLabel: UILabel!
-//    @IBOutlet weak var locationLabel: UILabel!
-//    @IBOutlet weak var priceLabel: UILabel!
-//    @IBOutlet weak var quantityStepper: UIStepper!
-//    @IBOutlet weak var quantityLabel: UILabel!
-//
-//    var stepperAction: ((Int) -> Void)?
-//
-//    func configure(with cartItem: CartItem) {
-//        productNameLabel.text = cartItem.productName
-//        locationLabel.text = cartItem.location
-//        priceLabel.text = "\(cartItem.price) BD"
-//        quantityLabel.text = "\(cartItem.quantity)"
-//        quantityStepper.value = Double(cartItem.quantity)
-//    }
-//
-//    @IBAction func stepperValueChanged(_ sender: UIStepper) {
-//        let newQuantity = Int(sender.value)
-//        quantityLabel.text = "\(newQuantity)"
-//        stepperAction?(newQuantity)
-//    }
-//}

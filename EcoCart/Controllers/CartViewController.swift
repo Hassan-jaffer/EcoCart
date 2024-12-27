@@ -1,7 +1,6 @@
 import UIKit
 import FirebaseFirestore
 import FirebaseAuth
-import SDWebImage
 
 class CartViewController: UIViewController {
     
