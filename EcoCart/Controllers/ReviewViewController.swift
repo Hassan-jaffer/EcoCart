@@ -30,7 +30,6 @@ class ReviewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("⚠️ ReviewViewController loaded with productId: \(String(describing: productId))")
         NotificationCenter.default.addObserver(self, selector: #selector(handleThemeChange), name: .themeDidChange, object: nil)
         setupUI()
         fetchReviews()
@@ -85,29 +84,18 @@ class ReviewViewController: UIViewController {
     }
     
     @IBAction func submitReviewTapped(_ sender: Any) {
-        print("📝 Submit review tapped")
         guard let productId = productId,
               let content = newReviewTextView.text,
               !content.isEmpty,
               selectedRating > 0 else {
-            print("❌ Validation failed:")
-            print("  - ProductId: \(String(describing: productId))")
-            print("  - Content empty: \(String(describing: newReviewTextView.text?.isEmpty))")
-            print("  - Rating: \(selectedRating)")
             showAlert(title: "Error", message: "Please enter a review and select a rating")
             return
         }
         
         guard let uid = User.uid else {
-            print("❌ No user ID found")
             showAlert(title: "Error", message: "Please log in to submit a review")
             return
         }
-        
-        print("✅ Creating review with:")
-        print("  - ProductId: \(productId)")
-        print("  - Content: \(content)")
-        print("  - Rating: \(selectedRating)")
         
         // Fetch user data from Firestore
         Task {
@@ -116,12 +104,10 @@ class ReviewViewController: UIViewController {
                 guard let userData = userDoc.data(),
                       let firstName = userData["firstName"] as? String,
                       let lastName = userData["lastName"] as? String else {
-                    print("❌ Could not get user data")
                     throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Could not get user data"])
                 }
                 
                 let userName = "\(firstName) \(lastName)"
-                print("👤 User name: \(userName)")
                 
                 let review = Review(
                     content: content,
@@ -130,9 +116,7 @@ class ReviewViewController: UIViewController {
                     userName: userName
                 )
                 
-                print("🔄 Submitting review to Firebase...")
                 try await ReviewFirebase.shared.addReview(review)
-                print("✅ Review submitted successfully")
                 
                 // Fetch updated product details
                 if let updatedProduct = try await Product.fetchProduct(withId: productId) {
@@ -141,16 +125,13 @@ class ReviewViewController: UIViewController {
                 }
                 
                 DispatchQueue.main.async { [weak self] in
-                    print("🧹 Clearing review form")
                     self?.newReviewTextView.text = ""
                     self?.selectedRating = 0
                     self?.updateStars()
-                    print("🔄 Refreshing reviews")
                     self?.fetchReviews()
                 }
                 self.showAlert(title: "Success", message: "Review submitted successfully!")
             } catch {
-                print("❌ Error submitting review: \(error)")
                 self.showAlert(title: "Error", message: "Failed to submit review: \(error.localizedDescription)")
             }
         }
@@ -158,25 +139,18 @@ class ReviewViewController: UIViewController {
     
     private func fetchReviews() {
         guard let productId = productId else {
-            print("❌ No productId found")
             return
         }
         
-        print("🔍 Fetching reviews for productId: \(productId)")
         Task {
             do {
                 let fetchedReviews = try await ReviewFirebase.shared.fetchReviews(for: productId)
-                print("✅ Found \(fetchedReviews.count) reviews")
-                print("📝 Reviews: \(fetchedReviews)")
                 
                 DispatchQueue.main.async { [weak self] in
-                    print("🔄 Updating UI with reviews")
                     self?.reviews = fetchedReviews
                     self?.reviewTableView.reloadData()
                 }
             } catch {
-                print("❌ Error fetching reviews: \(error)")
-                print("Error details: \(error)")
                 self.showAlert(title: "Error", message: "Failed to load reviews")
             }
         }
@@ -191,7 +165,6 @@ class ReviewViewController: UIViewController {
 
 extension ReviewViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("📊 Number of reviews: \(reviews.count)")
         if reviews.isEmpty {
             let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 44))
             messageLabel.text = "No reviews yet. Be the first to review!"
@@ -206,12 +179,10 @@ extension ReviewViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewCell", for: indexPath) as? ReviewCell else {
-            print("❌ Failed to dequeue ReviewCell")
             return UITableViewCell()
         }
         
         let review = reviews[indexPath.row]
-        print("🔵 Configuring cell at index \(indexPath.row) with review: \(review)")
         cell.configure(with: review)
         return cell
     }

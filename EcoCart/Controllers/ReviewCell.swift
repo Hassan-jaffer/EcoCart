@@ -39,12 +39,10 @@ class ReviewCell: UITableViewCell {
     }
     
     func configure(with review: Review) {
-        print("🔵 Configuring cell with review: \(review)")
         reviewContentTextView.text = review.content
         reviewerNameLabel.text = "By: \(review.userName)"
         
         let rating = max(0, min(5, review.rating))
-        print("⭐️ Setting rating to: \(rating)")
         
         let stars = [ratingStarButton1, ratingStarButton2, ratingStarButton3, ratingStarButton4, ratingStarButton5]
         stars.enumerated().forEach { index, button in

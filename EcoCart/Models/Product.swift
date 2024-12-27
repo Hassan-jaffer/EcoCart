@@ -59,31 +59,13 @@ struct Product {
         
         // Fetch documents from the "product" collection
         let snapshot = try await db.collection("product").getDocuments()
-        print("✅ Fetched \(snapshot.documents.count) products.")
-
         var products: [Product] = []
 
         for document in snapshot.documents {
             let data = document.data()
 
-            // Log the entire document data to check for the category field
-            print("📄 Parsing product: \(document.documentID)")
-            print("Raw data from Firebase: \(data)")
-
-            // Explicitly check and log the category field
-            if let categoryValue = data["Category"] as? String {
-                if categoryValue.isEmpty {
-                    print("❌ Category is empty for product \(document.documentID).")
-                } else {
-                    print("📦 Found category for product \(document.documentID): \(categoryValue)")
-                }
-            } else {
-                print("❌ Category is missing for product \(document.documentID).")
-            }
-
             // Extract metrics data
             guard let metricsData = data["metrics"] as? [String: Any] else {
-                print("❌ No metrics data found for document ID: \(document.documentID)")
                 continue // Skip this product if metrics are missing
             }
 
@@ -93,11 +75,6 @@ struct Product {
 
             // Extract and handle the category with a fallback if necessary
             let categoryValue = (data["Category"] as? String)?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "Unknown Category"
-
-            // Check if category was properly set or defaulted to "Unknown Category"
-            if categoryValue == "Unknown Category" {
-                print("❌ Using default category for product \(document.documentID).")
-            }
 
             // Create and append product to the list
             let product = Product(
@@ -125,11 +102,6 @@ struct Product {
             products.append(product)
         }
 
-        print("✅ Total Products Fetched: \(products.count)")
         return products
     }
-
-
-
-
 }
