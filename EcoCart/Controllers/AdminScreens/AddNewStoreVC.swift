@@ -16,7 +16,7 @@ class AddNewStoreVC: UIViewController {
     @IBOutlet weak var lastNameTextField: BlackBorderedTextField!
     
     
-    @IBOutlet weak var phoneNumberTextField: BlackBorderedTextField!
+    @IBOutlet weak var StoreNameTextField: BlackBorderedTextField!
     
     
     @IBOutlet weak var emailTextField: BlackBorderedTextField!
@@ -34,7 +34,7 @@ class AddNewStoreVC: UIViewController {
         // Validate inputs
         guard let firstName = firstNameTextField.text, !firstName.isEmpty,
               let lastName = lastNameTextField.text, !lastName.isEmpty,
-              let phone = phoneNumberTextField.text, !phone.isEmpty,
+              let storeName = StoreNameTextField.text, !storeName.isEmpty,
               let email = emailTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty else {
             showAlert(title: "Error", message: "Please fill in all fields.")
@@ -60,7 +60,7 @@ class AddNewStoreVC: UIViewController {
             let userData: [String: Any] = [
                 "firstName": firstName,
                 "lastName": lastName,
-                "phone": phone,
+                "storeName": storeName,
                 "email": email,
                 "userType": "storemanager", // Default user type
                 "createdAt": FieldValue.serverTimestamp()
@@ -74,7 +74,7 @@ class AddNewStoreVC: UIViewController {
                         self.firstNameTextField.text = ""
                         self.lastNameTextField.text = ""
                         self.emailTextField.text = ""
-                        self.phoneNumberTextField.text = ""
+                        self.StoreNameTextField.text = ""
                         self.passwordTextField.text = ""
                     }
                 }
