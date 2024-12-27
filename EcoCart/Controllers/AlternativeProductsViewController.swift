@@ -301,17 +301,11 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
         }
 
         // Generate the explanation for choosing this alternative product
-        let selectedProductScore = calculateFootprintScore(product: selectedProduct!)
-        let alternativeProductScore = calculateFootprintScore(product: alternativeProduct)
+       
         
         // Explanation logic: compare footprint scores
-        var explanation = "This alternative has a lower environmental footprint."
+        let explanation = "This alternative has a lower environmental footprint. We recommend giving it a look!"
 
-        if selectedProductScore > alternativeProductScore {
-            explanation += "\nThe selected product has a higher footprint."
-        } else {
-            explanation += "\nThe alternative has a better footprint."
-        }
 
         // Set the explanation text
         repExp.text = explanation
@@ -385,7 +379,7 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
         
         // Set the metric value to the third label (label3)
         if let label3 = cell.viewWithTag(3) as? UILabel {
-            label3.text = "\(metricProduct.metricValue)"
+            label3.text = "\(metricProduct.metricValue) \(metricProduct.metric) saved"
         }
         
         // Load the product image (with error handling)
