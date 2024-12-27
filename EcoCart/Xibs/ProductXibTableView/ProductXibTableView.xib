@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProductXibTableView" rowHeight="175" id="Zlc-f1-0MU" customClass="ProductXibTableView" customModule="EcoCart" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="634" height="175"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zlc-f1-0MU" id="Hfd-ex-f7S">
+                <rect key="frame" x="0.0" y="0.0" width="634" height="175"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="benchmark-0.png" translatesAutoresizingMaskIntoConstraints="NO" id="p1s-iL-wNa">
+                        <rect key="frame" x="20" y="10" width="100" height="80"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="80" id="QUd-Fi-TNC"/>
+                            <constraint firstAttribute="width" constant="100" id="Yt7-v2-8kA"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Gl-bq-2I0">
+                        <rect key="frame" x="140" y="10" width="197" height="15.666666666666664"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="197" id="de1-4L-deR"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BdD-Z5-K4J">
+                        <rect key="frame" x="140" y="40.666666666666664" width="88" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Quantity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFQ-TJ-qyr">
+                        <rect key="frame" x="238" y="40.333333333333336" width="117" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W5c-DE-oAG" customClass="CustomRoundedButton" customModule="EcoCart" customModuleProvider="target">
+                        <rect key="frame" x="20" y="110" width="143" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="MQb-xU-Saq"/>
+                            <constraint firstAttribute="width" constant="143" id="qXJ-h3-ffc"/>
+                        </constraints>
+                        <color key="tintColor" red="0.43921568989999998" green="0.59215688710000003" blue="0.77647060160000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="filled" title="Delete Product">
+                            <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="12"/>
+                            <color key="baseBackgroundColor" systemColor="systemRedColor"/>
+                        </buttonConfiguration>
+                        <connections>
+                            <action selector="deleteProductPressed:" destination="Zlc-f1-0MU" eventType="touchUpInside" id="f1w-sk-rcw"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BMc-Za-teE">
+                        <rect key="frame" x="140" y="68.333333333333329" width="197" height="15.666666666666671"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="197" id="Wec-bb-LED"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="BdD-Z5-K4J" firstAttribute="leading" secondItem="7Gl-bq-2I0" secondAttribute="leading" id="9us-o8-Qz6"/>
+                    <constraint firstItem="BdD-Z5-K4J" firstAttribute="top" secondItem="7Gl-bq-2I0" secondAttribute="bottom" constant="15" id="Di0-Au-ByM"/>
+                    <constraint firstItem="BMc-Za-teE" firstAttribute="top" secondItem="vFQ-TJ-qyr" secondAttribute="bottom" constant="10" id="Dja-j4-5rZ"/>
+                    <constraint firstItem="BMc-Za-teE" firstAttribute="leading" secondItem="BdD-Z5-K4J" secondAttribute="leading" id="PZr-kn-FhV"/>
+                    <constraint firstItem="7Gl-bq-2I0" firstAttribute="leading" secondItem="p1s-iL-wNa" secondAttribute="trailing" constant="20" id="TMs-9G-kjN"/>
+                    <constraint firstItem="W5c-DE-oAG" firstAttribute="top" secondItem="p1s-iL-wNa" secondAttribute="bottom" constant="20" id="atk-UX-q2O"/>
+                    <constraint firstItem="p1s-iL-wNa" firstAttribute="top" secondItem="Hfd-ex-f7S" secondAttribute="top" constant="10" id="dYw-gD-WFo"/>
+                    <constraint firstItem="p1s-iL-wNa" firstAttribute="leading" secondItem="Hfd-ex-f7S" secondAttribute="leading" constant="20" id="es8-FX-7N1"/>
+                    <constraint firstItem="vFQ-TJ-qyr" firstAttribute="leading" secondItem="BdD-Z5-K4J" secondAttribute="trailing" constant="10" id="mhZ-1D-ikC"/>
+                    <constraint firstItem="W5c-DE-oAG" firstAttribute="leading" secondItem="p1s-iL-wNa" secondAttribute="leading" id="mvQ-V7-qqp"/>
+                    <constraint firstItem="7Gl-bq-2I0" firstAttribute="top" secondItem="p1s-iL-wNa" secondAttribute="top" id="xEG-qu-y9o"/>
+                    <constraint firstItem="vFQ-TJ-qyr" firstAttribute="centerY" secondItem="BdD-Z5-K4J" secondAttribute="centerY" id="zLi-nG-yoY"/>
+                </constraints>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="number" keyPath="borderRadius">
+                        <real key="value" value="5"/>
+                    </userDefinedRuntimeAttribute>
+                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </userDefinedRuntimeAttribute>
+                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                        <real key="value" value="2"/>
+                    </userDefinedRuntimeAttribute>
+                </userDefinedRuntimeAttributes>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="name" destination="7Gl-bq-2I0" id="eka-2C-cI5"/>
+                <outlet property="price" destination="BdD-Z5-K4J" id="yJN-R1-qgQ"/>
+                <outlet property="productDescription" destination="BMc-Za-teE" id="9cX-Xe-2Gk"/>
+                <outlet property="productImage" destination="p1s-iL-wNa" id="RnH-ho-bKN"/>
+                <outlet property="quantity" destination="vFQ-TJ-qyr" id="Wco-Xf-dM1"/>
+            </connections>
+            <point key="canvasLocation" x="300.76335877862596" y="-15.140845070422536"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="benchmark-0.png" width="568" height="291"/>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

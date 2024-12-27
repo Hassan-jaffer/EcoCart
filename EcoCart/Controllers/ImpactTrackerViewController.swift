@@ -388,6 +388,6 @@ class ImpactTrackerViewController: UIViewController {
         
     }
     
-  
+
 
     }

@@ -63,15 +63,15 @@ class AddProductManagementViewController: UIViewController {
             "price": price,
             "stockQuantity": stockQuantity,
             "category": category,
-            "imageURL": "", // Add image upload logic later
+            "imageURL": "", // manager should add the imageURL
             "averageRating": 0,
             "numberOfRatings": 0,
             "totalRatings": 0,
-            "metrics": [
-                "Bio": 0,
-                "C02": 0,
-                "Plastic": 0,
-                "Tree": 0
+            "metrics": [ // you should let the manager add the following
+                "Bio": false, //biodegradability - true or false
+                "C02": 0, //estimated CO2 saved in kg
+                "Plastic": 0, //estimated plastic waste reduced in grams
+                "Tree": 0 //estimated trees saved
             ]
         ]
 

@@ -26,6 +26,7 @@ class ReviewViewController: UIViewController {
     var productId: String?
     private var reviews: [Review] = []
     private var selectedRating: Int = 0
+    private let db = Firestore.firestore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,20 +103,38 @@ class ReviewViewController: UIViewController {
             return
         }
         
+        guard let uid = User.uid else {
+            print("❌ No user ID found")
+            showAlert(title: "Error", message: "Please log in to submit a review")
+            return
+        }
+        
         print("✅ Creating review with:")
         print("  - ProductId: \(productId)")
         print("  - Content: \(content)")
         print("  - Rating: \(selectedRating)")
         
-        let review = Review(
-            content: content,
-            productId: productId,
-            rating: selectedRating,
-            userName: "User"
-        )
-        
+        // Fetch user data from Firestore
         Task {
             do {
+                let userDoc = try await db.collection("users").document(uid).getDocument()
+                guard let userData = userDoc.data(),
+                      let firstName = userData["firstName"] as? String,
+                      let lastName = userData["lastName"] as? String else {
+                    print("❌ Could not get user data")
+                    throw NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Could not get user data"])
+                }
+                
+                let userName = "\(firstName) \(lastName)"
+                print("👤 User name: \(userName)")
+                
+                let review = Review(
+                    content: content,
+                    productId: productId,
+                    rating: selectedRating,
+                    userName: userName
+                )
+                
                 print("🔄 Submitting review to Firebase...")
                 try await ReviewFirebase.shared.addReview(review)
                 print("✅ Review submitted successfully")
@@ -134,10 +153,10 @@ class ReviewViewController: UIViewController {
                     print("🔄 Refreshing reviews")
                     self?.fetchReviews()
                 }
-                showAlert(title: "Success", message: "Review submitted successfully!")
+                self.showAlert(title: "Success", message: "Review submitted successfully!")
             } catch {
                 print("❌ Error submitting review: \(error)")
-                showAlert(title: "Error", message: "Failed to submit review: \(error.localizedDescription)")
+                self.showAlert(title: "Error", message: "Failed to submit review: \(error.localizedDescription)")
             }
         }
     }
@@ -163,7 +182,7 @@ class ReviewViewController: UIViewController {
             } catch {
                 print("❌ Error fetching reviews: \(error)")
                 print("Error details: \(error)")
-                showAlert(title: "Error", message: "Failed to load reviews")
+                self.showAlert(title: "Error", message: "Failed to load reviews")
             }
         }
     }

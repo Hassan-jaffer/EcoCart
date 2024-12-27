@@ -77,7 +77,6 @@ class ProductDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("📱 ViewDidLoad called")
-        NotificationCenter.default.addObserver(self, selector: #selector(handleThemeChange), name: .themeDidChange, object: nil)
         setupUI()
         fetchProductDetails()
         
@@ -294,10 +293,9 @@ class ProductDetailsViewController: UIViewController {
         
         // Format metrics text
         let metricsText = """
-        Environmental Impact:
         Bio-Based: \(product.metrics.bio == 1 ? "Yes" : "No")
         CO₂ Saved: \(product.metrics.co2) kg
-        Plastic Saved: \(product.metrics.plastic) kg
+        Plastic Saved: \(product.metrics.plastic) g
         Trees Saved: \(product.metrics.tree)
         """
         impactTextView.text = metricsText
