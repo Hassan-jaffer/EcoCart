@@ -23,7 +23,7 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
         setupActivityIndicator()
         fetchProducts()
         updateFilterButtonColor()
-         addProductsToFirestore()
+         //addProductsToFirestore()
 
     }
     
