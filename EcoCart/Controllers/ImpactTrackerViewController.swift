@@ -43,7 +43,7 @@ class ImpactTrackerViewController: UIViewController {
         editProgressView() //adjust progress view size
         fetchData(period: "") //get all data from firestore (parameter is nil for default)
     }
-    
+    ///edit progress views
     func editProgressView(){
         editProgress(co2progressView)
         editProgress(plasticProgressView)
@@ -119,51 +119,47 @@ class ImpactTrackerViewController: UIViewController {
     }
     func fetchData(period: String){
         //query with the condition, seperated it to add action listener and date comparsion
-        let query: Query
-        let user = UserDefaults.standard.string(forKey: "user_uid_key") // id must be changed to logged in user
-        switch period {
-        case "day":
-            
-            let today = Calendar.current.startOfDay(for: Date())
-            query = self.db.collection("impactProd").whereField("userId", isEqualTo: user).whereField("impactProdPurchaseDate", isGreaterThanOrEqualTo: today)
-            
-        case "week":
-            
-            let week = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: Date())
-            query = self.db.collection("impactProd").whereField("userId", isEqualTo: user).whereField("impactProdPurchaseDate", isGreaterThanOrEqualTo: week!)
-            
-        case "month":
-            
-            let month = Calendar.current.date(byAdding: .month, value: -1, to: Date())
-            query = self.db.collection("impactProd").whereField("userId", isEqualTo: user).whereField("impactProdPurchaseDate", isGreaterThanOrEqualTo: month!)
-            
-        case "year":
-            
-            let year = Calendar.current.date(byAdding: .year, value: -1, to: Date())
-            query = self.db.collection("impactProd").whereField("userId", isEqualTo: user).whereField("impactProdPurchaseDate", isGreaterThanOrEqualTo: year!)
-        default:
-            query = self.db.collection("impactProd").whereField("userId", isEqualTo: user)
+        let query: Query //query to execute
+        let user = UserDefaults.standard.string(forKey: "user_uid_key") // id for logged in user
+        let time: Date //period filter
+        if period != ""{
+            switch period {
+            case "day":
+                time = Calendar.current.startOfDay(for: Date()) //filter by today's products only
+            case "week":
+                time = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: Date())! //filter by a week
+            case "month":
+                time = Calendar.current.date(byAdding: .month, value: -1, to: Date())! //filter by a month
+            case "year":
+                time = Calendar.current.date(byAdding: .year, value: -1, to: Date())! //filter by a year
+            default:
+                time = Calendar.current.startOfDay(for: Date()) //default value for errors
+                break
+            }
+            query = self.db.collection("impactProd").whereField("userId", isEqualTo: user!).whereField("impactProdPurchaseDate", isGreaterThanOrEqualTo: time) //apply user id and yime conditions
+        }else{
+            query = self.db.collection("impactProd").whereField("userId", isEqualTo: user!) //apply user id condition only
         }
         
         
-        query.addSnapshotListener(){ [weak self] (querySnapshot, error) in //action listener watches the database, updating any change happens. syntax should be the same
-            guard let self else { return }
+        query.addSnapshotListener(){ [weak self] (querySnapshot, error) in //attach action listener to watch the database, updating any change happens. (querySnapshot is the results, error for fails)
+            guard let self else { return } //required condition for action listener
             if let error = error {
                 self.showError(error: error.localizedDescription)
             }
-            //get the documents and check if its not empty
+            //check the snapshot and see if its not empty
             guard let documents = querySnapshot?.documents , !documents.isEmpty else {
                 
-                resetProgressView()
+                resetProgressView() //reset the charts to zeros
                 return
             }
-            self.resetValues()
+            self.resetValues() //reset class level values
             for document in documents{ //loop through each doc
                 let metrics = document.data()["impactProd"] as? [String: Any] ?? [:] //get the map field
-                let co2Progress = metrics["CO2"] as? Float ?? 0.0
-                let plasticProgress = metrics["Plastic"] as? Float ?? 0.0
-                let impOnTreeProgress = metrics["Tree"] as? Float ?? 0.0
-                let bioProgress = metrics["Bio"] as? Bool ?? false
+                let co2Progress = metrics["CO2"] as? Float ?? 0.0 //co2 saved
+                let plasticProgress = metrics["Plastic"] as? Float ?? 0.0 //plastic reduced
+                let impOnTreeProgress = metrics["Tree"] as? Float ?? 0.0 //trees saved
+                let bioProgress = metrics["Bio"] as? Bool ?? false //biodegradability
                 //calculate using the class level variables
                 self.totalCO2 += co2Progress
                 self.totalPlastic += plasticProgress
@@ -172,7 +168,7 @@ class ImpactTrackerViewController: UIViewController {
                 if bioProgress{
                     self.BioCount += 1
                 }
-                self.productCount += 1.0 //loops count
+                self.productCount += 1.0 //loops count (products ammount)
             }
 
             self.updateProgressView() //update ui
@@ -232,21 +228,21 @@ class ImpactTrackerViewController: UIViewController {
         
     }
     
-    
+    ///reset all data tracked from user
     func resetData(){
-        resetBtn.isEnabled = false
-        let user = "123" //user id will be changed later
-        self.db.collection("impactProd").whereField("userId", isEqualTo: user).getDocuments(){ querySnapshot, err in
+        resetBtn.isEnabled = false //close reset button to deny muiltple calls
+        let user = UserDefaults.standard.string(forKey: "user_uid_key") //user id
+        self.db.collection("impactProd").whereField("userId", isEqualTo: user!).getDocuments(){ querySnapshot, err in //get docs that match the user id
             if let err = err {
                 self.showError(error: err.localizedDescription)
                 return
             }
-            
+            //check snapshot
             guard let documents = querySnapshot?.documents, !documents.isEmpty else {
-                self.showNoData()
+                self.showNoData() //return an error to user - avoiding potential bug
                 return
             }
-            for document in querySnapshot!.documents {
+            for document in documents { //loop through docs
                 print("\(document.data())")
                 self.db.collection("impactProd").document(document.documentID).delete() { err in
                     if let err = err {
@@ -254,8 +250,8 @@ class ImpactTrackerViewController: UIViewController {
                     }
                     else {
                         
-                        self.resetProgressView()
-                        self.resetSuccess()
+                        self.resetProgressView() //reset chart to zeros
+                        self.resetSuccess() //show success
                     }
                 }
             }
