@@ -108,29 +108,39 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                 var validMetricProducts: [MetricProduct] = []
                 var usedProductIDs: Set<String> = [] // Track product IDs to prevent duplicates
 
-                // CO2: Find the product with the highest CO2 saved
+                // CO2 Saved Metric
                 if let co2Product = similarProducts
-                    .filter({ !usedProductIDs.contains($0.id) && $0.metrics.co2 > 0 }) // Exclude products with 0 CO2
+                    .filter({
+                        !usedProductIDs.contains($0.id) &&
+                        $0.metrics.co2 > selectedProduct.metrics.co2 // CO2 saved is higher than selected product
+                    })
                     .max(by: { $0.metrics.co2 < $1.metrics.co2 }) {
                     validMetricProducts.append(MetricProduct(product: co2Product, metric: "CO2", metricValue: Double(co2Product.metrics.co2)))
-                    usedProductIDs.insert(co2Product.id) // Mark this product as used
+                    usedProductIDs.insert(co2Product.id)
                 }
 
-                // Plastic: Find the product with the highest Plastic saved
+                // Plastic Saved Metric
                 if let plasticProduct = similarProducts
-                    .filter({ !usedProductIDs.contains($0.id) && $0.metrics.plastic > 0 }) // Exclude products with 0 Plastic
+                    .filter({
+                        !usedProductIDs.contains($0.id) &&
+                        $0.metrics.plastic > selectedProduct.metrics.plastic // Plastic saved is higher than selected product
+                    })
                     .max(by: { $0.metrics.plastic < $1.metrics.plastic }) {
                     validMetricProducts.append(MetricProduct(product: plasticProduct, metric: "Plastic", metricValue: Double(plasticProduct.metrics.plastic)))
-                    usedProductIDs.insert(plasticProduct.id) // Mark this product as used
+                    usedProductIDs.insert(plasticProduct.id)
                 }
 
-                // Trees: Find the product with the highest Trees saved
-                if let treeProduct = similarProducts
-                    .filter({ !usedProductIDs.contains($0.id) && $0.metrics.tree > 0 }) // Exclude products with 0 Trees
-                    .max(by: { $0.metrics.tree < $1.metrics.tree }) {
-                    validMetricProducts.append(MetricProduct(product: treeProduct, metric: "Trees", metricValue: Double(treeProduct.metrics.tree)))
-                    usedProductIDs.insert(treeProduct.id) // Mark this product as used
+                // Trees Saved Metric
+                if let treesProduct = similarProducts
+                    .filter({
+                        !usedProductIDs.contains($0.id) &&
+                        $0.metrics.tree > selectedProduct.metrics.tree // Trees saved is higher than selected product
+                    })
+                        .max(by: { $0.metrics.tree < $1.metrics.tree }) {
+                    validMetricProducts.append(MetricProduct(product: treesProduct, metric: "Trees", metricValue: Double(treesProduct.metrics.tree)))
+                    usedProductIDs.insert(treesProduct.id)
                 }
+
 
 
                 // Check if no valid alternatives exist
