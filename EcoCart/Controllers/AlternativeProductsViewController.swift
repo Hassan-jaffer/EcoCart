@@ -75,24 +75,15 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                 print("Fetched \(allProducts.count) products.")
 
                 // Filter products by keyword similarity (ignoring category) and exclude the selected product
-                          let similarProducts = allProducts.filter { product in
-                              let isSimilar = productContainsSimilarKeywords(selected: selectedProduct, candidate: product)
-                              let isNotSelected = product.id != selectedProduct.id // Exclude selected product
-                              return isSimilar && isNotSelected
-                          }
+                let similarProducts = allProducts.filter { product in
+                    let isSimilar = productContainsSimilarKeywords(selected: selectedProduct, candidate: product)
+                    let isNotSelected = product.id != selectedProduct.id // Exclude selected product
+                    return isSimilar && isNotSelected
+                }
 
                 print("Filtered \(similarProducts.count) similar products based on keywords.")
 
-                // If no similar products are found, notify the user
-                guard !similarProducts.isEmpty else {
-                    DispatchQueue.main.async {
-                        self.showNoAlternativeMessage("No alternatives found based on keywords.")
-                        self.statusImage.image = UIImage(named: "Magni")
-                        self.statusImage.isHidden = false
-                        
-                    }
-                    return
-                }
+               
 
                 // Calculate footprint score for the selected product
                 let selectedProductScore = calculateFootprintScore(product: selectedProduct)
@@ -100,7 +91,7 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
 
                 // Filter and sort similar products based on footprint score (for suggested alternatives)
                 let filteredProducts = similarProducts
-                    .filter { calculateFootprintScore(product: $0) < selectedProductScore } // Lower footprint score
+                    .filter { calculateFootprintScore(product: $0) <= selectedProductScore } // Lower footprint score
                     .sorted {
                         let scoreDiff = calculateFootprintScore(product: $0) - calculateFootprintScore(product: $1)
                         if abs(scoreDiff) < 0.01 { // If scores are nearly equal, prefer cheaper product
@@ -115,28 +106,53 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                 self.alternativeProduct = filteredProducts.first
 
                 // --------------------- For Metric Table ---------------------
-
-                // Now find the highest values for each metric (CO2, Plastic, Trees) for the table
                 var validMetricProducts: [MetricProduct] = []
+                var usedProductIDs: Set<String> = [] // Track product IDs to prevent duplicates
 
                 // CO2: Find product with highest CO2 saved
-                if let co2Product = similarProducts.max(by: { $0.metrics.co2 < $1.metrics.co2 }) {
+                if let co2Product = similarProducts
+                    .filter({ !usedProductIDs.contains($0.id) && $0.metrics.co2 > 0 }) // Exclude products with 0 CO2
+                    .max(by: { $0.metrics.co2 < $1.metrics.co2 }) {
                     validMetricProducts.append(MetricProduct(product: co2Product, metric: "CO2", metricValue: Double(co2Product.metrics.co2)))
+                    usedProductIDs.insert(co2Product.id) // Mark this product as used
                 }
+                print("CO2 Product: \(validMetricProducts.last?.product.name ?? "None") CO2: \(validMetricProducts.last?.metricValue ?? 0)")
 
                 // Plastic: Find product with highest Plastic saved
-                if let plasticProduct = similarProducts.max(by: { $0.metrics.plastic < $1.metrics.plastic }) {
+                if let plasticProduct = similarProducts
+                    .filter({ !usedProductIDs.contains($0.id) && $0.metrics.plastic > 0 }) // Exclude products with 0 Plastic
+                    .max(by: { $0.metrics.plastic < $1.metrics.plastic }) {
                     validMetricProducts.append(MetricProduct(product: plasticProduct, metric: "Plastic", metricValue: Double(plasticProduct.metrics.plastic)))
+                    usedProductIDs.insert(plasticProduct.id) // Mark this product as used
                 }
+                print("Plastic Product: \(validMetricProducts.last?.product.name ?? "None") Plastic: \(validMetricProducts.last?.metricValue ?? 0)")
 
                 // Trees: Find product with highest Trees saved
-                if let treeProduct = similarProducts.max(by: { $0.metrics.tree < $1.metrics.tree }) {
+                if let treeProduct = similarProducts
+                    .filter({ !usedProductIDs.contains($0.id) && $0.metrics.tree > 0 }) // Exclude products with 0 Trees
+                    .max(by: { $0.metrics.tree < $1.metrics.tree }) {
                     validMetricProducts.append(MetricProduct(product: treeProduct, metric: "Trees", metricValue: Double(treeProduct.metrics.tree)))
+                    usedProductIDs.insert(treeProduct.id) // Mark this product as used
+                }
+                print("Tree Product: \(validMetricProducts.last?.product.name ?? "None") Trees: \(validMetricProducts.last?.metricValue ?? 0)")
+                
+                
+                // If no similar products are found, notify the user
+                guard !similarProducts.isEmpty else {
+                    DispatchQueue.main.async {
+                        print("No similar products found based on keywords.")
+                        self.showNoAlternativeMessage("No alternatives found based on keywords.")
+                        self.statusImage.image = UIImage(named: "Magni")
+                        self.statusImage.isHidden = false
+                    }
+                    return
                 }
 
                 // Check if no valid alternatives exist
+                print("validMetricProducts count before check: \(validMetricProducts.count)")
                 guard !validMetricProducts.isEmpty else {
                     DispatchQueue.main.async {
+                        print("No valid products found. Updating UI.")
                         self.showNoAlternativeMessage("No valid alternative products found.")
                         self.statusImage.image = UIImage(named: "Magni")
                         self.statusImage.isHidden = false
@@ -144,12 +160,12 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                     return
                 }
 
-                // Now update the table with valid alternatives
+                // Update the table with valid alternatives
                 self.metricProducts = validMetricProducts
 
                 print("Metric products count: \(self.metricProducts.count)")
 
-                // Update UI with the alternative product details
+                // Reload the table data on the main thread
                 DispatchQueue.main.async {
                     self.metricsTableView.reloadData()
                 }
@@ -170,6 +186,7 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
             }
         }
     }
+
 
     private func calculateFootprintScore(product: Product) -> Double {
         // Extract metric values
