@@ -101,7 +101,7 @@ class AdminHomeVC: UITabBarController, StoresListXibDelegate, UITableViewDelegat
                 guard let firstName = data["firstName"] as? String,
                       let lastName = data["lastName"] as? String,
                       let email = data["email"] as? String,
-                      let phoneNumber = data["phone"] as? String else {
+                      let phoneNumber = data["storeName"] as? String else {
                     return nil
                 }
                 

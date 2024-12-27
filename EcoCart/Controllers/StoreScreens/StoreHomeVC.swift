@@ -83,78 +83,85 @@ extension StoreHomeVC {
     private func fetchProducts() {
         activityIndicator.startAnimating()
         
-        guard let userEmail = Auth.auth().currentUser?.email else {
+        guard let id = Auth.auth().currentUser?.uid else {
             print("Error: User is not logged in or email is unavailable")
             activityIndicator.stopAnimating()
             return
         }
         
         let db = Firestore.firestore()
-        
-        // Set up a listener for real-time updates
-        db.collection("product")
-            .whereField("storeName", isEqualTo: userEmail)
-            .addSnapshotListener { [weak self] querySnapshot, error in
-                guard let self = self else { return }
-                
-                if let error = error {
-                    print("Error fetching products: \(error.localizedDescription)")
-                    self.activityIndicator.stopAnimating()
-                    self.noDataLabel.isHidden = false
-                    return
-                }
-                
-                // Parse the Firestore documents into ProductModel instances
-                self.products = querySnapshot?.documents.compactMap { document in
-                    let data = document.data()
-                    print("Data is: \(data)")
-                    guard let name = data["name"] as? String else {
-                        print("Invalid or missing field: name in document \(document.documentID)")
-                        return nil
-                    }
-
-                    guard let imageURL = data["imageURL"] as? String else {
-                        print("Invalid or missing field: imageURL in document \(document.documentID)")
-                        return nil
-                    }
-
-                    guard let description = data["description"] as? String else {
-                        print("Invalid or missing field: description in document \(document.documentID)")
-                        return nil
-                    }
-
-                    guard let stockQuantity = data["stockQuantity"] as? Double else {
-                        print("Invalid or missing field: stockQuantity in document \(document.documentID)")
-                        return nil
-                    }
-
-                    guard let category = data["Category"] as? String else {
-                        print("Invalid or missing field: Category in document \(document.documentID)")
-                        return nil
-                    }
-
-                    guard let price = data["price"] as? Double else {
-                        print("Invalid or missing field: price in document \(document.documentID)")
-                        return nil
-                    }
-
-                    return ProductModel(
-                        id: document.documentID, // Firestore document ID
-                        productImage: imageURL,
-                        productName: name,
-                        productDescription: description,
-                        productCategory: category,
-                        productQuantity: String(stockQuantity),
-                        productPrice: String(price)
-                    )
-                } ?? []
-                
-                DispatchQueue.main.async {
-                    self.activityIndicator.stopAnimating()
-                    self.noDataLabel.isHidden = !self.products.isEmpty
-                    self.productsListTable.reloadData()
-                }
+        getUser(id: id) { storeName in
+            guard let storeName = storeName else {
+                print("Failed to fetch store name.")
+                return
             }
+            db.collection("product")
+                .whereField("storeName", isEqualTo: storeName)
+                .addSnapshotListener { [weak self] querySnapshot, error in
+                    guard let self = self else { return }
+                    
+                    // Set up a listener for real-time updates
+                    
+                    
+                    if let error = error {
+                        print("Error fetching products: \(error.localizedDescription)")
+                        self.activityIndicator.stopAnimating()
+                        self.noDataLabel.isHidden = false
+                        return
+                    }
+                    
+                    // Parse the Firestore documents into ProductModel instances
+                    self.products = querySnapshot?.documents.compactMap { document in
+                        let data = document.data()
+                        print("Data is: \(data)")
+                        guard let name = data["name"] as? String else {
+                            print("Invalid or missing field: name in document \(document.documentID)")
+                            return nil
+                        }
+                        
+                        guard let imageURL = data["imageURL"] as? String else {
+                            print("Invalid or missing field: imageURL in document \(document.documentID)")
+                            return nil
+                        }
+                        
+                        guard let description = data["description"] as? String else {
+                            print("Invalid or missing field: description in document \(document.documentID)")
+                            return nil
+                        }
+                        
+                        guard let stockQuantity = data["stockQuantity"] as? Double else {
+                            print("Invalid or missing field: stockQuantity in document \(document.documentID)")
+                            return nil
+                        }
+                        
+                        guard let category = data["Category"] as? String else {
+                            print("Invalid or missing field: Category in document \(document.documentID)")
+                            return nil
+                        }
+                        
+                        guard let price = data["price"] as? Double else {
+                            print("Invalid or missing field: price in document \(document.documentID)")
+                            return nil
+                        }
+                        
+                        return ProductModel(
+                            id: document.documentID, // Firestore document ID
+                            productImage: imageURL,
+                            productName: name,
+                            productDescription: description,
+                            productCategory: category,
+                            productQuantity: String(stockQuantity),
+                            productPrice: String(price)
+                        )
+                    } ?? []
+                    
+                    DispatchQueue.main.async {
+                        self.activityIndicator.stopAnimating()
+                        self.noDataLabel.isHidden = !self.products.isEmpty
+                        self.productsListTable.reloadData()
+                    }
+                }
+        }
     }
 
 
@@ -220,6 +227,28 @@ extension StoreHomeVC {
                 } else {
                     print("Error: indexPath.row is out of range after deletion.")
                 }
+            }
+        }
+    }
+    
+    func getUser(id: String, completion: @escaping (String?) -> Void) {
+        let userdb = Firestore.firestore()
+        let userRef = userdb.collection("users").document(id)
+        Task {
+            do{
+                let doc = try await userRef.getDocument()
+                
+                guard let data = doc.data() else {
+                    print("❌ No data found for ID: \(id)")
+                    completion(nil)
+                    return
+                }
+                let storeName = data["storeName"] as? String ?? ""
+                completion(storeName)
+            }
+            catch{
+                print("Error getting user: \(error)")
+                completion(nil)
             }
         }
     }
