@@ -11,6 +11,9 @@ import Foundation
 
 class ReviewViewController: UIViewController {
     // MARK: - Outlets
+    
+    @IBOutlet weak var reviewView: UIView!
+    
     @IBOutlet weak var reviewTableView: UITableView!
     @IBOutlet weak var newReviewTextView: UITextView!
     @IBOutlet weak var submitReviewButton: UIButton!
@@ -27,6 +30,7 @@ class ReviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("⚠️ ReviewViewController loaded with productId: \(String(describing: productId))")
+        NotificationCenter.default.addObserver(self, selector: #selector(handleThemeChange), name: .themeDidChange, object: nil)
         setupUI()
         fetchReviews()
     }
@@ -39,6 +43,11 @@ class ReviewViewController: UIViewController {
         reviewTableView.rowHeight = UITableView.automaticDimension
         reviewTableView.estimatedRowHeight = 150
         reviewTableView.tableFooterView = UIView()
+        if(ThemeManager.shared.isDarkMode){
+            reviewView.backgroundColor = UIColor.black
+        }else{
+            reviewView.backgroundColor = UIColor.white
+        }
         
         if let nib = Bundle.main.loadNibNamed("ReviewCell", owner: nil, options: nil) {
             reviewTableView.register(UINib(nibName: "ReviewCell", bundle: Bundle.main), forCellReuseIdentifier: "ReviewCell")
@@ -67,6 +76,10 @@ class ReviewViewController: UIViewController {
     @objc private func starTapped(_ sender: UIButton) {
         selectedRating = sender.tag
         updateStars()
+    }
+    
+    @objc private func handleThemeChange() {
+        setupUI() // Reapply theme settings dynamically
     }
     
     private func updateStars() {

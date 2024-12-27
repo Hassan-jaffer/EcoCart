@@ -62,9 +62,9 @@ class ImpactTrackerViewController: UIViewController {
         
     }
     func updateProgressView(){
-        var co2Percentage: Float = Float(Int((totalCO2 / targetCO2 * 100)))
+        var co2Percentage: Float = Float(Int((totalCO2 / (targetCO2 * productCount) * 100)))
         co2Percentage = min(co2Percentage, 100)
-        var plasticPercentage: Float = Float(Int((totalPlastic / targetPlastic * 100)))
+        var plasticPercentage: Float = Float(Int((totalPlastic / (targetPlastic * productCount) * 100)))
         plasticPercentage = min(plasticPercentage, 100)
         var treePercentage: Float = Float(Int((totalImpOnTree / targetImpOnTree * 100)))
         treePercentage = min(treePercentage, 100)
@@ -120,28 +120,29 @@ class ImpactTrackerViewController: UIViewController {
     func fetchData(period: String){
         //query with the condition, seperated it to add action listener and date comparsion
         let query: Query
+        let user = UserDefaults.standard.string(forKey: "user_uid_key") // id must be changed to logged in user
         switch period {
         case "day":
             
             let today = Calendar.current.startOfDay(for: Date())
-            query = self.db.collection("impactProd").whereField("userId", isEqualTo: "123").whereField("impactProdPurchaseDate", isGreaterThanOrEqualTo: today)
+            query = self.db.collection("impactProd").whereField("userId", isEqualTo: user).whereField("impactProdPurchaseDate", isGreaterThanOrEqualTo: today)
             
         case "week":
             
             let week = Calendar.current.date(byAdding: .weekOfYear, value: -1, to: Date())
-            query = self.db.collection("impactProd").whereField("userId", isEqualTo: "123").whereField("impactProdPurchaseDate", isGreaterThanOrEqualTo: week!)
+            query = self.db.collection("impactProd").whereField("userId", isEqualTo: user).whereField("impactProdPurchaseDate", isGreaterThanOrEqualTo: week!)
             
         case "month":
             
             let month = Calendar.current.date(byAdding: .month, value: -1, to: Date())
-            query = self.db.collection("impactProd").whereField("userId", isEqualTo: "123").whereField("impactProdPurchaseDate", isGreaterThanOrEqualTo: month!)
+            query = self.db.collection("impactProd").whereField("userId", isEqualTo: user).whereField("impactProdPurchaseDate", isGreaterThanOrEqualTo: month!)
             
         case "year":
             
             let year = Calendar.current.date(byAdding: .year, value: -1, to: Date())
-            query = self.db.collection("impactProd").whereField("userId", isEqualTo: "123").whereField("impactProdPurchaseDate", isGreaterThanOrEqualTo: year!)
+            query = self.db.collection("impactProd").whereField("userId", isEqualTo: user).whereField("impactProdPurchaseDate", isGreaterThanOrEqualTo: year!)
         default:
-            query = self.db.collection("impactProd").whereField("userId", isEqualTo: "123")
+            query = self.db.collection("impactProd").whereField("userId", isEqualTo: user)
         }
         
         
@@ -152,7 +153,7 @@ class ImpactTrackerViewController: UIViewController {
             }
             //get the documents and check if its not empty
             guard let documents = querySnapshot?.documents , !documents.isEmpty else {
-                //TODO - make a text above saying "No product available to track" (make it inside the method)
+                
                 resetProgressView()
                 return
             }
@@ -173,7 +174,7 @@ class ImpactTrackerViewController: UIViewController {
                 }
                 self.productCount += 1.0 //loops count
             }
-            print("action listner activated") //debug
+
             self.updateProgressView() //update ui
             
         }
@@ -185,8 +186,10 @@ class ImpactTrackerViewController: UIViewController {
         // Check if dark mode is enabled
         if traitCollection.userInterfaceStyle == .dark {
             graphView.backgroundColor = UIColor.darkGray  // Set background to gray in dark mode
+            barChart.backgroundColor = UIColor.darkGray
         } else {
             graphView.backgroundColor = UIColor.clear  // Keep it clear or transparent for light mode (similar to previous setup)
+            barChart.backgroundColor = UIColor.clear
         }
         
         // Apply the existing configurations (works for both dark and light modes)
@@ -232,8 +235,8 @@ class ImpactTrackerViewController: UIViewController {
     
     func resetData(){
         resetBtn.isEnabled = false
-        //user id will be changed later
-        self.db.collection("impactProd").whereField("userId", isEqualTo: "123").getDocuments(){ querySnapshot, err in
+        let user = "123" //user id will be changed later
+        self.db.collection("impactProd").whereField("userId", isEqualTo: user).getDocuments(){ querySnapshot, err in
             if let err = err {
                 self.showError(error: err.localizedDescription)
                 return
@@ -314,7 +317,7 @@ class ImpactTrackerViewController: UIViewController {
             self.fetchData(period: "year")
         })
         
-        let menu = UIMenu(title: "", children: [command1, command2, command3, command4, command5])
+        let menu = UIMenu(title: "Select a period", children: [command1, command2, command3, command4, command5])
         popupBtn.menu = menu
         popupBtn.showsMenuAsPrimaryAction = true
     }
@@ -359,12 +362,12 @@ class ImpactTrackerViewController: UIViewController {
     func updateBarChart(){
         //data part
         let dataEntries = [
-            BarChartDataEntry(x: 0, y: Double(totalCO2)),
-            BarChartDataEntry(x: 1, y: Double(totalPlastic)),
+            BarChartDataEntry(x: 0, y: Double(totalCO2) / 100),
+            BarChartDataEntry(x: 1, y: Double(totalPlastic) / 100),
             BarChartDataEntry(x: 2, y: Double(totalImpOnTree)),
             BarChartDataEntry(x: 3, y: Double(BioCount))
         ]
-        let dataSet = BarChartDataSet(entries: dataEntries, label: "")
+        let dataSet = BarChartDataSet(entries: dataEntries, label: "Environment Benefits")
         
         dataSet.colors = ChartColorTemplates.joyful()
         
@@ -374,13 +377,14 @@ class ImpactTrackerViewController: UIViewController {
         
         //design part
 
-        barChart.legend.enabled = false
-        barChart.xAxis.valueFormatter = IndexAxisValueFormatter(values: ["CO2 (KG)", "Plastic (G)", "Trees Saved", "Bio (Products)"])
+        
+        barChart.xAxis.valueFormatter = IndexAxisValueFormatter(values: ["CO2 (100KG)", "Plastic (100G)", "Trees (n)", "Biodegradabile (n)"])
         barChart.xAxis.granularity = 1
         barChart.xAxis.labelPosition = .bottom
         barChart.rightAxis.enabled = false
         barChart.drawGridBackgroundEnabled = false
         barChart.leftAxis.axisMinimum = 0
+        barChart.leftAxis.axisMaximum = 100
         
     }
     

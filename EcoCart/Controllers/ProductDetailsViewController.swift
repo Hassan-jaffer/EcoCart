@@ -14,6 +14,29 @@ import CoreLocation
 
 class ProductDetailsViewController: UIViewController {
     
+    
+    @IBOutlet weak var ImageUIView: UIView!
+    
+    @IBOutlet weak var ReviewView: UIView!
+    
+    
+    @IBOutlet weak var DescriptionView: UIView!
+    
+    
+    @IBOutlet weak var EnviroImpactView: UIView!
+    
+    
+    @IBOutlet weak var TopRatedView: UIView!
+    
+    
+    @IBOutlet weak var ProductsView: UIView!
+    
+    
+    
+    @IBOutlet weak var ProductsStack: UIStackView!
+    
+    
+    
     @IBOutlet weak var productImage: UIImageView!
     @IBOutlet weak var ecoFriendlyCertificateImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -54,6 +77,7 @@ class ProductDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("📱 ViewDidLoad called")
+        NotificationCenter.default.addObserver(self, selector: #selector(handleThemeChange), name: .themeDidChange, object: nil)
         setupUI()
         fetchProductDetails()
         
@@ -76,17 +100,57 @@ class ProductDetailsViewController: UIViewController {
         }
     }
     
+    @objc private func handleThemeChange() {
+        setupUI() // Reapply theme settings dynamically
+    }
+
+    
     private func setupUI() {
         print("🎨 Setting up UI")
-        productDescription.isEditable = false
-        impactTextView.isEditable = false
+        
+        // Apply colors based on theme
+        let backgroundColor = ThemeManager.shared.isDarkMode ? UIColor.darkGray : UIColor.white
+        let textColor = ThemeManager.shared.isDarkMode ? UIColor.white : UIColor.black
+        
+        if(ThemeManager.shared.isDarkMode) {
+            ImageUIView.backgroundColor = UIColor.black
+            DescriptionView.backgroundColor = UIColor.black
+            TopRatedView.backgroundColor = UIColor.black
+            ReviewView.backgroundColor = UIColor.black
+            TopRatedView.backgroundColor = UIColor.black
+            EnviroImpactView.backgroundColor = UIColor.black
+        }else{
+            ImageUIView.backgroundColor = UIColor.white
+            DescriptionView.backgroundColor = UIColor.white
+            TopRatedView.backgroundColor = UIColor.white
+            ReviewView.backgroundColor = UIColor.white
+            TopRatedView.backgroundColor = UIColor.white
+            EnviroImpactView.backgroundColor = UIColor.white
+
+        }
+        view.backgroundColor = backgroundColor
+        
+        // Apply theme to labels and text views
         nameLabel.font = .systemFont(ofSize: 24, weight: .bold)
         nameLabel.textAlignment = .center
         nameLabel.numberOfLines = 0
+        nameLabel.textColor = textColor
+        
+        productDescription.isEditable = false
+        productDescription.textColor = textColor
+        impactTextView.isEditable = false
+        impactTextView.textColor = textColor
+        quantityLabel.textColor = textColor
+        storeNameLabel.textColor = textColor
+        
         productQuantityStepper.value = Double(selectedQuantity)
         quantityLabel.text = "\(selectedQuantity)"
         productQuantityStepper.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)
         
+        // Set button background color based on theme
+        viewAlternativeOutlet.backgroundColor = ThemeManager.shared.isDarkMode ? UIColor.systemBlue : UIColor.systemGreen
+        storeLocationButton.backgroundColor = ThemeManager.shared.isDarkMode ? UIColor.systemBlue : UIColor.systemGreen
+
         setupTopRatedViews()
         fetchTopRatedProducts()
     }

@@ -1,3 +1,7 @@
+extension Notification.Name {
+    static let themeDidChange = Notification.Name("ThemeDidChange")
+}
+
 import UIKit
 
 class ThemeManager {
@@ -13,6 +17,8 @@ class ThemeManager {
         set {
             // Save the dark mode preference to UserDefaults
             UserDefaults.standard.set(newValue, forKey: "isDarkMode")
+            NotificationCenter.default.post(name: .themeDidChange, object: nil, userInfo: ["isDarkMode": newValue])
+
         }
     }
     
@@ -23,10 +29,22 @@ class ThemeManager {
         // Check if dark mode is enabled
         if isDarkMode {
             // Set dark mode
-            UIApplication.shared.windows.first?.overrideUserInterfaceStyle = .dark
+            setTheme(for: .dark)
         } else {
             // Set light mode
-            UIApplication.shared.windows.first?.overrideUserInterfaceStyle = .light
+            setTheme(for: .light)
+        }
+    }
+    
+    private func setTheme(for style: UIUserInterfaceStyle) {
+        // Get the current window scene
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+            return
+        }
+        
+        // Apply the theme to all windows in the window scene
+        for window in windowScene.windows {
+            window.overrideUserInterfaceStyle = style
         }
     }
 }

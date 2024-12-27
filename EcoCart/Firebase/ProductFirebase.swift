@@ -21,11 +21,11 @@ class ProductFirebase {
         let docRef = db.collection("product").document(id)
         let document = try await docRef.getDocument()
         
-        guard let data = document.data() else { 
+        guard let data = document.data() else {
             print("❌ No data found for product ID: \(id)")
-            return nil 
+            return nil
         }
-        
+
         // Get metrics data
         let metricsData = data["metrics"] as? [String: Any] ?? [:]
         
@@ -33,20 +33,20 @@ class ProductFirebase {
         print("📍 Raw location data from Firebase:")
         var latitude: Double?
         var longitude: Double?
-        
+
         if let locationData = data["location"] as? [String: Any] {
             print("   Found location object: \(locationData)")
-            
+
             if let lat = locationData["latitude"] as? Double {
                 latitude = lat
             }
             if let long = locationData["longtitude"] as? Double {  // Note the spelling in Firebase
                 longitude = long
             }
-            
+
             print("   Parsed location - lat: \(latitude ?? 0), long: \(longitude ?? 0)")
         }
-        
+
         let product = Product(
             id: document.documentID,
             name: data["name"] as? String ?? "",
@@ -68,12 +68,12 @@ class ProductFirebase {
             longitude: longitude,
             storeName: data["storeName"] as? String
         )
-        
+
         print("🏷️ Created product: \(product.name)")
         print("   Final location: lat=\(product.latitude ?? 0), long=\(product.longitude ?? 0)")
         return product
     }
-    
+
     func fetchAllProducts() async throws -> [Product] {
         print("📦 Fetching all products")
         let snapshot = try await db.collection("product").getDocuments()
@@ -81,7 +81,7 @@ class ProductFirebase {
         print("✅ Fetched \(products.count) products")
         return products
     }
-    
+
     func fetchProductsByCategory(_ category: String) async throws -> [Product] {
         print("🔍 Fetching products for category: \(category)")
         let snapshot = try await db.collection("product")
@@ -96,28 +96,28 @@ class ProductFirebase {
         return documents.compactMap { document in
             let data = document.data()
             print("📄 Parsing product: \(document.documentID)")
-            
+
             // Get metrics data
             let metricsData = data["metrics"] as? [String: Any] ?? [:]
-            
+
             // Get location data from nested location object
             print("📍 Raw location data from Firebase:")
             var latitude: Double?
             var longitude: Double?
-            
+
             if let locationData = data["location"] as? [String: Any] {
                 print("   Found location object: \(locationData)")
-                
+
                 if let lat = locationData["latitude"] as? Double {
                     latitude = lat
                 }
                 if let long = locationData["longtitude"] as? Double {  // Note the spelling in Firebase
                     longitude = long
                 }
-                
+
                 print("   Parsed location - lat: \(latitude ?? 0), long: \(longitude ?? 0)")
             }
-            
+
             let product = Product(
                 id: document.documentID,
                 name: data["name"] as? String ?? "",
@@ -139,16 +139,16 @@ class ProductFirebase {
                 longitude: longitude,
                 storeName: data["storeName"] as? String
             )
-            
+
             print("🏷️ Created product: \(product.name)")
             print("   Final location: lat=\(product.latitude ?? 0), long=\(product.longitude ?? 0)")
             return product
         }
     }
-    
+
     func updateProduct(_ product: Product) async throws {
         let docRef = db.collection("product").document(product.id)
-        
+
         var data: [String: Any] = [
             "name": product.name,
             "description": product.description,
@@ -167,7 +167,7 @@ class ProductFirebase {
             ],
             "storeName": product.storeName ?? ""
         ]
-        
+
         // Add location data directly at root level
         if let latitude = product.latitude, let longitude = product.longitude {
             data["location"] = [
@@ -175,7 +175,7 @@ class ProductFirebase {
                 "longitude": longitude
             ]
         }
-        
+
         try await docRef.setData(data, merge: true)
     }
 }

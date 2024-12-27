@@ -21,17 +21,18 @@ class AddProductViewController: UITableViewController {
     @IBOutlet weak var treeTxtFld: UITextField!
     @IBOutlet weak var bioSwitch: UISwitch!
     
+    @IBOutlet weak var categoryPopup: UIButton!
     @IBOutlet weak var confirmBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        createMenu()
     }
     
     @IBAction func confirmBtnTapped(_ sender: Any) {
     
     
-        
+        let user = UserDefaults.standard.string(forKey: "user_uid_key") //id will be changed to logged in user
         //get all info and store them in firebase
         guard let name = nameTxtFld.text, !name.isEmpty,
               let category = categoryTxtFld.text, !category.isEmpty,
@@ -75,7 +76,7 @@ class AddProductViewController: UITableViewController {
             "impactProdPrice": price,
             "impactProdPurchaseDate": purchaseDate,
             "impactProdStore": store,
-            "userId": "123" //temporary, later will be changed
+            "userId": user
             ]
         
         //reference firestore
@@ -121,6 +122,28 @@ class AddProductViewController: UITableViewController {
         present(alert, animated: true, completion: nil)
         confirmBtn.isEnabled = true
     }
+    
+    
+    func createMenu(){
+        
+        let catAcc = UIAction(title: "Accessories", handler: { _ in
+            self.categoryTxtFld.text = "Accessories"
+        })
+        let catClothes = UIAction(title: "Clothes", handler: { _ in
+            self.categoryTxtFld.text = "Clothes"
+            
+        })
+        let catElec = UIAction(title: "Electronics", handler: { _ in
+            self.categoryTxtFld.text = "Electronics"
+        })
+
+        let categoryMenu = UIMenu(title: "Select a Category", children: [catAcc, catClothes, catElec])
+        categoryPopup.menu = categoryMenu
+        categoryPopup.showsMenuAsPrimaryAction = true
+        
+    }
+    
+    
     }
     
 
