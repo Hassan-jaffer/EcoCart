@@ -255,14 +255,17 @@ class FilterViewController: UIViewController {
         // Category Options
                let MetCO2 = UIAction(title: "CO2 saved", handler: { _ in
                    self.selectedMetric = "C02"
+                   self.isAZFiltered = false // Deselect A-Z filter
                    self.updateButtonStates() // Update button state after selection
                })
                let MetPlastic = UIAction(title: "Plastic saved", handler: { _ in
                    self.selectedMetric = "Plastic"
+                   self.isAZFiltered = false // Deselect A-Z filter
                    self.updateButtonStates() // Update button state after selection
                })
                let MetTree = UIAction(title: "Trees saved", handler: { _ in
                    self.selectedMetric = "Tree"
+                   self.isAZFiltered = false // Deselect A-Z filter
                    self.updateButtonStates() // Update button state after selection
                })
 
