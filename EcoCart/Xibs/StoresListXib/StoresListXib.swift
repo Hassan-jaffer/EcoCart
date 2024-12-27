@@ -2,7 +2,7 @@
 //  StoresListXib.swift
 //  EcoCart
 //
-//  Created by Huzaifa Abbasi on 26/12/2024.
+//  Created by ali on 26/12/2024.
 //
 
 import UIKit

@@ -2,7 +2,7 @@
 //  StoreLogoutVC.swift
 //  EcoCart
 //
-//  Created by Huzaifa Abbasi on 27/12/2024.
+//  Created by ali on 27/12/2024.
 //
 
 import UIKit
