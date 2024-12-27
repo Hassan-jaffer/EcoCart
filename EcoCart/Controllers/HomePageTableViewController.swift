@@ -159,7 +159,7 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
         cell.alpha = 0
         cell.transform = CGAffineTransform(translationX: 0, y: 50) // Start position below
         
-        UIView.animate(withDuration: 0.2, delay: 0.02 * Double(indexPath.row), options: [.curveEaseInOut], animations: {
+        UIView.animate(withDuration: 0.01, delay: 0.001 * Double(indexPath.row), options: [.curveEaseInOut], animations: {
             cell.alpha = 1.0
             cell.transform = .identity // Return to default position
         }, completion: nil)
@@ -528,8 +528,8 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
       // self.db.collection("product").addDocument(data: Product6)
       // self.db.collection("product").addDocument(data: Product7)
    // self.db.collection("product").addDocument(data: Product8)
-    self.db.collection("product").addDocument(data: Product9)
-    self.db.collection("product").addDocument(data: Product10)
+   // self.db.collection("product").addDocument(data: Product9)
+    //self.db.collection("product").addDocument(data: Product10)
 
     }
     // Add more products similarly for the rest of the list...
