@@ -89,7 +89,7 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
 
                 // Filter and sort similar products based on footprint score (for suggested alternatives)
                 let filteredProducts = similarProducts
-                    .filter { calculateFootprintScore(product: $0) >= selectedProductScore } // Lower footprint score
+                    .filter { calculateFootprintScore(product: $0) >= selectedProductScore }
                     .sorted {
                         let scoreDiff = calculateFootprintScore(product: $0) - calculateFootprintScore(product: $1)
                         if abs(scoreDiff) < 0.01 { // If scores are nearly equal, prefer cheaper product
@@ -172,7 +172,6 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
             }
         }
     }
-
 
 
     private func calculateFootprintScore(product: Product) -> Double {
