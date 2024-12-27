@@ -10,6 +10,7 @@ struct MetricProduct {
 
 class AlternativeProductsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var MetricTitle: UILabel!
     @IBOutlet weak var repExp: UILabel!
     @IBOutlet weak var repName: UILabel!
     @IBOutlet weak var repImage: UIImageView!
@@ -107,39 +108,37 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                 var validMetricProducts: [MetricProduct] = []
                 var usedProductIDs: Set<String> = [] // Track product IDs to prevent duplicates
 
-                // CO2: Find product with highest CO2 saved
+                // CO2: Find the product with the highest CO2 saved
                 if let co2Product = similarProducts
                     .filter({ !usedProductIDs.contains($0.id) && $0.metrics.co2 > 0 }) // Exclude products with 0 CO2
                     .max(by: { $0.metrics.co2 < $1.metrics.co2 }) {
                     validMetricProducts.append(MetricProduct(product: co2Product, metric: "CO2", metricValue: Double(co2Product.metrics.co2)))
                     usedProductIDs.insert(co2Product.id) // Mark this product as used
                 }
-                print("CO2 Product: \(validMetricProducts.last?.product.name ?? "None") CO2: \(validMetricProducts.last?.metricValue ?? 0)")
 
-                // Plastic: Find product with highest Plastic saved
+                // Plastic: Find the product with the highest Plastic saved
                 if let plasticProduct = similarProducts
                     .filter({ !usedProductIDs.contains($0.id) && $0.metrics.plastic > 0 }) // Exclude products with 0 Plastic
                     .max(by: { $0.metrics.plastic < $1.metrics.plastic }) {
                     validMetricProducts.append(MetricProduct(product: plasticProduct, metric: "Plastic", metricValue: Double(plasticProduct.metrics.plastic)))
                     usedProductIDs.insert(plasticProduct.id) // Mark this product as used
                 }
-                print("Plastic Product: \(validMetricProducts.last?.product.name ?? "None") Plastic: \(validMetricProducts.last?.metricValue ?? 0)")
 
-                // Trees: Find product with highest Trees saved
+                // Trees: Find the product with the highest Trees saved
                 if let treeProduct = similarProducts
                     .filter({ !usedProductIDs.contains($0.id) && $0.metrics.tree > 0 }) // Exclude products with 0 Trees
                     .max(by: { $0.metrics.tree < $1.metrics.tree }) {
                     validMetricProducts.append(MetricProduct(product: treeProduct, metric: "Trees", metricValue: Double(treeProduct.metrics.tree)))
                     usedProductIDs.insert(treeProduct.id) // Mark this product as used
                 }
-                print("Tree Product: \(validMetricProducts.last?.product.name ?? "None") Trees: \(validMetricProducts.last?.metricValue ?? 0)")
+
 
                 // Check if no valid alternatives exist
                 print("validMetricProducts count before check: \(validMetricProducts.count)")
                 guard !validMetricProducts.isEmpty else {
                     DispatchQueue.main.async {
                         print("No valid products found. Updating UI.")
-                        self.showNoAlternativeMessage("No valid alternative products found.")
+                        self.showNoAlternativeMessage("This product has high enviromental footprint. However, no alternative products was found.")
                         self.statusImage.image = UIImage(named: "Magni")
                         self.statusImage.isHidden = false
                     }
@@ -357,7 +356,13 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
 
     // Number of rows in each section (count of products to show)
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if(metricProducts.count == 0){
+            MetricTitle.isHidden = true
+        }else{
+            MetricTitle.isHidden = false
+        }
         return metricProducts.count
+        
     }
 
     // Configure each cell in the table view dynamically
@@ -375,7 +380,7 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
         
         // Set the metric type to the second label (label2)
         if let label2 = cell.viewWithTag(2) as? UILabel {
-            label2.text = metricProduct.metric
+            label2.text = "This product has higher \(metricProduct.metric) saved!"
         }
         
         // Set the metric value to the third label (label3)
