@@ -38,8 +38,13 @@ class LogInTableViewController: UITableViewController {
                 UserDefaults.standard.set("regular", forKey: "user_type")
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 if let regularVC = storyboard.instantiateViewController(withIdentifier: "main") as? MainTabBarController {
-                    // Replace the entire navigation stack
-                    self.navigationController?.setViewControllers([regularVC], animated: true)
+                    if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                            if let window = windowScene.windows.first {
+                                // Set the new root view controller
+                                window.rootViewController = regularVC
+                                window.makeKeyAndVisible()
+                            }
+                        }
                 }
             case "admin":
                 UserDefaults.standard.set("admin", forKey: "user_type")
