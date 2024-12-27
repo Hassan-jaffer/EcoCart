@@ -242,8 +242,8 @@ class FilterViewController: UIViewController {
             self.selectedCategory = "Clothes"
             self.updateButtonStates() // Update button state after selection
         })
-        let catElec = UIAction(title: "Electronics", handler: { _ in
-            self.selectedCategory = "Electronics"
+        let catElec = UIAction(title: "Home & Lifestyle", handler: { _ in
+            self.selectedCategory = "Home & Lifestyle"
             self.updateButtonStates() // Update button state after selection
         })
 

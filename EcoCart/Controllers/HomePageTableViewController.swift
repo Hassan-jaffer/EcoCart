@@ -15,7 +15,7 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
     var filteredProducts: [Product] = []  // Filtered products for search
     var areFiltersActive = false // To track if filters are applied
     var activityIndicator: UIActivityIndicatorView! // Loading spinner
-    
+    let db = Firestore.firestore()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,6 +23,7 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
         setupActivityIndicator()
         fetchProducts()
         updateFilterButtonColor()
+        //addProductsToFirestore()
 
     }
     
@@ -158,7 +159,7 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
         cell.alpha = 0
         cell.transform = CGAffineTransform(translationX: 0, y: 50) // Start position below
         
-        UIView.animate(withDuration: 0.5, delay: 0.05 * Double(indexPath.row), options: [.curveEaseInOut], animations: {
+        UIView.animate(withDuration: 0.2, delay: 0.02 * Double(indexPath.row), options: [.curveEaseInOut], animations: {
             cell.alpha = 1.0
             cell.transform = .identity // Return to default position
         }, completion: nil)
@@ -303,7 +304,143 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
         // Reload the table view with the filtered and sorted products
         tableView.reloadData()
     }
+    func addProductsToFirestore(){
+        let Product1: [String: Any] = [
+            "name": "Bamboo Serving Tray",
+            "description": "Durable and stylish serving tray made from sustainable bamboo.",
+            "price": 29.99,
+            "imageURL": "https://example.com/bamboo-serving-tray.jpg",
+            "averageRating": 4.5,
+            "numberOfRatings": 120,
+            "totalRatings": 540,
+            "stockQuantity": 50,
+            "Category": "Home & Lifestyle",
+            "metrics": [
+                "Bio": true,
+                "CO2": 1.5,  // CO2 saved in KG
+                "Plastic": 0,  // Plastic waste reduced in grams
+                "Tree": 1  // Trees saved
+            ],
+            "latitude": 0.0,
+            "longitude": 0.0,
+            "storeName": "Eco Essentials"
+        ]
+        
+        let Product2: [String: Any] = [
+            "name": "Bamboo Cutting Board",
+            "description": "Eco-friendly and durable cutting board made from bamboo.",
+            "price": 24.99,
+            "imageURL": "https://example.com/bamboo-cutting-board.jpg",
+            "averageRating": 4.8,
+            "numberOfRatings": 90,
+            "totalRatings": 432,
+            "stockQuantity": 70,
+            "Category": "Home & Lifestyle",
+            "metrics": [
+                "Bio": true,
+                "CO2": 1.8,
+                "Plastic": 0,
+                "Tree": 1
+            ],
+            "latitude": 0.0,
+            "longitude": 0.0,
+            "storeName": "Eco Essentials"
+        ]
+        
+        let Product3: [String: Any] = [
+            "name": "Bamboo Kitchen Utensils Set",
+            "description": "Complete kitchen utensil set made from eco-friendly bamboo.",
+            "price": 34.99,
+            "imageURL": "https://example.com/bamboo-kitchen-utensils.jpg",
+            "averageRating": 4.7,
+            "numberOfRatings": 150,
+            "totalRatings": 705,
+            "stockQuantity": 40,
+            "Category": "Home & Lifestyle",
+            "metrics": [
+                "Bio": true,
+                "CO2": 1.7,
+                "Plastic": 300,
+                "Tree": 1
+            ],
+            "latitude": 0.0,
+            "longitude": 0.0,
+            "storeName": "Eco Essentials"
+        ]
+        
+        let Product4: [String: Any] = [
+            "name": "Organic Cotton Tablecloth",
+            "description": "Elegant and soft tablecloth made from organic cotton.",
+            "price": 39.99,
+            "imageURL": "https://example.com/organic-cotton-tablecloth.jpg",
+            "averageRating": 4.6,
+            "numberOfRatings": 85,
+            "totalRatings": 391,
+            "stockQuantity": 60,
+            "Category": "Home & Lifestyle",
+            "metrics": [
+                "Bio": true,
+                "CO2": 1.8,
+                "Plastic": 0,
+                "Tree": 1
+            ],
+            "latitude": 0.0,
+            "longitude": 0.0,
+            "storeName": "Eco Linens"
+        ]
+        
+        let Product5: [String: Any] = [
+            "name": "Organic Cotton Napkins",
+            "description": "Set of eco-friendly reusable napkins made from organic cotton.",
+            "price": 19.99,
+            "imageURL": "https://example.com/organic-cotton-napkins.jpg",
+            "averageRating": 4.5,
+            "numberOfRatings": 65,
+            "totalRatings": 292,
+            "stockQuantity": 80,
+            "Category": "Home & Lifestyle",
+            "metrics": [
+                "Bio": true,
+                "CO2": 0.8,
+                "Plastic": 0,
+                "Tree": 1
+            ],
+            "latitude": 0.0,
+            "longitude": 0.0,
+            "storeName": "Eco Linens"
+        ]
+        
+        let Product6: [String: Any] = [
+            "name": "Recycled Cotton Table Runner",
+            "description": "Decorative table runner made from recycled cotton.",
+            "price": 24.99,
+            "imageURL": "https://example.com/recycled-cotton-table-runner.jpg",
+            "averageRating": 4.7,
+            "numberOfRatings": 110,
+            "totalRatings": 517,
+            "stockQuantity": 50,
+            "Category": "Home & Lifestyle",
+            "metrics": [
+                "Bio": true,
+                "CO2": 2.0,
+                "Plastic": 0,
+                "Tree": 1
+            ],
+            "latitude": 0.0,
+            "longitude": 0.0,
+            "storeName": "Eco Linens"
+        ]
+        
+        self.db.collection("product").addDocument(data: Product1)
+        self.db.collection("product").addDocument(data: Product2)
+        self.db.collection("product").addDocument(data: Product3)
+        self.db.collection("product").addDocument(data: Product4)
+        self.db.collection("product").addDocument(data: Product5)
+        self.db.collection("product").addDocument(data: Product6)
 
+    }
+    // Add more products similarly for the rest of the list...
+    
 
 
 
