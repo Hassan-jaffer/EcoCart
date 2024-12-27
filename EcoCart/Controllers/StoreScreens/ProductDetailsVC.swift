@@ -86,9 +86,11 @@ class ProductDetailsVC: UIViewController {
             return
         }
          
-         db.collection("product").document(productId).updateData(updatedData) { error in
+         db.collection("product").document(productId).updateData(updatedData) { [weak self] error in
+             guard let self = self else { return }
              if let error = error {
                  print("Error updating product: \(error.localizedDescription)")
+                 self.showAlert(message: "Failed to update product: \(error.localizedDescription)")
              } else {
                  self.showAlert(message: "Product successfully updated.")
                  // Optionally, show a success message or navigate back

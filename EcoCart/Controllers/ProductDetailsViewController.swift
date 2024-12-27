@@ -76,7 +76,6 @@ class ProductDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("📱 ViewDidLoad called")
         setupUI()
         fetchProductDetails()
         
@@ -85,7 +84,6 @@ class ProductDetailsViewController: UIViewController {
         
         // Setup store location button
         configureStoreLocationButton()
-        print("🗺️ Store location button setup completed")
     }
     
     deinit {
@@ -105,8 +103,6 @@ class ProductDetailsViewController: UIViewController {
 
     
     private func setupUI() {
-        print("🎨 Setting up UI")
-        
         // Apply colors based on theme
         let backgroundColor = ThemeManager.shared.isDarkMode ? UIColor.darkGray : UIColor.white
         let textColor = ThemeManager.shared.isDarkMode ? UIColor.white : UIColor.black
@@ -152,7 +148,6 @@ class ProductDetailsViewController: UIViewController {
     }
     
     private func configureStoreLocationButton() {
-        print("🔧 Configuring store location button")
         storeLocationButton.isEnabled = true
         storeLocationButton.alpha = 1.0
         storeLocationButton.addTarget(self, action: #selector(storeLocationButtonTapped(_:)), for: .touchUpInside)
@@ -163,18 +158,19 @@ class ProductDetailsViewController: UIViewController {
     }
     
     @objc private func storeLocationButtonTapped(_ sender: Any) {
-        print("🗺️ Store location button tapped")
         guard let product = product else {
-            print("❌ No product available")
+            // Show alert if no product is available
+            let alert = UIAlertController(title: "Error",
+                                        message: "Product information not available",
+                                        preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
             return
         }
-        
-        print("📍 Product location - Latitude: \(product.latitude ?? 0), Longitude: \(product.longitude ?? 0)")
         
         // Check if location is available
         guard let latitude = product.latitude,
               let longitude = product.longitude else {
-            print("❌ No location data available")
             // Show alert if no location is available
             let alert = UIAlertController(title: "Location Unavailable",
                                         message: "No location available for this store",
@@ -183,8 +179,6 @@ class ProductDetailsViewController: UIViewController {
             present(alert, animated: true)
             return
         }
-        
-        print("✅ Creating map view with coordinates: \(latitude), \(longitude)")
         
         // Create a map view controller
         let mapVC = UIViewController()
@@ -235,36 +229,25 @@ class ProductDetailsViewController: UIViewController {
     
     private func fetchProductDetails() {
         guard let productId = self.productId else {
-            print("❌ No product ID available")
             return
         }
         
-        print("🔍 Fetching product details for ID: \(productId)")
         Task {
             do {
                 if let product = try await Product.fetchProduct(withId: productId) {
-                    print("✅ Product fetched successfully")
-                    print("📍 Location data - Latitude: \(product.latitude ?? 0), Longitude: \(product.longitude ?? 0)")
-                    print("📊 Metrics received: Bio=\(product.metrics.bio), CO2=\(product.metrics.co2), Plastic=\(product.metrics.plastic), Tree=\(product.metrics.tree)")
-                    
                     self.product = product
                     self.productId = product.id
                     updateUI(with: product)
                 } else {
-                    print("❌ Product fetch returned nil")
                     showAlert(title: "Error", message: "Failed to load product details")
                 }
             } catch {
-                print("❌ Error fetching product: \(error)")
-                showAlert(title: "Error", message: "Failed to load product details")
+                showAlert(title: "Error", message: error.localizedDescription)
             }
         }
     }
     
     private func updateUI(with product: Product) {
-        print("🌟 Updating UI with product: \(product.id)")
-        print("📍 Location data - Latitude: \(product.latitude ?? 0), Longitude: \(product.longitude ?? 0)")
-        
         // Update UI elements with product data
         nameLabel.text = product.name
         productDescription.text = product.description
@@ -311,7 +294,7 @@ class ProductDetailsViewController: UIViewController {
 
     
     private func loadImage(from url: URL) {
-        URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
+        URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
             if let data = data, let image = UIImage(data: data) {
                 DispatchQueue.main.async {
                     self?.productImage.image = image
@@ -321,20 +304,17 @@ class ProductDetailsViewController: UIViewController {
     }
     
     private func loadImage(from url: URL, into imageView: UIImageView) {
-        print("📱 Starting image download from: \(url)")
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
-                print("❌ Error downloading image: \(error)")
                 return
             }
             
             if let data = data, let image = UIImage(data: data) {
                 DispatchQueue.main.async {
-                    print("📱 Successfully loaded image")
                     imageView.image = image
                 }
             } else {
-                print("❌ Failed to create image from data")
+                return
             }
         }.resume()
     }
@@ -434,13 +414,11 @@ class ProductDetailsViewController: UIViewController {
     
     @IBAction func viewRatingsTapped(_ sender: Any) {
         guard let productId = self.productId else {
-            print("⚠️ No product ID available")
             return
         }
         
         let storyboard = UIStoryboard(name: "ProductDetails", bundle: nil)
         guard let reviewVC = storyboard.instantiateViewController(withIdentifier: "ReviewViewController") as? ReviewViewController else {
-            print("⚠️ Could not instantiate ReviewViewController from storyboard")
             return
         }
         
@@ -465,40 +443,31 @@ class ProductDetailsViewController: UIViewController {
     }
     
     private func fetchTopRatedProducts() {
-        print("📱 Starting to fetch top rated products")
         Task {
             do {
                 topRatedProducts = try await Product.fetchTopRatedEcoProducts(limit: 3)
-                print("📱 Fetched \(topRatedProducts.count) top rated products")
                 DispatchQueue.main.async { [weak self] in
-                    print("📱 Updating UI with top rated products")
                     self?.updateTopRatedUI()
                 }
             } catch {
-                print("❌ Error fetching top rated products: \(error)")
+                return
             }
         }
     }
     
     private func updateTopRatedUI() {
-        print("📱 Starting updateTopRatedUI")
         let imageViews = [topRatedImage1, topRatedImage2, topRatedImage3]
-        print("📱 Image views status: \(imageViews.map { $0 != nil })")
         
         for (index, product) in topRatedProducts.enumerated() {
             guard index < 3,
                   let imageView = imageViews[index] else {
-                print("❌ Failed to get image view at index \(index)")
                 continue
             }
             
-            print("📱 Processing product at index \(index): \(product.name)")
             if let imageUrlString = product.imageURL,
                let imageUrl = URL(string: imageUrlString) {
-                print("📱 Loading image from URL: \(imageUrlString)")
                 loadImage(from: imageUrl, into: imageView)
             } else {
-                print("❌ No image URL for product at index \(index)")
                 imageView.image = UIImage(named: "placeholderImage")
             }
         }
