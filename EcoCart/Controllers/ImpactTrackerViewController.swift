@@ -42,7 +42,40 @@ class ImpactTrackerViewController: UIViewController {
         editGraphView() //round the corners of the view
         editProgressView() //adjust progress view size
         fetchData(period: "") //get all data from firestore (parameter is nil for default)
+        NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange), name: .themeDidChange, object: nil)
+                
+                // Apply the initial theme
+                ThemeManager.shared.applyTheme()
     }
+    
+    @objc func themeDidChange(notification: Notification) {
+            // Update UI based on the new theme
+            editGraphView()
+        }
+        
+        func editGraphView() {
+            // Update your UI elements based on the current theme
+            if ThemeManager.shared.isDarkMode {
+                graphView.backgroundColor = UIColor.darkGray
+                barChart.backgroundColor = UIColor.darkGray
+            } else {
+                graphView.backgroundColor = UIColor.clear
+                barChart.backgroundColor = UIColor.clear
+            }
+
+            // Apply existing configurations (works for both dark and light modes)
+            graphView.layer.cornerRadius = 15
+            graphView.layer.borderWidth = 2
+            graphView.layer.borderColor = UIColor.systemGreen.cgColor
+            graphView.layer.shadowColor = UIColor.black.cgColor
+            
+            resetBtn.layer.cornerRadius = 15
+        }
+        
+        deinit {
+            NotificationCenter.default.removeObserver(self)
+        }
+    
     ///edit progress views
     func editProgressView(){
         editProgress(co2progressView)
@@ -175,38 +208,6 @@ class ImpactTrackerViewController: UIViewController {
             
         }
         
-    }
-    
-    
-    func editGraphView() {
-        // Check if dark mode is enabled
-        if traitCollection.userInterfaceStyle == .dark {
-            graphView.backgroundColor = UIColor.darkGray  // Set background to gray in dark mode
-            barChart.backgroundColor = UIColor.darkGray
-        } else {
-            graphView.backgroundColor = UIColor.clear  // Keep it clear or transparent for light mode (similar to previous setup)
-            barChart.backgroundColor = UIColor.clear
-        }
-        
-        // Apply the existing configurations (works for both dark and light modes)
-        graphView.layer.cornerRadius = 15
-        graphView.layer.borderWidth = 2
-        graphView.layer.borderColor = UIColor.systemGreen.cgColor
-        graphView.layer.shadowColor = UIColor.black.cgColor
-        
-        // Reset button appearance
-        resetBtn.layer.cornerRadius = 15
-    }
-    
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        
-        // Check if the user interface style (theme) has changed
-        if self.traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
-            // Reapply the theme to update the graph's background color
-            editGraphView()
-        }
     }
     
     

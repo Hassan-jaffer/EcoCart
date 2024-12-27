@@ -12,7 +12,7 @@
         <!--Product Details View Controller-->
         <scene sceneID="D2Q-54-UuT">
             <objects>
-                <viewController storyboardIdentifier="ProductDetailsViewController" id="0mZ-xP-vAc" customClass="ProductDetailsViewController" customModule="EcoCart" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProductDetailsViewController" hidesBottomBarWhenPushed="YES" id="0mZ-xP-vAc" customClass="ProductDetailsViewController" customModule="EcoCart" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="geG-8Y-KYp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -368,7 +368,7 @@
         <!--Review View Controller-->
         <scene sceneID="dJ6-lN-7Ik">
             <objects>
-                <viewController storyboardIdentifier="ReviewViewController" id="ahz-GD-7Ox" customClass="ReviewViewController" customModule="EcoCart" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ReviewViewController" hidesBottomBarWhenPushed="YES" id="ahz-GD-7Ox" customClass="ReviewViewController" customModule="EcoCart" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JSx-mG-hKP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

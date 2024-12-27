@@ -8,6 +8,7 @@
 import UIKit
 import SDWebImage
 
+
 protocol ProductXibTableViewDelegate: AnyObject {
     func deleteProduct(cell: ProductXibTableView)
 }

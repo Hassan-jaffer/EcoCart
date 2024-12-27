@@ -179,8 +179,8 @@ class ProductDetailsViewController: UIViewController {
               let longitude = product.longitude else {
             print("❌ No location data available")
             // Show alert if no location is available
-            let alert = UIAlertController(title: "Location Unavailable", 
-                                        message: "No location available for this store", 
+            let alert = UIAlertController(title: "Location Unavailable",
+                                        message: "No location available for this store",
                                         preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             present(alert, animated: true)
@@ -239,7 +239,7 @@ class ProductDetailsViewController: UIViewController {
     private func fetchProductDetails() {
         guard let productId = self.productId else {
             print("❌ No product ID available")
-            return 
+            return
         }
         
         print("🔍 Fetching product details for ID: \(productId)")
@@ -303,7 +303,7 @@ class ProductDetailsViewController: UIViewController {
         productQuantityStepper.maximumValue = Double(product.stockQuantity)
         
         // Configure store location button based on location availability
-        if let latitude = product.latitude, let longitude = product.longitude {
+        if let _ = product.latitude, let _ = product.longitude {
             storeLocationButton.isEnabled = true
             storeLocationButton.alpha = 1.0
         } else {
@@ -369,7 +369,7 @@ class ProductDetailsViewController: UIViewController {
                 let productRef = db.collection("product").document(product.id)
                 
                 // Fixed transaction signature
-                try await db.runTransaction({ (transaction, errorPointer) -> Any? in
+                _ = try await db.runTransaction({ (transaction, errorPointer) -> Any? in
                     let productDoc: DocumentSnapshot
                     do {
                         productDoc = try transaction.getDocument(productRef)
@@ -436,9 +436,9 @@ class ProductDetailsViewController: UIViewController {
     }
     
     @IBAction func viewRatingsTapped(_ sender: Any) {
-        guard let productId = self.productId else { 
+        guard let productId = self.productId else {
             print("⚠️ No product ID available")
-            return 
+            return
         }
         
         let storyboard = UIStoryboard(name: "ProductDetails", bundle: nil)

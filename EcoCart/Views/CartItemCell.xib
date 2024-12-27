@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CartItemCell" rowHeight="120" id="KGk-i7-Jjw" customClass="CartItemCell" customModule="EcoCart" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Img-v8-dK9">
+                        <rect key="frame" x="16" y="20" width="80" height="80"/>
+                        <color key="backgroundColor" white="0.94999999999999996" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="80" id="img-h-cst"/>
+                            <constraint firstAttribute="width" constant="80" id="img-w-cst"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n4h-hL-gT6">
+                        <rect key="frame" x="112" y="15.999999999999998" width="143" height="20.333333333333329"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prc-lb-gt7">
+                        <rect key="frame" x="112" y="44.333333333333336" width="143" height="21.000000000000007"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="99" translatesAutoresizingMaskIntoConstraints="NO" id="stp-qt-chg" customClass="CustomStepper" customModule="EcoCart" customModuleProvider="target">
+                        <rect key="frame" x="265" y="77" width="94" height="32"/>
+                        <connections>
+                            <action selector="stepperValueChanged:" destination="KGk-i7-Jjw" eventType="valueChanged" id="stp-act-id"/>
+                        </connections>
+                    </stepper>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qty-lb-val">
+                        <rect key="frame" x="112" y="82.666666666666671" width="143" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="stp-qt-chg" secondAttribute="trailing" constant="16" id="10h-H2-e4R"/>
+                    <constraint firstAttribute="bottom" secondItem="stp-qt-chg" secondAttribute="bottom" constant="11" id="11h-H2-e4R"/>
+                    <constraint firstItem="stp-qt-chg" firstAttribute="leading" secondItem="n4h-hL-gT6" secondAttribute="trailing" constant="10" id="12h-H2-e4R"/>
+                    <constraint firstItem="stp-qt-chg" firstAttribute="leading" secondItem="prc-lb-gt7" secondAttribute="trailing" constant="10" id="13h-H2-e4R"/>
+                    <constraint firstItem="Img-v8-dK9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="1gh-H2-e4R"/>
+                    <constraint firstItem="Img-v8-dK9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="2gh-H2-e4R"/>
+                    <constraint firstItem="n4h-hL-gT6" firstAttribute="leading" secondItem="Img-v8-dK9" secondAttribute="trailing" constant="16" id="3gh-H2-e4R"/>
+                    <constraint firstItem="n4h-hL-gT6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="4gh-H2-e4R"/>
+                    <constraint firstItem="prc-lb-gt7" firstAttribute="leading" secondItem="n4h-hL-gT6" secondAttribute="leading" id="5gh-H2-e4R"/>
+                    <constraint firstItem="stp-qt-chg" firstAttribute="leading" secondItem="qty-lb-val" secondAttribute="trailing" constant="10" id="6gh-H2-e4R"/>
+                    <constraint firstItem="prc-lb-gt7" firstAttribute="top" secondItem="n4h-hL-gT6" secondAttribute="bottom" constant="8" id="7gh-H2-e4R"/>
+                    <constraint firstItem="qty-lb-val" firstAttribute="leading" secondItem="prc-lb-gt7" secondAttribute="leading" id="8gh-H2-e4R"/>
+                    <constraint firstItem="qty-lb-val" firstAttribute="centerY" secondItem="stp-qt-chg" secondAttribute="centerY" id="9gh-H2-e4R"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="priceLabel" destination="prc-lb-gt7" id="price-out-id"/>
+                <outlet property="productImageView" destination="Img-v8-dK9" id="cXE-qc-mhQ"/>
+                <outlet property="productNameLabel" destination="n4h-hL-gT6" id="name-out-id"/>
+                <outlet property="quantityLabel" destination="qty-lb-val" id="qty-out-id"/>
+                <outlet property="stepper" destination="stp-qt-chg" id="XXP-UY-BfC"/>
+            </connections>
+            <point key="canvasLocation" x="-185" y="93"/>
+        </tableViewCell>
+    </objects>
+</document>
