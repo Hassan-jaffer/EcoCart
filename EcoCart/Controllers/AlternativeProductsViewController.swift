@@ -143,16 +143,27 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
 
 
 
-                // Check if no valid alternatives exist
+                // After calculating validMetricProducts
                 print("validMetricProducts count before check: \(validMetricProducts.count)")
-                guard !validMetricProducts.isEmpty else {
-                    DispatchQueue.main.async {
-                        print("No valid products found. Updating UI.")
-                        self.showNoAlternativeMessage("This product has high enviromental footprint. However, no alternative products was found.")
-                        self.statusImage.image = UIImage(named: "Magni")
-                        self.statusImage.isHidden = false
+
+                // Check if the selected product is environmentally friendly
+                if classifyProduct(product: selectedProduct) {
+                    // Inform the user that the selected product is a good choice
+                    showNoAlternativeMessage("The selected product already has a low environmental impact. Good choice!")
+                    AltMsg.textColor = UIColor.systemGreen // Change text color to green
+                    statusImage.image = UIImage.thumbs
+                    statusImage.isHidden = false
+                } else {
+                    // If there are no valid alternatives, show a different message
+                    guard !validMetricProducts.isEmpty else {
+                        DispatchQueue.main.async {
+                            print("No valid products found. Updating UI.")
+                            self.showNoAlternativeMessage("This product has a high environmental footprint. However, no alternative products were found.")
+                            self.statusImage.image = UIImage(named: "Magni")
+                            self.statusImage.isHidden = false
+                        }
+                        return
                     }
-                    return
                 }
 
                 // Update the table with valid alternatives
@@ -210,7 +221,7 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
         print("Weighted Footprint Score (before adjustment): \(footprintScore)")
 
         // Biodegradable adjustment (positive for biodegradable)
-        let biodegradableAdjustment = bio != 0 ? 0.005 : 0.0
+        let biodegradableAdjustment = bio != 0 ? 3 : 0.0
 
         // Log the adjustment
         print("Biodegradable Adjustment: \(biodegradableAdjustment)")
@@ -226,16 +237,16 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
 
     private func classifyProduct(product: Product) -> Bool {
         let footprintScore = calculateFootprintScore(product: product)
-        let threshold = 50.00 // Adjusted threshold
+        let threshold = 15.00 // Adjusted threshold
+        print("Footprint score for selected product: \(footprintScore)")
 
         // Check if the product meets the footprint score threshold
         if footprintScore >= threshold {
             return true // Product is environmentally friendly
+        }else{
+            return false
         }
 
-        // Additional checks can be added here
-        let metrics = product.metrics
-        return metrics.co2 > 100 || metrics.plastic > 100 || metrics.tree > 10 // Example criteria
     }
 
 
@@ -243,7 +254,7 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
     private let stopWords: Set<String> = [
         "recyclable", "eco", "green", "sustainable", "environmentally", "friendly",
         "product", "the", "and", "a", "of", "in", "to", "for", "is", "that", "on",
-        "with", "as", "by", "from", "this", "which", "be", "are", "at", "it", "recycled", "Cotton", "Organic", "Hemp", "hemp", "cotton", "organic",
+        "with", "as", "by", "from", "this", "which", "be", "are", "at", "it", "recycled", "Cotton", "Organic", "Hemp", "hemp", "cotton", "organic", "Bamboo", "bamboo"
         // Add more as needed
     ]
 
