@@ -48,6 +48,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="dYx-wV-K0T" id="eDF-nA-Rof"/>
+                        <outlet property="totalLabel" destination="6U1-gV-1Km" id="Xul-zn-U43"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

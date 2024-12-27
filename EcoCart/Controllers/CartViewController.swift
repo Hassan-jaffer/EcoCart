@@ -135,6 +135,21 @@ class CartViewController: UIViewController {
         guard let userID = Auth.auth().currentUser?.uid,
               let documentIDs = cartDocuments[productID] else { return }
         
+        // If quantity is 0 or negative, delete the item
+        if newQuantity <= 0 {
+            deleteItemFromFirebase(productID: productID) { [weak self] success in
+                if success {
+                    if let index = self?.cartItems.firstIndex(where: { $0.productID == productID }) {
+                        self?.cartItems.remove(at: index)
+                        DispatchQueue.main.async {
+                            self?.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+                        }
+                    }
+                }
+            }
+            return
+        }
+        
         // Update all documents for this product
         let batch = db.batch()
         let quantityPerDocument = newQuantity / documentIDs.count
@@ -197,6 +212,11 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
         cell.delegate = self
         cell.tag = indexPath.row
         
+        // Configure stepper
+        cell.stepper.minimumValue = 1
+        cell.stepper.maximumValue = 99
+        cell.stepper.value = Double(item.quantity)
+        
         return cell
     }
     
@@ -219,76 +239,23 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
 extension CartViewController: CartItemCellDelegate {
     func quantityDidChange(at index: Int, newQuantity: Int) {
         let item = cartItems[index]
+        
+        // If quantity would become 0, delete the item
+        if newQuantity <= 1 {
+            deleteItemFromFirebase(productID: item.productID) { [weak self] success in
+                if success {
+                    self?.cartItems.remove(at: index)
+                    DispatchQueue.main.async {
+                        self?.tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+                    }
+                }
+            }
+            return
+        }
+        
+        // Otherwise update the quantity
         cartItems[index].quantity = newQuantity
         tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
         updateQuantityInFirebase(productID: item.productID, newQuantity: newQuantity)
     }
 }
-
-
-
-
-
-//import UIKit
-//
-//class CartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-//    @IBOutlet weak var tableView: UITableView!
-//    @IBOutlet weak var totalPriceLabel: UILabel!
-//    @IBOutlet weak var checkoutButton: UIButton!
-//
-//    var cartItems: [CartItem] = [] // Replace with your cart item model
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        self.title = "Cart"
-//        setupTableView()
-//        loadCartItems()
-//        updateTotalPrice()
-//    }
-//
-//    private func setupTableView() {
-//        tableView.delegate = self
-//        tableView.dataSource = self
-//        tableView.register(UINib(nibName: "CartItemCell", bundle: nil), forCellReuseIdentifier: "CartItemCell")
-//    }
-//
-//    private func loadCartItems() {
-//        // Simulate loading cart items (replace with database or API call if needed)
-//        cartItems = [
-//            CartItem(productName: "Hand bag", quantity: 2, price: 7.0, location: "road 701, Manama"),
-//            CartItem(productName: "Hand bag", quantity: 3, price: 11.0, location: "road 701, Manama")
-//        ]
-//        tableView.reloadData()
-//    }
-//
-//    private func updateTotalPrice() {
-//        let total = cartItems.reduce(0) { $0 + ($1.price * Double($1.quantity)) }
-//        totalPriceLabel.text = "\(String(format: "%.3f", total)) BD"
-//    }
-//
-//    @IBAction func checkoutButtonTapped(_ sender: UIButton) {
-//        let storyboard = UIStoryboard(name: "Cart", bundle: nil)
-//        if let checkoutVC = storyboard.instantiateViewController(withIdentifier: "CheckoutViewController") as? CheckoutViewController {
-//            checkoutVC.cartTotal = cartItems.reduce(0) { $0 + ($1.price * Double($1.quantity)) }
-//            navigationController?.pushViewController(checkoutVC, animated: true)
-//        }
-//    }
-//
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return cartItems.count
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CartItemCell", for: indexPath) as? CartItemCell else {
-//            return UITableViewCell()
-//        }
-//        let cartItem = cartItems[indexPath.row]
-//        cell.configure(with: cartItem)
-//        cell.stepperAction = { [weak self] newQuantity in
-//            self?.cartItems[indexPath.row].quantity = newQuantity
-//            self?.updateTotalPrice()
-//        }
-//        return cell
-//    }
-//}
