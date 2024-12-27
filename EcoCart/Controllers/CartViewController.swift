@@ -87,7 +87,8 @@ class CartViewController: UIViewController {
                 }
                 
                 // Group items by productID
-                var groupedItems: [String: (CartItem, [String])] = [:]
+                var groupedItems: [String: (CartItem?, [String])] = [:]
+                let group = DispatchGroup()
                 
                 for document in documents {
                     let data = document.data()
@@ -100,30 +101,49 @@ class CartViewController: UIViewController {
                         continue
                     }
                     
-                    if var existingItem = groupedItems[productID]?.0 {
-                        // Update quantity for existing item
-                        existingItem.quantity += quantity
-                        var documentIDs = groupedItems[productID]?.1 ?? []
-                        documentIDs.append(document.documentID)
-                        groupedItems[productID] = (existingItem, documentIDs)
-                    } else {
-                        // Create new item
+                    // Fetch product details to get stock quantity
+                    group.enter()
+                    self?.db.collection("product").document(productID).getDocument { (productDoc, error) in
+                        defer { group.leave() }
+                        
+                        if let error = error {
+                            print("Error fetching product: \(error)")
+                            return
+                        }
+                        
+                        guard let productData = productDoc?.data(),
+                              let stockQuantity = productData["stockQuantity"] as? Int else {
+                            print("No stock quantity found for product")
+                            return
+                        }
+                        
                         let cartItem = CartItem(
+                            productID: productID,
                             productName: name,
-                            quantity: quantity,
-                            price: price,
                             imageURL: imageURL,
-                            productID: productID
+                            price: price,
+                            quantity: quantity,
+                            stockQuantity: stockQuantity
                         )
-                        groupedItems[productID] = (cartItem, [document.documentID])
+                        
+                        if let existing = groupedItems[productID] {
+                            groupedItems[productID] = (cartItem, existing.1 + [document.documentID])
+                        } else {
+                            groupedItems[productID] = (cartItem, [document.documentID])
+                        }
                     }
                 }
                 
-                // Convert grouped items to arrays
-                self?.cartItems = groupedItems.values.map { $0.0 }
-                self?.cartDocuments = Dictionary(uniqueKeysWithValues: groupedItems.map { ($0.key, $0.value.1) })
-                
-                DispatchQueue.main.async {
+                group.notify(queue: .main) {
+                    // Convert grouped items to array and update UI
+                    let items = groupedItems.compactMap { $0.value.0 }
+                    self?.cartItems = items
+                    
+                    // Update document IDs mapping
+                    self?.cartDocuments = groupedItems.reduce(into: [:]) { result, item in
+                        result[item.key] = item.value.1
+                    }
+                    
                     self?.tableView.reloadData()
                     self?.tableView.refreshControl?.endRefreshing()
                 }

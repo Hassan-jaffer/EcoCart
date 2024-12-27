@@ -49,7 +49,7 @@ class CartItemCell: UITableViewCell {
         stepper.stepValue = 1
         stepper.wraps = false
         stepper.autorepeat = true
-        stepper.minimumValue = 0  // This will work with CustomStepper
+        stepper.minimumValue = 0
     }
     
     // MARK: - Configuration
@@ -60,7 +60,14 @@ class CartItemCell: UITableViewCell {
         quantityLabel.text = "\(item.quantity)"
         priceLabel.text = String(format: "%.3f BHD", item.totalPrice)
         
+        // Set maximum value based on stock quantity
+        stepper.maximumValue = Double(item.stockQuantity)
         stepper.value = Double(item.quantity)
+        
+        // Update quantity label with stock info if near maximum
+        if item.quantity >= item.stockQuantity {
+            quantityLabel.text = "\(item.quantity) (Max)"
+        }
         
         loadImage(from: item.imageURL)
     }
@@ -110,8 +117,16 @@ class CartItemCell: UITableViewCell {
             return
         }
         
+        // Check if we're trying to exceed stock quantity
+        if let item = item, newValue > item.stockQuantity {
+            // Reset to maximum stock quantity
+            sender.value = Double(item.stockQuantity)
+            quantityLabel.text = "\(item.stockQuantity) (Max)"
+            return
+        }
+        
         let isIncrementing = newValue > currentQuantity
-        quantityLabel.text = "\(newValue)"
+        quantityLabel.text = newValue >= (item?.stockQuantity ?? 99) ? "\(newValue) (Max)" : "\(newValue)"
         delegate?.quantityDidChange(at: tag, newQuantity: newValue, isIncrementing: isIncrementing)
     }
     
