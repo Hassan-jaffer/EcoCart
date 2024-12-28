@@ -133,11 +133,11 @@ class AddProductViewController: UITableViewController {
             self.categoryTxtFld.text = "Clothes"
             
         })
-        let catElec = UIAction(title: "Electronics", handler: { _ in
-            self.categoryTxtFld.text = "Electronics"
+        let catHome = UIAction(title: "Home & Lifestyle", handler: { _ in
+            self.categoryTxtFld.text = "Home & Lifestyle"
         })
 
-        let categoryMenu = UIMenu(title: "Select a Category", children: [catAcc, catClothes, catElec])
+        let categoryMenu = UIMenu(title: "Select a Category", children: [catAcc, catClothes, catHome])
         categoryPopup.menu = categoryMenu
         categoryPopup.showsMenuAsPrimaryAction = true
         

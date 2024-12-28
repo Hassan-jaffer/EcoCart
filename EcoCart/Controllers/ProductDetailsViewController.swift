@@ -76,7 +76,6 @@ class ProductDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("📱 ViewDidLoad called")
         setupUI()
         fetchProductDetails()
         
@@ -85,7 +84,6 @@ class ProductDetailsViewController: UIViewController {
         
         // Setup store location button
         configureStoreLocationButton()
-        print("🗺️ Store location button setup completed")
     }
     
     deinit {
@@ -105,8 +103,6 @@ class ProductDetailsViewController: UIViewController {
 
     
     private func setupUI() {
-        print("🎨 Setting up UI")
-        
         // Apply colors based on theme
         let backgroundColor = ThemeManager.shared.isDarkMode ? UIColor.darkGray : UIColor.white
         let textColor = ThemeManager.shared.isDarkMode ? UIColor.white : UIColor.black
@@ -142,39 +138,19 @@ class ProductDetailsViewController: UIViewController {
         quantityLabel.textColor = textColor
         storeNameLabel.textColor = textColor
         
+        // Configure stepper
         productQuantityStepper.minimumValue = 1
-        productQuantityStepper.maximumValue = 99
         productQuantityStepper.value = 1
+        selectedQuantity = 1
         quantityLabel.text = "1"
-        
         productQuantityStepper.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)
         
-        // Set button background color based on theme
-        viewAlternativeOutlet.backgroundColor = ThemeManager.shared.isDarkMode ? UIColor.systemBlue : UIColor.systemGreen
-        storeLocationButton.backgroundColor = ThemeManager.shared.isDarkMode ? UIColor.systemBlue : UIColor.systemGreen
 
         setupTopRatedViews()
         fetchTopRatedProducts()
-        
-        // Configure UI elements
-        ImageUIView.layer.cornerRadius = 10
-        ReviewView.layer.cornerRadius = 10
-        DescriptionView.layer.cornerRadius = 10
-        EnviroImpactView.layer.cornerRadius = 10
-        TopRatedView.layer.cornerRadius = 10
-        ProductsView.layer.cornerRadius = 10
-        
-        // Add shadows
-        [ImageUIView, ReviewView, DescriptionView, EnviroImpactView, TopRatedView, ProductsView].forEach { view in
-            view?.layer.shadowColor = UIColor.black.cgColor
-            view?.layer.shadowOffset = CGSize(width: 0, height: 2)
-            view?.layer.shadowOpacity = 0.2
-            view?.layer.shadowRadius = 4
-        }
     }
     
     private func configureStoreLocationButton() {
-        print("🔧 Configuring store location button")
         storeLocationButton.isEnabled = true
         storeLocationButton.alpha = 1.0
         storeLocationButton.addTarget(self, action: #selector(storeLocationButtonTapped(_:)), for: .touchUpInside)
@@ -185,28 +161,27 @@ class ProductDetailsViewController: UIViewController {
     }
     
     @objc private func storeLocationButtonTapped(_ sender: Any) {
-        print("🗺️ Store location button tapped")
         guard let product = product else {
-            print("❌ No product available")
-            return
-        }
-        
-        print("📍 Product location - Latitude: \(product.latitude ?? 0), Longitude: \(product.longitude ?? 0)")
-        
-        // Check if location is available
-        guard let latitude = product.latitude,
-              let longitude = product.longitude else {
-            print("❌ No location data available")
-            // Show alert if no location is available
-            let alert = UIAlertController(title: "Location Unavailable", 
-                                        message: "No location available for this store", 
+            // Show alert if no product is available
+            let alert = UIAlertController(title: "Error",
+                                        message: "Product information not available",
                                         preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             present(alert, animated: true)
             return
         }
         
-        print("✅ Creating map view with coordinates: \(latitude), \(longitude)")
+        // Check if location is available
+        guard let latitude = product.latitude,
+              let longitude = product.longitude else {
+            // Show alert if no location is available
+            let alert = UIAlertController(title: "Location Unavailable",
+                                        message: "No location available for this store",
+                                        preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+            return
+        }
         
         // Create a map view controller
         let mapVC = UIViewController()
@@ -251,99 +226,78 @@ class ProductDetailsViewController: UIViewController {
     }
     
     var productId: String?
-    var product: Product?
+    var product: Product?  // Changed from 'let' to 'var'
     private var selectedQuantity: Int = 1
     private var topRatedProducts: [Product] = []
     
     private func fetchProductDetails() {
         guard let productId = self.productId else {
-            print("❌ No product ID available")
-            return 
+            return
         }
         
-        print("🔍 Fetching product details for ID: \(productId)")
         Task {
             do {
                 if let product = try await Product.fetchProduct(withId: productId) {
-                    print("✅ Product fetched successfully")
-                    print("📍 Location data - Latitude: \(product.latitude ?? 0), Longitude: \(product.longitude ?? 0)")
-                    print("📊 Metrics received: Bio=\(product.metrics.bio), CO2=\(product.metrics.co2), Plastic=\(product.metrics.plastic), Tree=\(product.metrics.tree)")
-                    
                     self.product = product
                     self.productId = product.id
                     updateUI(with: product)
                 } else {
-                    print("❌ Product fetch returned nil")
-                    showAlert(message: "Failed to load product details")
+                    showAlert(title: "Error", message: "Failed to load product details")
                 }
             } catch {
-                print("❌ Error fetching product: \(error)")
-                showAlert(message: "Failed to load product details")
+                showAlert(title: "Error", message: error.localizedDescription)
             }
         }
     }
     
     private func updateUI(with product: Product) {
+        // Update UI elements with product data
         nameLabel.text = product.name
-        productPrice.text = String(format: "%.3f BHD", product.price)
         productDescription.text = product.description
+        productPrice.text = String(format: "%.2f BHD", product.price)
         storeNameLabel.text = product.storeName ?? "Store name not available"
         
-        // Set stepper maximum to stock quantity
-        productQuantityStepper.minimumValue = 1
-        productQuantityStepper.maximumValue = Double(product.stockQuantity)
-        productQuantityStepper.value = min(productQuantityStepper.value, Double(product.stockQuantity))
-        quantityLabel.text = "\(Int(productQuantityStepper.value))"
-        
-        // Update impact metrics text
-        var impactText = ""
-        if let metrics: Product.Metrics? = product.metrics {
-            if metrics?.bio != 0 {
-                impactText += "✓ This product is biodegradable\n"
-            }
-            if let co2 = metrics?.co2, co2 > 0 {
-                impactText += String(format: "✓ Saves %.1f kg of CO2\n", Double(co2))
-            }
-            if let plastic = metrics?.plastic, plastic > 0 {
-                impactText += String(format: "✓ Reduces %.0f g of plastic waste\n", Double(plastic))
-            }
-            if let tree = metrics?.tree, tree > 0 {
-                impactText += String(format: "✓ Saves %.1f trees\n", Double(tree))
-            }
-        }
-        impactTextView.text = impactText
-        
         // Load product image
-        if let imageURL = URL(string: product.imageURL ?? "") {
+        if let imageURLString = product.imageURL, let imageURL = URL(string: imageURLString) {
             loadImage(from: imageURL, into: productImage)
         }
         
-        // Update the rating buttons
-        updateRatingButtons(with: Double(product.averageRating))
-        
-        // Show/hide alternative products button based on category
-        viewAlternativeOutlet.isHidden = (product.category ?? "").isEmpty
-    }
-    
-    private func updateRatingButtons(with rating: Double) {
         let starButtons = [ratingButton1, ratingButton2, ratingButton3, ratingButton4, ratingButton5]
         starButtons.enumerated().forEach { index, button in
             button?.setImage(UIImage(systemName: "star.fill"), for: .normal)
-            button?.tintColor = Double(index) < rating ? .systemYellow : .systemGray4
+            button?.tintColor = index < product.averageRating ? .systemYellow : .systemGray4
+        }
+        
+        // Show/hide eco-friendly certificate based on Bio metric
+        ecoFriendlyCertificateImage.isHidden = product.metrics.bio != 1
+        if product.metrics.bio == 1 {
+            ecoFriendlyCertificateImage.image = UIImage(named: "eco-certificate")
+        }
+        
+        // Format metrics text
+        let metricsText = """
+        Bio-Based: \(product.metrics.bio == 1 ? "Yes" : "No")
+        CO₂ Saved: \(product.metrics.co2) kg
+        Plastic Saved: \(product.metrics.plastic) g
+        Trees Saved: \(product.metrics.tree)
+        """
+        impactTextView.text = metricsText
+        
+        productQuantityStepper.maximumValue = Double(product.stockQuantity)
+        
+        // Configure store location button based on location availability
+        if let _ = product.latitude, let _ = product.longitude {
+            storeLocationButton.isEnabled = true
+            storeLocationButton.alpha = 1.0
+        } else {
+            storeLocationButton.isEnabled = true
+            storeLocationButton.alpha = 1.0
         }
     }
-    
-    @IBAction func stepperValueChanged(_ sender: UIStepper) {
-        guard let product = self.product else { return }
-        
-        // Ensure we don't exceed stock quantity
-        let newValue = min(Int(sender.value), product.stockQuantity)
-        sender.value = Double(newValue)
-        quantityLabel.text = "\(newValue)"
-    }
+
     
     private func loadImage(from url: URL) {
-        URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
+        URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
             if let data = data, let image = UIImage(data: data) {
                 DispatchQueue.main.async {
                     self?.productImage.image = image
@@ -353,113 +307,128 @@ class ProductDetailsViewController: UIViewController {
     }
     
     private func loadImage(from url: URL, into imageView: UIImageView) {
-        print("📱 Starting image download from: \(url)")
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
-                print("❌ Error downloading image: \(error)")
                 return
             }
             
             if let data = data, let image = UIImage(data: data) {
                 DispatchQueue.main.async {
-                    print("📱 Successfully loaded image")
                     imageView.image = image
                 }
             } else {
-                print("❌ Failed to create image from data")
+                return
             }
         }.resume()
     }
     
-    private func showAlert(message: String) {
-        let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
     
+    @objc private func stepperValueChanged() {
+        selectedQuantity = Int(productQuantityStepper.value)
+        quantityLabel.text = "\(selectedQuantity)"
+    }
+    
     @IBAction func addToCartTapped(_ sender: Any) {
-            guard let product = product else { return }
-            
-            let selectedQuantity = Int(productQuantityStepper.value)
-            
-            // Check if we have enough stock
-            if product.stockQuantity < selectedQuantity {
-                showAlert(title: "Error", message: "Not enough items in stock!")
-                return
-            }
-            
-            // Update product quantity in Firebase
-            Task {
-                do {
-                    let db = Firestore.firestore()
-                    let productRef = db.collection("product").document(product.id)
-                    
-                    // Fixed transaction signature
-                    try await db.runTransaction({ (transaction, errorPointer) -> Any? in
-                        let productDoc: DocumentSnapshot
-                        do {
-                            productDoc = try transaction.getDocument(productRef)
-                        } catch let fetchError as NSError {
-                            errorPointer?.pointee = fetchError
-                            return nil
-                        }
-                        
-                        guard let currentStock = productDoc.data()?["stockQuantity"] as? Int else {
-                            let error = NSError(
-                                domain: "AppErrorDomain",
-                                code: -1,
-                                userInfo: [NSLocalizedDescriptionKey: "Could not get current stock"]
-                            )
-                            errorPointer?.pointee = error
-                            return nil
-                        }
-                        
-                        // Check stock again in transaction
-                        if currentStock < selectedQuantity {
-                            let error = NSError(
-                                domain: "AppErrorDomain",
-                                code: -1,
-                                userInfo: [NSLocalizedDescriptionKey: "Not enough stock"]
-                            )
-                            errorPointer?.pointee = error
-                            return nil
-                        }
-                        
-                        // Update stock quantity
-                        let newStock = currentStock - selectedQuantity
-                        transaction.updateData(["stockQuantity": newStock], forDocument: productRef)
-                        
-                        // Add to cart collection with exact field names from Firebase
-                        let cartItemData: [String: Any] = [
-                            "imageURL": product.imageURL ?? "",
-                            "name": product.name,
-                            "price": product.price,
-                            "productID": product.id,
-                            "quantity": selectedQuantity,
-                            "userID": Auth.auth().currentUser?.uid ?? "guest"
-                        ]
-                        
-                        let cartRef = db.collection("cart").document()
-                        transaction.setData(cartItemData, forDocument: cartRef)
-                        
+        guard let product = product else { return }
+        
+        // Check if we have enough stock
+        if product.stockQuantity < selectedQuantity {
+            showAlert(title: "Error", message: "Not enough items in stock!")
+            return
+        }
+        
+        // Update product quantity in Firebase
+        Task {
+            do {
+                let db = Firestore.firestore()
+                let productRef = db.collection("product").document(product.id)
+                
+                // Fixed transaction signature
+                _ = try await db.runTransaction({ (transaction, errorPointer) -> Any? in
+                    let productDoc: DocumentSnapshot
+                    do {
+                        productDoc = try transaction.getDocument(productRef)
+                    } catch let fetchError as NSError {
+                        errorPointer?.pointee = fetchError
                         return nil
-                    })
-                    
-                    // Success
-                    DispatchQueue.main.async {
-                        self.showAlert(title: "Success", message: "\(selectedQuantity) x \(product.name) added to cart!")
-                        // Update the UI to reflect new stock quantity
-                        self.product?.stockQuantity -= selectedQuantity
-                        self.productQuantityStepper.maximumValue = Double(self.product?.stockQuantity ?? 0)
                     }
                     
-                } catch {
-                    DispatchQueue.main.async {
-                        self.showAlert(title: "Error", message: error.localizedDescription)
+                    guard let currentStock = productDoc.data()?["stockQuantity"] as? Int else {
+                        let error = NSError(
+                            domain: "AppErrorDomain",
+                            code: -1,
+                            userInfo: [NSLocalizedDescriptionKey: "Could not get current stock"]
+                        )
+                        errorPointer?.pointee = error
+                        return nil
                     }
+                    
+                    // Check stock again in transaction
+                    if currentStock < self.selectedQuantity {
+                        let error = NSError(
+                            domain: "AppErrorDomain",
+                            code: -1,
+                            userInfo: [NSLocalizedDescriptionKey: "Not enough stock"]
+                        )
+                        errorPointer?.pointee = error
+                        return nil
+                    }
+                    
+                    // Update stock quantity
+                    let newStock = currentStock - self.selectedQuantity
+                    transaction.updateData(["stockQuantity": newStock], forDocument: productRef)
+                    
+                    // Add to cart collection with exact field names from Firebase
+                    let cartItemData: [String: Any] = [
+                        "imageURL": product.imageURL ?? "",
+                        "name": product.name,
+                        "price": product.price,
+                        "productID": product.id,
+                        "quantity": self.selectedQuantity,
+                        "userID": Auth.auth().currentUser?.uid ?? "guest"
+                    ]
+                    
+                    let cartRef = db.collection("cart").document()
+                    transaction.setData(cartItemData, forDocument: cartRef)
+                    
+                    return nil
+                })
+                
+                // Success
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Success", message: "\(self.selectedQuantity) x \(product.name) added to cart!")
+                    // Update the UI to reflect new stock quantity
+                    self.product?.stockQuantity -= self.selectedQuantity
+                    self.productQuantityStepper.maximumValue = Double(self.product?.stockQuantity ?? 0)
+                }
+                
+            } catch {
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Error", message: error.localizedDescription)
                 }
             }
         }
+    }
+    
+    @IBAction func viewRatingsTapped(_ sender: Any) {
+        guard let productId = self.productId else {
+            return
+        }
+        
+        let storyboard = UIStoryboard(name: "ProductDetails", bundle: nil)
+        guard let reviewVC = storyboard.instantiateViewController(withIdentifier: "ReviewViewController") as? ReviewViewController else {
+            return
+        }
+        
+        reviewVC.productId = productId
+        reviewVC.title = "Reviews"
+        navigationController?.pushViewController(reviewVC, animated: true)
+    }
     
     // MARK: - Top Rated Products
     private func setupTopRatedViews() {
@@ -477,40 +446,31 @@ class ProductDetailsViewController: UIViewController {
     }
     
     private func fetchTopRatedProducts() {
-        print("📱 Starting to fetch top rated products")
         Task {
             do {
                 topRatedProducts = try await Product.fetchTopRatedEcoProducts(limit: 3)
-                print("📱 Fetched \(topRatedProducts.count) top rated products")
                 DispatchQueue.main.async { [weak self] in
-                    print("📱 Updating UI with top rated products")
                     self?.updateTopRatedUI()
                 }
             } catch {
-                print("❌ Error fetching top rated products: \(error)")
+                return
             }
         }
     }
     
     private func updateTopRatedUI() {
-        print("📱 Starting updateTopRatedUI")
         let imageViews = [topRatedImage1, topRatedImage2, topRatedImage3]
-        print("📱 Image views status: \(imageViews.map { $0 != nil })")
         
         for (index, product) in topRatedProducts.enumerated() {
             guard index < 3,
                   let imageView = imageViews[index] else {
-                print("❌ Failed to get image view at index \(index)")
                 continue
             }
             
-            print("📱 Processing product at index \(index): \(product.name)")
             if let imageUrlString = product.imageURL,
                let imageUrl = URL(string: imageUrlString) {
-                print("📱 Loading image from URL: \(imageUrlString)")
                 loadImage(from: imageUrl, into: imageView)
             } else {
-                print("❌ No image URL for product at index \(index)")
                 imageView.image = UIImage(named: "placeholderImage")
             }
         }
