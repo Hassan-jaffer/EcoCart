@@ -74,7 +74,7 @@ class ReviewViewController: UIViewController {
     }
     
     @objc private func handleThemeChange() {
-        setupUI() // Reapply theme settings dynamically
+        setupUI() 
     }
     
     private func updateStars() {
