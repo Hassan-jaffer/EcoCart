@@ -71,10 +71,10 @@ class FilterViewController: UIViewController {
                 Metric.heightAnchor.constraint(equalTo: enviroBtn.heightAnchor, multiplier: 0.6)
             ])
 
-            // Set constraints for Category Popup Button inside categoryBtn (aligned to the right edge)
+            // Set constraints for Category Popup Button inside categoryBtn
             NSLayoutConstraint.activate([
-                CategoryPopupBtn.trailingAnchor.constraint(equalTo: categoryBtn.trailingAnchor, constant: -20), // Adjust the constant for padding
-                CategoryPopupBtn.centerYAnchor.constraint(equalTo: categoryBtn.centerYAnchor), // Keep it vertically centered
+                CategoryPopupBtn.trailingAnchor.constraint(equalTo: categoryBtn.trailingAnchor, constant: -20),
+                CategoryPopupBtn.centerYAnchor.constraint(equalTo: categoryBtn.centerYAnchor),
                 CategoryPopupBtn.widthAnchor.constraint(equalTo: categoryBtn.widthAnchor, multiplier: 0.6),
                 CategoryPopupBtn.heightAnchor.constraint(equalTo: categoryBtn.heightAnchor, multiplier: 0.6)
             ])
@@ -114,7 +114,7 @@ class FilterViewController: UIViewController {
                 self.categoryBtn.backgroundColor = .white
             }
             
-            // **Update Availability button**
+            // Update Availability button
             if self.isAvailableFiltered == true {
                 self.availabilityBtn.backgroundColor = .coolLightGreen
             } else {
@@ -233,7 +233,7 @@ class FilterViewController: UIViewController {
         resetBtn(enviroBtn)
         resetBtn(azBtn)
         resetBtn(categoryBtn)
-        resetBtn(enviroBtn)  // Reset Metric button
+        resetBtn(enviroBtn)
 
         
         // Reset Button Titles
@@ -253,11 +253,15 @@ class FilterViewController: UIViewController {
         let priceHL = UIAction(title: "High To Low", handler: { _ in
             self.selectedPriceOrder = "High To Low"
             self.isAZFiltered = false // Deselect A-Z filter
+            self.selectedMetric = nil
+            self.Metric.setTitle("Metric", for: .normal)
             self.updateButtonStates() // Update button state after selection
         })
         let priceLH = UIAction(title: "Low To High", handler: { _ in
             self.selectedPriceOrder = "Low To High"
             self.isAZFiltered = false // Deselect A-Z filter
+            self.selectedMetric = nil
+            self.Metric.setTitle("Metric", for: .normal)
             self.updateButtonStates() // Update button state after selection
         })
 
@@ -288,16 +292,22 @@ class FilterViewController: UIViewController {
                let MetCO2 = UIAction(title: "CO2 saved", handler: { _ in
                    self.selectedMetric = "C02"
                    self.isAZFiltered = false // Deselect A-Z filter
+                   self.selectedPriceOrder = nil
+                   self.PricePopupBtn.setTitle("Price Filter", for: .normal)
                    self.updateButtonStates() // Update button state after selection
                })
                let MetPlastic = UIAction(title: "Plastic saved", handler: { _ in
                    self.selectedMetric = "Plastic"
                    self.isAZFiltered = false // Deselect A-Z filter
+                   self.selectedPriceOrder = nil
+                   self.PricePopupBtn.setTitle("Price Filter", for: .normal)
                    self.updateButtonStates() // Update button state after selection
                })
                let MetTree = UIAction(title: "Trees saved", handler: { _ in
                    self.selectedMetric = "Tree"
                    self.isAZFiltered = false // Deselect A-Z filter
+                   self.selectedPriceOrder = nil
+                   self.PricePopupBtn.setTitle("Price Filter", for: .normal)
                    self.updateButtonStates() // Update button state after selection
                })
 

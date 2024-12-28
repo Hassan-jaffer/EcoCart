@@ -77,7 +77,7 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
                 // Sort products by average rating in descending order
                 self.products.sort { $0.averageRating > $1.averageRating }
 
-                // Initially show all products
+                // show all products
                 self.filteredProducts = self.products
 
                 DispatchQueue.main.async {
@@ -141,7 +141,7 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
                 return isValid
             }
             
-            // Then apply search text filtering
+            //apply search text filtering
             filteredProducts = filteredList.filter { product in
                 product.name.lowercased().contains(searchText.lowercased()) ||
                 product.description.lowercased().contains(searchText.lowercased())
@@ -290,14 +290,14 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
                 filteredProducts.sort { $0.price < $1.price }
             }
         } else if isAZFiltered {
-            // A-Z sorting overrides ratings (but not price)
+            
             filteredProducts.sort { $0.name.lowercased() < $1.name.lowercased() }
         } else {
-            // Default to sorting by highest average rating when no other sorting is applied
+           
             filteredProducts.sort { $0.averageRating > $1.averageRating }
         }
 
-        // Reload the table view with the filtered and sorted products
+        // Reload the table view 
         tableView.reloadData()
     }
     

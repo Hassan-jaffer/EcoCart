@@ -3,8 +3,8 @@ import FirebaseFirestore
 
 struct MetricProduct {
     var product: Product
-    var metric: String // This can be "CO2", "Plastic", "Trees", etc.
-    var metricValue: Double // Store the value of the metric (e.g., CO2, Plastic, Trees)
+    var metric: String
+    var metricValue: Double //the value of the metric CO2, Plastic, Trees
 }
 
 class AlternativeProductsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -18,13 +18,13 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
     var currentMetric = "CO2" // Default metric to use
     @IBOutlet weak var AltMsg: UILabel!
     @IBOutlet weak var repPrice: UILabel!
-    var metricProducts: [MetricProduct] = [] // Make sure this array is populated
+    var metricProducts: [MetricProduct] = []
     @IBOutlet weak var metricsTableView: UITableView!
     var selectedProduct: Product?
-    var alternativeProduct: Product? // Store the alternative product to show on the UI
+    var alternativeProduct: Product? //the alternative product to show on the UI
     
     @IBOutlet weak var statusImage: UIImageView!
-    // Weights for each environmental metric (can be adjusted dynamically or fetched from a config)
+    // Weights for each environmental metric
     let co2Weight: Double = 0.5
     let plasticWeight: Double = 0.3
     let treeWeight: Double = 0.2
@@ -34,15 +34,15 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //print("View did load - Fetching alternative products.")
+        
         fetchAlternativeProduct()
         metricsTableView.delegate = self
         metricsTableView.dataSource = self
         setupViewColor()
-        // Create a tap gesture recognizer for the entire UIView that contains the product details
+        // tap gesture for the entire UIView that contains the product details
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapAlternativeProduct))
         repName.superview?.isUserInteractionEnabled = true // Enable interaction for the parent view
-        repName.superview?.addGestureRecognizer(tapGesture)  // Add gesture to the parent view
+        repName.superview?.addGestureRecognizer(tapGesture)
         
         NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange), name: .themeDidChange, object: nil)
                 
@@ -72,13 +72,13 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
     
     
     @objc private func didTapAlternativeProduct() {
-        // Ensure an alternative product exists
+       
         guard let alternativeProduct = alternativeProduct else {
             print("No alternative product to display.")
             return
         }
         
-        // Instantiate and navigate to the ProductDetailsViewController
+        //navigate to the ProductDetailsViewController
         if let productDetailsVC = ProductDetailsViewController.instantiate(with: alternativeProduct.id) {
             navigationController?.pushViewController(productDetailsVC, animated: true)
             print("Navigating to product details for: \(alternativeProduct.name)")
@@ -100,7 +100,7 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                 let allProducts = try await Product.fetchAllProducts()
                 print("Fetched \(allProducts.count) products.")
                 
-                // Filter products by keyword similarity (ignoring category) and exclude the selected product
+                // Filter products by keyword similarity and exclude the selected product
                 let similarProducts = allProducts.filter { product in
                     let isSimilar = productContainsSimilarKeywords(selected: selectedProduct, candidate: product)
                     let isNotSelected = product.id != selectedProduct.id // Exclude selected product
@@ -129,9 +129,9 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
                 // Set the best alternative product to be shown in the header
                 self.alternativeProduct = filteredProducts.first
                 
-                // --------------------- For Metric Table ---------------------
+                // --------------------- this part is for Metric Table --------------------
                 var validMetricProducts: [MetricProduct] = []
-                var usedProductIDs: Set<String> = [] // Track product IDs to prevent duplicates
+                var usedProductIDs: Set<String> = [] // get the product id to exclude it from the list
                 
                 // CO2 Saved Metric
                 if let co2Product = similarProducts
@@ -223,7 +223,7 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
         let co2Saved = product.metrics.co2
         let plasticSaved = product.metrics.plastic
         let treesSaved = product.metrics.tree
-        let bio = product.metrics.bio // Assuming this is an Int (1 for biodegradable, 0 for not)
+        let bio = product.metrics.bio
         
         // Log the extracted values
         print("CO2 Saved: \(co2Saved), Plastic Saved: \(plasticSaved), Trees Saved: \(treesSaved), Biodegradable: \(bio != 0)")
@@ -266,11 +266,11 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
         // Check if the product meets the footprint score threshold
         if footprintScore >= threshold {
             return true // Product is environmentally friendly
+        }else{
+            return false
         }
         
-        // Additional checks can be added here
-        let metrics = product.metrics
-        return metrics.co2 > 100 || metrics.plastic > 100 || metrics.tree > 10 // Example criteria
+        
     }
     
     
@@ -279,22 +279,22 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
         "recyclable", "eco", "green", "sustainable", "environmentally", "friendly",
         "product", "the", "and", "a", "of", "in", "to", "for", "is", "that", "on",
         "with", "as", "by", "from", "this", "which", "be", "are", "at", "it", "recycled", "Cotton", "Organic", "Hemp", "hemp", "cotton", "organic", "Bamboo", "bamboo"
-        // Add more as needed
+        // if you see a similarity problem, add common words here - Hasan
     ]
     
     private func productContainsSimilarKeywords(selected: Product, candidate: Product) -> Bool {
-        // Extract keywords from product names
+        // get keywords from product names
         let selectedKeywords = extractKeywords(from: selected.name)
         let candidateKeywords = extractKeywords(from: candidate.name)
         
-        // Check if the sets of keywords intersect
+        // check if the sets of keywords are the same
         let matchingKeywords = selectedKeywords.intersection(candidateKeywords)
         print("Matching keywords: \(matchingKeywords)")
         return !matchingKeywords.isEmpty
     }
     
     private func extractKeywords(from name: String) -> Set<String> {
-        // Convert the product name to lowercase, remove special characters, and split into words
+        // extract the words from the product name
         let words = name
             .lowercased()
             .components(separatedBy: CharacterSet.alphanumerics.inverted)
@@ -318,7 +318,7 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
         repPrice.superview?.isHidden = false
         repImage.superview?.isHidden = false
         
-        // Update UI with the alternative product details
+        // Update the UI
         repName.text = alternativeProduct.name
         repPrice.text = "\(alternativeProduct.price) BHD"
         
@@ -345,10 +345,8 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
             repImage.image = UIImage(named: "placeholder") // Default placeholder if no image URL is available
         }
         
-        // Generate the explanation for choosing this alternative product
         
-        
-        // Explanation logic: compare footprint scores
+        // Explanation:
         let explanation = "This alternative has a lower environmental footprint. We recommend giving it a look!"
         
         
@@ -373,13 +371,13 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
     
     // When a row is selected, navigate to ProductDetailsViewController
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Get the selected MetricProduct
+        
         let selectedMetricProduct = metricProducts[indexPath.row]
         
-        // Get the associated Product
+        
         let selectedProduct = selectedMetricProduct.product
         
-        // Instantiate and navigate to the ProductDetailsViewController
+        //navigate to the ProductDetailsViewController
         if let productDetailsVC = ProductDetailsViewController.instantiate(with: selectedProduct.id) {
             navigationController?.pushViewController(productDetailsVC, animated: true)
             print("Navigating to product details for: \(selectedProduct.name)")
@@ -388,12 +386,12 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
         }
     }
     
-    // Number of sections in the table view (1 section in this case)
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    // Number of rows in each section (count of products to show)
+    // (count of products to show)
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(metricProducts.count == 0){
             MetricTitle.isHidden = true
@@ -404,7 +402,7 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
         
     }
     
-    // Configure each cell in the table view dynamically
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Dequeue the cell from the prototype
         let cell = tableView.dequeueReusableCell(withIdentifier: "MetricCell", for: indexPath)
@@ -417,17 +415,17 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
             label1.text = metricProduct.product.name
         }
         
-        // Set the metric type to the second label (label2)
+        
         if let label2 = cell.viewWithTag(2) as? UILabel {
             label2.text = "This product has higher \(metricProduct.metric) saved!"
         }
         
-        // Set the metric value to the third label (label3)
+        
         if let label3 = cell.viewWithTag(3) as? UILabel {
             label3.text = "\(metricProduct.metricValue) \(metricProduct.metric) saved"
         }
         
-        // Load the product image (with error handling)
+        // Load the product image 
         if let imageView = cell.viewWithTag(4) as? UIImageView {
             if let imageUrlString = metricProduct.product.imageURL, let imageUrl = URL(string: imageUrlString) {
                 URLSession.shared.dataTask(with: imageUrl) { data, _, error in
