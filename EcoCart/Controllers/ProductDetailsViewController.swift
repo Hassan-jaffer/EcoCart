@@ -145,9 +145,6 @@ class ProductDetailsViewController: UIViewController {
         quantityLabel.text = "1"
         productQuantityStepper.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)
         
-        // Set button background color based on theme
-        viewAlternativeOutlet.backgroundColor = ThemeManager.shared.isDarkMode ? UIColor.systemBlue : UIColor.systemGreen
-        storeLocationButton.backgroundColor = ThemeManager.shared.isDarkMode ? UIColor.systemBlue : UIColor.systemGreen
 
         setupTopRatedViews()
         fetchTopRatedProducts()
