@@ -188,7 +188,7 @@ class ProfilePageTableViewController: UITableViewController, UIImagePickerContro
             self.profileImageView.image = selectedImage
         }
         
-        guard let imageData = selectedImage.jpegData(compressionQuality: 0.8) else {
+        guard let imageData = selectedImage.jpegData(compressionQuality: 0) else {
             print("Failed to convert image to data")
             return
         }

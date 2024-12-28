@@ -99,31 +99,6 @@ class LogInTableViewController: UITableViewController {
         passwordField.text = String()
     }
     
-    func checkIfLoggedIn() {
-        guard let uid = User.uid else { return }
-        
-        // Check regular users collection
-        db.collection("users").document(uid).getDocument { [weak self] document, error in
-            guard let self = self else { return }
-            
-            if let document = document, document.exists {
-                if let userType = document.data()?["userType"] as? String, userType == "regular" {
-                    print("is regular user")
-                    self.performSegue(withIdentifier: "home", sender: self)
-                    return
-                }
-            }
-            
-            // If not found in regular users, check service providers
-            self.db.collection("serviceProviders").document(uid).getDocument { document, error in
-                if let document = document, document.exists {
-                    print("is service provider")
-                    self.performSegue(withIdentifier: "serviceproviderhome", sender: self)
-                }
-            }
-        }
-    }
-    
     @IBAction func login(_ sender: UIButton) {
         guard let username = usernameField.text, !username.isEmpty,
               let password = passwordField.text, !password.isEmpty else {
@@ -191,54 +166,6 @@ class LogInTableViewController: UITableViewController {
         }
     }
     
-    func loginSegue() {
-        guard let uid = User.uid else { return }
-        
-        // Check user type in a single collection with a 'type' field
-        db.collection("users").document(uid).getDocument { [weak self] document, error in
-            guard let self = self else { return }
-            
-            if let document = document, document.exists,
-               let userType = document.data()?["type"] as? String {
-                
-                switch userType.lowercased() {
-                case "regular":
-                    self.performSegue(withIdentifier: "Home", sender: self)
-                case "admin":
-                    self.performSegue(withIdentifier: "Home", sender: self)
-                case "storemanager":
-                    self.performSegue(withIdentifier: "storeManagerHome", sender: self)
-                default:
-                    print("Invalid user type")
-                }
-            } else {
-                print("Could not find user or user type")
-            }
-        }
-    }
-    
-//    func loginSegue() {
-//        guard let uid = User.uid else { return }
-//        
-//        // First check regular users
-//        db.collection("users").document(uid).getDocument { [weak self] document, error in
-//            guard let self = self else { return }
-//            
-//            if let document = document, document.exists {
-//                self.performSegue(withIdentifier: "home", sender: self)
-//                return
-//            }
-//            
-//            // If not found in regular users, check service providers
-//            self.db.collection("serviceProviders").document(uid).getDocument { document, error in
-//                if let document = document, document.exists {
-//                    self.performSegue(withIdentifier: "serviceproviderhome", sender: self)
-//                } else {
-//                    print("could not find the user type")
-//                }
-//            }
-//        }
-//    }
     
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
