@@ -1,7 +1,6 @@
 import UIKit
 import FirebaseFirestore
 
-
 struct MetricProduct {
     var product: Product
     var metric: String // This can be "CO2", "Plastic", "Trees", etc.
@@ -9,6 +8,8 @@ struct MetricProduct {
 }
 
 class AlternativeProductsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet weak var suggestAlternativeView: UIView!
     
     @IBOutlet weak var MetricTitle: UILabel!
     @IBOutlet weak var repExp: UILabel!
@@ -37,14 +38,38 @@ class AlternativeProductsViewController: UIViewController, UITableViewDelegate, 
         fetchAlternativeProduct()
         metricsTableView.delegate = self
         metricsTableView.dataSource = self
-        
+        setupViewColor()
         // Create a tap gesture recognizer for the entire UIView that contains the product details
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapAlternativeProduct))
         repName.superview?.isUserInteractionEnabled = true // Enable interaction for the parent view
         repName.superview?.addGestureRecognizer(tapGesture)  // Add gesture to the parent view
         
+        NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange), name: .themeDidChange, object: nil)
+                
+                // Apply the initial theme
+                ThemeManager.shared.applyTheme()
         
     }
+    
+    
+    @objc func themeDidChange(notification: Notification) {
+            // Update UI based on the new theme
+            setupViewColor()
+        }
+    
+    func setupViewColor() {
+        print("Setting up view color...")
+        if ThemeManager.shared.isDarkMode {
+            print("Dark mode detected")
+            suggestAlternativeView.backgroundColor = .darkGray // Emerald Green
+            repExp.textColor = UIColor.green
+        }else{
+            print("Light mode detected")
+            suggestAlternativeView.backgroundColor = .appGreen
+            repExp.textColor = UIColor.systemCyan
+        }
+    }
+    
     
     @objc private func didTapAlternativeProduct() {
         // Ensure an alternative product exists
