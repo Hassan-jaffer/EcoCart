@@ -212,8 +212,8 @@
                         <outlet property="usernameField" destination="3pa-xX-MGO" id="MrW-dD-0ta"/>
                         <outlet property="viewUI" destination="yxS-Jb-YI5" id="j2D-pQ-zn6"/>
                         <segue destination="2ob-qo-UUP" kind="show" identifier="regularMain" id="fWJ-fb-XNg"/>
-                        <segue destination="Or8-eM-UYL" kind="show" id="IzG-db-R0d"/>
-                        <segue destination="SQC-Q2-rgR" kind="show" id="dv1-Cg-QrN"/>
+                        <segue destination="Or8-eM-UYL" kind="show" identifier="mainAdmin" id="IzG-db-R0d"/>
+                        <segue destination="SQC-Q2-rgR" kind="show" identifier="mainMaager" id="dv1-Cg-QrN"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gw1-Of-Xh8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

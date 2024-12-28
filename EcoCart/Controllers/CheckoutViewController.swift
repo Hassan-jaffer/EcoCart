@@ -1,75 +1,99 @@
 import UIKit
+import FirebaseFirestore
 
-class CheckoutViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var cardSwitch: UISwitch!
-    @IBOutlet weak var cashSwitch: UISwitch!
-    @IBOutlet weak var deliveryNotesTextField: UITextField!
-    @IBOutlet weak var subtotalLabel: UILabel!
-    @IBOutlet weak var deliveryFeeLabel: UILabel!
+class CheckoutViewController: UIViewController {
+    // MARK: - Outlets
     @IBOutlet weak var totalAmountLabel: UILabel!
-    @IBOutlet weak var confirmButton: UIButton!
+    @IBOutlet weak var cardSwitch: UISwitch!
+    @IBOutlet weak var cashOnDeliverySwitch: UISwitch!
 
-    var cartItems: [CartItem] = [] // Replace with your cart item model
-    var deliveryFee: Double = 1.0
-    var cartTotal: Double = 0.0
+    // MARK: - Properties
+    var totalAmount: Double = 0.0 // Passed from CartViewController
+    var userID: String = "user123" // Replace with actual user ID from authentication
+    var username: String = "hasan Shehab" // Replace with actual username from user profile
+    var cartItems: [CartItem] = [] // Passed from CartViewController
+    private let db = Firestore.firestore()
 
-
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Checkout"
-        setupTableView()
-        updatePaymentSummary()
-    }
-
-    private func setupTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(UINib(nibName: "CartItemCell", bundle: nil), forCellReuseIdentifier: "CartItemCell")
-    }
-
-    private func updatePaymentSummary() {
-        let subtotal = cartItems.reduce(0) { $0 + ($1.price * Double($1.quantity)) }
-        let totalAmount = subtotal + deliveryFee
-        subtotalLabel.text = "\(String(format: "%.3f", subtotal)) BD"
-        deliveryFeeLabel.text = "\(String(format: "%.3f", deliveryFee)) BD"
-        totalAmountLabel.text = "\(String(format: "%.3f", totalAmount)) BD"
-    }
-
-    @IBAction func cardSwitchChanged(_ sender: UISwitch) {
-        if sender.isOn {
-            cashSwitch.setOn(false, animated: true)
-        }
-    }
-
-    @IBAction func cashSwitchChanged(_ sender: UISwitch) {
-        if sender.isOn {
-            cardSwitch.setOn(false, animated: true)
-        }
+        // Calculate the total amount from cart items
+        totalAmount = cartItems.reduce(0) { $0 + $1.totalPrice }
+        // Display the total amount
+        totalAmountLabel.text = String(format: "Total Amount: %.3f BHD", totalAmount)
     }
 
     @IBAction func confirmButtonTapped(_ sender: UIButton) {
+        // Determine the selected payment method
         let paymentMethod = cardSwitch.isOn ? "Card" : "Cash on Delivery"
-        let deliveryNotes = deliveryNotesTextField.text ?? ""
 
-        print("Order confirmed with:")
-        print("- Payment Method: \(paymentMethod)")
-        print("- Delivery Notes: \(deliveryNotes)")
-        print("- Total Amount: \(totalAmountLabel.text ?? "")")
-
-        // Proceed to a success screen or perform backend submission
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cartItems.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CartItemCell", for: indexPath) as? CartItemCell else {
-            return UITableViewCell()
+        // Save the order to Firestore
+        saveOrder(paymentMethod: paymentMethod) { [weak self] success in
+            if success {
+                if self?.cardSwitch.isOn == true {
+                    // Navigate to PaymentDetailsViewController if Card is selected
+                    self?.performSegue(withIdentifier: "toPaymentDetails", sender: nil)
+                } else {
+                    // Show success message for Cash on Delivery
+                    self?.showSuccessAlert(message: "Order confirmed with Cash on Delivery.")
+                }
+            } else {
+                self?.showErrorAlert(message: "Failed to save the order. Please try again.")
+            }
         }
-        let cartItem = cartItems[indexPath.row]
-        cell.configure(with: cartItem)
-        return cell
+    }
+
+    private func saveOrder(paymentMethod: String, completion: @escaping (Bool) -> Void) {
+        
+
+        // Save each cart item as a separate order document
+        for item in cartItems {
+            let data: [String: Any] = [
+            
+                "userID": userID,
+                "username": username,
+                "productName": item.productName,
+                "price": item.price,
+                "quantity": item.quantity,
+                "imageURL": item.imageURL,
+                "stockQuantity": item.stockQuantity,
+                "pending": true,
+                "paymentMethod": paymentMethod
+            ]
+        
+
+            db.collection("orders").addDocument(data: data) { error in
+                if let error{
+                    self.showErrorAlert(message: error.localizedDescription)
+                    completion(false)
+                } else {
+                    self.showSuccessAlert(message: "Successfully ordered!")
+                    completion(true)
+                }
+            }
+        }
+    }
+
+    private func showErrorAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true)
+    }
+
+    private func showSuccessAlert(message: String) {
+        let alert = UIAlertController(title: "Success", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+            self.navigationController?.popToRootViewController(animated: true)
+        })
+        present(alert, animated: true)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toPaymentDetails", let destination = segue.destination as? PaymentDetailsViewController {
+            // Pass total amount and user info to PaymentDetailsViewController
+            destination.totalAmount = totalAmount
+            destination.userID = userID
+            destination.username = username
+        }
     }
 }

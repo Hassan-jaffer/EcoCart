@@ -5,9 +5,9 @@ import FirebaseAuth
 class ProfilePageTableViewController: UITableViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
     @IBOutlet weak var logoutButton: UIButton!
-    @IBOutlet weak var ProfileImageView: UIImageView!
+    @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var profileName: UIButton!
-    @IBOutlet weak var profileEmil: UILabel!
+    @IBOutlet weak var profileEmail: UILabel!
     @IBOutlet weak var darkModeSwitch: UISwitch!
     
     private var profileListener: ListenerRegistration?
@@ -33,11 +33,9 @@ class ProfilePageTableViewController: UITableViewController, UIImagePickerContro
     // MARK: - UI Setup
     
     private func setupUI() {
-        ProfileImageView.clipsToBounds = false
-        ProfileImageView.layer.masksToBounds = true
-        ProfileImageView.layer.cornerRadius = ProfileImageView.frame.height / 2
+        profileImageView.clipsToBounds = true
+        profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
         self.navigationItem.hidesBackButton = true
-        
         
         let appearance = UITabBarAppearance()
         appearance.backgroundColor = UIColor(red: 156/255, green: 230/255, blue: 157/255, alpha: 1.0)
@@ -57,20 +55,31 @@ class ProfilePageTableViewController: UITableViewController, UIImagePickerContro
     // MARK: - Profile Management
     
     func updateProfile() {
-        guard let uid = User.uid else { return }
+        guard let uid = Auth.auth().currentUser?.uid else { return }
         profileListener?.remove()
-        profileListener = Database.Users.observeUser(user: uid) { [weak self] profile in
-            guard let self = self, let profile = profile else { return }
-            self.updateProfile(profile: profile)
+        profileListener = Firestore.firestore().collection("users").document(uid).addSnapshotListener { [weak self] snapshot, error in
+            guard let self = self, let data = snapshot?.data() else { return }
+            self.updateProfile(with: data)
         }
     }
     
-    func updateProfile(profile: Profile) {
-        print("Updating profile with: \(profile)")
-        DispatchQueue.main.async {
-            Database.Storage.loadImage(view: self.ProfileImageView, uuid: profile.image)
-            self.profileName.setTitle(profile.name, for: .normal)
-            self.profileEmil.text = profile.email
+    func updateProfile(with data: [String: Any]) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            if let imageData = data["profileImage"] as? Data {
+                self.profileImageView.image = UIImage(data: imageData)
+            }
+            
+            if let firstName = data["firstName"] as? String,
+               let lastName = data["lastName"] as? String {
+                let name = firstName + " " + lastName
+                self.profileName.setTitle(name, for: .normal)
+            }
+            
+            if let email = data["email"] as? String {
+                self.profileEmail.text = email
+            }
         }
     }
     
@@ -102,25 +111,22 @@ class ProfilePageTableViewController: UITableViewController, UIImagePickerContro
             preferredStyle: .alert
         )
         alert.addTextField()
-        alert.textFields![0].text = self.profileName.titleLabel!.text
+        alert.textFields![0].text = self.profileName.titleLabel?.text
         
         alert.addAction(UIAlertAction(title: "OK", style: .default) { [weak self] _ in
             guard let self = self,
-                  let newName = alert.textFields![0].text,
+                  let newName = alert.textFields?[0].text,
                   !newName.isEmpty,
-                  let uid = User.uid else { return }
+                  let uid = Auth.auth().currentUser?.uid else { return }
             
-            Database.Users.getUserReference(for: uid) { userRef in
-                guard let userRef = userRef else { return }
-                userRef.updateData([
-                    "name": newName
-                ]) { error in
-                    if let error = error {
-                        print("Error updating name: \(error.localizedDescription)")
-                        return
-                    }
-                    self.profileName.setTitle(newName, for: .normal)
+            Firestore.firestore().collection("users").document(uid).updateData([
+                "name": newName
+            ]) { error in
+                if let error = error {
+                    print("Error updating name: \(error.localizedDescription)")
+                    return
                 }
+                self.profileName.setTitle(newName, for: .normal)
             }
         })
         
@@ -146,7 +152,7 @@ class ProfilePageTableViewController: UITableViewController, UIImagePickerContro
     @IBAction func profileImageEdit(_ sender: Any) {
         let alert = UIAlertController(
             title: "Profile Photo Change",
-            message: "Are you sure you want change your photo?",
+            message: "Are you sure you want to change your photo?",
             preferredStyle: .alert
         )
         
@@ -179,26 +185,24 @@ class ProfilePageTableViewController: UITableViewController, UIImagePickerContro
         }
         
         DispatchQueue.main.async {
-            self.ProfileImageView.image = selectedImage
+            self.profileImageView.image = selectedImage
         }
         
-        if let imageUuid = Database.Storage.saveImage(image: selectedImage) {
-            guard let uid = User.uid else { return }
-            
-            Database.Users.getUserReference(for: uid) { [weak self] userRef in
-                guard let userRef = userRef else { return }
-                userRef.updateData([
-                    "image": imageUuid
-                ]) { error in
-                    if let error = error {
-                        print("Error updating profile image in database: \(error.localizedDescription)")
-                        return
-                    }
-                    print("Profile image updated successfully in database.")
-                }
+        guard let imageData = selectedImage.jpegData(compressionQuality: 0.8) else {
+            print("Failed to convert image to data")
+            return
+        }
+        
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        Firestore.firestore().collection("users").document(uid).updateData([
+            "profileImage": imageData
+        ]) { error in
+            if let error = error {
+                print("Error updating profile image in Firestore: \(error.localizedDescription)")
+                return
             }
-        } else {
-            print("Failed to save image to database.")
+            print("Profile image updated successfully in Firestore.")
         }
     }
     

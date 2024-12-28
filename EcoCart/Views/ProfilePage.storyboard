@@ -40,8 +40,8 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Unknown" translatesAutoresizingMaskIntoConstraints="NO" id="DWg-F8-zlc">
-                                                    <rect key="frame" x="20" y="9.3333333333333357" width="91" height="91"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="DWg-F8-zlc">
+                                                    <rect key="frame" x="20" y="10" width="91" height="89.666666666666686"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="DWg-F8-zlc" secondAttribute="height" id="DGI-14-KUg"/>
                                                     </constraints>
@@ -197,10 +197,10 @@
                     <navigationItem key="navigationItem" id="kn8-Bb-l5p"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="ProfileImageView" destination="DWg-F8-zlc" id="noA-C2-BjA"/>
                         <outlet property="darkModeSwitch" destination="NZ3-3F-B15" id="XRM-4y-8I5"/>
                         <outlet property="logoutButton" destination="pRE-d5-d4b" id="Wqs-6t-MML"/>
-                        <outlet property="profileEmil" destination="LMf-th-Cxy" id="CBg-1e-YTH"/>
+                        <outlet property="profileEmail" destination="LMf-th-Cxy" id="pht-sT-v2E"/>
+                        <outlet property="profileImageView" destination="DWg-F8-zlc" id="fr0-19-X0j"/>
                         <outlet property="profileName" destination="CYE-sy-p7V" id="Yt0-jy-S35"/>
                     </connections>
                 </tableViewController>
@@ -306,9 +306,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Unknown" width="263" height="192"/>
         <image name="arrow.forward.circle" catalog="system" width="128" height="123"/>
         <image name="arrow.forward.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="person.circle" catalog="system" width="128" height="123"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -41,12 +41,23 @@
                         <segue destination="dZj-MR-eYQ" kind="relationship" relationship="viewControllers" id="ECA-U6-om7"/>
                         <segue destination="FxJ-bh-nL5" kind="relationship" relationship="viewControllers" id="E79-S5-vKo"/>
                         <segue destination="dVD-ZR-jhO" kind="relationship" relationship="viewControllers" id="OPy-uE-CwU"/>
+                        <segue destination="jzB-Ep-cVh" kind="relationship" relationship="viewControllers" id="lis-b9-BhU"/>
                         <segue destination="wzx-sn-rl0" kind="relationship" relationship="viewControllers" id="zi9-zr-g2P"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IlN-u3-MBN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="818" y="-758"/>
+        </scene>
+        <!--History-->
+        <scene sceneID="7WC-sT-WQ8">
+            <objects>
+                <viewControllerPlaceholder storyboardName="History" id="H29-md-lJR" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="rY9-xk-kxa"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2fx-w3-Ah6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2292.3664122137402" y="-1289.4366197183099"/>
         </scene>
         <!--ProfilePage-->
         <scene sceneID="Smf-vJ-xT2">
@@ -94,7 +105,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U26-Gy-8dm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2716.7938931297708" y="-1238.0281690140846"/>
+            <point key="canvasLocation" x="3643.5114503816794" y="-1238.0281690140846"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oLh-6K-1aS">
@@ -144,10 +155,30 @@
             </objects>
             <point key="canvasLocation" x="2256" y="-339"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="0Kg-fX-02X">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jzB-Ep-cVh" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="clock" catalog="system" id="0z2-HW-XTt"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0MX-zz-RFT">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="H29-md-lJR" kind="relationship" relationship="rootViewController" id="eAw-1q-IAB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Aoc-yg-n1J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1734" y="-1289"/>
+        </scene>
     </scenes>
     <resources>
         <image name="cart" catalog="system" width="128" height="102"/>
         <image name="chart.bar" catalog="system" width="128" height="89"/>
+        <image name="clock" catalog="system" width="128" height="123"/>
         <image name="gearshape" catalog="system" width="128" height="123"/>
         <image name="house" catalog="system" width="128" height="104"/>
     </resources>

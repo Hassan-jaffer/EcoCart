@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vqJ-Z3-ILq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vqJ-Z3-ILq">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -224,6 +224,7 @@
                         <segue destination="yM4-pu-vbl" kind="relationship" relationship="viewControllers" id="7bR-YN-FQ3"/>
                         <segue destination="Sy6-nk-AU0" kind="relationship" relationship="viewControllers" id="wG4-9U-zQf"/>
                         <segue destination="fnd-bX-zjP" kind="relationship" relationship="viewControllers" id="XJW-hc-hd3"/>
+                        <segue destination="Mnt-AI-Z5L" kind="relationship" relationship="viewControllers" id="mv3-9z-zkZ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sxI-sZ-Rxq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -361,8 +362,37 @@
             </objects>
             <point key="canvasLocation" x="613" y="-525"/>
         </scene>
+        <!--Store OrderVC-->
+        <scene sceneID="Iam-vP-ApW">
+            <objects>
+                <viewController id="Mnt-AI-Z5L" customClass="StoreOrderVC" customModule="EcoCart" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gQ4-6D-tjc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="52z-LR-Ctp">
+                                <rect key="frame" x="10" y="69" width="373" height="700"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="yvQ-7D-hnH"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="yvQ-7D-hnH" firstAttribute="trailing" secondItem="52z-LR-Ctp" secondAttribute="trailing" constant="10" id="5qs-5R-pUg"/>
+                            <constraint firstItem="yvQ-7D-hnH" firstAttribute="bottom" secondItem="52z-LR-Ctp" secondAttribute="bottom" id="6Zy-wa-WaK"/>
+                            <constraint firstItem="52z-LR-Ctp" firstAttribute="leading" secondItem="yvQ-7D-hnH" secondAttribute="leading" constant="10" id="XN5-QD-zBW"/>
+                            <constraint firstItem="52z-LR-Ctp" firstAttribute="top" secondItem="yvQ-7D-hnH" secondAttribute="top" constant="10" id="hFS-yI-qYV"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="cart" catalog="system" id="LhR-Go-yNo"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zQJ-cO-qs3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-141" y="-1246"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="cart" catalog="system" width="128" height="102"/>
         <image name="gear.circle.fill" catalog="system" width="128" height="123"/>
         <image name="house" catalog="system" width="128" height="104"/>
         <image name="plus.app.fill" catalog="system" width="128" height="114"/>

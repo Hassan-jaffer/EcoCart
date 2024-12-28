@@ -24,10 +24,8 @@ class ProductFirebase {
             return nil
         }
 
-        // Get metrics data
         let metricsData = data["metrics"] as? [String: Any] ?? [:]
         
-        // Get location data from nested location object
         var latitude: Double?
         var longitude: Double?
 
@@ -35,7 +33,7 @@ class ProductFirebase {
             if let lat = locationData["latitude"] as? Double {
                 latitude = lat
             }
-            if let long = locationData["longtitude"] as? Double {  // Note the spelling in Firebase
+            if let long = locationData["longtitude"] as? Double {
                 longitude = long
             }
         }
@@ -81,10 +79,8 @@ class ProductFirebase {
         return documents.compactMap { document in
             let data = document.data()
 
-            // Get metrics data
             let metricsData = data["metrics"] as? [String: Any] ?? [:]
 
-            // Get location data from nested location object
             var latitude: Double?
             var longitude: Double?
 
@@ -92,7 +88,7 @@ class ProductFirebase {
                 if let lat = locationData["latitude"] as? Double {
                     latitude = lat
                 }
-                if let long = locationData["longtitude"] as? Double {  // Note the spelling in Firebase
+                if let long = locationData["longtitude"] as? Double {
                     longitude = long
                 }
             }
@@ -143,7 +139,6 @@ class ProductFirebase {
             "storeName": product.storeName ?? ""
         ]
 
-        // Add location data directly at root level
         if let latitude = product.latitude, let longitude = product.longitude {
             data["location"] = [
                 "latitude": latitude,
