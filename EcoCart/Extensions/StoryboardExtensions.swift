@@ -10,6 +10,7 @@ import UIKit
 enum AppStoryboard: String {
     case admin = "AdminScreens"
     case stores = "StoreScreens"
+    case cart = "Cart"
 }
 
 extension UIViewController{

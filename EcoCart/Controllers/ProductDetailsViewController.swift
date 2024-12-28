@@ -79,10 +79,8 @@ class ProductDetailsViewController: UIViewController {
         setupUI()
         fetchProductDetails()
         
-        // Add observer for product updates
         NotificationCenter.default.addObserver(self, selector: #selector(handleProductUpdate(_:)), name: NSNotification.Name("ProductUpdated"), object: nil)
         
-        // Setup store location button
         configureStoreLocationButton()
     }
     
@@ -138,8 +136,11 @@ class ProductDetailsViewController: UIViewController {
         quantityLabel.textColor = textColor
         storeNameLabel.textColor = textColor
         
-        productQuantityStepper.value = Double(selectedQuantity)
-        quantityLabel.text = "\(selectedQuantity)"
+        // Configure stepper
+        productQuantityStepper.minimumValue = 1
+        productQuantityStepper.value = 1
+        selectedQuantity = 1
+        quantityLabel.text = "1"
         productQuantityStepper.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)
         
 
@@ -159,7 +160,6 @@ class ProductDetailsViewController: UIViewController {
     
     @objc private func storeLocationButtonTapped(_ sender: Any) {
         guard let product = product else {
-            // Show alert if no product is available
             let alert = UIAlertController(title: "Error",
                                         message: "Product information not available",
                                         preferredStyle: .alert)
@@ -223,7 +223,7 @@ class ProductDetailsViewController: UIViewController {
     }
     
     var productId: String?
-    var product: Product?  // Changed from 'let' to 'var'
+    var product: Product?
     private var selectedQuantity: Int = 1
     private var topRatedProducts: [Product] = []
     
