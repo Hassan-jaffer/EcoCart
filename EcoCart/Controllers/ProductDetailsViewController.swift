@@ -305,7 +305,7 @@ class ProductDetailsViewController: UIViewController {
     
     private func loadImage(from url: URL, into imageView: UIImageView) {
         URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
+            if error != nil {
                 return
             }
             
