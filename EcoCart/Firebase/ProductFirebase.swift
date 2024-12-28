@@ -17,12 +17,10 @@ class ProductFirebase {
     private init() {}
     
     func fetchProduct(withId id: String) async throws -> Product? {
-        print("🔍 Fetching product with ID: \(id)")
         let docRef = db.collection("product").document(id)
         let document = try await docRef.getDocument()
         
         guard let data = document.data() else {
-            print("❌ No data found for product ID: \(id)")
             return nil
         }
 
@@ -30,21 +28,16 @@ class ProductFirebase {
         let metricsData = data["metrics"] as? [String: Any] ?? [:]
         
         // Get location data from nested location object
-        print("📍 Raw location data from Firebase:")
         var latitude: Double?
         var longitude: Double?
 
         if let locationData = data["location"] as? [String: Any] {
-            print("   Found location object: \(locationData)")
-
             if let lat = locationData["latitude"] as? Double {
                 latitude = lat
             }
             if let long = locationData["longtitude"] as? Double {  // Note the spelling in Firebase
                 longitude = long
             }
-
-            print("   Parsed location - lat: \(latitude ?? 0), long: \(longitude ?? 0)")
         }
 
         let product = Product(
@@ -69,56 +62,42 @@ class ProductFirebase {
             storeName: data["storeName"] as? String
         )
 
-        print("🏷️ Created product: \(product.name)")
-        print("   Final location: lat=\(product.latitude ?? 0), long=\(product.longitude ?? 0)")
         return product
     }
 
     func fetchAllProducts() async throws -> [Product] {
-        print("📦 Fetching all products")
         let snapshot = try await db.collection("product").getDocuments()
-        let products = try await parseProducts(from: snapshot.documents)
-        print("✅ Fetched \(products.count) products")
-        return products
+        return try await parseProducts(from: snapshot.documents)
     }
 
     func fetchProductsByCategory(_ category: String) async throws -> [Product] {
-        print("🔍 Fetching products for category: \(category)")
         let snapshot = try await db.collection("product")
             .whereField("category", isEqualTo: category)
             .getDocuments()
-        let products = try await parseProducts(from: snapshot.documents)
-        print("✅ Fetched \(products.count) products for category \(category)")
-        return products
+        return try await parseProducts(from: snapshot.documents)
     }
     
     private func parseProducts(from documents: [QueryDocumentSnapshot]) async throws -> [Product] {
         return documents.compactMap { document in
             let data = document.data()
-            print("📄 Parsing product: \(document.documentID)")
 
             // Get metrics data
             let metricsData = data["metrics"] as? [String: Any] ?? [:]
 
             // Get location data from nested location object
-            print("📍 Raw location data from Firebase:")
             var latitude: Double?
             var longitude: Double?
 
             if let locationData = data["location"] as? [String: Any] {
-                print("   Found location object: \(locationData)")
-
                 if let lat = locationData["latitude"] as? Double {
                     latitude = lat
                 }
                 if let long = locationData["longtitude"] as? Double {  // Note the spelling in Firebase
                     longitude = long
                 }
-
-                print("   Parsed location - lat: \(latitude ?? 0), long: \(longitude ?? 0)")
             }
 
-            let product = Product(
+            return Product(
                 id: document.documentID,
                 name: data["name"] as? String ?? "",
                 description: data["description"] as? String ?? "",
@@ -139,10 +118,6 @@ class ProductFirebase {
                 longitude: longitude,
                 storeName: data["storeName"] as? String
             )
-
-            print("🏷️ Created product: \(product.name)")
-            print("   Final location: lat=\(product.latitude ?? 0), long=\(product.longitude ?? 0)")
-            return product
         }
     }
 
