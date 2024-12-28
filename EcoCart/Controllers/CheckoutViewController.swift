@@ -44,12 +44,12 @@ class CheckoutViewController: UIViewController {
     }
 
     private func saveOrder(paymentMethod: String, completion: @escaping (Bool) -> Void) {
-        let batch = db.batch()
+        
 
         // Save each cart item as a separate order document
         for item in cartItems {
-            let orderRef = db.collection("orders").document()
-            batch.setData([
+            let data: [String: Any] = [
+            
                 "userID": userID,
                 "username": username,
                 "productName": item.productName,
@@ -59,16 +59,17 @@ class CheckoutViewController: UIViewController {
                 "stockQuantity": item.stockQuantity,
                 "pending": true,
                 "paymentMethod": paymentMethod
-            ], forDocument: orderRef)
-        }
+            ]
+        
 
-        batch.commit { error in
-            if let error = error {
-                print("Error saving order: \(error)")
-                completion(false)
-            } else {
-                print("Order saved successfully.")
-                completion(true)
+            db.collection("orders").addDocument(data: data) { error in
+                if let error{
+                    self.showErrorAlert(message: error.localizedDescription)
+                    completion(false)
+                } else {
+                    self.showSuccessAlert(message: "Successfully ordered!")
+                    completion(true)
+                }
             }
         }
     }
