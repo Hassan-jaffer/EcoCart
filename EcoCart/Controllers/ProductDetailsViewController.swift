@@ -138,8 +138,11 @@ class ProductDetailsViewController: UIViewController {
         quantityLabel.textColor = textColor
         storeNameLabel.textColor = textColor
         
-        productQuantityStepper.value = Double(selectedQuantity)
-        quantityLabel.text = "\(selectedQuantity)"
+        // Configure stepper
+        productQuantityStepper.minimumValue = 1
+        productQuantityStepper.value = 1
+        selectedQuantity = 1
+        quantityLabel.text = "1"
         productQuantityStepper.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)
         
 
