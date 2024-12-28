@@ -69,82 +69,82 @@
         <!--Checkout View Controller-->
         <scene sceneID="R1b-71-M2U">
             <objects>
-                <viewController storyboardIdentifier="PaymentDetailsViewController" id="wQt-v0-HPK" customClass="CheckoutViewController" sceneMemberID="viewController">
+                <viewController id="wQt-v0-HPK" customClass="CheckoutViewController" customModule="EcoCart" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="loU-O9-Hsq">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="2rb-fX-orT">
-                                <rect key="frame" x="16" y="12" width="361" height="398.66666666666669"/>
+                                <rect key="frame" x="16" y="12" width="361" height="402.66666666666669"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="unh-mA-VpQ">
-                                <rect key="frame" x="16" y="449.66666666666669" width="51" height="31"/>
+                                <rect key="frame" x="16" y="453.66666666666669" width="51" height="31"/>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="eQH-nf-hrA">
-                                <rect key="frame" x="288" y="449.66666666666669" width="51" height="31"/>
+                                <rect key="frame" x="288" y="453.66666666666669" width="51" height="31"/>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Card" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GkG-dE-UEg">
-                                <rect key="frame" x="21" y="488.66666666666669" width="37" height="21"/>
+                                <rect key="frame" x="21" y="492.66666666666669" width="37" height="21.000000000000057"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cash On Delivery" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxy-tz-jjx">
-                                <rect key="frame" x="245" y="487.66666666666669" width="132" height="21"/>
+                                <rect key="frame" x="245" y="491.66666666666669" width="132" height="21.000000000000057"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Delivery Notes" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gLa-kg-bay">
-                                <rect key="frame" x="21" y="541.66666666666663" width="356" height="34"/>
+                                <rect key="frame" x="21" y="545.66666666666663" width="356" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Tf-x4-SBd">
-                                <rect key="frame" x="21" y="607.66666666666663" width="103" height="30"/>
+                                <rect key="frame" x="21" y="611.66666666666663" width="103" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtotal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H7F-YX-XFs">
-                                <rect key="frame" x="21" y="645.66666666666663" width="64" height="21"/>
+                                <rect key="frame" x="21" y="649.66666666666663" width="64" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Gx-rG-VMu">
-                                <rect key="frame" x="263" y="645.66666666666663" width="60" height="21"/>
+                                <rect key="frame" x="263" y="649.66666666666663" width="60" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delivery" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LEr-Ls-3nY">
-                                <rect key="frame" x="21" y="681.66666666666663" width="62" height="21"/>
+                                <rect key="frame" x="21" y="685.66666666666663" width="62" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pwT-he-4it">
-                                <rect key="frame" x="263" y="674.66666666666663" width="60" height="21"/>
+                                <rect key="frame" x="263" y="678.66666666666663" width="60" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="666-Yr-vmy">
-                                <rect key="frame" x="21" y="710.66666666666663" width="101" height="21"/>
+                                <rect key="frame" x="21" y="714.66666666666663" width="101" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c5A-CS-VvO">
-                                <rect key="frame" x="263" y="709.66666666666663" width="60" height="21"/>
+                                <rect key="frame" x="263" y="713.66666666666663" width="60" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gCF-uY-10d">
-                                <rect key="frame" x="21" y="766.66666666666663" width="314" height="42.333333333333371"/>
+                                <rect key="frame" x="21" y="770.66666666666663" width="314" height="38.333333333333371"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Confirm">
                                     <backgroundConfiguration key="background" cornerRadius="8">
@@ -153,6 +153,7 @@
                                     <color key="baseForegroundColor" red="1" green="0.97732342910000003" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
                                 <connections>
+                                    <action selector="confirmButtonTapped:" destination="wQt-v0-HPK" eventType="touchUpInside" id="hT0-Pw-pJQ"/>
                                     <segue destination="j9e-jA-DgE" kind="push" id="jVW-1G-rbi"/>
                                 </connections>
                             </button>
@@ -195,10 +196,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="6u4-6n-NZm"/>
+                    <connections>
+                        <outlet property="cardSwitch" destination="unh-mA-VpQ" id="PBt-Jh-s9Z"/>
+                        <outlet property="cashOnDeliverySwitch" destination="eQH-nf-hrA" id="E58-iO-gxk"/>
+                        <outlet property="totalAmountLabel" destination="666-Yr-vmy" id="mpX-jo-otF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yFu-Mi-YR5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="817.55725190839689" y="3.5211267605633805"/>
+            <point key="canvasLocation" x="732" y="4"/>
         </scene>
         <!--Payment Details View Controller-->
         <scene sceneID="c4c-nt-7Wh">
@@ -279,6 +285,9 @@
                                     </backgroundConfiguration>
                                     <color key="baseForegroundColor" red="1" green="0.97732342910000003" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="confirmPaymentButtonTapped:" destination="j9e-jA-DgE" eventType="touchUpInside" id="NVd-jy-Eft"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="uP1-Br-Cj4"/>
@@ -316,6 +325,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Okm-Df-f4N"/>
+                    <connections>
+                        <outlet property="creditCardTextField" destination="cDT-aJ-WAF" id="MzW-Us-zhf"/>
+                        <outlet property="cvvTextField" destination="Oqn-cJ-LSE" id="x1x-xJ-teV"/>
+                        <outlet property="expiryDateTextField" destination="Z42-eD-yQq" id="EnY-5Q-8fC"/>
+                        <outlet property="fullNameTextField" destination="KZd-oe-sFG" id="nvn-s4-XDH"/>
+                        <outlet property="totalAmountLabel" destination="FlZ-xo-tyH" id="Rst-lS-3NJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gZ2-O5-m6F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

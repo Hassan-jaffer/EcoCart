@@ -1,73 +1,88 @@
 import UIKit
+import FirebaseFirestore
 
 class PaymentDetailsViewController: UIViewController {
-    @IBOutlet weak var paymentMethodLabel: UILabel!
-    @IBOutlet weak var cardholderNameTextField: UITextField!
-    @IBOutlet weak var cardNumberTextField: UITextField!
+    // MARK: - Outlets
+    @IBOutlet weak var fullNameTextField: UITextField!
+    @IBOutlet weak var creditCardTextField: UITextField!
     @IBOutlet weak var expiryDateTextField: UITextField!
     @IBOutlet weak var cvvTextField: UITextField!
     @IBOutlet weak var totalAmountLabel: UILabel!
-    @IBOutlet weak var confirmButton: UIButton!
 
-    var paymentMethod: String = "Card" // Default to Card
-    var totalAmount: Double = 0.0
+    // MARK: - Properties
+    var totalAmount: Double = 0.0 // Passed from CheckoutViewController
+    var userID: String = "" // Passed from CheckoutViewController
+    var username: String = "" // Passed from CheckoutViewController
+    private let db = Firestore.firestore()
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Payment Details"
-        setupUI()
+        // Display the total amount
+        totalAmountLabel.text = String(format: "Total Amount: %.3f BHD", totalAmount)
     }
 
-    private func setupUI() {
-        paymentMethodLabel.text = "Payment Method: \(paymentMethod)"
-        totalAmountLabel.text = "\(String(format: "%.3f", totalAmount)) BD"
+    @IBAction func confirmPaymentButtonTapped(_ sender: UIButton) {
+        // Validate user input
+        guard let fullName = fullNameTextField.text, !fullName.isEmpty,
+              let creditCard = creditCardTextField.text, !creditCard.isEmpty,
+              let expiryDate = expiryDateTextField.text, !expiryDate.isEmpty,
+              let cvv = cvvTextField.text, !cvv.isEmpty else {
+            showErrorAlert(message: "Please fill in all fields.")
+            return
+        }
 
-        // Hide card details if payment method is not "Card"
-        let isCardPayment = paymentMethod == "Card"
-        cardholderNameTextField.isHidden = !isCardPayment
-        cardNumberTextField.isHidden = !isCardPayment
-        expiryDateTextField.isHidden = !isCardPayment
-        cvvTextField.isHidden = !isCardPayment
+        // Save payment details to Firestore
+        savePaymentDetails(fullName: fullName, creditCard: creditCard, expiryDate: expiryDate, cvv: cvv)
     }
 
-    @IBAction func confirmButtonTapped(_ sender: UIButton) {
-        if paymentMethod == "Card" {
-            // Validate card details
-            guard let cardholderName = cardholderNameTextField.text, !cardholderName.isEmpty,
-                  let cardNumber = cardNumberTextField.text, cardNumber.count == 16,
-                  let expiryDate = expiryDateTextField.text, !expiryDate.isEmpty,
-                  let cvv = cvvTextField.text, cvv.count == 3 else {
-                showAlert(title: "Error", message: "Please fill in all card details.")
+    private func savePaymentDetails(fullName: String, creditCard: String, expiryDate: String, cvv: String) {
+        let paymentDetails: [String: Any] = [
+            "fullName": fullName,
+            "creditCard": creditCard,
+            "expiryDate": expiryDate,
+            "cvv": cvv,
+            "pending": false // Mark as processed
+        ]
+
+        db.collection("orders").whereField("userID", isEqualTo: userID).getDocuments { [weak self] snapshot, error in
+            if let error = error {
+                print("Error fetching orders: \(error)")
+                self?.showErrorAlert(message: "Failed to update payment details. Please try again.")
                 return
             }
-            
-            print("Card Payment Details:")
-            print("- Cardholder Name: \(cardholderName)")
-            print("- Card Number: \(cardNumber)")
-            print("- Expiry Date: \(expiryDate)")
-            print("- CVV: \(cvv)")
+
+            guard let documents = snapshot?.documents else { return }
+            let batch = self?.db.batch()
+
+            // Update all pending orders for this user
+            for document in documents {
+                let ref = document.reference
+                batch?.updateData(paymentDetails, forDocument: ref)
+            }
+
+            batch?.commit { error in
+                if let error = error {
+                    print("Error updating payment details: \(error)")
+                    self?.showErrorAlert(message: "Failed to update payment details. Please try again.")
+                } else {
+                    self?.showSuccessAlert(message: "Payment successful!")
+                }
+            }
         }
-        
-        // Show success alert and navigate to home screen
-        showSuccessAlert()
     }
 
-    private func showSuccessAlert() {
-        let alert = UIAlertController(title: "Success", message: "Your order is on the way!", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-            self.navigateToHomeScreen()
-        })
+    private func showErrorAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true)
     }
 
-    private func navigateToHomeScreen() {
-        navigationController?.popToRootViewController(animated: true)
-    }
-
-
-    private func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
+    private func showSuccessAlert(message: String) {
+        let alert = UIAlertController(title: "Success", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+            self.navigationController?.popToRootViewController(animated: true)
+        })
         present(alert, animated: true)
     }
 }
