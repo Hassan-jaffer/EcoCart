@@ -46,7 +46,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TWY-0z-h0l">
-                                        <rect key="frame" x="91" y="89.999999999999986" width="33" height="17"/>
+                                        <rect key="frame" x="91" y="87.666666666666671" width="33" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -62,8 +62,8 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1HC-bB-27T">
-                                        <rect key="frame" x="91" y="66.999999999999986" width="109.66666666666669" height="14.333333333333329"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <rect key="frame" x="91" y="66.999999999999986" width="109.66666666666669" height="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -160,8 +160,15 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="03K-8y-OZa">
+                                <rect key="frame" x="76" y="131" width="243" height="105.33333333333331"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="105.33" id="l5A-t3-ZgB"/>
+                                    <constraint firstAttribute="width" constant="243" id="rfZ-dT-0TV"/>
+                                </constraints>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Similar Products with different high metrics!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UsC-A3-sHT">
-                                <rect key="frame" x="16" y="286" width="347" height="20"/>
+                                <rect key="frame" x="16" y="326" width="347" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="TYJ-aH-kz2"/>
                                     <constraint firstAttribute="width" constant="347" id="zul-ar-giM"/>
@@ -170,9 +177,6 @@
                                 <color key="textColor" systemColor="systemGreenColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="03K-8y-OZa">
-                                <rect key="frame" x="76" y="131" width="243" height="105.33333333333331"/>
-                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -187,11 +191,10 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="G08-QB-gGU" secondAttribute="trailing" constant="16" id="KLU-Ba-bjO"/>
                             <constraint firstItem="03K-8y-OZa" firstAttribute="top" secondItem="u9p-Ax-QmR" secondAttribute="bottom" constant="17.329999999999998" id="Mfg-Nk-U52"/>
                             <constraint firstItem="x6T-xh-LnF" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="OWd-Mh-LyL"/>
-                            <constraint firstItem="UsC-A3-sHT" firstAttribute="top" secondItem="03K-8y-OZa" secondAttribute="bottom" constant="49.670000000000002" id="ap5-vc-5gV"/>
-                            <constraint firstItem="x6T-xh-LnF" firstAttribute="top" secondItem="G08-QB-gGU" secondAttribute="bottom" constant="92.329999999999998" id="cTk-VP-RAV"/>
+                            <constraint firstItem="x6T-xh-LnF" firstAttribute="top" secondItem="UsC-A3-sHT" secondAttribute="bottom" constant="18" id="PSl-X8-uiH"/>
+                            <constraint firstItem="UsC-A3-sHT" firstAttribute="top" secondItem="G08-QB-gGU" secondAttribute="bottom" constant="54.329999999999998" id="b0S-ep-sN3"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="03K-8y-OZa" secondAttribute="trailing" constant="74" id="eHa-I2-o3k"/>
                             <constraint firstItem="u9p-Ax-QmR" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="14" id="eRM-QS-3Km"/>
-                            <constraint firstItem="x6T-xh-LnF" firstAttribute="top" secondItem="UsC-A3-sHT" secondAttribute="bottom" constant="58" id="rnm-Xn-nL4"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="x6T-xh-LnF" secondAttribute="bottom" id="uXr-lX-uMR"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="UsC-A3-sHT" secondAttribute="trailing" constant="30" id="yeA-qK-naW"/>
                         </constraints>
