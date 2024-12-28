@@ -24,7 +24,7 @@ class HistoryTableViewCell: UITableViewCell {
     
     func configureCell(order: History) {
         nameOutlet.text = order.productName
-        priceLabel.text = "$\(order.price)"
+        priceLabel.text = "\(order.price) BD"
         storeNameLabel.text = order.storeName
         
         if order.pending {
