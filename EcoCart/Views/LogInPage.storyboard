@@ -46,7 +46,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="separatorColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexBackgroundColor" red="0.60392159219999997" green="0.71372550729999995" blue="0.32941177490000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <sections>
@@ -206,8 +205,14 @@
                     <navigationItem key="navigationItem" id="fsy-O3-I9g"/>
                     <connections>
                         <outlet property="LoginButton" destination="Kbb-C7-fKl" id="Abo-re-jKc"/>
+                        <outlet property="emailContentView" destination="slD-Ai-Ml3" id="M27-oB-zEh"/>
                         <outlet property="eyeButton" destination="MyC-Cl-jkb" id="Wp9-MQ-5Ix"/>
+                        <outlet property="loginContentView" destination="oXP-id-ciO" id="qsC-Xr-3rm"/>
+                        <outlet property="loginTableView" destination="2JC-Or-Qey" id="Pvw-E3-u52"/>
+                        <outlet property="passwordContentView" destination="4U8-FT-2vz" id="3pu-yb-bcd"/>
                         <outlet property="passwordField" destination="1Q1-YN-LcQ" id="ERq-M0-teo"/>
+                        <outlet property="signUpContentView" destination="2YG-Qf-vxw" id="noy-tQ-LaH"/>
+                        <outlet property="underSignUpContentView" destination="fi9-lz-EVj" id="wcq-Xu-uat"/>
                         <outlet property="userRegistrationButton" destination="zWa-fE-EI9" id="0kP-Mv-NNN"/>
                         <outlet property="usernameField" destination="3pa-xX-MGO" id="MrW-dD-0ta"/>
                         <outlet property="viewUI" destination="yxS-Jb-YI5" id="j2D-pQ-zn6"/>
