@@ -11,6 +11,19 @@ import FirebaseFirestore
 
 class LogInTableViewController: UITableViewController {
     
+    //The bellow code is for Dark mode implementation, dont delete
+    
+    @IBOutlet var loginTableView: UITableView!
+    
+    @IBOutlet weak var loginContentView: UIView!
+    
+    @IBOutlet weak var underSignUpContentView: UIView!
+    
+    @IBOutlet weak var signUpContentView: UIView!
+    @IBOutlet weak var emailContentView: UIView!
+    
+    @IBOutlet weak var passwordContentView: UIView!
+    
     @IBOutlet weak var userRegistrationButton: UIButton!
     @IBOutlet var usernameField: UITextField!
     @IBOutlet var passwordField: UITextField!
@@ -69,9 +82,20 @@ class LogInTableViewController: UITableViewController {
 
             }
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(themeDidChange), name: .themeDidChange, object: nil)
+                
+                // Apply the initial theme
+                ThemeManager.shared.applyTheme()
+        
              setupUI()
          
     }
+    
+    @objc func themeDidChange(notification: Notification) {
+            // Update UI based on the new theme - Hasan
+        setupUI()
+        }
     
     private func setupUI() {
         viewUI.layer.cornerRadius = 40
@@ -83,6 +107,24 @@ class LogInTableViewController: UITableViewController {
                 // Set the navigation bar title
                 self.title = "Login"
             }
+        if ThemeManager.shared.isDarkMode {
+            loginTableView.backgroundColor = .black
+            emailContentView.backgroundColor = .black
+            passwordContentView.backgroundColor = .black
+            signUpContentView.backgroundColor = .black
+            loginContentView.backgroundColor = .black
+            underSignUpContentView.backgroundColor = .black
+            
+            
+        }else{
+            loginTableView.backgroundColor = .white
+            emailContentView.backgroundColor = .white
+            passwordContentView.backgroundColor = .white
+            signUpContentView.backgroundColor = .white
+            loginContentView.backgroundColor = .white
+            underSignUpContentView.backgroundColor = .white
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
