@@ -97,7 +97,6 @@
 		C3DAFA8F2D1DF5680040DFD5 /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DAFA8E2D1DF5680040DFD5 /* ImageExtension.swift */; };
 		C3DAFA922D1DF8640040DFD5 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = C3DAFA912D1DF8640040DFD5 /* SDWebImage */; };
 		C3DAFA942D1DF8640040DFD5 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C3DAFA932D1DF8640040DFD5 /* SDWebImageMapKit */; };
-		CF84B6A52CFC58280006F605 /* ProfileBackup.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF84B6A42CFC58280006F605 /* ProfileBackup.storyboard */; };
 		F23585FD2D058D1E00C00219 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F23585FC2D058D1E00C00219 /* FirebaseAuth */; };
 		F23585FF2D058D1E00C00219 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = F23585FE2D058D1E00C00219 /* FirebaseCore */; };
 		F23586012D058D1E00C00219 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = F23586002D058D1E00C00219 /* FirebaseFirestore */; };
@@ -214,7 +213,6 @@
 		C3DAFA8A2D1DEE000040DFD5 /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
 		C3DAFA8C2D1DEE690040DFD5 /* ProductXibTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductXibTableView.swift; sourceTree = "<group>"; };
 		C3DAFA8E2D1DF5680040DFD5 /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
-		CF84B6A42CFC58280006F605 /* ProfileBackup.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProfileBackup.storyboard; sourceTree = "<group>"; };
 		F2574B202D0058F900FF2011 /* Filter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Filter.storyboard; sourceTree = "<group>"; };
 		F2574B262D00785B00FF2011 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		F2DCE3502CF728FF002D4AB1 /* EcoCart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EcoCart.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -319,7 +317,6 @@
 				0E7C9AAB2CF72FCD0049CD22 /* LaunchScreen.storyboard */,
 				0E7C9AAD2CF72FCD0049CD22 /* Main.storyboard */,
 				0E7C9AAE2CF72FCD0049CD22 /* ProductDetails.storyboard */,
-				CF84B6A42CFC58280006F605 /* ProfileBackup.storyboard */,
 				F2574B202D0058F900FF2011 /* Filter.storyboard */,
 				105F69B02D049D1E005454A7 /* ReviewCell.xib */,
 				83D547132D137D9C004DE1CE /* LogInPage.storyboard */,
@@ -621,7 +618,6 @@
 				0E7C9AB32CF72FCD0049CD22 /* GoogleService-Info.plist in Resources */,
 				104856312D076A9400D60B8D /* ReviewCell.xib in Resources */,
 				0E7C9AB42CF72FCD0049CD22 /* Impact Tracker.storyboard in Resources */,
-				CF84B6A52CFC58280006F605 /* ProfileBackup.storyboard in Resources */,
 				C3DAFA892D1DEB4A0040DFD5 /* ProductXibTableView.xib in Resources */,
 				83D547142D137D9C004DE1CE /* LogInPage.storyboard in Resources */,
 				0E7C9AB52CF72FCD0049CD22 /* ProductDetails.storyboard in Resources */,
