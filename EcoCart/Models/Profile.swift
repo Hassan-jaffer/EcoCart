@@ -32,7 +32,7 @@ class Profile {
             print("[Profile.loadProfile] error parsing Poast, dumping dict", dictionary)
             return nil
         }
-        var name = firstName + " " + lastName
+        let name = firstName + " " + lastName
         let image = dictionary["image"] as? String ?? "unknown.jpg"
         //print(name, image, email)
         

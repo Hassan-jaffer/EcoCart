@@ -1,43 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jqU-ki-a3E">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jqU-ki-a3E">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main-->
-        <scene sceneID="mTW-SO-bzj">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Main" id="2ob-qo-UUP" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="HVJ-NR-Nkl"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mIy-hm-LC0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1334" y="-543"/>
-        </scene>
-        <!--mainAdmin-->
-        <scene sceneID="oZ3-Fx-BTn">
-            <objects>
-                <viewControllerPlaceholder storyboardName="mainAdmin" id="Or8-eM-UYL" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="Vab-50-IbV"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NB4-Nt-Oys" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1351" y="-346"/>
-        </scene>
-        <!--mainManager-->
-        <scene sceneID="2ha-mF-qFU">
-            <objects>
-                <viewControllerPlaceholder storyboardName="mainManager" id="SQC-Q2-rgR" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="d2n-NO-93b"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ABk-iy-vl4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1273" y="-205"/>
-        </scene>
         <!--Login Page-->
         <scene sceneID="VJ5-12-fJd">
             <objects>
@@ -216,9 +186,6 @@
                         <outlet property="userRegistrationButton" destination="zWa-fE-EI9" id="0kP-Mv-NNN"/>
                         <outlet property="usernameField" destination="3pa-xX-MGO" id="MrW-dD-0ta"/>
                         <outlet property="viewUI" destination="yxS-Jb-YI5" id="j2D-pQ-zn6"/>
-                        <segue destination="2ob-qo-UUP" kind="show" identifier="regularMain" id="fWJ-fb-XNg"/>
-                        <segue destination="Or8-eM-UYL" kind="show" identifier="mainAdmin" id="IzG-db-R0d"/>
-                        <segue destination="SQC-Q2-rgR" kind="show" identifier="mainMaager" id="dv1-Cg-QrN"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gw1-Of-Xh8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
