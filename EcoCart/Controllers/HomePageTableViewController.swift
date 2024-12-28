@@ -290,7 +290,7 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
                 filteredProducts.sort { $0.price < $1.price }
             }
         } else if isAZFiltered {
-            // A-Z sorting overrides ratings (but not price)
+            
             filteredProducts.sort { $0.name.lowercased() < $1.name.lowercased() }
         } else {
             // Default to sorting by highest average rating when no other sorting is applied
