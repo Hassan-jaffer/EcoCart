@@ -289,9 +289,6 @@ class HomePageTableViewController: UIViewController, UITableViewDataSource, UITa
             } else if priceOrder == "Low To High" {
                 filteredProducts.sort { $0.price < $1.price }
             }
-        } else if let metric = selectedMetric {
-            // If a metric filter is applied, don't sort by A-Z or ratings
-            // (Metric sorting is already applied above)
         } else if isAZFiltered {
             // A-Z sorting overrides ratings (but not price)
             filteredProducts.sort { $0.name.lowercased() < $1.name.lowercased() }
